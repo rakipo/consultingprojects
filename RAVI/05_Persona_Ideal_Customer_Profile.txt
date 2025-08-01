@@ -1,0 +1,146 @@
+Part 1: Build a Full Persona / Ideal Customer Profile (ICP)
+
+You need both the who and the why they care.
+
+Ask the following questions:
+
+    Persona Identity
+
+        - What is their name? (realistic, e.g. "Susan, 52, Sandwich Generation")
+        - What is their age, life stage, or family status?
+        - What job or role do they hold?
+        - Where do they live or spend time online?
+        - What do they value (e.g., stability, independence, trust)?
+        - How tech-savvy are they?
+        - What media do they consume?
+
+    Pain & Frustration
+
+        - What are their top 3 pain points right now?
+        - What are they struggling to understand or decide?
+        - What emotions are tied to these pains? (guilt, overwhelm, urgency, fear)
+        - What keeps them up at night?
+        - What would failure look like to them?
+
+    Goals & Motivations
+
+        - What do they want more than anything?
+        - What are their short-term and long-term goals?
+        - What would success look like for them?
+        - What would make them feel proud or relieved?
+
+    Barriers & Objections
+
+        - What's holding them back from taking action?
+        - What have they tried that didn't work?
+        - What do they believe about AI / care / tech / your space?
+        - What fears do they have about change?
+
+    Buyer Behavior
+
+        - What triggers them to start looking for a solution?
+        - How do they research and make decisions?
+        - Who influences their decisions (spouse, advisor, employer)?
+        - What would make them trust someone with this?
+
+----
+
+Example Output (Summarized Persona)
+
+    Persona: "Susan, the Adult Daughter (52)"
+    - Cares for aging parents while managing work and kids
+    - Struggles with time, guilt, and understanding senior care
+    - Wants AI tools to simplify housing decisions, legal planning
+    - Fears choosing the wrong path and losing control
+    - Relies on friends, articles, and YouTube for guidance
+    - Needs trust, clarity, and empathy from any tool or service
+
+----
+
+Part 2: Generate Pillar Blog Topics + Subtopics (tied to Persona & Goals)
+
+Once you have a persona, the blog strategy is simple:
+
+    Pillar Topics = Their core problems
+    Subpillars = Their questions, blockers, and desires
+
+Use these GraphRAG queries or Claude prompts to extract them.
+
+    Pillar Topic Prompts
+
+        - What are the 5 most urgent problems [persona] is facing?
+        - What topics have the most pain points mapped in the graph?
+        - What core life decisions is [persona] struggling with?
+        - What themes appear most in past questions from this persona?
+        - What services or offers target this persona's core pain?
+
+    These become your main content buckets.
+
+    Example (for Susan):
+
+        - Housing for aging parents
+        - Long-term care planning
+        - Legal/financial stress
+        - Sandwich generation burnout
+        - Navigating family conflict
+
+    Subpillar / Support Topic Prompts
+
+        - What questions does [persona] ask about [pillar topic]?
+        - What objections or beliefs stop them from acting?
+        - What fears or myths surround this topic?
+        - What do they search for on YouTube/Google?
+        - What parts of this topic are confusing or emotional?
+        - What solutions have they tried and failed?
+
+    These become your individual blog posts, lead magnets, videos.
+
+    Example:
+
+        Pillar: Housing for aging parents
+
+            - Sub: "How to talk to your parents about moving"
+            - Sub: "Assisted living vs memory care: what's the difference?"
+            - Sub: "Can Medicare help pay for housing?"
+            - Sub: "What to do if your parent refuses to move"
+
+----
+
+PART 3: Part 3: Blog-Writing Questions that GraphRAG (or Claude) Should Answer
+
+Here's the list of blog-building prompts GraphRAG (or Claude with access to your graph) should support.
+
+    Strategy-Level
+
+        - What is a complete content cluster around [pain point]?
+        - What pillar content themes do I have (or need) for [persona]?
+        - What topics are most undercovered for [persona]?
+        - What's the top-of-funnel vs bottom-of-funnel content split?
+
+    Article Planning
+
+        - What's a good headline for an article about [subpillar]?
+        - What emotional hooks would connect with [persona] on this topic?
+        - What supporting stats or examples do I already have?
+        - What related articles exist in my system (to link or repurpose)?
+
+    Article Drafting
+
+        - Write a full blog article about [topic] for [persona]
+        - Summarize [topic] in a way that resonates emotionally
+        - Create 5 title options for this article
+        - Suggest an outline with intro, pain, solution, CTA
+
+----
+
+Final Combo Example
+
+    Persona: Susan, Sandwich Generation Caregiver
+    Goal: Reduce overwhelm while choosing senior housing
+    Prompt to GraphRAG:
+
+    "Create a blog post titled 'The 5 Biggest Mistakes Adult Children Make When Moving Their Parents' using content already in my graph. Focus on Susan's emotional triggers and common misunderstandings."
+
+    Output: Blog post, plus suggestions for 3 follow-ups, a lead magnet, and related videos.
+
+ 

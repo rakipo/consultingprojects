@@ -1,0 +1,54 @@
+Primary table which need to be transformed to neo4j:
+
+CREATE TABLE IF NOT EXISTS structured_content (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,                    -- Original URL
+    raw_html_id INT NOT NULL,             -- Link to raw HTML record
+    domain TEXT NOT NULL,                 -- Domain category  
+    site_name TEXT,                       -- Specific website
+    title TEXT,                           -- Page/article title
+    author TEXT,                          -- Author name(s)
+    publish_date DATE,                    -- When content was published
+    content TEXT NOT NULL,                -- Extracted clean text content
+    summary TEXT,                         -- Optional summary (AI-generated or extracted)
+    tags JSONB DEFAULT '[]'::jsonb,       -- Category tags as JSON array
+    language VARCHAR(5),                  -- Language code (e.g., 'en', 'es')
+    extracted_at TIMESTAMP DEFAULT NOW(), -- When content was extracted
+    is_latest BOOLEAN DEFAULT TRUE,       -- Is this the latest extracted version?
+    run_id TEXT NOT NULL,                 -- Which crawl session extracted this
+    CONSTRAINT fk_structured_raw FOREIGN KEY (raw_html_id) REFERENCES raw_html_store(id) ON DELETE CASCADE,
+    CONSTRAINT fk_structured_run FOREIGN KEY (run_id) REFERENCES crawl_runs(run_id) ON DELETE CASCADE
+);
+
+
+#1 question: 
+My understanding is the graph should have the information which are required for analyitcs. Content and summary no need to resolve further to load into neo4j. But it should have backward tracebility to postgress. sothat content and summary could be pulled.
+
+In other scenario:
+
+content: that could be a "blob" type data, which will be big in the size. is this need to stored on neo4j? if "content" need be searched I propse chunking and storing the content to vector index on neo4j. 
+
+summary: depending on the size we can directly store this on neo4j and make the "Fulltext search" on this.
+
+#2 question:
+the current scope of the project 
+1. Connection layer between Postgres + Neo4j
+   - Pull from Postgres (structured_content)
+   - Transform data into JSON-ready format
+   - Insert into Neo4j via Cypher queries
+   - Follow best practices (MERGE, constraint setup, deduping)
+
+2. Graph schema setup in Neo4j  ---> this is actually first step 
+   - Nodes: Article, Entity, Topic, Person, Company, etc.
+   - Relationships: MENTIONS, TAGS, SIMILAR_TO, WRITTEN_BY, etc.
+   - Constraints, indexing, uniqueness setup
+
+3. MCP server setup
+   - MCP Cypher Server running (local or containerized)
+   - MCP Data Modeling server if schema support needed
+   - Test calls (e.g. get_schema, write_cypher) with sample inputs
+
+4. Documented pipeline for:
+   - How to fetch Postgres data → transform → send to Claude/GPT for tagging
+   - How to ingest into Neo4j using MCP server
+   - How to run basic queries (match, update, etc.)

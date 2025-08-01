@@ -1,0 +1,307 @@
+/*
+==============================
+UNIVERSAL WEB SCRAPING SCHEMA 
+==============================
+
+PROJECT OVERVIEW:
+- Multi-domain content scraping system
+- Scale: 5-10 domains, 50-100 websites each, 10k-20k total pages
+- Target Sites: Government/academic (NIH, Alzheimer's research sites)
+- Framework: Designed for Scrapy integration
+- Database: PostgreSQL with versioning and concurrency support
+
+DOMAIN STRUCTURE EXAMPLE:
+- Domain: "healthcare" 
+  ├── Site: "nih.gov" (500 pages)
+  ├── Site: "alzforum.org" (300 pages)
+  └── Site: "alzheimers.net" (200 pages)
+- Domain: "research"
+  ├── Site: "pubmed.gov" (800 pages)
+  └── Site: "clinicaltrials.gov" (400 pages)
+
+SCRAPING WORKFLOW:
+1. Start crawl run → INSERT into crawl_runs
+2. Discover URLs → INSERT into link_queue  
+3. Process queue → scrape pages → INSERT into raw_html_store
+4. Extract content → INSERT into structured_content
+5. Track failures → INSERT into failed_urls
+6. Handle recrawls → automatic versioning via triggers
+
+KEY FEATURES:
+- Versioning: Multiple versions of same URL supported
+- Concurrency: Multiple crawl runs can operate simultaneously  
+- Deduplication: Content hash prevents storing identical content
+- Retry Logic: Failed URLs tracked with retry counts
+- Performance: Optimized indexes for common query patterns
+
+CONTENT TARGETING SPECIFICATION:
+
+SCRAPE THESE CONTENT TYPES:
+✅ HTML pages (articles, blog posts, news)
+✅ Text-based content (research papers as HTML)
+✅ PDF documents (research papers, reports) - extract text only
+✅ Plain text files (.txt)
+✅ XML files (data feeds, structured content)
+✅ JSON files (API responses, structured data)
+✅ CSV files (research data, statistics)
+✅ RSS/Atom feeds (news updates, blog feeds)
+✅ Markdown files (.md) - documentation, README files
+
+DO NOT SCRAPE:
+❌ Images (jpg, png, gif, svg)
+❌ Videos (mp4, avi, mov)
+❌ Audio files (mp3, wav)
+❌ Binary documents (Word docs, Excel files)
+❌ Archives (zip, rar, tar)
+❌ Code repositories
+❌ Social media feeds/comments
+❌ E-commerce product pages
+❌ Login/registration pages
+❌ Search result pages
+❌ Navigation/menu pages
+
+FOCUS ON:
+- Research articles and papers
+- Government health information
+- Medical guidelines and protocols
+- Clinical trial data
+- Academic publications
+- Official health organization content
+
+===========================================
+
+-- ====================================
+-- TABLE 1: CRAWL RUN TRACKING
+-- ====================================
+CREATE TABLE IF NOT EXISTS crawl_runs (
+    run_id TEXT PRIMARY KEY,              -- Unique identifier for each crawl session
+    started_at TIMESTAMP DEFAULT NOW(),   -- When this crawl run began
+    status TEXT CHECK (status IN ('active', 'completed', 'failed')) DEFAULT 'active'
+);
+
+-- USAGE EXAMPLE:
+-- INSERT INTO crawl_runs (run_id, status) VALUES ('healthcare_2025_01', 'active');
+
+
+-- ====================================
+-- TABLE 2: LINK DISCOVERY QUEUE  
+-- ====================================
+CREATE TABLE IF NOT EXISTS link_queue (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,                    -- Full URL to be scraped
+    domain TEXT NOT NULL,                 -- Top-level domain category (e.g., "healthcare")
+    site_name TEXT,                       -- Specific website (e.g., "nih.gov")
+    parent_url TEXT,                      -- URL where this link was discovered
+    crawl_depth INT CHECK (crawl_depth >= 0 AND crawl_depth <= 50), -- How deep from start page
+    priority INT DEFAULT 0,               -- Higher number = higher priority
+    is_scraped BOOLEAN DEFAULT FALSE,     -- Has this URL been processed?
+    discovered_at TIMESTAMP DEFAULT NOW(),
+    run_id TEXT NOT NULL,                 -- Which crawl session found this URL
+    CONSTRAINT fk_queue_run FOREIGN KEY (run_id) REFERENCES crawl_runs(run_id) ON DELETE CASCADE
+);
+
+-- USAGE EXAMPLES:
+-- Queue a new URL for scraping:
+-- INSERT INTO link_queue (url, domain, site_name, run_id) 
+-- VALUES ('https://nih.gov/news/article-123', 'healthcare', 'nih.gov', 'healthcare_2025_01');
+
+-- Get next URLs to scrape (with concurrency safety):
+-- SELECT * FROM link_queue 
+-- WHERE NOT is_scraped AND run_id = 'healthcare_2025_01' 
+-- ORDER BY priority DESC, crawl_depth 
+-- LIMIT 100 FOR UPDATE SKIP LOCKED;
+
+
+-- ====================================
+-- TABLE 3: RAW HTML STORAGE
+-- ====================================
+CREATE TABLE IF NOT EXISTS raw_html_store (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,                    -- URL that was scraped
+    domain TEXT NOT NULL,                 -- Domain category
+    site_name TEXT,                       -- Specific website
+    html_body TEXT NOT NULL,              -- Full HTML content
+    content_hash CHAR(64) NOT NULL,       -- SHA-256 hash for duplicate detection
+    http_status SMALLINT CHECK (http_status >= 100 AND http_status <= 599),
+    content_type TEXT,                    -- MIME type or page category
+    canonical_url TEXT,                   -- Canonical URL if different from scraped URL
+    encoding TEXT DEFAULT 'utf-8',       -- Character encoding
+    crawled_at TIMESTAMP DEFAULT NOW(),   -- When this page was scraped
+    response_time_ms SMALLINT,            -- How long the request took
+    source_tag TEXT,                      -- Which scraper/tool was used
+    is_latest BOOLEAN DEFAULT TRUE,       -- Is this the most recent version?
+    run_id TEXT NOT NULL,                 -- Which crawl session scraped this
+    CONSTRAINT fk_raw_run FOREIGN KEY (run_id) REFERENCES crawl_runs(run_id) ON DELETE CASCADE
+);
+
+-- VERSIONING BEHAVIOR:
+-- When same URL is scraped again, trigger automatically sets old versions to is_latest=FALSE
+-- This allows tracking content changes over time while keeping latest version easily accessible
+
+-- USAGE EXAMPLES:
+-- Store scraped HTML:
+-- INSERT INTO raw_html_store (url, domain, site_name, html_body, content_hash, run_id)
+-- VALUES ('https://nih.gov/article-123', 'healthcare', 'nih.gov', '<html>...</html>', 'sha256hash', 'run_2025_01');
+
+-- Get latest version of a page:
+-- SELECT * FROM raw_html_store WHERE url = 'https://nih.gov/article-123' AND is_latest = true;
+
+
+-- ====================================
+-- TABLE 4: EXTRACTED STRUCTURED CONTENT
+-- ====================================
+CREATE TABLE IF NOT EXISTS structured_content (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,                    -- Original URL
+    raw_html_id INT NOT NULL,             -- Link to raw HTML record
+    domain TEXT NOT NULL,                 -- Domain category  
+    site_name TEXT,                       -- Specific website
+    title TEXT,                           -- Page/article title
+    author TEXT,                          -- Author name(s)
+    publish_date DATE,                    -- When content was published
+    content TEXT NOT NULL,                -- Extracted clean text content
+    summary TEXT,                         -- Optional summary (AI-generated or extracted)
+    tags JSONB DEFAULT '[]'::jsonb,       -- Category tags as JSON array
+    language VARCHAR(5),                  -- Language code (e.g., 'en', 'es')
+    extracted_at TIMESTAMP DEFAULT NOW(), -- When content was extracted
+    is_latest BOOLEAN DEFAULT TRUE,       -- Is this the latest extracted version?
+    run_id TEXT NOT NULL,                 -- Which crawl session extracted this
+    CONSTRAINT fk_structured_raw FOREIGN KEY (raw_html_id) REFERENCES raw_html_store(id) ON DELETE CASCADE,
+    CONSTRAINT fk_structured_run FOREIGN KEY (run_id) REFERENCES crawl_runs(run_id) ON DELETE CASCADE
+);
+
+-- USAGE EXAMPLES:
+-- Store extracted content:
+-- INSERT INTO structured_content (url, raw_html_id, domain, title, content, tags, run_id)
+-- VALUES ('https://nih.gov/article-123', 1, 'healthcare', 'New Research Study', 'Article content...', 
+--         '["alzheimers", "research", "clinical-trial"]'::jsonb, 'run_2025_01');
+
+-- Search by tags:
+-- SELECT * FROM structured_content 
+-- WHERE tags @> '["alzheimers"]'::jsonb AND is_latest = true;
+
+
+-- ====================================
+-- TABLE 5: FAILED URLS TRACKING
+-- ====================================
+CREATE TABLE IF NOT EXISTS failed_urls (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,                    -- URL that failed
+    domain TEXT NOT NULL,                 -- Domain category
+    site_name TEXT,                       -- Specific website
+    reason TEXT NOT NULL,                 -- Why it failed (timeout, 404, etc.)
+    retry_count SMALLINT DEFAULT 0,       -- How many times we've retried
+    attempted_at TIMESTAMP DEFAULT NOW(), -- When the failure occurred
+    run_id TEXT NOT NULL,                 -- Which crawl session had the failure
+    CONSTRAINT fk_failed_run FOREIGN KEY (run_id) REFERENCES crawl_runs(run_id) ON DELETE CASCADE
+);
+
+-- USAGE EXAMPLES:
+-- Record a failure:
+-- INSERT INTO failed_urls (url, domain, reason, retry_count, run_id)
+-- VALUES ('https://nih.gov/broken-page', 'healthcare', '404 Not Found', 0, 'run_2025_01');
+
+-- Get URLs ready for retry (failed less than 3 times):
+-- SELECT * FROM failed_urls WHERE retry_count < 3 ORDER BY attempted_at;
+
+
+-- ====================================
+-- PERFORMANCE INDEXES
+-- ====================================
+
+-- Link queue indexes (for efficient crawling)
+CREATE INDEX IF NOT EXISTS idx_queue_ready ON link_queue(domain, priority DESC, crawl_depth) WHERE NOT is_scraped;
+CREATE INDEX IF NOT EXISTS idx_queue_run ON link_queue(run_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_queue_url_run ON link_queue(url, run_id);
+
+-- Raw HTML indexes (for duplicate detection and latest version queries)
+CREATE INDEX IF NOT EXISTS idx_raw_latest ON raw_html_store(domain, crawled_at DESC) WHERE is_latest;
+CREATE INDEX IF NOT EXISTS idx_raw_content_hash ON raw_html_store(content_hash);
+CREATE INDEX IF NOT EXISTS idx_raw_url_latest ON raw_html_store(url) WHERE is_latest;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_raw_domain_content ON raw_html_store(domain, content_hash, crawled_at DESC);
+
+-- Structured content indexes (for content queries and tag searches)
+CREATE INDEX IF NOT EXISTS idx_structured_latest ON structured_content(domain, publish_date DESC NULLS LAST) WHERE is_latest;
+CREATE INDEX IF NOT EXISTS idx_structured_tags ON structured_content USING gin(tags) WHERE tags != '[]'::jsonb;
+CREATE INDEX IF NOT EXISTS idx_structured_url_latest ON structured_content(url) WHERE is_latest;
+
+-- Failed URLs indexes (for retry logic)
+CREATE INDEX IF NOT EXISTS idx_failed_retry ON failed_urls(domain, retry_count, attempted_at);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_failed_url_run ON failed_urls(url, run_id);
+
+
+-- ====================================
+-- AUTOMATIC VERSIONING TRIGGERS
+-- ====================================
+
+-- Trigger for raw HTML versioning
+CREATE OR REPLACE FUNCTION update_raw_html_latest() RETURNS TRIGGER AS $$
+BEGIN
+    -- When new HTML is inserted, mark previous versions as not latest
+    UPDATE raw_html_store 
+    SET is_latest = FALSE 
+    WHERE url = NEW.url AND id != NEW.id;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_raw_html_latest 
+    AFTER INSERT ON raw_html_store 
+    FOR EACH ROW EXECUTE FUNCTION update_raw_html_latest();
+
+-- Trigger for structured content versioning  
+CREATE OR REPLACE FUNCTION update_structured_latest() RETURNS TRIGGER AS $$
+BEGIN
+    -- When new structured content is inserted, mark previous versions as not latest
+    UPDATE structured_content 
+    SET is_latest = FALSE 
+    WHERE url = NEW.url AND id != NEW.id;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_structured_latest 
+    AFTER INSERT ON structured_content 
+    FOR EACH ROW EXECUTE FUNCTION update_structured_latest();
+
+
+-- ====================================
+-- STORAGE OPTIMIZATIONS
+-- ====================================
+ALTER TABLE raw_html_store ALTER COLUMN html_body SET STORAGE EXTERNAL;
+ALTER TABLE structured_content ALTER COLUMN content SET STORAGE EXTERNAL;
+
+
+-- ====================================
+-- COMMON QUERIES FOR SCRAPY INTEGRATION
+-- ====================================
+
+/*
+-- Start a new crawl run:
+INSERT INTO crawl_runs (run_id, status) VALUES ('healthcare_jan_2025', 'active');
+
+-- Get domain statistics:
+SELECT domain, site_name, COUNT(*) as total_pages, 
+       COUNT(*) FILTER (WHERE is_latest = true) as latest_pages
+FROM structured_content 
+GROUP BY domain, site_name 
+ORDER BY total_pages DESC;
+
+-- Find duplicate content across sites:
+SELECT content_hash, COUNT(*) as duplicate_count, array_agg(DISTINCT site_name) as sites
+FROM raw_html_store 
+WHERE is_latest = true 
+GROUP BY content_hash 
+HAVING COUNT(*) > 1;
+
+-- Monitor crawl progress:
+SELECT domain, 
+       COUNT(*) as total_queued,
+       COUNT(*) FILTER (WHERE is_scraped = true) as completed,
+       COUNT(*) FILTER (WHERE is_scraped = false) as remaining
+FROM link_queue 
+WHERE run_id = 'current_run_id'
+GROUP BY domain;
+*/

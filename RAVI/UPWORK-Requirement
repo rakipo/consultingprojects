@@ -1,0 +1,73 @@
+
+Summary
+We've built a unified PostgreSQL database containing structured content scraped from multiple domains (in progress are healthcare, legal, senior living, etc.). Now, we're transitioning from flat storage to a graph intelligence layer using Neo4j.
+
+Neo4j will serve as the knowledge graph and reasoning engine, enabling advanced use cases like trend detection, topical clustering, smart retrieval (GraphRAG), and decision support agents.
+
+To do this right, we're adopting Neo4j's official MCP (Model Context Protocol) integration layer, which supports intelligent schema design and LLM-driven ingestion using Claude/GPT agents.
+
+=================
+What You'll Work With
+
+You will not write a scraper. That's already done. You will:
+
+1. Pull cleaned content from PostgreSQL (structured_content table).
+2. Transform that into graph-compatible entities/relationships using Claude/GPT or manually for now.
+3. Push into Neo4j using Cypher, aligned with a well-defined graph schema.
+4. Set up the MCP Cypher Server so Claude/GPT agents can query, write, and model in Neo4j.
+5. Optionally explore the Data Modeling MCP Server to define and evolve the schema with Claude.
+
+What MCP Is
+
+https://neo4j.com/developer/genai-ecosystem/model-context-protocol-mcp/
+
+MCP (Model Context Protocol) is an emerging standard that allows LLMs (like Claude or GPT) to interact with databases and tools via structured commands (like get_schema, write_cypher, etc.).
+
+Neo4j has officially adopted this. They provide two MCP server implementations:
+
+Server Type | Role
+Cypher MCP Server | Accepts read/write Cypher queries from LLM agents
+Data Modeling MCP | Lets agents model schemas, validate relationships, etc.
+
+This means you can:
+- Let LLMs design or evolve the graph schema via natural language.
+- Auto-generate ingestion scripts.
+- Push new nodes/relationships programmatically via LLM-backed interfaces.
+
+We'll likely run both servers locally or via Docker to support agent-based ingestion going forward.
+
+What You'll Deliver
+
+1. Connection layer between Postgres + Neo4j
+   - Pull from Postgres (structured_content)
+   - Transform data into JSON-ready format
+   - Insert into Neo4j via Cypher queries
+   - Follow best practices (MERGE, constraint setup, deduping)
+
+2. Graph schema setup in Neo4j
+   - Nodes: Article, Entity, Topic, Person, Company, etc.
+   - Relationships: MENTIONS, TAGS, SIMILAR_TO, WRITTEN_BY, etc.
+   - Constraints, indexing, uniqueness setup
+
+3. MCP server setup
+   - MCP Cypher Server running (local or containerized)
+   - MCP Data Modeling server if schema support needed
+   - Test calls (e.g. get_schema, write_cypher) with sample inputs
+
+4. Documented pipeline for:
+   - How to fetch Postgres data → transform → send to Claude/GPT for tagging
+   - How to ingest into Neo4j using MCP server
+   - How to run basic queries (match, update, etc.)
+
+
+This is a modular setup. If this is well done, we'll bring you back for more advanced automations and integrations. This is 1 of many long term projects.
+
+My Budget is 300$, with more neo4j projects to come.
+
+
+
+
+
+
+
+

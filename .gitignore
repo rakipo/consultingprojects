@@ -1,0 +1,88 @@
+# Database files and data
+*.db
+*.sqlite
+*.sqlite3
+installation/neo4j/data/
+installation/neo4j/logs/
+installation/neo4j/metrics/
+
+# Neo4j specific
+neostore*
+*.counts.db
+*.indexstats.db
+*.labeltokenstore.db*
+*.nodestore.db*
+*.propertystore.db*
+*.relationshipstore.db*
+*.relationshiptypestore.db*
+*.schemastore.db*
+database_lock
+store_lock
+checkpoint.*
+*.transaction.db.*
+
+# Environment files
+.env
+*.env.local
+*.env.production
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Certificates and keys
+*.key
+*.crt
+*.pem
+*.p12
+*.pfx
+installation/cert_backup/
+installation/new_cert/
+installation/neo4j/cert/
+
+# Logs
+*.log
+logs/
+
+# Docker volumes and data
+docker-data/
+volumes/
+
+# Backup files
+*.bak
+*.backup
+*.old
