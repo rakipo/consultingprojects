@@ -1,0 +1,115 @@
+# Environment Configuration
+# All environment variables and their defaults
+
+database:
+  postgres:
+    host:
+      env_var: "POSTGRES_HOST"
+      default: "localhost"
+      description: "PostgreSQL server hostname"
+    port:
+      env_var: "POSTGRES_PORT"
+      default: 5432
+      type: "int"
+      description: "PostgreSQL server port"
+    database:
+      env_var: "POSTGRES_DB"
+      default: "movies"
+      description: "PostgreSQL database name"
+    user:
+      env_var: "POSTGRES_USER"
+      default: "postgres"
+      description: "PostgreSQL username"
+    password:
+      env_var: "POSTGRES_PASSWORD"
+      default: "password123"
+      description: "PostgreSQL password"
+      sensitive: true
+    schema:
+      env_var: "POSTGRES_SCHEMA"
+      default: "public"
+      description: "PostgreSQL schema name"
+    
+  neo4j:
+    uri:
+      env_var: "NEO4J_URI"
+      default: "bolt://localhost:7687"
+      description: "Neo4j connection URI"
+    user:
+      env_var: "NEO4J_USER"
+      default: "neo4j"
+      description: "Neo4j username"
+    password:
+      env_var: "NEO4J_PASSWORD"
+      default: "password123"
+      description: "Neo4j password"
+      sensitive: true
+    database:
+      env_var: "NEO4J_DATABASE"
+      default: "neo4j"
+      description: "Neo4j database name"
+
+server:
+  name:
+    env_var: "MCP_SERVER_NAME"
+    default: "mcp-neo4j-data-modeling"
+    description: "MCP server name"
+  log_level:
+    env_var: "LOG_LEVEL"
+    default: "INFO"
+    description: "Logging level"
+    options: ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+  timeout:
+    env_var: "SERVER_TIMEOUT"
+    default: 30
+    type: "int"
+    description: "Server timeout in seconds"
+
+cypher:
+  standards_file:
+    env_var: "CYPHER_STANDARDS_FILE"
+    default: "cypher_standards.yaml"
+    description: "Path to Cypher standards configuration file"
+  validation_enabled:
+    env_var: "CYPHER_VALIDATION_ENABLED"
+    default: true
+    type: "bool"
+    description: "Enable Cypher query validation"
+  auto_fix_enabled:
+    env_var: "CYPHER_AUTO_FIX_ENABLED"
+    default: false
+    type: "bool"
+    description: "Enable automatic fixing of Cypher queries"
+
+migration:
+  batch_size:
+    env_var: "MIGRATION_BATCH_SIZE"
+    default: 1000
+    type: "int"
+    description: "Number of records to process in each batch"
+  clear_existing:
+    env_var: "MIGRATION_CLEAR_EXISTING"
+    default: false
+    type: "bool"
+    description: "Clear existing Neo4j data before migration"
+  default_date:
+    env_var: "MIGRATION_DEFAULT_DATE"
+    default: "2024-01-01"
+    description: "Default date for missing publish dates"
+
+performance:
+  connection_pool_size:
+    env_var: "CONNECTION_POOL_SIZE"
+    default: 10
+    type: "int"
+    description: "Database connection pool size"
+  query_timeout:
+    env_var: "QUERY_TIMEOUT"
+    default: 30
+    type: "int"
+    description: "Query timeout in seconds"
+  max_retries:
+    env_var: "MAX_RETRIES"
+    default: 3
+    type: "int"
+    description: "Maximum number of retry attempts"

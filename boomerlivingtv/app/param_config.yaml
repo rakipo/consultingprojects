@@ -1,0 +1,362 @@
+# Parameters Configuration
+# All parameters, prompts, templates, and static configurations
+
+# Database queries and SQL templates
+database_queries:
+  postgres:
+    schema_info: |
+      SELECT table_name, column_name, data_type, is_nullable
+      FROM information_schema.columns
+      WHERE table_schema = $schema
+      ORDER BY table_name, ordinal_position
+    
+    domain_distribution: |
+      SELECT domain, COUNT(*) 
+      FROM structured_content 
+      GROUP BY domain
+    
+    author_statistics: |
+      SELECT author, COUNT(*) 
+      FROM structured_content 
+      GROUP BY author
+    
+    tag_analysis: |
+      SELECT tag, COUNT(*) as count
+      FROM structured_content,
+           jsonb_array_elements_text(tags) as tag
+      GROUP BY tag
+      ORDER BY count DESC
+    
+    relationship_patterns: |
+      SELECT author, domain, COUNT(*) as articles
+      FROM structured_content
+      GROUP BY author, domain
+      ORDER BY articles DESC
+    
+    content_data: |
+      SELECT id, url, domain, site_name, title, author, 
+             publish_date, content, summary, tags, language
+      FROM structured_content
+      ORDER BY id
+  
+  neo4j:
+    test_connection: "RETURN 1 as test"
+    
+    clear_all_data: "MATCH (n) DETACH DELETE n"
+    
+    count_nodes: |
+      RETURN 
+        size((:Author)) as authors,
+        size((:Article)) as articles,
+        size((:Domain)) as domains,
+        size((:Tag)) as tags,
+        size((:Website)) as websites
+    
+    constraints:
+      - "CREATE CONSTRAINT author_name IF NOT EXISTS FOR (a:Author) REQUIRE a.name IS UNIQUE"
+      - "CREATE CONSTRAINT domain_name IF NOT EXISTS FOR (d:Domain) REQUIRE d.name IS UNIQUE"
+      - "CREATE CONSTRAINT tag_name IF NOT EXISTS FOR (t:Tag) REQUIRE t.name IS UNIQUE"
+      - "CREATE CONSTRAINT website_name IF NOT EXISTS FOR (w:Website) REQUIRE w.site_name IS UNIQUE"
+      - "CREATE CONSTRAINT article_id IF NOT EXISTS FOR (a:Article) REQUIRE a.id IS UNIQUE"
+    
+    indexes:
+      - "CREATE INDEX author_name_idx IF NOT EXISTS FOR (a:Author) ON (a.name)"
+      - "CREATE INDEX article_title_idx IF NOT EXISTS FOR (a:Article) ON (a.title)"
+      - "CREATE INDEX article_created_date_idx IF NOT EXISTS FOR (a:Article) ON (a.created_date)"
+      - "CREATE INDEX domain_name_idx IF NOT EXISTS FOR (d:Domain) ON (d.name)"
+
+# Migration templates
+migration_templates:
+  article_migration: |
+    // Create Author
+    MERGE (author:Author {name: $author})
+    
+    // Create Domain
+    MERGE (domain:Domain {name: $domain})
+    
+    // Create Website
+    MERGE (website:Website {site_name: $site_name})
+    
+    // Create Article
+    CREATE (article:Article {
+        id: $article_id,
+        title: $title,
+        url: $url,
+        publish_date: date($publish_date),
+        content: $content,
+        summary: $summary,
+        language: $language
+    })
+    
+    // Create relationships
+    CREATE (author)-[:WROTE]->(article)
+    CREATE (article)-[:BELONGS_TO]->(domain)
+    CREATE (article)-[:PUBLISHED_ON]->(website)
+    
+    // Create author specialization relationship
+    MERGE (author)-[spec:SPECIALIZES_IN]->(domain)
+    ON CREATE SET spec.article_count = 1
+    ON MATCH SET spec.article_count = spec.article_count + 1
+    
+    RETURN article.id as created_article
+  
+  tag_relationship: |
+    MATCH (article:Article {id: $article_id})
+    MERGE (tag:Tag {name: $tag})
+    CREATE (article)-[:TAGGED_WITH]->(tag)
+
+# Data model templates
+data_model_templates:
+  header: |
+    // Neo4j Data Model for Content Management System
+    // Generated with Cypher Standards Compliance
+  
+  node_descriptions:
+    - "// Node Labels (PascalCase):"
+    - "// - Author: Content creators"
+    - "// - Article: Individual publications"
+    - "// - Domain: Content categories"
+    - "// - Tag: Content tags"
+    - "// - Website: Source websites"
+  
+  relationship_descriptions:
+    - "// Relationships (UPPER_SNAKE_CASE):"
+    - "// - (Author)-[:WROTE]->(Article)"
+    - "// - (Article)-[:BELONGS_TO]->(Domain)"
+    - "// - (Article)-[:TAGGED_WITH]->(Tag)"
+    - "// - (Article)-[:PUBLISHED_ON]->(Website)"
+    - "// - (Author)-[:SPECIALIZES_IN]->(Domain)"
+    - "// - (Tag)-[:RELATED_TO]->(Domain)"
+
+# Sample query templates
+sample_queries:
+  create_nodes:
+    author: |
+      // Create Author nodes
+      MERGE (a:Author {name: $author_name})
+      SET a.specialization = $specialization
+    
+    domain: |
+      // Create Domain nodes
+      MERGE (d:Domain {name: $domain_name})
+      SET d.description = $description
+    
+    tag: |
+      // Create Tag nodes
+      MERGE (t:Tag {name: $tag_name})
+      SET t.category = $category
+  
+  create_relationships:
+    author_wrote_article: |
+      // Author writes articles
+      MATCH (author:Author {name: $author_name})
+      MATCH (article:Article {title: $article_title})
+      CREATE (author)-[:WROTE {date: date($date)}]->(article)
+    
+    article_belongs_to_domain: |
+      // Articles belong to domains
+      MATCH (article:Article)
+      MATCH (domain:Domain {name: $domain_name})
+      WHERE article.title CONTAINS $keyword1 OR article.title CONTAINS $keyword2
+      CREATE (article)-[:BELONGS_TO]->(domain)
+  
+  analysis:
+    productive_authors: |
+      // Most productive authors
+      MATCH (a:Author)-[:WROTE]->(article:Article)
+      RETURN a.name, count(article) as article_count
+      ORDER BY article_count DESC
+      LIMIT $limit
+    
+    domain_distribution: |
+      // Domain distribution
+      MATCH (d:Domain)<-[:BELONGS_TO]-(article:Article)
+      RETURN d.name, count(article) as article_count
+      ORDER BY article_count DESC
+      LIMIT $limit
+    
+    author_specializations: |
+      // Author specializations
+      MATCH (a:Author)-[s:SPECIALIZES_IN]->(d:Domain)
+      RETURN a.name, d.name, s.article_count
+      ORDER BY s.article_count DESC
+      LIMIT $limit
+  
+  search:
+    keyword_search: |
+      // Find articles by keyword
+      MATCH (article:Article)
+      WHERE article.title CONTAINS $keyword OR article.content CONTAINS $content_keyword
+      RETURN article.title, article.author, article.publish_date
+      LIMIT $limit
+    
+    related_articles: |
+      // Find related articles through tags
+      MATCH (article1:Article)-[:TAGGED_WITH]->(tag:Tag)<-[:TAGGED_WITH]-(article2:Article)
+      WHERE article1.title = $reference_title
+      AND article1 <> article2
+      RETURN article2.title, article2.author, collect(tag.name) as shared_tags
+      LIMIT $limit
+    
+    author_collaborations: |
+      // Find author collaborations (articles in same domain)
+      MATCH (a1:Author)-[:WROTE]->(article1:Article)-[:BELONGS_TO]->(d:Domain)<-[:BELONGS_TO]-(article2:Article)<-[:WROTE]-(a2:Author)
+      WHERE a1 <> a2
+      RETURN a1.name, a2.name, d.name, count(*) as shared_domain_articles
+      ORDER BY shared_domain_articles DESC
+      LIMIT $limit
+
+# Analytics query templates
+analytics_templates:
+  node_count: |
+    // Count {node_type} nodes
+    MATCH (n:{node_type})
+    RETURN count(n) as total_{node_type_lower}s
+    LIMIT $limit
+  
+  connection_analysis: |
+    // Most connected {node_type} nodes
+    MATCH (n:{node_type})
+    RETURN n, size((n)--()) as connection_count
+    ORDER BY connection_count DESC
+    LIMIT $limit
+  
+  timeline_analysis: |
+    // {node_type} creation timeline
+    MATCH (n:{node_type})
+    WHERE n.created_date IS NOT NULL
+    RETURN date(n.created_date) as creation_date, count(n) as count
+    ORDER BY creation_date DESC
+    LIMIT $limit
+
+# MCP Server configuration
+mcp_server:
+  resources:
+    - uri: "postgres://schema"
+      name: "PostgreSQL Schema"
+      description: "Current PostgreSQL database schema"
+      mime_type: "application/json"
+    
+    - uri: "neo4j://model"
+      name: "Neo4j Data Model"
+      description: "Generated Neo4j data model"
+      mime_type: "text/plain"
+    
+    - uri: "analysis://content"
+      name: "Content Analysis"
+      description: "Analysis of content structure and relationships"
+      mime_type: "application/json"
+  
+  tools:
+    - name: "analyze_postgres_schema"
+      description: "Analyze PostgreSQL schema and suggest Neo4j model"
+      input_schema:
+        type: "object"
+        properties: {}
+        required: []
+    
+    - name: "migrate_to_neo4j"
+      description: "Migrate data from PostgreSQL to Neo4j"
+      input_schema:
+        type: "object"
+        properties:
+          clear_existing:
+            type: "boolean"
+            description: "Clear existing Neo4j data before migration"
+            default: false
+        required: []
+    
+    - name: "generate_cypher_queries"
+      description: "Generate Cypher queries for common operations with standards compliance"
+      input_schema:
+        type: "object"
+        properties:
+          query_type:
+            type: "string"
+            enum: ["create_nodes", "create_relationships", "analysis", "search"]
+            description: "Type of queries to generate"
+          node_type:
+            type: "string"
+            description: "Node type for node/relationship operations"
+          properties:
+            type: "object"
+            description: "Properties for node creation"
+        required: ["query_type"]
+    
+    - name: "validate_cypher_query"
+      description: "Validate Cypher query against standards and best practices"
+      input_schema:
+        type: "object"
+        properties:
+          query:
+            type: "string"
+            description: "Cypher query to validate"
+          fix_issues:
+            type: "boolean"
+            description: "Attempt to automatically fix common issues"
+            default: false
+        required: ["query"]
+    
+    - name: "generate_standards_compliant_query"
+      description: "Generate a standards-compliant Cypher query for specific operations"
+      input_schema:
+        type: "object"
+        properties:
+          operation:
+            type: "string"
+            enum: ["create_node", "create_relationship", "search", "analytics"]
+            description: "Type of operation to generate query for"
+          parameters:
+            type: "object"
+            description: "Parameters for the operation"
+        required: ["operation", "parameters"]
+
+# Default values and constants
+defaults:
+  node_types:
+    - "Author"
+    - "Article"
+    - "Domain"
+    - "Tag"
+    - "Website"
+  
+  relationship_types:
+    - "WROTE"
+    - "BELONGS_TO"
+    - "TAGGED_WITH"
+    - "PUBLISHED_ON"
+    - "SPECIALIZES_IN"
+    - "RELATED_TO"
+  
+  property_types:
+    string: "STRING"
+    integer: "INTEGER"
+    float: "FLOAT"
+    boolean: "BOOLEAN"
+    date: "DATE"
+    datetime: "DATETIME"
+  
+  limits:
+    default_query_limit: 1000
+    max_batch_size: 5000
+    max_connections: 10
+  
+  messages:
+    success:
+      migration_complete: "Migration completed successfully!"
+      validation_passed: "✅ Query passes all validation checks!"
+      connection_successful: "Connection successful"
+    
+    errors:
+      unknown_tool: "Unknown tool: {tool_name}"
+      unknown_resource: "Unknown resource: {resource_uri}"
+      unknown_query_type: "Unknown query type: {query_type}"
+      unknown_operation: "Unknown operation: {operation}"
+      connection_failed: "Connection failed: {error}"
+      migration_failed: "Failed to migrate data: {error}"
+      validation_failed: "Query validation failed"
+    
+    info:
+      server_starting: "Starting MCP Neo4j Data Modeling Server..."
+      server_initialized: "Data modeling server initialized successfully"
+      processing_batch: "Processing batch {batch_number} of {total_batches}"

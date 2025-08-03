@@ -1,0 +1,201 @@
+# Cypher Generation Standards Configuration
+# Define rules and standards for generating consistent Cypher queries
+
+naming_conventions:
+  nodes:
+    # Node labels should be PascalCase
+    label_case: "PascalCase"
+    # Node property names should be snake_case
+    property_case: "snake_case"
+    # Reserved node labels to avoid
+    reserved_labels: ["Node", "Element", "Entity"]
+    # Maximum label length
+    max_label_length: 50
+    
+  relationships:
+    # Relationship types should be UPPER_SNAKE_CASE
+    type_case: "UPPER_SNAKE_CASE"
+    # Relationship property names should be snake_case
+    property_case: "snake_case"
+    # Common relationship patterns
+    standard_relationships:
+      - "BELONGS_TO"
+      - "CREATED_BY"
+      - "TAGGED_WITH"
+      - "PUBLISHED_ON"
+      - "RELATES_TO"
+    # Maximum relationship type length
+    max_type_length: 30
+    
+  properties:
+    # Property naming standards
+    case: "snake_case"
+    # Reserved property names to avoid
+    reserved_names: ["id", "type", "class"]
+    # Required properties for certain node types
+    required_properties:
+      Article: ["title", "created_date"]
+      Author: ["name"]
+      Domain: ["name"]
+    # Property type mappings
+    type_mappings:
+      string: "STRING"
+      integer: "INTEGER"
+      float: "FLOAT"
+      boolean: "BOOLEAN"
+      date: "DATE"
+      datetime: "DATETIME"
+
+query_structure:
+  # Query formatting standards
+  formatting:
+    # Indent size for nested clauses
+    indent_size: 2
+    # Maximum line length
+    max_line_length: 100
+    # Use uppercase for Cypher keywords
+    keyword_case: "UPPER"
+    # Add comments for complex queries
+    require_comments: true
+    
+  # Query patterns and best practices
+  patterns:
+    # Always use MERGE for creating unique nodes
+    prefer_merge_over_create: true
+    # Use parameterized queries
+    require_parameters: true
+    # Limit result sets
+    default_limit: 1000
+    # Use indexes for performance
+    suggest_indexes: true
+    
+  # Query validation rules
+  validation:
+    # Prevent Cartesian products
+    check_cartesian_products: true
+    # Require WHERE clauses for updates
+    require_where_for_updates: true
+    # Maximum query complexity score
+    max_complexity_score: 100
+    # Disallow dangerous operations in production
+    disallow_delete_all: true
+
+performance:
+  # Performance optimization rules
+  indexing:
+    # Auto-suggest indexes for frequently queried properties
+    auto_suggest: true
+    # Required indexes for certain node types
+    required_indexes:
+      Article: ["title", "created_date"]
+      Author: ["name"]
+      Domain: ["name"]
+    # Composite index suggestions
+    composite_indexes:
+      - ["Article", ["domain", "created_date"]]
+      - ["Author", ["name", "specialization"]]
+      
+  # Query optimization hints
+  optimization:
+    # Use USING INDEX hints when appropriate
+    use_index_hints: true
+    # Suggest query plan analysis
+    suggest_explain: true
+    # Warn about expensive operations
+    warn_expensive_ops: true
+
+security:
+  # Security standards
+  access_control:
+    # Require role-based access patterns
+    require_rbac: false
+    # Sanitize user inputs
+    sanitize_inputs: true
+    # Prevent injection attacks
+    prevent_injection: true
+    
+  # Data privacy rules
+  privacy:
+    # Mask sensitive data in examples
+    mask_sensitive_data: true
+    # Sensitive property patterns
+    sensitive_patterns:
+      - "password"
+      - "email"
+      - "phone"
+      - "ssn"
+      - "credit_card"
+
+documentation:
+  # Documentation requirements
+  comments:
+    # Require comments for complex queries
+    require_for_complex: true
+    # Comment style
+    style: "// Single line comments"
+    # Include query purpose
+    include_purpose: true
+    # Include performance notes
+    include_performance_notes: true
+    
+  # Example generation
+  examples:
+    # Include sample data in examples
+    include_sample_data: true
+    # Show expected results
+    show_expected_results: true
+    # Include error handling examples
+    include_error_handling: true
+
+validation_rules:
+  # Custom validation rules
+  custom_rules:
+    - name: "no_orphaned_nodes"
+      description: "Ensure all nodes have at least one relationship"
+      pattern: "MATCH (n) WHERE NOT (n)--() RETURN count(n)"
+      threshold: 0
+      
+    - name: "consistent_date_format"
+      description: "Use consistent date format across all queries"
+      pattern: "date\\('\\d{4}-\\d{2}-\\d{2}'\\)"
+      required: true
+      
+    - name: "proper_constraint_naming"
+      description: "Use descriptive names for constraints"
+      pattern: "CREATE CONSTRAINT \\w+_\\w+ IF NOT EXISTS"
+      required: true
+
+# Template patterns for common operations
+templates:
+  create_node: |
+    // Create {node_type} node with validation
+    MERGE (n:{node_type} {{
+      {properties}
+    }})
+    ON CREATE SET n.created_date = datetime()
+    ON MATCH SET n.updated_date = datetime()
+    RETURN n
+    
+  create_relationship: |
+    // Create {relationship_type} relationship
+    MATCH (a:{source_type} {{{source_property}: ${source_param}}})
+    MATCH (b:{target_type} {{{target_property}: ${target_param}}})
+    MERGE (a)-[r:{relationship_type}]->(b)
+    ON CREATE SET r.created_date = datetime()
+    RETURN r
+    
+  search_pattern: |
+    // Search {node_type} by {search_field}
+    MATCH (n:{node_type})
+    WHERE n.{search_field} CONTAINS ${search_param}
+    RETURN n
+    ORDER BY n.{order_field} DESC
+    LIMIT ${limit}
+    
+  analytics_pattern: |
+    // Analytics query for {description}
+    MATCH {match_pattern}
+    WHERE {where_conditions}
+    RETURN {return_fields}
+    ORDER BY {order_fields}
+    LIMIT ${limit}

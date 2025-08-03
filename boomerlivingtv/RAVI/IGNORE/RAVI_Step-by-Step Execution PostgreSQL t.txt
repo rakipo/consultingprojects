@@ -1,0 +1,146 @@
+Step-by-Step Execution: PostgreSQL to Neo4j w/ MCP
+
+----
+
+Step 1. Finalize Your Graph Schema
+
+Before ingestion or MCP, lock down the schema.
+
+    - Define key Node labels: Article, Topic, Entity, Author, Source
+    - Define Relationships: TAGS, MENTIONS, WRITTEN_BY, SIMILAR_TO
+    - Define constraints: Article.id, Entity.name, etc.
+
+    Deliverable: A Cypher file or diagram that shows the target structure
+    (We can auto-generate this using Claude + Data Modeling MCP later if needed)
+
+----
+
+Step 2. Query + Export from PostgreSQL
+
+Extract relevant data (e.g. from structured_content) like this:
+
+    SELECT id, title, content, tags, author, publish_date
+    FROM structured_content
+    WHERE publish_date > NOW() - INTERVAL '7 days';
+
+Export to JSON or directly pass as structured dicts into your pipeline.
+
+----
+
+Step 3. Construct Claude Prompt for Graph Transformation
+
+Use Claude Code or GPT-4 to convert each article into graph data.
+
+    Prompt Template:
+
+    You are a graph content transformer. Convert the following article into nodes and relationships compatible with Neo4j.
+
+    Input:
+    {
+      "id": "123",
+      "title": "AI in Senior Living",
+      "content": "...",
+      "tags": ["AI", "Elder Care"],
+      "author": "Dr. Smith",
+      "publish_date": "2025-07-25"
+    }
+
+    Output:
+    {
+      "nodes": [...],
+      "relationships": [...]
+    }
+
+    Output format must match Cypher-ready entities like:
+
+    {
+      "nodes": [
+        { "label": "Article", "properties": { "id": "123", "title": "...", ... } },
+        { "label": "Topic", "properties": { "name": "AI" } }
+      ],
+      "relationships": [
+        { "from": "Article", "to": "Topic", "type": "TAGS" }
+      ]
+    }
+
+----
+
+Step 4. Write Cypher Ingestion Script
+
+Take Claude's output and insert it into Neo4j using Python (neo4j, py2neo, etc.) or via MCP.
+
+    Example Cypher:
+
+    MERGE (a:Article {id: $id})
+    SET a.title = $title, a.publish_date = $publish_date
+
+    MERGE (t:Topic {name: $tag})
+    MERGE (a)-[:TAGS]->(t)
+
+----
+
+Step 5. Set Up the Neo4j MCP Cypher Server
+
+Install via Docker or pip:
+
+    - https://github.com/neo4j-labs/neo4j-mcp-cypher-server
+    - Exposes /get_schema, /write_cypher, /read_cypher endpoints
+    - Configure endpoint + Neo4j credentials in mcp_config.json
+
+    Example:
+
+    {
+      "tools": [
+        {
+          "tool_name": "Neo4j Cypher",
+          "tool_type": "cypher",
+          "tool_url": "http://localhost:8080"
+        }
+      ]
+    }
+
+This allows Claude/GPT to reason over your schema, generate new Cypher, and push updates.
+
+----
+
+Step 6. (Optional) Set Up the Data Modeling MCP Server
+
+If you want the LLM to design the schema, use the modeling MCP server.
+
+    - Input: Article examples
+    - Output: Full schema recommendation
+    - Also generates constraints, example Cypher, and node/edge diagrams
+
+    Repo: https://github.com/neo4j-labs/neo4j-mcp-data-modeling
+
+----
+
+Step 7. Connect Claude Agent Loop
+
+Build a loop where:
+
+    1. PostgreSQL article is extracted
+    2. Claude transforms into graph schema
+    3. Script sends Cypher into Neo4j
+    4. MCP is used for testing, querying, and confirming schema structure
+
+----
+MCP tree to include:
+
+    mcp_neo4j/
+    ├── mcp_config.json
+    ├── schema/
+    │   └── base_graph.cypher
+    ├── prompts/
+    │   └── transform_article_to_graph.md
+    ├── ingestion/
+    │   ├── postgres_extractor.py
+    │   ├── claude_graph_transformer.py
+    │   └── neo4j_ingest.py
+    ├── tests/
+    │   └── validate_ingestion.cypher
+    └── logs/
+
+This makes your ingestion self-improving and modular  
+
+ 

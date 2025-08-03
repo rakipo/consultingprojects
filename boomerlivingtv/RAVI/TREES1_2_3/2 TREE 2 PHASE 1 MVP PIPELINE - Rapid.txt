@@ -1,0 +1,90 @@
+TREE 2: PHASE 1 MVP PIPELINE - Rapid Prototype for Proof of Concept
+
+What This Tree Does
+A stripped-down 1-week implementation that proves the core concept works: PostgreSQL articles → basic Neo4j relationships → Claude title generation. Input: your existing articles. Output: semantically-generated content titles that actually relate to your existing content. No complex features - just the essential pipeline to validate the approach.
+
+Why You Need This Tree
+Before investing weeks building the full production pipeline (Tree 1), you need proof the semantic approach actually works with your real data. This MVP tests the core hypothesis: "Can Claude extract meaningful relationships from my content and generate better titles?" Answer in 1 week, not 1 month.
+
+Tree Distinctions
+- Tree 1 (Full Pipeline): Production-ready with entity extraction, complex relationships, MCP integration - 4-6 weeks
+- Tree 2 (This MVP): Basic proof-of-concept with simple relationships, manual triggers - 1 week  
+- Tree 3 (Intelligence): Strategic queries for business insights - requires Tree 1 or 2 as foundation
+
+Purpose: Validate core concept quickly → if successful, upgrade to Tree 1 + Tree 3. If issues found, fix approach before major investment.
+
+MVP_SEMANTIC_PIPELINE/
+├── README.md
+├── docker-compose.yml                  ← PostgreSQL + Neo4j containers only
+├── requirements.txt                    ← Minimal Python dependencies
+├── .env.example
+│
+├── config/
+│   ├── target_topics.json             ← Your core topics (elder law, caregiving, etc.)
+│   └── basic_domains.json             ← Trusted content sources
+│
+├── schemas/
+│   ├── content_basic.sql              ← Simple article storage
+│   └── neo4j_basic.cypher            ← Basic Category-Topic-Author relationships
+│
+├── pipeline/
+│   ├── extract_articles.py           ← Pull from your PostgreSQL structured_content
+│   ├── basic_transform.py            ← Simple entity extraction (no Claude yet)  
+│   └── load_neo4j.py                 ← Create basic graph relationships
+│
+├── generation/
+│   ├── find_related.py               ← Basic Neo4j query: find 3-5 related articles
+│   ├── build_context.py              ← Format related articles for Claude prompt
+│   └── generate_titles.py            ← Claude API: context → new titles
+│
+├── api/
+│   ├── simple_app.py                 ← FastAPI with 3 endpoints: extract, transform, generate
+│   └── test_routes.py                ← Manual trigger endpoints for testing
+│
+└── scripts/
+    ├── setup_mvp.py                  ← Initialize databases with basic schema
+    ├── test_pipeline.py              ← End-to-end test with sample data
+    └── validate_output.py            ← Check if generated titles make sense
+
+
+----
+
+
+MVP Core Jobs (5 Total):
+1. EXTRACT_SAMPLE_ARTICLES - Pull 50-100 articles from PostgreSQL  
+2. CREATE_BASIC_GRAPH - Build simple Article-Topic relationships in Neo4j
+3. FIND_RELATED_CONTENT - Query graph for 3-5 related articles by topic
+4. GENERATE_TEST_TITLES - Claude API with basic context from related articles
+5. VALIDATE_RESULTS - Manual review: do generated titles make sense?
+
+
+----
+
+
+Success Criteria for MVP:
+[ ] Can extract articles from existing PostgreSQL database
+[ ] Creates basic relationships in Neo4j without errors  
+[ ] Finds semantically related content (not just keyword matching)
+[ ] Generates 20+ titles that are actually relevant to your content
+[ ] Titles show clear improvement over random/keyword approaches
+
+
+----
+
+
+MVP Limitations (By Design):
+    No complex entity extraction (people, organizations, tech)
+    No performance tracking or feedback loops  
+    No multi-format content generation (just titles)
+    No strategic intelligence queries
+    No automated scheduling - manual triggers only
+    No MCP integration - direct API calls only
+
+
+----
+
+
+Decision Point After MVP:
+If MVP succeeds → Build Tree 1 (full pipeline) + Tree 3 (intelligence layer)  
+If MVP has issues → Fix core approach before investing in production system  
+Risk mitigation: 1-week investment vs 6-week investment to prove concept

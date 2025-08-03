@@ -1,0 +1,47 @@
+# Consolidated Requirements for Boomer Living TV App
+# All dependencies for the entire application
+
+# Core Python Libraries
+pyyaml>=6.0.0
+typing-extensions>=4.0.0
+
+# Database Drivers
+psycopg2-binary>=2.9.7
+neo4j>=5.15.0
+
+# Data Processing
+pandas>=2.0.0
+requests>=2.31.0
+
+# MCP (Model Context Protocol) Framework
+mcp>=1.0.0
+
+# LangChain and LangGraph (for AI/ML components)
+langgraph>=0.0.40
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-anthropic>=0.1.0
+langchain-core>=0.1.0
+
+# Web Framework and API
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.5.0
+
+# Utilities
+python-dotenv>=1.0.0
+asyncio-mqtt>=0.13.0
+
+# Token counting for LLM usage
+tiktoken>=0.5.0
+
+# Development and Testing (optional)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Additional utilities that might be needed
+python-dateutil>=2.8.0
+pytz>=2023.0
+jsonschema>=4.0.0

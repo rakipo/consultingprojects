@@ -1,0 +1,26 @@
+# MCP Neo4j Data Modeling Server Requirements
+# All dependencies for data modeling and migration
+
+# MCP Framework
+mcp>=1.0.0
+
+# Database Drivers
+psycopg2-binary>=2.9.7
+neo4j>=5.15.0
+
+# Data Processing
+pandas>=2.0.0
+
+# Core Python Libraries
+pyyaml>=6.0.0
+typing-extensions>=4.0.0
+
+# Validation
+pydantic>=2.5.0
+
+# Utilities
+python-dotenv>=1.0.0
+python-dateutil>=2.8.0
+
+# Async support
+asyncio>=3.4.3

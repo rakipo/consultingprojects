@@ -1,0 +1,18 @@
+# MCP Neo4j Cypher Server Requirements
+# Core MCP and database dependencies
+
+# MCP Framework
+mcp>=1.0.0
+
+# Database Drivers
+neo4j>=5.15.0
+
+# Core Python Libraries
+pyyaml>=6.0.0
+typing-extensions>=4.0.0
+
+# Async support
+asyncio>=3.4.3
+
+# Logging and utilities
+python-dateutil>=2.8.0

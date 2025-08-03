@@ -1,0 +1,14 @@
+docker-compose down
+docker-compose up -d
+ docker logs mcp_neo4j-neo4j-1
+
+
+ find cert -type f ! \( -name "*.crt" -o -name "*.pem" \) -delete
+
+
+
+https://localhost:7473/
+http://localhost:7474
+
+
+

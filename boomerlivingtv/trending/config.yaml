@@ -1,0 +1,14 @@
+model:
+  provider: "openai"
+  name: "gpt-4o"
+  api_key: "your-openai-api-key-here"
+  temperature: 0.3
+  max_tokens: 200
+
+# Alternative configurations for other providers
+# model:
+#   provider: "anthropic"
+#   name: "claude-3-sonnet-20240229"
+#   api_key: "your-anthropic-api-key-here"
+#   temperature: 0.3
+#   max_tokens: 1000

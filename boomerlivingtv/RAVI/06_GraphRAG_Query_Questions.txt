@@ -1,0 +1,132 @@
+----
+GraphRAG Query Questions
+----
+
+Audience & Persona Discovery
+
+These help you understand who you're serving and what they need.
+
+    - Who are my top personas based on content or services?
+    - What pain points are most common among my personas?
+    - What questions do my audience ask most often?
+    - Which persona has the highest monetization potential?
+    - What emotions are associated with each persona's pain?
+    - What are the top goals of [persona]?
+    - What stage of life is [persona] typically in?
+
+----
+
+Offer & Monetization Strategy
+
+Use these to align your products/services with audience needs.
+
+    - Which services match each persona's top pain points?
+    - What products am I missing based on the problems I've mapped?
+    - Which offers convert best for [persona]?
+    - What upsell opportunities exist in my current offer stack?
+    - What pain points are not addressed by any current service?
+    - Which problems are most urgent vs most valuable to solve?
+    - What problems could I solve with a productized AI tool?
+
+----
+
+Content Generation & Planning
+
+Use these to generate content ideas, fill gaps, and repurpose.
+
+    - What blog posts already exist for [topic/persona]?
+    - What content gaps exist around [persona or topic]?
+    - Which pieces of content are connected to high-converting services?
+    - What are 3 content clusters I could build around [pain point]?
+    - Which YouTube or podcast topics haven't been covered yet?
+    - What are the most reused phrases or tags across my graph?
+    - What ideas have high strategic value but low content coverage?
+
+----
+
+Marketing & Messaging
+
+Refine your messaging across platforms.
+
+    - What messages resonate most with [persona]?
+    - What language do my personas use to describe their pain?
+    - What hooks have worked best in past content?
+    - Which pain points are emotionally loaded vs technical?
+    - What objections have I addressed in past marketing?
+    - What beliefs or fears keep [persona] from buying?
+
+----
+
+Growth & Strategy Insights
+
+Use these to fuel scale and innovation.
+
+    - What areas of my graph are underdeveloped?
+    - What new content themes or products are emerging?
+    - What recurring concepts do I mention but haven't productized?
+    - Where are the weak connections between persona → pain → offer?
+    - What topics are trending externally but not yet in my graph?
+    - What types of content or services are overrepresented?
+
+----
+
+AI Prompting & RAG Generation
+
+These help you generate actual prompts or answers from the graph.
+
+    - Create a LinkedIn post about [topic] based on my graph.
+    - Generate a content calendar for [persona] using available insights.
+    - Summarize everything I've said about [pain point] across all sources.
+    - Draft an offer page for [service] using graph insights.
+    - Create a 5-part email sequence for [persona] and [pain].
+    - What should I post next week to drive newsletter signups?
+
+----
+
+Feedback Loops (for agents or growth)
+
+Use these to create self-improving agents or identify weak spots.
+
+    - What content should be added to improve answers for [query]?
+    - What node types are missing metadata?
+    - What knowledge is outdated or incomplete?
+    - What has been most referenced but not turned into a product or post?
+    - What areas of the graph have low connection density?
+
+----
+
+Knowledge Base Optimization
+
+Improve the structure of your graph and RAG engine.
+
+    - What nodes have no relationships?
+    - What entities have too many broad connections?
+    - What tags or categories are overused?
+    - What questions come up repeatedly but aren't well-answered?
+    - What types of content do I have the most/least of?
+    - Where can I consolidate similar ideas?
+
+----
+
+Planning, Productization, and Decision Support
+
+Use these for business decisions.
+
+    - What content or knowledge could be turned into a product?
+    - What's the fastest path to monetization based on my graph?
+    - What new lead magnets can be created from existing insights?
+    - What's the #1 knowledge gap for [persona] that I haven't filled?
+    - What's the best next product to build?
+    - How can I repackage my services to solve more urgent problems?
+
+----
+
+Bonus: Meta-Graph Questions
+
+These help you improve your graph itself.
+
+    - What questions are users asking that return low-quality answers?
+    - What parts of the graph are most often used in RAG queries?
+    - What's the ratio of content to services in the graph?
+    - Which prompts are most effective at activating the graph?
+
