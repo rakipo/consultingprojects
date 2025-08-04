@@ -1,0 +1,175 @@
+Social_questions_content_intelligence.txt
+
+SOCIAL MEDIA CONTENT INTELLIGENCE QUESTIONS
+
+GraphRAG Testing Framework: Strategic Questions for Cross-Platform Social Media Intelligence & Viral Content Optimization
+
+----
+
+CROSS-PLATFORM CONTENT STRATEGY
+Questions that optimize content performance across all social media platforms
+
+Platform-Specific Content Gaps
+1. "What content topics perform well on LinkedIn but have zero coverage on my Twitter?"
+2. "Which topics appear in viral TikToks but have no representation in my Instagram content?"
+3. "Find content gaps that appear across 3+ high-performing posts on different platforms"
+4. "What professional insights work on LinkedIn but need adaptation for Twitter threads?"
+5. "Which visual concepts succeed on Instagram but could work as LinkedIn carousels?"
+
+Content Repurposing Intelligence
+6. "Show me content patterns that work across multiple platforms with minimal adaptation"
+7. "Which long-form LinkedIn posts could become Twitter thread series?"
+8. "Find concepts that work as TikTok videos but need written explanation for LinkedIn"
+9. "What Twitter insights deserve comprehensive LinkedIn article treatment?"
+10. "Which Instagram stories could become permanent posts with higher engagement?"
+
+Cross-Platform Audience Development
+11. "Map optimal posting frequency across platforms based on engagement analysis"
+12. "Which content naturally drives followers from one platform to another?"
+13. "Find topic clusters that create consistent personal brand across all platforms"
+14. "What content formats work for audience building vs conversion on each platform?"
+15. "Which cross-platform content creates compound engagement effects?"
+
+----
+
+VIRAL CONTENT & ENGAGEMENT OPTIMIZATION
+Questions that uncover viral patterns and maximize engagement
+
+Viral Pattern Recognition
+16. "What content structures correlate with 10x higher engagement on each platform?"
+17. "Find hook combinations that drive viral reach across different social platforms"
+18. "Which controversial angles get engagement without damaging professional reputation?"
+19. "What timing patterns emerge from viral content in my industry across platforms?"
+20. "Which trending topics align with my expertise but aren't oversaturated yet?"
+
+Platform-Specific Engagement Drivers
+21. "Which LinkedIn post formats (text, carousel, video) drive highest professional engagement?"
+22. "Find Twitter thread structures that maximize retweets and meaningful replies"
+23. "What TikTok video elements correlate with highest completion rates in my niche?"
+24. "Which Instagram caption lengths and hashtag strategies optimize reach vs engagement?"
+25. "What Facebook post types drive highest share rates for professional content?"
+
+Community Building & Relationship Strategy
+26. "Which content generates the most valuable comments and professional connections?"
+27. "Find topics that create ongoing conversation threads across multiple posts"
+28. "What content positions me as a thought leader vs just another content creator?"
+29. "Which posts naturally lead to direct message conversations and business opportunities?"
+30. "What controversial but defensible positions establish unique market positioning?"
+
+----
+
+PROFESSIONAL NETWORKING & THOUGHT LEADERSHIP
+Questions that build authority and professional influence across platforms
+
+LinkedIn Professional Authority
+31. "Which professional insights need comprehensive LinkedIn articles vs quick posts?"
+32. "What industry topics do senior professionals discuss that I should address?"
+33. "Find knowledge gaps where my experience creates unique content authority"
+34. "Which trending professional topics need contrarian or nuanced perspectives?"
+35. "What case studies and results could become credibility-building content?"
+
+Twitter Thought Leadership
+36. "Which complex topics work better as Twitter threads vs single tweets?"
+37. "Find industry conversations where I could add valuable expert perspective"
+38. "What trending hashtags align with my expertise for thought leadership positioning?"
+39. "Which Twitter spaces topics would establish me as a recognized expert?"
+40. "What controversial industry takes would position me as a category creator?"
+
+Cross-Platform Authority Building
+41. "Which content demonstrates expertise that competitors can't replicate?"
+42. "Find topics where my unique background creates unfair content advantage"
+43. "What industry frameworks can I develop and promote across all platforms?"
+44. "Which professional achievements deserve strategic content amplification?"
+45. "What thought leadership content naturally leads to speaking and collaboration opportunities?"
+
+----
+
+BUSINESS DEVELOPMENT & CONVERSION OPTIMIZATION
+Questions that turn social media engagement into business results
+
+Lead Generation & Business Impact
+46. "What social content topics correlate with highest consultation request rates?"
+47. "Which posts generate the most qualified business inquiries across platforms?"
+48. "Find content gaps that position my services as the obvious solution"
+49. "What educational content naturally leads to 'how do I hire you?' responses?"
+50. "Which social proof content (testimonials, results) drives highest conversion rates?"
+
+Network Effects & Referral Generation
+51. "What content creates word-of-mouth recommendations from existing clients?"
+52. "Which posts get shared most by potential referral sources in my network?"
+53. "Find content that establishes expertise without competing with potential partners"
+54. "What topics generate engagement from ideal client profiles across platforms?"
+55. "Which content creates 'you should follow this person' recommendations?"
+
+Sales Funnel Integration
+56. "What's the optimal content progression from social discovery → email subscription → customer?"
+57. "Which social content topics need dedicated landing pages for conversion optimization?"
+58. "Find content gaps in the customer journey that social media should address"
+59. "What free value content naturally leads to premium service inquiries?"
+60. "Which social proof content should be systematically collected and amplified?"
+
+----
+
+COMPETITIVE INTELLIGENCE & MARKET POSITIONING
+Questions that establish market leadership and competitive advantage
+
+Competitive Content Analysis
+61. "What topics do industry leaders consistently post about that I'm missing?"
+62. "Find content angles that successful accounts use but I could execute better"
+63. "Which trending industry topics aren't being addressed by major competitors?"
+64. "What content gaps exist in competitor strategies that create opportunities?"
+65. "Which successful content formats could I adapt with my unique perspective?"
+
+Market Differentiation Strategy
+66. "What unique combinations of my expertise create content no competitor can replicate?"
+67. "Find controversial but defensible positions that establish clear market differentiation"
+68. "Which industry blind spots could I address to become the go-to expert?"
+69. "What emerging trends in my industry need early thought leadership content?"
+70. "Which outdated industry practices deserve contrarian content challenging conventional wisdom?"
+
+Influence & Industry Impact
+71. "What content topics would establish me as a category creator vs follower?"
+72. "Find opportunities to coin new terms or frameworks that could gain industry adoption"
+73. "Which industry problems need solution-oriented content that showcases my approach?"
+74. "What content could influence industry conversations and best practices?"
+75. "Which collaborative content opportunities would elevate my industry standing?"
+
+----
+
+CONTENT PRODUCTION & EFFICIENCY OPTIMIZATION
+Questions that streamline content creation and maximize impact
+
+Content Batch Creation & Scaling
+76. "Which high-performing content topics have infinite expansion potential for content series?"
+77. "Find content pillars that could generate 50+ posts with consistent engagement"
+78. "What evergreen content needs regular updates to maintain relevance and reach?"
+79. "Which successful posts deserve systematic repurposing across all platforms?"
+80. "What content templates based on high-performing posts could scale content production?"
+
+Platform-Specific Optimization
+81. "Which content formats require platform-specific adaptation vs universal posting?"
+82. "Find optimal character counts and content structures for each platform"
+83. "What hashtag strategies work best for discovery vs engagement on each platform?"
+84. "Which posting times and frequencies optimize reach without audience fatigue?"
+85. "What cross-platform linking strategies drive traffic without platform penalties?"
+
+Content ROI & Performance Analysis
+86. "Which content types drive highest engagement per hour of creation time?"
+87. "Find content that generates business results vs content that just builds vanity metrics"
+88. "What topics have highest lifetime engagement value across all platforms?"
+89. "Which content creation workflows produce highest quality output most efficiently?"
+90. "What content analytics predict long-term business impact vs short-term viral success?"
+
+----
+
+VALIDATION CRITERIA
+Each question must return actionable, specific, data-backed answers that directly impact social media performance and business objectives within 14 days
+
+Success Metrics:
+- Engagement Analytics: Returns platform-specific engagement patterns and optimization opportunities
+- Cross-Platform Intelligence: Identifies content repurposing and audience development strategies
+- Business Impact: Links social media strategy to lead generation and professional opportunities
+- Competitive Position: Shows differentiation opportunities and thought leadership positioning
+- Content Efficiency: Optimizes content creation workflow and resource allocation
+
+The Social Media GraphRAG succeeds when it can answer: "Based on cross-platform engagement data, viral pattern analysis, and business conversion tracking, what exact social media content should I create next to maximize professional influence and business impact, and which platforms should I prioritize for distribution?"

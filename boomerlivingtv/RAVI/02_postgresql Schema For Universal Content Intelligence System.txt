@@ -1,0 +1,289 @@
+02_Postgresql_schema_for_universal_content_intelligence_system.txt
+
+ENHANCED POSTGRESQL SCHEMA FOR UNIVERSAL CONTENT INTELLIGENCE SYSTEM
+
+Includes all core metadata + Claude enrichment fields with confidence scores
+
+----
+
+CONTENT TYPE ENUMERATION (Standardized Values)
+
+Use these EXACT values in content_type field:
+
+    CREATE TYPE content_type_enum AS ENUM (
+        'youtube_video',
+        'blog_article', 
+        'podcast_episode',
+        'linkedin_post',
+        'twitter_post',
+        'tiktok_video',
+        'instagram_post',
+        'pdf_document',
+        'research_paper',
+        'webinar_recording'
+    );
+
+----
+
+CORE CONTENT METADATA TABLE
+
+    CREATE TABLE content_items (
+        id SERIAL PRIMARY KEY,
+        
+        -- Core Content Identification
+        content_id TEXT UNIQUE NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT,
+        author_name TEXT,
+        author_id TEXT,
+        publish_date DATE NOT NULL,
+        content_type content_type_enum NOT NULL,
+        source_url TEXT,
+        
+        -- Content Metrics
+        word_count INT DEFAULT 0,
+        page_count INT, -- For PDFs/documents
+        duration_seconds INT, -- For audio/video content
+        engagement_metrics JSONB, -- Views, downloads, shares, citations
+        
+        -- Classification Data
+        tags TEXT[],
+        category TEXT,
+        domain TEXT, -- "finance", "legal", "technology", "healthcare", etc.
+        
+        -- Content Text Data
+        content_text TEXT,
+        content_language TEXT DEFAULT 'en',
+        content_available BOOLEAN DEFAULT FALSE,
+        content_segmented JSONB, -- Array of {page/timestamp, text} objects
+        
+        -- Source Metadata
+        source_name TEXT, -- Publication, website, channel name
+        source_authority_score DECIMAL(3,2), -- 0.0-1.0 credibility rating
+        source_type TEXT, -- "academic", "news", "blog", "government", "commercial"
+        
+        -- System Metadata
+        ingested_at TIMESTAMP DEFAULT NOW(),
+        enriched_at TIMESTAMP, -- When Claude processing completed
+        enrichment_version TEXT DEFAULT '1.0' -- Track prompt version used
+    );
+
+----
+
+CLAUDE ENRICHMENT TABLES
+
+Insights with confidence scoring and metadata
+
+    CREATE TABLE content_insights (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        -- Core Insight Data
+        text TEXT NOT NULL,
+        type TEXT NOT NULL, -- "statistic", "framework", "misconception", "tip", "warning", "story", "tool"
+        location_reference TEXT, -- Page number, timestamp, paragraph, section
+        
+        -- Quality Metrics
+        confidence DECIMAL(3,2) CHECK (confidence >= 0.0 AND confidence <= 1.0),
+        actionability TEXT CHECK (actionability IN ('high', 'medium', 'low')),
+        
+        -- Metadata
+        keywords TEXT[],
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+Content gaps with urgency and opportunity scoring
+
+    CREATE TABLE content_gaps (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        -- Gap Analysis
+        gap_text TEXT NOT NULL,
+        gap_type TEXT NOT NULL, -- "definitional", "process", "example", "timing", "cost", "risk"
+        urgency TEXT CHECK (urgency IN ('high', 'medium', 'low')),
+        
+        -- Opportunity Metrics
+        estimated_content_size TEXT, -- "2-page article", "10-minute section", "3-chapter guide"
+        suggested_title TEXT,
+        search_volume_potential TEXT CHECK (search_volume_potential IN ('high', 'medium', 'low')),
+        
+        -- Metadata
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+Psychology-driven hooks with engagement estimates
+
+    CREATE TABLE content_hooks (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        -- Hook Data
+        hook_text TEXT NOT NULL,
+        category TEXT NOT NULL, -- "problem-focused", "mistake-focused", "secret-focused", etc.
+        psychology_triggers TEXT, -- "loss_aversion + specificity"
+        
+        -- Performance Metrics
+        target_emotion TEXT, -- "concern", "curiosity", "urgency"
+        estimated_engagement TEXT, -- "high", "medium", "low"
+        character_count INT,
+        
+        -- Metadata
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+Hierarchical topic taxonomy
+
+    CREATE TABLE content_topics (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        -- Topic Classification
+        topic_name TEXT NOT NULL, -- snake_case format
+        hierarchy_level TEXT CHECK (hierarchy_level IN ('primary', 'secondary', 'tertiary')),
+        domain TEXT, -- "finance", "legal", "technology", "healthcare"
+        
+        -- Analysis Metadata
+        content_complexity TEXT, -- "low", "medium", "high"
+        audience_intent TEXT, -- "learning", "implementation", "research"
+        
+        -- Cross-referencing
+        cross_references TEXT[], -- Related topics for linking
+        
+        -- Metadata
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+Overall enrichment summary per content item
+
+    CREATE TABLE content_analysis_summary (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT UNIQUE REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        -- Extraction Counts
+        total_insights INT DEFAULT 0,
+        total_gaps INT DEFAULT 0,
+        total_hooks INT DEFAULT 0,
+        total_topics INT DEFAULT 0,
+        
+        -- Quality Scores
+        overall_confidence_score DECIMAL(3,2),
+        content_opportunity_score DECIMAL(3,2),
+        hook_potential_score DECIMAL(3,2),
+        
+        -- Audience Analysis
+        primary_audience TEXT,
+        follow_up_potential TEXT CHECK (follow_up_potential IN ('high', 'medium', 'low')),
+        
+        -- Processing Metadata
+        processing_time_seconds INT,
+        claude_model_used TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+----
+
+ENGAGEMENT & SENTIMENT DATA
+
+Top comments for sentiment analysis
+
+    CREATE TABLE content_comments (
+        id SERIAL PRIMARY KEY,
+        content_id TEXT REFERENCES content_items(content_id) ON DELETE CASCADE,
+        
+        comment_text TEXT NOT NULL,
+        author_name TEXT,
+        like_count INT DEFAULT 0,
+        comment_sentiment_score DECIMAL(3,2), -- -1.0 to 1.0
+        
+        created_at TIMESTAMP DEFAULT NOW()
+    );
+
+----
+
+INDEXES FOR PERFORMANCE
+
+Core content lookups
+
+    CREATE INDEX idx_content_content_id ON content_items(content_id);
+    CREATE INDEX idx_content_author_id ON content_items(author_id);
+    CREATE INDEX idx_content_publish_date ON content_items(publish_date);
+    CREATE INDEX idx_content_type ON content_items(content_type);
+    CREATE INDEX idx_content_domain ON content_items(domain);
+
+Enrichment quality filtering
+
+    CREATE INDEX idx_insights_confidence ON content_insights(confidence);
+    CREATE INDEX idx_insights_actionability ON content_insights(actionability);
+    CREATE INDEX idx_gaps_urgency ON content_gaps(urgency);
+    CREATE INDEX idx_hooks_estimated_engagement ON content_hooks(estimated_engagement);
+
+Topic clustering
+
+    CREATE INDEX idx_topics_name ON content_topics(topic_name);
+    CREATE INDEX idx_topics_hierarchy ON content_topics(hierarchy_level);
+    CREATE INDEX idx_topics_domain ON content_topics(domain);
+
+Full-text search on content
+
+    CREATE INDEX idx_content_text_fts ON content_items USING GIN(to_tsvector('english', content_text));
+    CREATE INDEX idx_insights_text_fts ON content_insights USING GIN(to_tsvector('english', text));
+
+----
+
+SAMPLE QUERIES FOR TESTING
+
+Find high-confidence insights from recent content
+
+    SELECT 
+        c.title,
+        c.content_type,
+        i.text,
+        i.confidence,
+        i.actionability
+    FROM content_items c
+    JOIN content_insights i ON c.content_id = i.content_id
+    WHERE i.confidence > 0.8 
+        AND i.actionability = 'high'
+        AND c.publish_date > CURRENT_DATE - INTERVAL '30 days'
+    ORDER BY i.confidence DESC;
+
+Identify high-urgency content gaps for planning
+
+    SELECT 
+        c.title,
+        c.content_type,
+        g.gap_text,
+        g.suggested_title,
+        g.urgency
+    FROM content_items c
+    JOIN content_gaps g ON c.content_id = g.content_id
+    WHERE g.urgency = 'high'
+    ORDER BY c.engagement_metrics->>'total_engagement' DESC;
+
+Find best-performing hooks by engagement across content types
+
+    SELECT 
+        h.hook_text,
+        h.estimated_engagement,
+        h.psychology_triggers,
+        c.title,
+        c.content_type
+    FROM content_hooks h
+    JOIN content_items c ON h.content_id = c.content_id
+    WHERE h.estimated_engagement = 'high'
+    ORDER BY c.engagement_metrics->>'total_engagement' DESC;
+
+Cross-content type topic analysis
+
+    SELECT 
+        t.topic_name,
+        t.domain,
+        c.content_type,
+        COUNT(*) as content_count,
+        AVG(s.overall_confidence_score) as avg_confidence
+    FROM content_topics t
+    JOIN content_items c ON t.content_id = c.content_id
+    JOIN content_analysis_summary s ON c.content_id = s.content_id
+    GROUP BY t.topic_name, t.domain, c.content_type
+    ORDER BY content_count DESC;

@@ -1,0 +1,53 @@
+STAGE 1: UNIVERSAL CONTENT INGESTION (From Any Source + Claude)
+
+    PostgreSQL Row (Universal Schema)
+    │
+    ├── content_id             ← Unique identifier for any content type
+    ├── title                  ← Content title/headline
+    ├── content_type           ← "youtube_video", "blog_article", "podcast_episode", "linkedin_post", etc.
+    ├── publish_date           ← When content was created/published
+    ├── content_text           ← Full text content (extracted/transcribed)
+    ├── word_count             ← Content length for classification
+    ├── duration_seconds       ← For audio/video content (NULL for articles)
+    ├── page_count             ← For PDFs/documents (NULL for videos)
+    ├── source_url             ← URL or file path reference
+    ├── author_name            ← Content creator/author
+    ├── domain                 ← "finance", "legal", "technology", "healthcare", etc.
+    ├── engagement_metrics     ← JSONB: {views, likes, shares, comments, downloads}
+    ├── source_authority_score ← 0.0-1.0 credibility rating
+    └── source_type            ← "academic", "news", "blog", "government", "commercial"
+
+    Claude Analysis (Universal Output)
+    │
+    ├── insights[]             ← Extracted structured knowledge with confidence scores
+    │   ├── text               ← "Most people misunderstand tax planning basics"
+    │   ├── type               ← "statistic", "framework", "misconception", "tip", "warning"
+    │   ├── confidence         ← 0.0-1.0 quality score
+    │   ├── actionability      ← "high", "medium", "low"
+    │   ├── location_reference ← Page number, timestamp, paragraph, section
+    │   └── keywords[]         ← Relevant terms for search/categorization
+    │
+    ├── gap_statements[]       ← Missed opportunities with urgency ratings
+    │   ├── gap_text           ← "Never explains how to calculate tax liability"
+    │   ├── gap_type           ← "definitional", "process", "example", "timing", "cost"
+    │   ├── urgency            ← "high", "medium", "low"
+    │   ├── estimated_content_size ← "2-page article", "10-minute video", "3-episode series"
+    │   ├── suggested_title    ← "How to Calculate Your Tax Liability: Step-by-Step Guide"
+    │   └── search_volume_potential ← "high", "medium", "low"
+    │
+    ├── topics[]               ← Hierarchical classification for content clustering
+    │   ├── topic_name         ← "tax_planning", "estate_law", "retirement_strategies"
+    │   ├── hierarchy_level    ← "primary", "secondary", "tertiary"
+    │   ├── domain             ← "finance", "legal", "technology", "healthcare"
+    │   ├── audience_intent    ← "learning", "implementation", "research"
+    │   ├── content_complexity ← "low", "medium", "high"
+    │   └── cross_references[] ← Related topics for linking
+    │
+    └── hook_variations[]      ← Psychology-driven titles with engagement estimates
+        ├── hook_text          ← "This tax strategy saved our clients $50,000"
+        ├── category           ← "mistake-focused", "problem-focused", "secret-focused"
+        ├── psychology_triggers ← "loss_aversion + specificity"
+        ├── target_emotion     ← "concern", "curiosity", "urgency"
+        ├── estimated_engagement ← "high", "medium", "low"
+        ├── character_count    ← For platform optimization
+        └── platform_optimized ← "youtube", "linkedin", "twitter", "blog"

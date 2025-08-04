@@ -1,0 +1,191 @@
+Podcast_create_nodes.cypher.txt
+
+create_nodes.cypher
+
+    // Podcast Nodes
+    MERGE (p:Podcast {id: $content_id})
+    SET p.title = $title,
+        p.publish_date = date($publish_date),
+        p.duration_seconds = toInteger($duration_seconds),
+        p.content_text = $content_text,
+        p.source_url = $source_url,
+        p.author_name = $author_name,
+        p.domain = $domain,
+        p.category = $category,
+        p.episode_number = toInteger($episode_number),
+        p.season_number = toInteger($season_number);
+
+    // Insight Nodes
+    MERGE (i:Insight {id: $insight_id})
+    SET i.text = $text,
+        i.type = $type,
+        i.confidence = toFloat($confidence),
+        i.actionability = $actionability,
+        i.timestamp = $timestamp;
+
+    // Gap Nodes
+    MERGE (g:Gap {id: $gap_id})
+    SET g.text = $text,
+        g.type = $type,
+        g.urgency = $urgency,
+        g.estimated_content_size = $estimated_content_size,
+        g.suggested_title = $suggested_title,
+        g.guest_potential = $guest_potential;
+
+    // Topic Nodes
+    MERGE (t:Topic {name: $name})
+    SET t.hierarchy_level = $hierarchy_level,
+        t.domain = $domain,
+        t.audience_intent = $audience_intent,
+        t.content_complexity = $content_complexity;
+
+    // Hook Nodes (optional)
+    MERGE (h:Hook {id: $hook_id})
+    SET h.text = $text,
+        h.category = $category,
+        h.psychology_triggers = $psychology_triggers,
+        h.estimated_engagement = $estimated_engagement,
+        h.target_emotion = $target_emotion;
+
+----
+
+create_relationships.cypher
+
+    // Podcast contains Insight
+    MATCH (p:Podcast {id: $content_id}), (i:Insight {id: $insight_id})
+    MERGE (p)-[:CONTAINS]->(i);
+
+    // Podcast has Gap
+    MATCH (p:Podcast {id: $content_id}), (g:Gap {id: $gap_id})
+    MERGE (p)-[:HAS_GAP]->(g);
+
+    // Podcast belongs to Topic
+    MATCH (p:Podcast {id: $content_id}), (t:Topic {name: $topic_name})
+    MERGE (p)-[:BELONGS_TO]->(t);
+
+    // Podcast has Hook (optional)
+    MATCH (p:Podcast {id: $content_id}), (h:Hook {id: $hook_id})
+    MERGE (p)-[:HAS_HOOK]->(h);
+
+----
+
+query_tests.cypher
+
+    // 1. High urgency episode gaps
+    MATCH (p:Podcast)-[:HAS_GAP]->(g:Gap)
+    WHERE g.urgency = "high"
+    RETURN p.title, g.text, g.suggested_title, g.guest_potential
+    ORDER BY p.publish_date DESC
+    LIMIT 10;
+
+    // 2. High confidence insights
+    MATCH (p:Podcast)-[:CONTAINS]->(i:Insight)
+    WHERE i.confidence > 0.8
+    RETURN p.title, i.text, i.type, i.actionability, i.timestamp
+    ORDER BY i.confidence DESC;
+
+    // 3. Topics with most content gaps
+    MATCH (p:Podcast)-[:BELONGS_TO]->(t:Topic), (p)-[:HAS_GAP]->(g:Gap)
+    WHERE t.hierarchy_level = "primary"
+    RETURN t.name, t.domain, count(g) as gap_count
+    ORDER BY gap_count DESC
+    LIMIT 5;
+
+    // 4. Guest expertise insights
+    MATCH (p:Podcast)-[:CONTAINS]->(i:Insight)
+    WHERE i.type = "guest_expertise" AND i.actionability = "high"
+    RETURN p.title, p.author_name, i.text
+    ORDER BY i.confidence DESC;
+
+    // 5. Episode title optimization
+    MATCH (p:Podcast)-[:HAS_HOOK]->(h:Hook)
+    WHERE h.estimated_engagement = "high"
+    RETURN p.title, h.text, h.psychology_triggers, h.target_emotion;
+
+    // 6. Series development opportunities
+    MATCH (p:Podcast)-[:BELONGS_TO]->(t:Topic), (p)-[:HAS_GAP]->(g:Gap)
+    WHERE g.urgency = "high" AND g.guest_potential = "high"
+    RETURN t.name, g.text, g.suggested_title, count(p) as episode_count
+    ORDER BY episode_count ASC;
+
+    // 7. Episode duration analysis
+    MATCH (p:Podcast)-[:CONTAINS]->(i:Insight)
+    WHERE p.duration_seconds > 3600
+    RETURN p.title, p.duration_seconds/60 as duration_minutes, count(i) as insight_count
+    ORDER BY insight_count DESC;
+
+----
+
+ingest_runner.py
+
+    from neo4j import GraphDatabase
+    import json
+
+    class PodcastGraphIngestor:
+        def __init__(self, uri, user, password):
+            self.driver = GraphDatabase.driver(uri, auth=(user, password))
+
+        def run_query(self, query, parameters):
+            with self.driver.session() as session:
+                session.run(query, parameters)
+
+        def close(self):
+            self.driver.close()
+
+    # Example usage (to be customized by freelancer)
+    # ingestor = PodcastGraphIngestor("bolt://localhost:7687", "neo4j", "password")
+    # ingestor.run_query(NODE_CYPHER_HERE, PARAMS)
+    # ingestor.close()
+
+----
+
+requirements.txt
+
+    neo4j==5.17.0
+
+----
+
+README.md
+
+Neo4j Podcast Intelligence Engine
+
+This project enables ingestion from a universal PostgreSQL database into a production-grade Neo4j knowledge graph optimized for podcast content intelligence and episode strategy.
+
+Setup
+
+1. Install dependencies:
+    pip install -r requirements.txt
+
+2. Configure your Neo4j instance and credentials.
+
+3. Use ingest_runner.py with the create_nodes.cypher and create_relationships.cypher files to populate the graph.
+
+Node Types
+
+- (:Podcast) – Core podcast/episode entity
+- (:Insight) – Claude-extracted insights (including guest expertise)
+- (:Gap) – Episode opportunities and missing topics
+- (:Topic) – Semantic clusters with hierarchy
+- (:Hook) – Episode title/description optimization
+
+Relationships
+
+- (:Podcast)-[:CONTAINS]->(:Insight)
+- (:Podcast)-[:HAS_GAP]->(:Gap)
+- (:Podcast)-[:BELONGS_TO]->(:Topic)
+- (:Podcast)-[:HAS_HOOK]->(:Hook) (optional)
+
+Test Queries
+
+See query_tests.cypher for Claude-ready queries, including:
+- High urgency episode gaps
+- Guest expertise analysis
+- Series development opportunities
+- Episode title optimization
+- Duration and engagement analysis
+
+Notes
+
+- All source data must match the universal schema with content_type = "podcast", "episode"
+- This repo is only for Neo4j structure — no Claude runners or PostgreSQL ingestion logic included
+- Optimized for episode planning, guest strategy, and series development

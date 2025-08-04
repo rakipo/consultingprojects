@@ -1,0 +1,102 @@
+CONTENT INTELLIGENCE QUESTIONS
+
+GraphRAG Testing Framework: 25+ Questions That Build Content Engine
+
+----
+
+VIDEO/YOUTUBE CREATION INTELLIGENCE
+Questions that uncover viral video opportunities and build massive audiences
+
+Gap Discovery & Market Intelligence
+1. "What video topics have search volume >100K/month but fewer than 5 competitors creating content?"
+2. "Which topics appear in high-performing podcasts but have zero YouTube coverage in my niche?"
+3. "Find content gaps that appear across 3+ viral videos - these are validated demand signals"
+4. "What misconceptions do my competitors repeat that I can correct with authority?"
+5. "Which secondary topics from my best videos deserve their own dedicated content?"
+
+Viral Hook Engineering
+6. "Show me hook patterns from videos with 1M+ views - what psychology combinations work?"
+7. "Which 'mistake-focused' hooks drive highest click-through in financial content vs health content?"
+8. "Find curiosity gaps that work across multiple successful channels in my industry"
+9. "What numerical specificity (exact dollar amounts, timeframes) appears in viral titles?"
+10. "Which controversial angles get engagement without damaging authority?"
+
+Series & Revenue Optimization
+11. "Map a 52-week content calendar using gap analysis from top-performing content"
+12. "Which video topics naturally lead to course/product sales based on engagement patterns?"
+13. "Find topic clusters that create binge-worthy viewing sessions (10+ minute watch time)"
+14. "What follow-up questions appear most in comments that signal video sequel opportunities?"
+15. "Which insights from my content deserve premium course modules vs free video content?"
+
+Competitive Domination
+16. "What topics do 7-figure creators cover that I haven't touched yet?"
+17. "Find topic combinations that work for others but I could execute better with my unique angle"
+18. "Which trending topics align with my expertise but aren't saturated yet?"
+19. "What seasonal content patterns emerge from successful channels that I can replicate?"
+
+----
+
+WRITTEN CONTENT/AUTHORITY BUILDING
+Questions that establish thought leadership and drive high-value conversions
+
+Authority Content Strategy
+20. "Which video insights need 3,000+ word authoritative articles to rank in search?"
+21. "What topics do I cover in videos but need written thought leadership pieces for credibility?"
+22. "Find academic concepts that need practical implementation guides only I can write"
+23. "Which complex topics require step-by-step written tutorials vs video explanations?"
+24. "What industry frameworks can I create based on patterns across my content?"
+
+SEO & Search Domination
+25. "Which keywords have high commercial intent but my written content doesn't target yet?"
+26. "Find long-tail variations of my video topics that need dedicated blog posts"
+27. "What 'how-to' searches get 50K+ monthly volume but have weak competition?"
+28. "Which of my insights deserve pillar page treatment for search authority?"
+
+Lead Generation & Conversion
+29. "What pain points appear repeatedly that signal high-converting lead magnet opportunities?"
+30. "Which insights could become case studies that demonstrate ROI/results?"
+31. "Find knowledge gaps that position my services as the obvious solution"
+32. "What topics generate the most 'how do I implement this?' responses - these are sales opportunities"
+
+Cross-Format Revenue Multiplication
+33. "Which successful video content would 10x in value as detailed written guides?"
+34. "Find insights that work as free content vs premium paid content"
+35. "What video series could become a comprehensive book/course outline?"
+36. "Which written pieces would generate more impact as video content?"
+
+----
+
+BUSINESS INTELLIGENCE & SCALE
+Meta-questions that optimize the entire content machine
+
+System Optimization
+37. "Which content types (video vs written) drive more qualified leads in my business?"
+38. "Find content that generates revenue directly vs content that builds audience for later monetization"
+39. "What topics have highest lifetime value - audience members who consume this content spend the most?"
+40. "Which insights predict customer success - content that correlates with client results?"
+
+Competitive Moats & Differentiation
+41. "What unique combinations of my expertise create content no competitor can replicate?"
+42. "Find topics where my personal story/experience creates unfair advantage"
+43. "Which content positions me as the category creator vs follower?"
+44. "What controversial but defensible positions could I take that others won't?"
+
+Scale & Leverage Points
+45. "Which content topics have infinite expansion potential (could create 100+ pieces)?"
+46. "Find insights that could become SaaS features, tools, or productized services"
+47. "What content creates network effects - viewers who share and bring more viewers?"
+48. "Which topics build dependency - audience comes back repeatedly for updates?"
+
+----
+
+VALIDATION CRITERIA
+Each question must return actionable, specific, data-backed answers that directly impact business decisions within 24 hours of query
+
+Success Metrics:
+- Specificity: Returns exact topics, titles, or content ideas
+- Confidence: Shows data quality scores to filter noise  
+- Urgency: Prioritizes opportunities by business impact
+- Actionability: Provides next steps, not just insights
+- Revenue Correlation: Links content strategy to business growth
+
+The GraphRAG succeeds when it can answer: "Based on all available data, what exact piece of content should I create next to maximize business impact, and why?"

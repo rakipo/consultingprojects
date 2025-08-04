@@ -1,0 +1,160 @@
+create_nodes.cypher
+
+    // Video Nodes
+    MERGE (v:Video {id: $video_id})
+    SET v.title = $title,
+        v.upload_date = date($upload_date),
+        v.duration_seconds = toInteger($duration_seconds),
+        v.transcript_text = $transcript_text,
+        v.view_count = toInteger($view_count),
+        v.video_url = $video_url;
+
+    // Insight Nodes
+    MERGE (i:Insight {id: $insight_id})
+    SET i.text = $text,
+        i.type = $type,
+        i.confidence = toFloat($confidence),
+        i.actionability = $actionability,
+        i.timestamp = $timestamp;
+
+    // Gap Nodes
+    MERGE (g:Gap {id: $gap_id})
+    SET g.text = $text,
+        g.type = $type,
+        g.urgency = $urgency,
+        g.estimated_video_length = $estimated_video_length;
+
+    // Topic Nodes
+    MERGE (t:Topic {name: $name})
+    SET t.hierarchy_level = $hierarchy_level,
+        t.audience_intent = $audience_intent;
+
+    // Hook Nodes (optional)
+    MERGE (h:Hook {id: $hook_id})
+    SET h.text = $text,
+        h.category = $category,
+        h.psychology = $psychology,
+        h.estimated_ctr = toFloat($estimated_ctr);
+
+----
+
+create_relationships.cypher
+
+    // Video contains Insight
+    MATCH (v:Video {id: $video_id}), (i:Insight {id: $insight_id})
+    MERGE (v)-[:CONTAINS]->(i);
+
+    // Video has Gap
+    MATCH (v:Video {id: $video_id}), (g:Gap {id: $gap_id})
+    MERGE (v)-[:HAS_GAP]->(g);
+
+    // Video belongs to Topic
+    MATCH (v:Video {id: $video_id}), (t:Topic {name: $topic_name})
+    MERGE (v)-[:BELONGS_TO]->(t);
+
+    // Video has Hook (optional)
+    MATCH (v:Video {id: $video_id}), (h:Hook {id: $hook_id})
+    MERGE (v)-[:HAS_HOOK]->(h);
+
+----
+
+query_tests.cypher
+
+    // 1. High urgency gaps
+    MATCH (v:Video)-[:HAS_GAP]->(g:Gap)
+    WHERE g.urgency = "high"
+    RETURN v.title, g.text
+    ORDER BY v.upload_date DESC
+    LIMIT 10;
+
+    // 2. High confidence insights
+    MATCH (v:Video)-[:CONTAINS]->(i:Insight)
+    WHERE i.confidence > 0.8
+    RETURN v.title, i.text, i.type
+    ORDER BY i.confidence DESC;
+
+    // 3. Topics with most gaps
+    MATCH (v:Video)-[:BELONGS_TO]->(t:Topic), (v)-[:HAS_GAP]->(g:Gap)
+    RETURN t.name, count(g) as gap_count
+    ORDER BY gap_count DESC
+    LIMIT 5;
+
+    // 4. Hooks with high CTR
+    MATCH (v:Video)-[:HAS_HOOK]->(h:Hook)
+    WHERE h.estimated_ctr > 0.1
+    RETURN v.title, h.text, h.category;
+
+----
+
+ingest_runner.py
+
+    from neo4j import GraphDatabase
+    import json
+
+    class GraphIngestor:
+        def __init__(self, uri, user, password):
+            self.driver = GraphDatabase.driver(uri, auth=(user, password))
+
+        def run_query(self, query, parameters):
+            with self.driver.session() as session:
+                session.run(query, parameters)
+
+        def close(self):
+            self.driver.close()
+
+    # Example usage (to be customized by freelancer)
+    # ingestor = GraphIngestor("bolt://localhost:7687", "neo4j", "password")
+    # ingestor.run_query(NODE_CYPHER_HERE, PARAMS)
+    # ingestor.close()
+
+----
+
+requirements.txt
+
+    neo4j==5.17.0
+
+----
+
+README.md
+
+Neo4j GraphRAG Ingestion Engine
+
+This project enables ingestion from a universal PostgreSQL database into a production-grade Neo4j knowledge graph optimized for GraphRAG and Claude-based question answering.
+
+Setup
+
+1. Install dependencies:
+    pip install -r requirements.txt
+
+2. Configure your Neo4j instance and credentials.
+
+3. Use ingest_runner.py with the create_nodes.cypher and create_relationships.cypher files to populate the graph.
+
+Node Types
+
+- (:Video) – Core content entity
+- (:Insight) – Claude-extracted insights
+- (:Gap) – Underserved opportunities
+- (:Topic) – Semantic clusters
+- (:Hook) – Optional optimization prompts
+
+Relationships
+
+- (:Video)-[:CONTAINS]->(:Insight)
+- (:Video)-[:HAS_GAP]->(:Gap)
+- (:Video)-[:BELONGS_TO]->(:Topic)
+- (:Video)-[:HAS_HOOK]->(:Hook) (optional)
+
+Test Queries
+
+See query_tests.cypher for Claude-ready queries, including:
+- High urgency gaps
+- Confidence-ranked insights
+- Most neglected topics
+- Hooks with high CTR
+
+Notes
+
+- All source data must match the universal schema.
+- This repo is only for Neo4j structure — no Claude runners or PostgreSQL ingestion logic included.
+- Custom media types (e.g., Article, Podcast) can reuse this graph schema with minimal config tweaks.

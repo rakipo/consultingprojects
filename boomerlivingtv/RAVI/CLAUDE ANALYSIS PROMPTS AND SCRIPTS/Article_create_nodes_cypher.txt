@@ -1,0 +1,181 @@
+create_nodes.cypher
+
+    // Article Nodes
+    MERGE (a:Article {id: $content_id})
+    SET a.title = $title,
+        a.publish_date = date($publish_date),
+        a.word_count = toInteger($word_count),
+        a.content_text = $content_text,
+        a.source_url = $source_url,
+        a.author_name = $author_name,
+        a.domain = $domain,
+        a.category = $category;
+
+    // Insight Nodes
+    MERGE (i:Insight {id: $insight_id})
+    SET i.text = $text,
+        i.type = $type,
+        i.confidence = toFloat($confidence),
+        i.actionability = $actionability,
+        i.location_reference = $location_reference;
+
+    // Gap Nodes
+    MERGE (g:Gap {id: $gap_id})
+    SET g.text = $text,
+        g.type = $type,
+        g.urgency = $urgency,
+        g.estimated_content_size = $estimated_content_size,
+        g.suggested_title = $suggested_title,
+        g.search_volume_potential = $search_volume_potential;
+
+    // Topic Nodes
+    MERGE (t:Topic {name: $name})
+    SET t.hierarchy_level = $hierarchy_level,
+        t.domain = $domain,
+        t.audience_intent = $audience_intent,
+        t.content_complexity = $content_complexity;
+
+    // Hook Nodes (optional)
+    MERGE (h:Hook {id: $hook_id})
+    SET h.text = $text,
+        h.category = $category,
+        h.psychology_triggers = $psychology_triggers,
+        h.estimated_engagement = $estimated_engagement,
+        h.character_count = toInteger($character_count);
+
+----
+
+create_relationships.cypher
+
+    // Article contains Insight
+    MATCH (a:Article {id: $content_id}), (i:Insight {id: $insight_id})
+    MERGE (a)-[:CONTAINS]->(i);
+
+    // Article has Gap
+    MATCH (a:Article {id: $content_id}), (g:Gap {id: $gap_id})
+    MERGE (a)-[:HAS_GAP]->(g);
+
+    // Article belongs to Topic
+    MATCH (a:Article {id: $content_id}), (t:Topic {name: $topic_name})
+    MERGE (a)-[:BELONGS_TO]->(t);
+
+    // Article has Hook (optional)
+    MATCH (a:Article {id: $content_id}), (h:Hook {id: $hook_id})
+    MERGE (a)-[:HAS_HOOK]->(h);
+
+----
+
+query_tests.cypher
+
+    // 1. High urgency content gaps
+    MATCH (a:Article)-[:HAS_GAP]->(g:Gap)
+    WHERE g.urgency = "high"
+    RETURN a.title, g.text, g.suggested_title
+    ORDER BY a.publish_date DESC
+    LIMIT 10;
+
+    // 2. High confidence insights
+    MATCH (a:Article)-[:CONTAINS]->(i:Insight)
+    WHERE i.confidence > 0.8
+    RETURN a.title, i.text, i.type, i.actionability
+    ORDER BY i.confidence DESC;
+
+    // 3. Topics with most content gaps
+    MATCH (a:Article)-[:BELONGS_TO]->(t:Topic), (a)-[:HAS_GAP]->(g:Gap)
+    WHERE t.hierarchy_level = "primary"
+    RETURN t.name, t.domain, count(g) as gap_count
+    ORDER BY gap_count DESC
+    LIMIT 5;
+
+    // 4. SEO optimization opportunities
+    MATCH (a:Article)-[:CONTAINS]->(i:Insight)
+    WHERE i.type = "seo" AND i.actionability = "high"
+    RETURN a.title, a.domain, i.text
+    ORDER BY i.confidence DESC;
+
+    // 5. Headline optimization hooks
+    MATCH (a:Article)-[:HAS_HOOK]->(h:Hook)
+    WHERE h.estimated_engagement = "high"
+    RETURN a.title, h.text, h.psychology_triggers, h.category;
+
+    // 6. Content strategy opportunities
+    MATCH (a:Article)-[:BELONGS_TO]->(t:Topic), (a)-[:HAS_GAP]->(g:Gap)
+    WHERE g.search_volume_potential = "high" AND g.urgency = "high"
+    RETURN t.name, g.text, g.suggested_title, count(a) as article_count
+    ORDER BY article_count ASC;
+
+----
+
+ingest_runner.py
+
+    from neo4j import GraphDatabase
+    import json
+
+    class ArticleGraphIngestor:
+        def __init__(self, uri, user, password):
+            self.driver = GraphDatabase.driver(uri, auth=(user, password))
+
+        def run_query(self, query, parameters):
+            with self.driver.session() as session:
+                session.run(query, parameters)
+
+        def close(self):
+            self.driver.close()
+
+    # Example usage (to be customized by freelancer)
+    # ingestor = ArticleGraphIngestor("bolt://localhost:7687", "neo4j", "password")
+    # ingestor.run_query(NODE_CYPHER_HERE, PARAMS)
+    # ingestor.close()
+
+----
+
+requirements.txt
+
+    neo4j==5.17.0
+
+----
+
+README.md
+
+Neo4j Article Intelligence Engine
+
+This project enables ingestion from a universal PostgreSQL database into a production-grade Neo4j knowledge graph optimized for article/blog content intelligence and SEO optimization.
+
+Setup
+
+1. Install dependencies:
+    pip install -r requirements.txt
+
+2. Configure your Neo4j instance and credentials.
+
+3. Use ingest_runner.py with the create_nodes.cypher and create_relationships.cypher files to populate the graph.
+
+Node Types
+
+- (:Article) – Core article/blog content entity
+- (:Insight) – Claude-extracted insights (including SEO insights)
+- (:Gap) – Content opportunities and missing topics
+- (:Topic) – Semantic clusters with hierarchy
+- (:Hook) – Headline/title optimization prompts
+
+Relationships
+
+- (:Article)-[:CONTAINS]->(:Insight)
+- (:Article)-[:HAS_GAP]->(:Gap)
+- (:Article)-[:BELONGS_TO]->(:Topic)
+- (:Article)-[:HAS_HOOK]->(:Hook) (optional)
+
+Test Queries
+
+See query_tests.cypher for Claude-ready queries, including:
+- High urgency content gaps
+- SEO optimization opportunities
+- Content strategy insights
+- Headline optimization hooks
+- Topic gap analysis
+
+Notes
+
+- All source data must match the universal schema with content_type = "article", "blog", "guide"
+- This repo is only for Neo4j structure — no Claude runners or PostgreSQL ingestion logic included
+- Optimized for SEO intelligence, content strategy, and competitive analysis

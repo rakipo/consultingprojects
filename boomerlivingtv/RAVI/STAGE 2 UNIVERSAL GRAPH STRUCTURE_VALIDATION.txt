@@ -1,0 +1,82 @@
+STAGE 2: UNIVERSAL GRAPH STRUCTURE (Neo4j Nodes + Relationships)
+
+    (:Content) - Universal content node for all types
+    │
+    ├── content_id             ← Unique identifier
+    ├── title                  ← Content title/headline
+    ├── content_type           ← "youtube_video", "blog_article", "podcast_episode", "linkedin_post"
+    ├── publish_date           ← When content was created/published
+    ├── content_text           ← Full text content
+    ├── word_count             ← Content length
+    ├── duration_seconds       ← For audio/video (NULL for articles)
+    ├── page_count             ← For PDFs/documents (NULL for videos)
+    ├── source_url             ← URL or file path reference
+    ├── author_name            ← Content creator/author
+    ├── domain                 ← "finance", "legal", "technology", "healthcare"
+    ├── engagement_metrics     ← JSONB: platform-specific engagement data
+    ├── source_authority_score ← 0.0-1.0 credibility rating
+    └── source_type            ← "academic", "news", "blog", "government", "commercial"
+
+    (:Insight) - Claude-extracted insights with quality metrics
+    │
+    ├── text                   ← "Most people misunderstand Medicaid eligibility rules"
+    ├── type                   ← "statistic", "framework", "misconception", "tip", "warning", "story", "tool"
+    ├── confidence             ← 0.0-1.0 quality score
+    ├── actionability          ← "high", "medium", "low"
+    ├── location_reference     ← Page number, timestamp, paragraph, section
+    └── keywords[]             ← Array of relevant terms
+
+    (:Gap) - Content opportunities with business impact scoring
+    │
+    ├── gap_text               ← "Never explains how to set up a trust"
+    ├── gap_type               ← "definitional", "process", "example", "timing", "cost", "risk"
+    ├── urgency                ← "high", "medium", "low"
+    ├── estimated_content_size ← "2-page article", "10-minute video", "3-episode series"
+    ├── suggested_title        ← "Trust Setup Guide: Step-by-Step Process"
+    └── search_volume_potential ← "high", "medium", "low"
+
+    (:Topic) - Hierarchical content organization
+    │
+    ├── name                   ← "tax_planning", "estate_law", "ai_automation"
+    ├── hierarchy_level        ← "primary", "secondary", "tertiary"
+    ├── domain                 ← "finance", "legal", "technology", "healthcare"
+    ├── audience_intent        ← "learning", "implementation", "research"
+    ├── content_complexity     ← "low", "medium", "high"
+    └── cross_references[]     ← Related topics for linking
+
+    (:Hook) - Psychology-driven optimization (optional)
+    │
+    ├── hook_text              ← "This estate planning mistake cost my client $200,000"
+    ├── category               ← "mistake-focused", "problem-focused", "secret-focused"
+    ├── psychology_triggers    ← "loss_aversion + specificity"
+    ├── target_emotion         ← "concern", "curiosity", "urgency"
+    ├── estimated_engagement   ← "high", "medium", "low"
+    ├── character_count        ← For platform character limits
+    └── platform_optimized     ← "youtube", "linkedin", "twitter", "blog"
+
+    (:Author) - Content creator tracking (optional)
+    │
+    ├── name                   ← Content creator/author
+    ├── authority_score        ← Credibility rating based on source analysis
+    ├── content_count          ← Number of pieces authored in system
+    ├── specialization         ← Primary domain/expertise
+    └── engagement_average     ← Average engagement across their content
+
+    Universal Relationships
+    │
+    ├── (:Content)-[:CONTAINS]->(:Insight)      ← Insight extracted from this content
+    ├── (:Content)-[:BELONGS_TO]->(:Topic)      ← Categorize by semantic grouping
+    ├── (:Content)-[:HAS_GAP]->(:Gap)           ← Gaps identified in this content
+    ├── (:Content)-[:HAS_HOOK]->(:Hook)         ← Content optimization hooks
+    ├── (:Author)-[:CREATED]->(:Content)        ← Authorship relationship
+    ├── (:Topic)-[:RELATES_TO]->(:Topic)        ← Topic hierarchy and relationships
+    ├── (:Insight)-[:SUPPORTS]->(:Topic)        ← Insights that validate topic importance
+    └── (:Gap)-[:SUGGESTS]->(:Topic)            ← Gaps that suggest new topic areas
+
+    Content-Type-Specific Filtering
+    │
+    ├── YouTube Intelligence    ← Filter: content_type = 'youtube_video'
+    ├── Article Intelligence    ← Filter: content_type = 'blog_article'
+    ├── Podcast Intelligence    ← Filter: content_type = 'podcast_episode'
+    ├── Social Intelligence     ← Filter: content_type IN ['linkedin_post', 'twitter_post', 'tiktok_video']
+    └── Cross-Format Analysis   ← Query across all content_types for universal insights

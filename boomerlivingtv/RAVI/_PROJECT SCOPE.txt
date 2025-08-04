@@ -1,0 +1,81 @@
+PROJECT SCOPE - EXPANDED TO INCLUDE CLAUDE INTEGRATION
+
+I'm providing documentation for the PostgreSQL → Claude API → Neo4j + MCP project with media-specific intelligence modules with Claude integration.  
+
+----
+
+What You're Building:
+    - PostgreSQL → Claude API integration → Neo4j pipeline
+    - Claude content analysis with confidence scoring
+    - MCP Cypher Server for natural language queries
+    - Universal Content Intelligence System with 4 media modules
+
+----
+
+Universal Media Intelligence:
+
+Core System:
+    - Universal PostgreSQL schema handling ALL content types
+    - Claude AI analysis engine for any media format  
+    - Neo4j knowledge graph with universal relationships
+    - MCP server for natural language business queries
+    - Complete content processing pipeline
+
+Media Intelligence Modules (questions that must be uncovered once graph rag is done):
+    - YouTube Intelligence: strategic video content queries
+    - Article Intelligence: SEO and blog optimization queries
+    - Podcast Intelligence: episode and series planning queries
+    - Social Intelligence: cross-platform social media queries
+
+----
+
+Your Implementation Guide:
+
+Core System:
+
+1. Main spec: 03_execution Tree_neo4j Universal Content Intelligence Engine.txt
+2. Database schema: 02_postgresql Schema (you populate via Claude)
+3. Claude Integration: Claude API Integration.txt (NEW - YOU BUILD THIS)
+4. MCP setup: 00_GET_STARTED.txt Step 5
+5. Architecture reference: 01_Content_Intelligence_Platform_Architecture.txt
+
+Media Modules (Ready-to-deploy):
+
+6. YouTube: YouTube_create_nodes.cypher.txt + YouTube_questions_content_intelligence.txt
+7. Articles: Article_create_nodes_cypher.txt + Article_questions_content_intelligence.txt
+8. Podcasts: Podcast_create_nodes.cypher.txt + Podcast_questions_content_intelligence.txt
+9. Social: Social_create_nodes_cypher.txt + Social_questions_content_intelligence.txt
+
+----
+
+Implementation Notes:
+    - Core system deployment: Expanded to include Claude API integration
+    - Claude analysis: Build complete content processing pipeline
+    - Media modules: Pre-built Cypher queries + relationship patterns
+    - Database work: Universal schema + Claude enrichment pipeline
+    - MCP integration: Natural language queries work across all media types
+    - Modular architecture: Deploy core system + any combination of media modules
+
+----
+
+Technical Deliverables:
+
+neo4j_graphrag/
+├── core_system/
+│   ├── create_nodes.cypher           Universal nodes
+│   ├── create_relationships.cypher   Universal relationships  
+│   ├── query_tests.cypher            Core validation queries
+│   ├── ingest_runner.py              PostgreSQL → Neo4j pipeline
+│   └── mcp_server_setup.py           Natural language interface
+├── claude_integration/               Build This
+│   ├── run_claude_enrichment.py      Main processing script
+│   ├── claude_prompts.py             Content analysis prompts
+│   ├── config.py                     Configuration management
+│   └── test_integration.py           Testing framework
+├── media_modules/
+│   ├── youtube_intelligence/         Video content queries
+│   ├── article_intelligence/         SEO & blog queries
+│   ├── podcast_intelligence/         Episode planning queries
+│   └── social_intelligence/          Cross-platform queries
+├── requirements.txt
+└── README.md                         Complete setup guide

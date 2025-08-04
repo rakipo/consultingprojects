@@ -1,0 +1,154 @@
+Podcast_questions_content_intelligence.txt
+
+PODCAST CONTENT INTELLIGENCE QUESTIONS
+
+GraphRAG Testing Framework: Strategic Questions for Podcast Content Intelligence & Episode Optimization
+
+----
+
+EPISODE PLANNING & CONTENT STRATEGY
+Questions that uncover episode opportunities and optimize podcast content
+
+Topic Gap Discovery
+1. "What podcast topics have high search volume but fewer than 3 episodes in my niche?"
+2. "Which topics appear in successful podcasts but have zero coverage in my show?"
+3. "Find content gaps that appear across 5+ popular episodes - validated listener demand"
+4. "What questions appear repeatedly in comments that signal episode opportunities?"
+5. "Which secondary topics from my best episodes deserve dedicated deep-dive episodes?"
+
+Content Series Development
+6. "Map out a 12-episode series using gap analysis from high-performing podcast content"
+7. "Which topics naturally connect for binge-worthy episode sequences?"
+8. "Find topic clusters that create strong episode-to-episode listener retention"
+9. "What follow-up topics appear in listener feedback that signal series potential?"
+10. "Which insights from individual episodes deserve comprehensive series treatment?"
+
+Episode Format Optimization
+11. "Which episode formats (interviews, solo, panel) drive highest completion rates?"
+12. "Find content that works better as short-form vs long-form episodes"
+13. "What topics require expert interviews vs solo commentary?"
+14. "Which episode structures correlate with highest listener engagement?"
+15. "What controversial angles get engagement without damaging podcast authority?"
+
+----
+
+GUEST STRATEGY & INTERVIEW INTELLIGENCE
+Questions that optimize guest selection and interview content
+
+Guest Discovery & Booking
+16. "What expertise gaps exist in my podcast that top-tier guests could fill?"
+17. "Find guest combinations that work for successful podcasts but I haven't tried"
+18. "Which trending experts align with my podcast themes but aren't oversaturated?"
+19. "What seasonal guest patterns emerge from successful interview shows?"
+20. "Which potential guests have unique stories that competitors haven't covered?"
+
+Interview Content Optimization
+21. "Which guest insights need follow-up questions to extract maximum value?"
+22. "What topics do guests cover superficially that need deeper exploration?"
+23. "Find concepts that guests explain well but lack practical implementation guides"
+24. "Which complex topics require multiple guest perspectives vs single expert deep-dives?"
+25. "What industry frameworks can I develop based on patterns across guest interviews?"
+
+Guest Relationship Building
+26. "Which guest topics demonstrate natural collaboration opportunities?"
+27. "Find knowledge gaps where return guests could provide updates or advanced content"
+28. "Which guests need spotlight episodes vs collaborative panel discussions?"
+29. "What controversial but defensible positions could establish unique guest relationships?"
+30. "Which guest expertise creates unfair content advantage over competitor podcasts?"
+
+----
+
+AUDIENCE ENGAGEMENT & GROWTH STRATEGY
+Questions that drive listener retention and podcast growth
+
+Listener Behavior Analysis
+31. "Which episode topics have highest completion rates vs drop-off points?"
+32. "Find content that generates organic shares vs content that builds loyal listeners"
+33. "What topics correlate with highest subscriber conversion rates?"
+34. "Which episodes predict long-term listener retention and engagement?"
+35. "What content creates community discussion beyond the episode release?"
+
+Content Performance Optimization
+36. "What pain points appear repeatedly that signal high-value episode opportunities?"
+37. "Which episode insights could become standalone resources or bonus content?"
+38. "Find knowledge gaps that position my expertise as the obvious solution"
+39. "What topics generate the most 'please do more episodes on this' requests?"
+40. "Which educational content naturally leads to premium content or course sales?"
+
+Cross-Platform Content Strategy
+41. "Which successful episodes would 10x in value as comprehensive video content?"
+42. "Find insights that work as podcast clips vs full episode content"
+43. "What episode content could become a book or comprehensive guide?"
+44. "Which audio content would generate more impact as written articles or social posts?"
+45. "What evergreen episodes need regular updates or follow-up episodes?"
+
+----
+
+PODCAST BUSINESS & MONETIZATION INTELLIGENCE
+Questions that optimize podcast business impact and revenue
+
+Monetization Opportunity Analysis
+46. "Which episode topics naturally lead to sponsorship opportunities in my niche?"
+47. "Find content gaps that create premium membership or course opportunities"
+48. "What topics demonstrate expertise that justifies consulting or coaching sales?"
+49. "Which episodes need better calls-to-action to improve conversion rates?"
+50. "What content creates natural product placement opportunities without being salesy?"
+
+Audience Development & Retention
+51. "What's the content progression from casual listener → subscriber → customer?"
+52. "Which episodes have high engagement but don't convert to email subscribers?"
+53. "Find content gaps in the listener journey that competitors are missing"
+54. "What educational content leads to consultation requests or service inquiries?"
+55. "Which episodes create dependency - listeners who return for regular updates?"
+
+----
+
+TECHNICAL OPTIMIZATION & PRODUCTION INTELLIGENCE
+Questions that improve podcast production and discoverability
+
+Episode Structure & Production
+56. "Which episode lengths correlate with highest completion rates by topic type?"
+57. "Find optimal episode frequency based on topic complexity and audience retention"
+58. "What intro/outro patterns drive highest subscriber conversion rates?"
+59. "Which episode titles and descriptions optimize for both SEO and click-through?"
+60. "What audio quality factors correlate with listener retention and growth?"
+
+Platform Optimization & Distribution
+61. "Which podcast platforms drive most qualified traffic for my content niche?"
+62. "Find optimal release timing based on audience behavior and competition analysis"
+63. "What show notes structure improves both SEO and listener experience?"
+64. "Which episode tags and categories optimize discoverability without keyword stuffing?"
+65. "What cross-promotion strategies work best for podcasts in my domain?"
+
+----
+
+COMPETITIVE INTELLIGENCE & POSITIONING
+Questions that establish podcast authority and market position
+
+Market Analysis & Differentiation
+66. "What topics do top-ranked podcasts in my niche avoid that I could dominate?"
+67. "Find content angles that successful podcasts cover but I could execute better"
+68. "Which trending topics align with my expertise but aren't oversaturated yet?"
+69. "What unique combinations of my experience create content no competitor can replicate?"
+70. "Which controversial but defensible positions could establish thought leadership?"
+
+Industry Trends & Innovation
+71. "What podcast formats are emerging that I could pioneer in my niche?"
+72. "Find technology trends that create new podcast content opportunities"
+73. "Which industry changes signal new episode topics before competitors catch on?"
+74. "What seasonal patterns in my industry create predictable content opportunities?"
+75. "Which cross-industry insights could bring fresh perspective to my podcast niche?"
+
+----
+
+VALIDATION CRITERIA
+Each question must return actionable, specific, data-backed answers that directly impact podcast growth and business objectives within 30 days
+
+Success Metrics:
+- Episode Performance: Returns completion rates, engagement data, and growth metrics
+- Guest Strategy: Identifies high-value guest opportunities and optimal interview approaches
+- Content Planning: Provides specific episode ideas with audience demand validation
+- Business Impact: Links podcast strategy to subscriber growth and revenue objectives
+- Competitive Position: Shows differentiation opportunities and market gaps
+
+The Podcast GraphRAG succeeds when it can answer: "Based on listener behavior, guest expertise patterns, and competitive analysis, what exact episode should I record next to maximize audience growth and business impact, and why?"

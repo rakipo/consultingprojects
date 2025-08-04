@@ -1,0 +1,134 @@
+Claude API Integration
+
+Overview
+
+Build complete Claude API integration that processes raw content and populates PostgreSQL enrichment tables with structured business intelligence.
+
+----
+
+DELIVERABLES
+
+1. Claude Analysis Scripts
+
+Files to Build:
+    - run_claude_enrichment.py - Main processing script
+    - claude_prompts.py - Prompt templates for content analysis
+    - config.py - Configuration and settings management
+    - requirements.txt - Python dependencies
+
+2. Content Analysis Prompts
+
+Requirements:
+    - Extract insights with confidence scores (0.0-1.0)
+    - Identify content gaps with urgency ratings
+    - Classify topics with hierarchy levels
+    - Generate psychology-driven hooks
+    - Return structured JSON matching PostgreSQL schema
+
+Example Output Structure:
+    {
+      "insights": [{"text": "...", "confidence": 0.85, "actionability": "high"}],
+      "gaps": [{"gap_text": "...", "urgency": "high", "suggested_title": "..."}],
+      "topics": [{"topic_name": "...", "hierarchy_level": "primary"}],
+      "hooks": [{"hook_text": "...", "psychology_triggers": "..."}]
+    }
+
+3. Database Integration
+
+Requirements:
+    - Read unenriched content from content_items table
+    - Save Claude analysis to enrichment tables:
+        - content_insights
+        - content_gaps
+        - content_topics
+        - content_hooks
+    - Update enriched_at timestamp when complete
+    - Handle database transactions and rollbacks
+
+4. Production Features
+
+API Management:
+    - Rate limiting to avoid Claude API limits
+    - Retry logic for failed requests
+    - Cost monitoring and batch processing
+    - Content length optimization (handle long content)
+
+Error Handling:
+    - JSON parsing validation
+    - Database connection management
+    - API key validation
+    - Logging and error reporting
+
+5. Testing Framework
+
+Requirements:
+    - Test Claude API integration with sample content
+    - Validate JSON parsing and database insertion
+    - End-to-end testing with real content
+    - Cost estimation tools
+
+----
+
+TECHNICAL SPECIFICATIONS
+
+Claude API Integration
+    - Use Claude Sonnet 4 model (claude-sonnet-4-20250514)
+    - Handle content up to 8,000 characters
+    - Implement structured prompts for consistent output
+    - Parse JSON responses and handle malformed output
+
+Database Schema Compliance
+
+Must populate these exact PostgreSQL tables:
+    content_insights (content_id, text, type, confidence, actionability, location_reference)
+    content_gaps (content_id, gap_text, gap_type, urgency, estimated_content_size, suggested_title)
+    content_topics (content_id, topic_name, hierarchy_level, domain, audience_intent)
+    content_hooks (content_id, hook_text, category, psychology_triggers, estimated_engagement)
+
+Configuration Management
+    - Environment variables for API keys and database credentials
+    - Configurable batch sizes and processing limits
+    - Cost monitoring and usage tracking
+    - Development vs production settings
+
+----
+
+SUCCESS CRITERIA
+
+Functional Requirements
+
+1. Content Processing: Successfully analyze any content type (YouTube, articles, podcasts, social)
+2. Data Quality: Extract meaningful insights with confidence scores >0.7
+3. Database Population: All enrichment tables populated correctly
+4. Cost Efficiency: Process content at <$0.05 per piece
+5. Error Recovery: Handle API failures gracefully
+
+Integration Requirements
+
+1. End-to-End Testing: Raw content → Claude analysis → Neo4j → strategic questions
+2. Batch Processing: Handle 100+ content pieces without manual intervention
+3. Monitoring: Track processing status and costs
+4. Documentation: Non-technical setup and usage guides
+
+Performance Requirements
+    - Process 10 content pieces in <5 minutes
+    - Database transactions complete successfully
+    - Memory usage stays under reasonable limits
+    - API rate limits respected
+
+----
+
+DELIVERABLE STRUCTURE
+
+claude_integration/
+├── run_claude_enrichment.py       # Main processing script
+├── claude_prompts.py              # Prompt templates
+├── config.py                      # Configuration management
+├── database.py                    # Database operations
+├── utils.py                       # Helper functions
+├── test_integration.py            # Testing framework
+├── requirements.txt               # Dependencies
+├── .env.example                   # Environment template
+├── README_claude.md               # Usage documentation
+└── logs/                          # Processing logs
+ 
