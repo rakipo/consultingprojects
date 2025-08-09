@@ -1,0 +1,47 @@
+Neo4j Data Load Metrics
+==================================================
+
+Load completed at: 2025-08-07T22:57:33.388684
+
+NODES CREATED:
+--------------------
+Article: 0
+Website: 0
+Author: 0
+Chunk: 155
+Total Nodes: 155
+
+RELATIONSHIPS CREATED:
+-------------------------
+PUBLISHED_ON: 0
+HAS_CHUNK: 0
+WRITTEN_BY: 0
+TAGGED_WITH: 0
+Total Relationships: 0
+
+FAILED OPERATIONS:
+--------------------
+Failed Author nodes: 10
+
+VECTOR EMBEDDINGS:
+--------------------
+Chunks created: 155
+Embeddings generated: 155
+
+SUMMARY:
+----------
+Total records processed: 10
+Total errors: 10
+
+ERRORS:
+----------
+1. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+2. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+3. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+4. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+5. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+6. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+7. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+8. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+9. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}
+10. Failed to create Author node: ERR_L002: Error executing Cypher query: {code: Neo.ClientError.Statement.SemanticError} {message: Cannot merge the following node because of null property value for 'author': (:Author {author: null})}

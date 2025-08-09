@@ -1,0 +1,13 @@
+Database Query Results - 2025-08-07 14:51:04
+Database: movies
+Host: localhost
+
+================================================================================
+Query: check_table_exists
+Description: Check if structured_content table exists
+SQL: SELECT COUNT(*) FROM structured_content;
+--------------------------------------------------------------------------------
+ERROR: relation "structured_content" does not exist
+LINE 1: SELECT COUNT(*) FROM structured_content;
+                             ^
+

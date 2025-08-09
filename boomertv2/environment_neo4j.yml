@@ -1,0 +1,12 @@
+name: neo4j-modeling-functionality
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - neo4j==5.15.0
+    - requests==2.31.0
+    - PyYAML==6.0.1
+    - pytest==7.4.3

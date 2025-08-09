@@ -1,0 +1,12 @@
+Database Query Results - 2025-08-07 13:12:47
+Database: SERP_TREND_DEV_DB
+Host: 4.150.184.135
+
+================================================================================
+Query: list_all_tables
+Description: List all tables in the current database
+SQL: SELECT * from structured_content limit 1;
+--------------------------------------------------------------------------------
+Columns: id, url, raw_html_id, domain, site_name, title, author, publish_date, content, summary, tags, language, word_count, meta_description, extracted_at, is_latest, run_id
+Row count: 0
+

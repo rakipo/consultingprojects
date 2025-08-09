@@ -1,0 +1,48 @@
+Database Query Results - 2025-08-07 14:49:26
+Database: movies
+Host: localhost
+
+================================================================================
+Query: list_all_tables
+Description: List all tables in the current database
+SQL: SELECT table_name, table_schema FROM information_schema.tables WHERE table_schema NOT IN ('information_schema', 'pg_catalog') ORDER BY table_schema, table_name;
+--------------------------------------------------------------------------------
+Columns: table_name, table_schema
+Row count: 0
+
+================================================================================
+Query: list_database_users
+Description: List all database users/roles
+SQL: SELECT rolname as username, rolsuper as is_superuser, rolcreaterole as can_create_roles, rolcreatedb as can_create_db, rolcanlogin as can_login FROM pg_roles ORDER BY rolname;
+--------------------------------------------------------------------------------
+Columns: username, is_superuser, can_create_roles, can_create_db, can_login
+Row count: 13
+
+Row 1: ('pg_checkpoint', False, False, False, False)
+Row 2: ('pg_database_owner', False, False, False, False)
+Row 3: ('pg_execute_server_program', False, False, False, False)
+Row 4: ('pg_monitor', False, False, False, False)
+Row 5: ('pg_read_all_data', False, False, False, False)
+Row 6: ('pg_read_all_settings', False, False, False, False)
+Row 7: ('pg_read_all_stats', False, False, False, False)
+Row 8: ('pg_read_server_files', False, False, False, False)
+Row 9: ('pg_signal_backend', False, False, False, False)
+Row 10: ('pg_stat_scan_tables', False, False, False, False)
+... and 3 more rows
+================================================================================
+Query: table_details
+Description: Get detailed information about all user tables including row counts
+SQL: SELECT schemaname, tablename, tableowner, tablespace FROM pg_tables WHERE schemaname NOT IN ('information_schema', 'pg_catalog') ORDER BY schemaname, tablename;
+--------------------------------------------------------------------------------
+Columns: schemaname, tablename, tableowner, tablespace
+Row count: 0
+
+================================================================================
+Query: database_info
+Description: Get current database information
+SQL: SELECT current_database() as database_name, current_user as current_user, version() as postgresql_version;
+--------------------------------------------------------------------------------
+Columns: database_name, current_user, postgresql_version
+Row count: 1
+
+Row 1: ('movies', 'postgres', 'PostgreSQL 15.13 (Debian 15.13-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit')

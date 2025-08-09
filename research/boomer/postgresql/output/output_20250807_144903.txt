@@ -1,0 +1,33 @@
+Database Query Results - 2025-08-07 14:49:03
+Database: movies
+Host: localhost
+
+================================================================================
+Query: list_all_tables
+Description: create table
+SQL: CREATE SEQUENCE IF NOT EXISTS structured_content_id_seq;
+
+CREATE TABLE IF NOT EXISTS public.structured_content
+(
+    id bigint NOT NULL DEFAULT nextval('structured_content_id_seq'::regclass),
+    url text NOT NULL,
+    raw_html_id bigint,
+    domain text NOT NULL,
+    site_name text,
+    title text,
+    author text,
+    publish_date date,
+    content text NOT NULL,
+    summary text,
+    tags jsonb DEFAULT '[]'::jsonb,
+    language character varying(5),
+    word_count integer,
+    meta_description text,
+    extracted_at timestamp with time zone DEFAULT now(),
+    is_latest boolean DEFAULT true,
+    run_id uuid,
+    CONSTRAINT structured_content_pkey PRIMARY KEY (id)
+)
+
+--------------------------------------------------------------------------------
+Affected rows: -1

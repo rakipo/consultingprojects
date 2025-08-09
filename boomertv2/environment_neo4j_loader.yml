@@ -1,0 +1,15 @@
+name: neo4j-loader-functionality
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - neo4j==5.15.0
+    - sentence-transformers==2.2.2
+    - openai==1.3.0
+    - numpy==1.24.3
+    - PyYAML==6.0.1
+    - psycopg2-binary==2.9.7
+    - pytest==7.4.3

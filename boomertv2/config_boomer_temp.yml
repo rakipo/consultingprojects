@@ -1,0 +1,163 @@
+# Database configuration
+database:
+  postgres: |
+    host: 4.150.184.135
+    port: 5432
+    database: SERP_TREND_DEV_DB
+    user: serptrend_user
+    password: SERPTREND_1349_SCRAPING
+  neo4j: |
+    host: localhost
+    port: 7687
+    database: neo4j
+    user: neo4j
+    password: password123
+
+queries:
+  trending: 'SELECT * from structured_Article limit 2;'
+
+# Neo4j Model Configuration
+neo4j_model_config:
+  trending:
+    # Columns to include in model creation (if not specified, all columns are used)
+    include_columns:
+      - id
+      - url
+      - domain
+      - site_name
+      - title
+      - author
+      - publish_date
+      - content
+      - summary
+      - tags
+      - language
+      - word_count
+      - meta_description
+      - is_latest
+      - run_id
+      - chunk_id
+      - embedding
+      - chunk_text
+      - content_id
+    
+    # Node definitions with labels, properties, and node IDs
+    nodes:
+      - label: "Article"
+        node_id_property: "id"
+        properties:
+          - name: "id"
+            type: "string"
+            unique: true
+          - name: "title"
+            type: "string"
+            indexed: true
+          - name: "summary"
+            type: "text"
+          - name: "publish_date"
+            type: "datetime"
+          - name: "word_count"
+            type: "integer"
+          - name: "is_latest"
+            type: "boolean"
+  
+      - label: "Website"
+        node_id_property: "domain"
+        properties:
+          - name: "domain"
+            type: "string"
+            unique: true
+            alias: "site_domain"
+          - name: "site_name"
+            type: "string"
+            indexed: true
+            alias: "name"
+        multiple_labels:
+          - "Source"
+      
+      - label: "Author"
+        node_id_property: "author"
+        properties:
+          - name: "author"
+            type: "string"
+            unique: true
+            alias: "name"
+        multiple_labels:
+          - "Person"
+          - "Creator"
+      
+      - label: "Chunk"
+        node_id_property: "chunk_id"
+        properties:
+          - name: "chunk_id"
+            type: "string"
+            unique: true
+          - name: "embedding"
+            type: "vector"
+            vector_dimension: 1536
+            vector_similarity: "cosine"
+          - name: "chunk_text"
+            type: "text"
+    
+    # Relationships between nodes
+    relationships:
+      - type: "PUBLISHED_ON"
+        start_node: "Article"
+        end_node: "Website"
+        start_property: "domain"
+        end_property: "domain"
+        properties:
+          - name: "url"
+            type: "string"
+      
+      - type: "WRITTEN_BY"
+        start_node: "Content"
+        end_node: "Author"
+        start_property: "author"
+        end_property: "author"
+        properties:
+          - name: "publish_date"
+            type: "datetime"
+      
+      - type: "HAS_CHUNK"
+        start_node: "Article"
+        end_node: "Chunk"
+        start_property: "id"
+        end_property: "chunk_id"
+        properties:
+          - name: "chunk_order"
+            type: "integer"
+          - name: "chunk_position"
+            type: "integer"
+      
+      - type: "TAGGED_WITH"
+        start_node: "Article"
+        end_node: "Tag"
+        start_property: "id"
+        end_property: "tag_name"
+        properties: []
+        # This relationship will be created by splitting the tags field
+    
+    # Extra indexes beyond the default ones
+    extra_indexes:
+      - node_label: "Content"
+        property: "word_count"
+        type: "RANGE"
+      - node_label: "Content"
+        property: "publish_date"
+        type: "RANGE"
+      - node_label: "Website"
+        property: "domain"
+        type: "TEXT"
+      - node_label: "Chunk"
+        property: "embedding"
+        type: "VECTOR"
+        vector_dimension: 1536
+        vector_similarity: "cosine"
+    
+    # Global aliases for common transformations
+    global_aliases:
+      Article_text: "Article"
+      article_title: "title"
+      publication_date: "publish_date"
+      source_domain: "domain"

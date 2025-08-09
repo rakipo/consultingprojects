@@ -1,0 +1,17 @@
+# Use default files
+python db_query_runner.py
+
+# Specify both files
+python db_query_runner.py -c config.yml -q queries.yml
+
+# Use custom config file
+python db_query_runner.py --config prod_config.yml
+
+# Use custom queries file
+python db_query_runner.py --queries test_queries.yml
+
+# Use both custom files
+python db_query_runner.py -c prod_config.yml -q test_queries.yml
+
+# Show help
+python db_query_runner.py -

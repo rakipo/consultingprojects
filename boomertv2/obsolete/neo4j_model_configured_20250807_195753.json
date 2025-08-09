@@ -1,0 +1,377 @@
+{
+  "model_info": {
+    "generated_by": "Neo4j Model Generator (Configured)",
+    "generated_at": "2025-08-07T19:57:55.705379",
+    "source_table_columns": [
+      "id",
+      "url",
+      "raw_html_id",
+      "domain",
+      "site_name",
+      "title",
+      "author",
+      "publish_date",
+      "content",
+      "summary",
+      "tags",
+      "language",
+      "word_count",
+      "meta_description",
+      "extracted_at",
+      "is_latest",
+      "run_id"
+    ],
+    "total_records": 2,
+    "configuration_applied": true
+  },
+  "nodes": [
+    {
+      "label": "Article",
+      "node_id_property": "id",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string",
+          "unique": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "indexed": true
+        },
+        {
+          "name": "summary",
+          "type": "text"
+        },
+        {
+          "name": "publish_date",
+          "type": "datetime"
+        },
+        {
+          "name": "word_count",
+          "type": "integer"
+        },
+        {
+          "name": "is_latest",
+          "type": "boolean"
+        }
+      ],
+      "description": "Node representing Article entities"
+    },
+    {
+      "label": "Website",
+      "node_id_property": "domain",
+      "properties": [
+        {
+          "name": "domain",
+          "type": "string",
+          "unique": true,
+          "alias": "site_domain"
+        },
+        {
+          "name": "site_name",
+          "type": "string",
+          "indexed": true,
+          "alias": "name"
+        }
+      ],
+      "description": "Node representing Website entities",
+      "multiple_labels": [
+        "Source"
+      ]
+    },
+    {
+      "label": "Author",
+      "node_id_property": "author",
+      "properties": [],
+      "description": "Node representing Author entities"
+    }
+  ],
+  "relationships": [
+    {
+      "type": "PUBLISHED_ON",
+      "start_node": "Article",
+      "end_node": "Website",
+      "start_property": "domain",
+      "end_property": "domain",
+      "properties": [
+        {
+          "name": "url",
+          "type": "string"
+        }
+      ],
+      "description": "Relationship PUBLISHED_ON from Article to Website"
+    },
+    {
+      "type": "WRITTEN_BY",
+      "start_node": "Article",
+      "end_node": "Author",
+      "start_property": "author",
+      "end_property": "name",
+      "properties": [
+        {
+          "name": "publish_date",
+          "type": "datetime"
+        }
+      ],
+      "description": "Relationship WRITTEN_BY from Article to Author"
+    },
+    {
+      "type": "TAGGED_WITH",
+      "start_node": "Article",
+      "end_node": "Tag",
+      "start_property": "id",
+      "end_property": "tag_name",
+      "properties": [],
+      "description": "Relationship TAGGED_WITH from Article to Tag"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "UNIQUE",
+      "node_label": "Article",
+      "property": "id",
+      "cypher": "CREATE CONSTRAINT article_id_unique IF NOT EXISTS FOR (n:Article) REQUIRE n.id IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Website",
+      "property": "domain",
+      "cypher": "CREATE CONSTRAINT website_domain_unique IF NOT EXISTS FOR (n:Website) REQUIRE n.domain IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Author",
+      "property": "name",
+      "cypher": "CREATE CONSTRAINT author_name_unique IF NOT EXISTS FOR (n:Author) REQUIRE n.name IS UNIQUE"
+    }
+  ],
+  "indexes": [
+    {
+      "type": "STRING",
+      "node_label": "Article",
+      "property": "title",
+      "cypher": "CREATE INDEX article_title_text IF NOT EXISTS FOR (n:Article) ON (n.title)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Article",
+      "property": "content",
+      "cypher": "CREATE INDEX article_content_text IF NOT EXISTS FOR (n:Article) ON (n.content)"
+    },
+    {
+      "type": "STRING",
+      "node_label": "Website",
+      "property": "site_name",
+      "cypher": "CREATE INDEX website_site_name_text IF NOT EXISTS FOR (n:Website) ON (n.site_name)"
+    },
+    {
+      "type": "RANGE",
+      "node_label": "Article",
+      "property": "publish_date",
+      "cypher": "CREATE INDEX article_publish_date_range IF NOT EXISTS FOR (n:Article) ON (n.publish_date)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Website",
+      "property": "domain",
+      "cypher": "CREATE INDEX website_domain_text IF NOT EXISTS FOR (n:Website) ON (n.domain)"
+    },
+    {
+      "type": "VECTOR",
+      "node_label": "Chunk",
+      "property": "embedding",
+      "vector_dimension": 1536,
+      "vector_similarity": "cosine",
+      "cypher": "CREATE VECTOR INDEX chunk_embedding_vector IF NOT EXISTS FOR (n:Chunk) ON (n.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 1536, `vector.similarity_function`: 'cosine'}}"
+    }
+  ],
+  "import_queries": [
+    {
+      "description": "Import Article nodes",
+      "cypher": "// Create Article nodes\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                CREATE (n:Article {id: row.id, title: row.title, content: row.content, summary: row.summary, publish_date: row.publish_date, word_count: row.word_count, is_latest: row.is_latest})",
+      "node_type": "Article"
+    },
+    {
+      "description": "Import Website nodes",
+      "cypher": "// Create Website nodes\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                CREATE (n:Website:Source {site_domain: row.domain, name: row.site_name})",
+      "node_type": "Website"
+    },
+    {
+      "description": "Import Author nodes",
+      "cypher": "// Create Author nodes\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                CREATE (n:Author {})",
+      "node_type": "Author"
+    },
+    {
+      "description": "Create PUBLISHED_ON relationships",
+      "cypher": "// Create PUBLISHED_ON relationships\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                MATCH (start:Article {domain: row.domain})\n                MATCH (end:Website {domain: row.domain})\n                CREATE (start)-[r:PUBLISHED_ON {url: row.url}]->(end)",
+      "relationship_type": "PUBLISHED_ON"
+    },
+    {
+      "description": "Create WRITTEN_BY relationships",
+      "cypher": "// Create WRITTEN_BY relationships\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                MATCH (start:Article {author: row.author})\n                MATCH (end:Author {name: row.name})\n                CREATE (start)-[r:WRITTEN_BY {publish_date: row.publish_date}]->(end)",
+      "relationship_type": "WRITTEN_BY"
+    },
+    {
+      "description": "Create TAGGED_WITH relationships",
+      "cypher": "// Create TAGGED_WITH relationships\n                LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                MATCH (start:Article {id: row.id})\n                MATCH (end:Tag {tag_name: row.tag_name})\n                CREATE (start)-[r:TAGGED_WITH]->(end)",
+      "relationship_type": "TAGGED_WITH"
+    }
+  ],
+  "configuration": {
+    "include_columns": [
+      "id",
+      "url",
+      "domain",
+      "site_name",
+      "title",
+      "author",
+      "publish_date",
+      "content",
+      "summary",
+      "tags",
+      "language",
+      "word_count",
+      "meta_description",
+      "is_latest",
+      "run_id"
+    ],
+    "nodes": [
+      {
+        "label": "Article",
+        "node_id_property": "id",
+        "properties": [
+          {
+            "name": "id",
+            "type": "string",
+            "unique": true
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "indexed": true
+          },
+          {
+            "name": "content",
+            "type": "text",
+            "indexed": true
+          },
+          {
+            "name": "summary",
+            "type": "text"
+          },
+          {
+            "name": "publish_date",
+            "type": "datetime"
+          },
+          {
+            "name": "word_count",
+            "type": "integer"
+          },
+          {
+            "name": "is_latest",
+            "type": "boolean"
+          }
+        ]
+      },
+      {
+        "label": "Website",
+        "node_id_property": "domain",
+        "properties": [
+          {
+            "name": "domain",
+            "type": "string",
+            "unique": true,
+            "alias": "site_domain"
+          },
+          {
+            "name": "site_name",
+            "type": "string",
+            "indexed": true,
+            "alias": "name"
+          }
+        ],
+        "multiple_labels": [
+          "Source"
+        ]
+      },
+      {
+        "label": "Author",
+        "node_id_property": "author",
+        "properties": [
+          {
+            "name": "name",
+            "type": "string",
+            "unique": true
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "PUBLISHED_ON",
+        "start_node": "Article",
+        "end_node": "Website",
+        "start_property": "domain",
+        "end_property": "domain",
+        "properties": [
+          {
+            "name": "url",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "type": "WRITTEN_BY",
+        "start_node": "Article",
+        "end_node": "Author",
+        "start_property": "author",
+        "end_property": "name",
+        "properties": [
+          {
+            "name": "publish_date",
+            "type": "datetime"
+          }
+        ]
+      },
+      {
+        "type": "TAGGED_WITH",
+        "start_node": "Article",
+        "end_node": "Tag",
+        "start_property": "id",
+        "end_property": "tag_name",
+        "properties": []
+      }
+    ],
+    "extra_indexes": [
+      {
+        "node_label": "Article",
+        "property": "publish_date",
+        "type": "RANGE"
+      },
+      {
+        "node_label": "Website",
+        "property": "domain",
+        "type": "TEXT"
+      },
+      {
+        "node_label": "Chunk",
+        "property": "embedding",
+        "type": "VECTOR",
+        "vector_dimension": 1536,
+        "vector_similarity": "cosine"
+      }
+    ],
+    "global_aliases": {
+      "Article_text": "Article",
+      "article_title": "title",
+      "publication_date": "publish_date",
+      "source_domain": "domain"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Test if structured_content table exists
+queries:
+  - name: "check_table_exists"
+    description: "Check if structured_content table exists"
+    sql: "SELECT COUNT(*) FROM structured_content;"

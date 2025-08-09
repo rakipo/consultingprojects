@@ -1,0 +1,11 @@
+name: postgres-functionality
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - psycopg2-binary==2.9.7
+    - PyYAML==6.0.1
+    - pytest==7.4.3

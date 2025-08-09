@@ -1,0 +1,73 @@
+{
+  "timestamp": "20250807_123911",
+  "project_path": "../postgresql",
+  "main_program": "db_query_runner.py",
+  "total_issues": 6,
+  "risk_score": 11,
+  "severity_breakdown": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 5,
+    "LOW": 1
+  },
+  "category_breakdown": {
+    "FILE_OPERATIONS": 5,
+    "NETWORK_ACCESS": 1
+  },
+  "issues": [
+    {
+      "severity": "LOW",
+      "category": "NETWORK_ACCESS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 51,
+      "description": "Detected network access: psycopg2.connect",
+      "recommendation": "Validate URLs and use HTTPS. Implement proper error handling",
+      "code_snippet": "self.connection = psycopg2.connect(**self.database_config)"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "FILE_OPERATIONS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 139,
+      "description": "Detected file operations: open(self.output_file, 'w'",
+      "recommendation": "Validate file paths and use proper error handling",
+      "code_snippet": "with open(self.output_file, 'w') as output:"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "FILE_OPERATIONS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 140,
+      "description": "Detected file operations: .write(",
+      "recommendation": "Validate file paths and use proper error handling",
+      "code_snippet": "output.write(f\"Database Query Results - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\\n\")"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "FILE_OPERATIONS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 141,
+      "description": "Detected file operations: .write(",
+      "recommendation": "Validate file paths and use proper error handling",
+      "code_snippet": "output.write(f\"Database: {self.database_config.get('database', 'N/A')}\\n\")"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "FILE_OPERATIONS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 142,
+      "description": "Detected file operations: .write(",
+      "recommendation": "Validate file paths and use proper error handling",
+      "code_snippet": "output.write(f\"Host: {self.database_config.get('host', 'N/A')}\\n\\n\")"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "FILE_OPERATIONS",
+      "file_path": "../postgresql/db_query_runner.py",
+      "line_number": 150,
+      "description": "Detected file operations: .write(",
+      "recommendation": "Validate file paths and use proper error handling",
+      "code_snippet": "output.write(formatted_output)"
+    }
+  ]
+}

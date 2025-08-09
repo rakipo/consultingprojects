@@ -1,0 +1,58 @@
+Database Query Results - 2025-08-07 11:02:08
+Database: SERP_TREND_DEV_DB
+Host: 4.150.184.135
+
+================================================================================
+Query: list_all_tables
+Description: List all tables in the current database
+SQL: SELECT table_name, table_schema FROM information_schema.tables WHERE table_schema NOT IN ('information_schema', 'pg_catalog') ORDER BY table_schema, table_name;
+--------------------------------------------------------------------------------
+Columns: table_name, table_schema
+Row count: 5
+
+Row 1: ('crawl_runs', 'public')
+Row 2: ('failed_urls', 'public')
+Row 3: ('link_queue', 'public')
+Row 4: ('raw_html_store', 'public')
+Row 5: ('structured_content', 'public')
+================================================================================
+Query: list_database_users
+Description: List all database users/roles
+SQL: SELECT rolname as username, rolsuper as is_superuser, rolcreaterole as can_create_roles, rolcreatedb as can_create_db, rolcanlogin as can_login FROM pg_roles ORDER BY rolname;
+--------------------------------------------------------------------------------
+Columns: username, is_superuser, can_create_roles, can_create_db, can_login
+Row count: 21
+
+Row 1: ('ai50_user', False, False, False, True)
+Row 2: ('hanhdb_user', False, False, False, True)
+Row 3: ('masterdev_user', False, False, False, True)
+Row 4: ('pg_checkpoint', False, False, False, False)
+Row 5: ('pg_create_subscription', False, False, False, False)
+Row 6: ('pg_database_owner', False, False, False, False)
+Row 7: ('pg_execute_server_program', False, False, False, False)
+Row 8: ('pg_maintain', False, False, False, False)
+Row 9: ('pg_monitor', False, False, False, False)
+Row 10: ('pg_read_all_data', False, False, False, False)
+... and 11 more rows
+================================================================================
+Query: table_details
+Description: Get detailed information about all user tables including row counts
+SQL: SELECT schemaname, tablename, tableowner, tablespace FROM pg_tables WHERE schemaname NOT IN ('information_schema', 'pg_catalog') ORDER BY schemaname, tablename;
+--------------------------------------------------------------------------------
+Columns: schemaname, tablename, tableowner, tablespace
+Row count: 5
+
+Row 1: ('public', 'crawl_runs', 'postgres', None)
+Row 2: ('public', 'failed_urls', 'postgres', None)
+Row 3: ('public', 'link_queue', 'postgres', None)
+Row 4: ('public', 'raw_html_store', 'postgres', None)
+Row 5: ('public', 'structured_content', 'postgres', None)
+================================================================================
+Query: database_info
+Description: Get current database information
+SQL: SELECT current_database() as database_name, current_user as current_user, version() as postgresql_version;
+--------------------------------------------------------------------------------
+Columns: database_name, current_user, postgresql_version
+Row count: 1
+
+Row 1: ('SERP_TREND_DEV_DB', 'serptrend_user', 'PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit')

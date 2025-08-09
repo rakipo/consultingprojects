@@ -1,0 +1,13 @@
+Database Query Results - 2025-08-07 14:48:02
+Database: movies
+Host: localhost
+
+================================================================================
+Query: list_all_tables
+Description: create table
+SQL: 'CREATE TABLE IF NOT EXISTS public.structured_content ( id bigint NOT NULL DEFAULT nextval("structured_content_id_seq"::regclass), url text COLLATE pg_catalog."default" NOT NULL, raw_html_id bigint, domain text COLLATE pg_catalog."default" NOT NULL, site_name text COLLATE pg_catalog."default", title text COLLATE pg_catalog."default", author text COLLATE pg_catalog."default", publish_date date, content text STORAGE EXTERNAL COLLATE pg_catalog."default" NOT NULL, summary text COLLATE pg_catalog."default", tags jsonb DEFAULT "[]"::jsonb, language character varying(5) COLLATE pg_catalog."default", word_count integer, meta_description text COLLATE pg_catalog."default", extracted_at timestamp with time zone DEFAULT now(), is_latest boolean DEFAULT true, run_id uuid, CONSTRAINT structured_content_pkey PRIMARY KEY (id), CONSTRAINT structured_content_raw_html_id_fkey FOREIGN KEY (raw_html_id) REFERENCES public.raw_html_store (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE, CONSTRAINT structured_content_run_id_fkey FOREIGN KEY (run_id) REFERENCES public.crawl_runs (run_id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE ) '
+--------------------------------------------------------------------------------
+ERROR: syntax error at or near "'CREATE TABLE IF NOT EXISTS public.structured_content ( id bigint NOT NULL DEFAULT nextval("structured_content_id_seq"::regclass), url text COLLATE pg_catalog."default" NOT NULL, raw_html_id bigint, domain text COLLATE pg_catalog."default" NOT NULL, site_name text COLLATE pg_catalog."default", title text COLLATE pg_catalog."default", author text COLLATE pg_catalog."default", publish_date date, content text STORAGE EXTERNAL COLLATE pg_catalog."default" NOT NULL, summary text COLLATE pg_catalog."default", tags jsonb DEFAULT "[]"::jsonb, language character varying(5) COLLATE pg_catalog."default", word_count integer, meta_description text COLLATE pg_catalog."default", extracted_at timestamp with time zone DEFAULT now(), is_latest boolean DEFAULT true, run_id uuid, CONSTRAINT structured_content_pkey PRIMARY KEY (id), CONSTRAINT structured_content_raw_html_id_fkey FOREIGN KEY (raw_html_id) REFERENCES public.raw_html_store (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE, CONSTRAINT structured_content_run_id_fkey FOREIGN KEY (run_id) REFERENCES public.crawl_runs (run_id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE ) '"
+LINE 1: 'CREATE TABLE IF NOT EXISTS public.structured_content ( id b...
+        ^
+

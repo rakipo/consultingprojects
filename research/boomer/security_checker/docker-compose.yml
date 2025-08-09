@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  security-analyzer:
+    build: .
+    container_name: security_analyzer
+    volumes:
+      - ./:/app:ro  # Read-only mount for security
+      - ./security_reports:/app/security_reports:rw  # Write access only for reports
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    networks:
+      - security_net
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+    user: "1000:1000"  # Non-root user
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+
+  # PostgreSQL for testing (isolated)
+  postgres-test:
+    image: postgres:15-alpine
+    container_name: postgres_test
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - security_net
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+
+networks:
+  security_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local

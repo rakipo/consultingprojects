@@ -1,0 +1,17 @@
+# SQL queries configuration
+queries:
+  - name: "list_all_tables"
+    description: "List all tables in the current database"
+    sql: "SELECT table_name, table_schema FROM information_schema.tables WHERE table_schema NOT IN ('information_schema', 'pg_catalog') ORDER BY table_schema, table_name;"
+  
+  - name: "list_database_users"
+    description: "List all database users/roles"
+    sql: "SELECT rolname as username, rolsuper as is_superuser, rolcreaterole as can_create_roles, rolcreatedb as can_create_db, rolcanlogin as can_login FROM pg_roles ORDER BY rolname;"
+  
+  - name: "table_details"
+    description: "Get detailed information about all user tables including row counts"
+    sql: "SELECT schemaname, tablename, tableowner, tablespace FROM pg_tables WHERE schemaname NOT IN ('information_schema', 'pg_catalog') ORDER BY schemaname, tablename;"
+  
+  - name: "database_info"
+    description: "Get current database information"
+    sql: "SELECT current_database() as database_name, current_user as current_user, version() as postgresql_version;"

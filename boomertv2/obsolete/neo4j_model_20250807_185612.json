@@ -1,0 +1,162 @@
+{
+  "model_info": {
+    "generated_by": "Neo4j Model Generator",
+    "generated_at": "2025-08-07T18:56:14.488521",
+    "source_table_columns": [
+      "id",
+      "url",
+      "raw_html_id",
+      "domain",
+      "site_name",
+      "title",
+      "author",
+      "publish_date",
+      "content",
+      "summary",
+      "tags",
+      "language",
+      "word_count",
+      "meta_description",
+      "extracted_at",
+      "is_latest",
+      "run_id"
+    ],
+    "total_records": 2
+  },
+  "nodes": [
+    {
+      "label": "Content",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string",
+          "unique": true
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "raw_html_id",
+          "type": "string",
+          "unique": true
+        },
+        {
+          "name": "domain",
+          "type": "string"
+        },
+        {
+          "name": "site_name",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "author",
+          "type": "string"
+        },
+        {
+          "name": "publish_date",
+          "type": "datetime"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "summary",
+          "type": "string"
+        },
+        {
+          "name": "tags",
+          "type": "string"
+        },
+        {
+          "name": "language",
+          "type": "string"
+        },
+        {
+          "name": "word_count",
+          "type": "string"
+        },
+        {
+          "name": "meta_description",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "extracted_at",
+          "type": "string"
+        },
+        {
+          "name": "is_latest",
+          "type": "string"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "unique": true
+        }
+      ],
+      "description": "Primary node representing records from PostgreSQL table"
+    }
+  ],
+  "relationships": [],
+  "constraints": [
+    {
+      "type": "UNIQUE",
+      "node_label": "Content",
+      "property": "id",
+      "cypher": "CREATE CONSTRAINT content_id_unique IF NOT EXISTS FOR (n:Content) REQUIRE n.id IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Content",
+      "property": "raw_html_id",
+      "cypher": "CREATE CONSTRAINT content_raw_html_id_unique IF NOT EXISTS FOR (n:Content) REQUIRE n.raw_html_id IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Content",
+      "property": "run_id",
+      "cypher": "CREATE CONSTRAINT content_run_id_unique IF NOT EXISTS FOR (n:Content) REQUIRE n.run_id IS UNIQUE"
+    }
+  ],
+  "indexes": [
+    {
+      "type": "TEXT",
+      "node_label": "Content",
+      "property": "site_name",
+      "cypher": "CREATE INDEX content_site_name_text IF NOT EXISTS FOR (n:Content) ON (n.site_name)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Content",
+      "property": "title",
+      "cypher": "CREATE INDEX content_title_text IF NOT EXISTS FOR (n:Content) ON (n.title)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Content",
+      "property": "content",
+      "cypher": "CREATE INDEX content_content_text IF NOT EXISTS FOR (n:Content) ON (n.content)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Content",
+      "property": "meta_description",
+      "cypher": "CREATE INDEX content_meta_description_text IF NOT EXISTS FOR (n:Content) ON (n.meta_description)"
+    }
+  ],
+  "import_queries": [
+    {
+      "description": "Basic import from CSV",
+      "cypher": "// Import data from CSV\n            LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n            CREATE (n:Content {id: row.id, url: row.url, raw_html_id: row.raw_html_id, domain: row.domain, site_name: row.site_name, title: row.title, author: row.author, publish_date: row.publish_date, content: row.content, summary: row.summary, tags: row.tags, language: row.language, word_count: row.word_count, meta_description: row.meta_description, extracted_at: row.extracted_at, is_latest: row.is_latest, run_id: row.run_id})"
+    }
+  ]
+}

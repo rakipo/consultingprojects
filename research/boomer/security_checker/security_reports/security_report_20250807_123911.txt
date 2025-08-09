@@ -1,0 +1,80 @@
+================================================================================
+SECURITY ANALYSIS REPORT
+================================================================================
+
+Project: ../postgresql
+Main Program: db_query_runner.py
+Analysis Time: 20250807_123911
+Total Issues: 6
+Risk Score: 11
+
+Risk Level: MEDIUM - Review and fix when possible
+
+SEVERITY BREAKDOWN:
+----------------------------------------
+CRITICAL  :   0 issues
+HIGH      :   0 issues
+MEDIUM    :   5 issues
+LOW       :   1 issues
+
+CATEGORY BREAKDOWN:
+----------------------------------------
+FILE_OPERATIONS     :   5 issues
+NETWORK_ACCESS      :   1 issues
+
+DETAILED ISSUES:
+================================================================================
+
+LOW SEVERITY ISSUES:
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 51
+Category: NETWORK_ACCESS
+Description: Detected network access: psycopg2.connect
+Recommendation: Validate URLs and use HTTPS. Implement proper error handling
+Code: self.connection = psycopg2.connect(**self.database_config)
+----------------------------------------
+
+MEDIUM SEVERITY ISSUES:
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 139
+Category: FILE_OPERATIONS
+Description: Detected file operations: open(self.output_file, 'w'
+Recommendation: Validate file paths and use proper error handling
+Code: with open(self.output_file, 'w') as output:
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 140
+Category: FILE_OPERATIONS
+Description: Detected file operations: .write(
+Recommendation: Validate file paths and use proper error handling
+Code: output.write(f"Database Query Results - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 141
+Category: FILE_OPERATIONS
+Description: Detected file operations: .write(
+Recommendation: Validate file paths and use proper error handling
+Code: output.write(f"Database: {self.database_config.get('database', 'N/A')}\n")
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 142
+Category: FILE_OPERATIONS
+Description: Detected file operations: .write(
+Recommendation: Validate file paths and use proper error handling
+Code: output.write(f"Host: {self.database_config.get('host', 'N/A')}\n\n")
+----------------------------------------
+
+File: ../postgresql/db_query_runner.py
+Line: 150
+Category: FILE_OPERATIONS
+Description: Detected file operations: .write(
+Recommendation: Validate file paths and use proper error handling
+Code: output.write(formatted_output)
+----------------------------------------

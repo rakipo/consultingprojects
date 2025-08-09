@@ -1,0 +1,25 @@
+Neo4j Data Load Metrics
+==================================================
+
+Load completed at: 2025-08-07T21:42:31.458890
+
+NODES CREATED:
+--------------------
+Total Nodes: 0
+
+RELATIONSHIPS CREATED:
+-------------------------
+Total Relationships: 0
+
+FAILED OPERATIONS:
+--------------------
+
+VECTOR EMBEDDINGS:
+--------------------
+Chunks created: 0
+Embeddings generated: 0
+
+SUMMARY:
+----------
+Total records processed: 0
+Total errors: 0

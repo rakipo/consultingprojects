@@ -1,0 +1,7 @@
+# Database configuration
+database:
+  host: 4.150.184.135
+  port: 5432
+  database: SERP_TREND_DEV_DB
+  user: serptrend_user
+  password: SERPTREND_1349_SCRAPING

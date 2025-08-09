@@ -1,0 +1,7 @@
+# Database configuration
+database:
+  host: localhost
+  port: 5432
+  database: movies
+  user: postgres
+  password: password123
