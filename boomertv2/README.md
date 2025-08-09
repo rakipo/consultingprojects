@@ -2,6 +2,37 @@
 
 A comprehensive Python pipeline for connecting to PostgreSQL servers, executing queries, and generating Neo4j graph models using MCP (Model Context Protocol).
 
+## Project Structure
+
+```
+├── src/                          # Source code
+│   ├── postgres_query_runner.py # PostgreSQL query execution
+│   ├── neo4j_model_generator.py # Neo4j model generation
+│   └── neo4j_data_loader.py     # Neo4j data loading
+├── tests/                        # Unit tests
+│   ├── test_postgres_query_runner.py
+│   ├── test_neo4j_model_generator.py
+│   └── test_neo4j_data_loader.py
+├── config/                       # Configuration files
+│   ├── config_boomer_load.yml    # Data loading configuration
+│   ├── config_boomer_model.yml   # Model generation configuration
+│   ├── environment.yml           # Conda environment
+│   └── docker-compose-neo4j-mcp.yml
+├── scripts/                      # Utility scripts
+│   ├── debug_chunking.py         # Debug text chunking
+│   ├── load_embeddings_to_neo4j.py
+│   └── reset_neo4j_database.sh
+├── output/                       # Generated outputs
+│   ├── data/                     # Data files and models
+│   ├── metrics/                  # Load metrics
+│   └── logs/                     # Log files
+├── sql/                          # SQL and Cypher queries
+│   ├── *.cypher                  # Cypher query files
+│   └── *.cql                     # CQL query files
+└── docs/                         # Documentation
+    └── *.md                      # Markdown documentation
+```
+
 ## Features
 
 ### PostgreSQL Query Runner
@@ -35,12 +66,12 @@ A comprehensive Python pipeline for connecting to PostgreSQL servers, executing 
 ### Using Conda (Recommended)
 ```bash
 # Create main environment
-conda env create -f environment.yml
+conda env create -f config/environment.yml
 conda activate postgres-neo4j-pipeline
 
 # Or create specific functionality environments
-conda env create -f environment_postgres.yml  # PostgreSQL functionality only
-conda env create -f environment_neo4j.yml     # Neo4j functionality only
+conda env create -f config/environment_postgres.yml  # PostgreSQL functionality only
+conda env create -f config/environment_neo4j.yml     # Neo4j functionality only
 ```
 
 ### Using Pip
@@ -54,44 +85,44 @@ pip install -r requirements.txt
 
 #### Command Line
 ```bash
-python postgres_query_runner.py config_boomer.yml trending sample_data.txt
+python src/postgres_query_runner.py config/config_boomer_load.yml trending output/data/sample_data.txt
 ```
 
 #### As a Module
 ```python
-from postgres_query_runner import run_postgres_query
+from src.postgres_query_runner import run_postgres_query
 
-run_postgres_query('config_boomer.yml', 'trending', 'output.csv')
+run_postgres_query('config/config_boomer_load.yml', 'trending', 'output/data/output.csv')
 ```
 
 ### Neo4j Model Generator
 
 #### Command Line
 ```bash
-python neo4j_model_generator.py config_boomer.yml trending neo4j_model_20250807.json
+python src/neo4j_model_generator.py config/config_boomer_model.yml trending output/data/neo4j_model_20250807.json
 ```
 
 #### As a Module
 ```python
-from neo4j_model_generator import Neo4jModelGenerator
+from src.neo4j_model_generator import Neo4jModelGenerator
 
 generator = Neo4jModelGenerator()
-generator.generate_neo4j_model_from_query('config_boomer.yml', 'trending', 'model.json')
+generator.generate_neo4j_model_from_query('config/config_boomer_model.yml', 'trending', 'output/data/model.json')
 ```
 
 ### Neo4j Data Loader
 
 #### Command Line
 ```bash
-python neo4j_data_loader.py config_boomer_load.yml neo4j_model_20250807.json neo4j_load_metrics_20250807.txt
+python src/neo4j_data_loader.py config/config_boomer_load.yml output/data/neo4j_model_20250807.json output/metrics/neo4j_load_metrics_20250807.txt
 ```
 
 #### As a Module
 ```python
-from neo4j_data_loader import Neo4jDataLoader
+from src.neo4j_data_loader import Neo4jDataLoader
 
 loader = Neo4jDataLoader()
-loader.load_data_to_neo4j('config_boomer_load.yml', 'model.json', 'metrics.txt')
+loader.load_data_to_neo4j('config/config_boomer_load.yml', 'output/data/model.json', 'output/metrics/metrics.txt')
 ```
 
 ## Configuration Format
@@ -120,16 +151,16 @@ queries:
 
 ```bash
 # Test PostgreSQL functionality
-python -m unittest test_postgres_query_runner.py -v
+python -m unittest tests.test_postgres_query_runner -v
 
 # Test Neo4j functionality
-python -m unittest test_neo4j_model_generator.py -v
+python -m unittest tests.test_neo4j_model_generator -v
 
 # Test Neo4j loader functionality
-python -m unittest test_neo4j_data_loader.py -v
+python -m unittest tests.test_neo4j_data_loader -v
 
 # Run all tests
-python -m unittest discover -v
+python -m unittest discover tests -v
 ```
 
 ## Error Codes
@@ -236,35 +267,35 @@ Neo4jModelGenerator (Inherits from PostgresQueryRunner)
 ### Environment Setup
 ```bash
 # Create and activate main environment
-conda env create -f environment.yml
+conda env create -f config/environment.yml
 conda activate postgres-neo4j-pipeline
 
 # Create PostgreSQL-only environment
-conda env create -f environment_postgres.yml
+conda env create -f config/environment_postgres.yml
 conda activate postgres-functionality
 
 # Create Neo4j-only environment
-conda env create -f environment_neo4j.yml
+conda env create -f config/environment_neo4j.yml
 conda activate neo4j-modeling-functionality
 
 # Create Neo4j Loader-only environment
-conda env create -f environment_neo4j_loader.yml
+conda env create -f config/environment_neo4j_loader.yml
 conda activate neo4j-loader-functionality
 ```
 
 ### Running Applications
 ```bash
 # PostgreSQL Query Runner
-python postgres_query_runner.py config_boomer.yml trending sample_data.txt
-python postgres_query_runner.py config_boomer.yml users user_data.csv
+python src/postgres_query_runner.py config/config_boomer_load.yml trending output/data/sample_data.txt
+python src/postgres_query_runner.py config/config_boomer_load.yml users output/data/user_data.csv
 
 # Neo4j Model Generator
-python neo4j_model_generator.py config_boomer.yml trending neo4j_model_$(date +%Y%m%d_%H%M%S).json
-python neo4j_model_generator.py config_boomer.yml users neo4j_user_model.json
+python src/neo4j_model_generator.py config/config_boomer_model.yml trending output/data/neo4j_model_$(date +%Y%m%d_%H%M%S).json
+python src/neo4j_model_generator.py config/config_boomer_model.yml users output/data/neo4j_user_model.json
 
 # Neo4j Data Loader
-python neo4j_data_loader.py config_boomer_load.yml neo4j_model_20250807.json neo4j_load_metrics_$(date +%Y%m%d_%H%M%S).txt
-python neo4j_data_loader.py config_boomer_load.yml neo4j_user_model.json neo4j_user_metrics.txt
+python src/neo4j_data_loader.py config/config_boomer_load.yml output/data/neo4j_model_20250807.json output/metrics/neo4j_load_metrics_$(date +%Y%m%d_%H%M%S).txt
+python src/neo4j_data_loader.py config/config_boomer_load.yml output/data/neo4j_user_model.json output/metrics/neo4j_user_metrics.txt
 ```
 
 ### Testing
@@ -273,9 +304,9 @@ python neo4j_data_loader.py config_boomer_load.yml neo4j_user_model.json neo4j_u
 python -m unittest discover -v
 
 # Run specific test files
-python -m unittest test_postgres_query_runner.py -v
-python -m unittest test_neo4j_model_generator.py -v
-python -m unittest test_neo4j_data_loader.py -v
+python -m unittest tests.test_postgres_query_runner -v
+python -m unittest tests.test_neo4j_model_generator -v
+python -m unittest tests.test_neo4j_data_loader -v
 
 # Run tests with coverage
 pip install pytest-cov
@@ -285,22 +316,22 @@ pytest --cov=. --cov-report=html
 ### Docker Operations
 ```bash
 # Start Neo4j and MCP services
-docker-compose -f docker-compose-neo4j-mcp.yml up -d
+docker-compose -f config/docker-compose-neo4j-mcp.yml up -d
 
 # Stop services
-docker-compose -f docker-compose-neo4j-mcp.yml down
+docker-compose -f config/docker-compose-neo4j-mcp.yml down
 
 # View logs
-docker-compose -f docker-compose-neo4j-mcp.yml logs
+docker-compose -f config/docker-compose-neo4j-mcp.yml logs
 ```
 
 ### Development
 ```bash
 # Format code
-black *.py
+black src/ tests/ scripts/
 
 # Lint code
-flake8 *.py
+flake8 src/ tests/ scripts/
 
 # Install development dependencies
 pip install -r requirements.txt
