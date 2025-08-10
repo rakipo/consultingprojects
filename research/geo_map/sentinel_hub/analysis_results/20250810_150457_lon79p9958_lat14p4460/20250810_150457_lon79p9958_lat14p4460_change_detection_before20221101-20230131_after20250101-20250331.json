@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-10T15:04:57.893477",
+    "analysis_type": "change_detection",
+    "coordinates": [
+      [
+        79.9957724429183,
+        14.446024455437907
+      ],
+      [
+        79.99587101412848,
+        14.44600887103552
+      ],
+      [
+        79.99586363806654,
+        14.44594718263318
+      ],
+      [
+        79.9957664079881,
+        14.445960169624453
+      ]
+    ],
+    "bbox": {
+      "min_lon": 79.9957664079881,
+      "min_lat": 14.44594718263318,
+      "max_lon": 79.99587101412848,
+      "max_lat": 14.446024455437907
+    },
+    "resolution": 10,
+    "max_cloud_coverage": 20.0,
+    "date_ranges": [
+      [
+        "2022-11-01",
+        "2023-01-31"
+      ],
+      [
+        "2025-01-01",
+        "2025-03-31"
+      ]
+    ]
+  },
+  "analysis_result": {
+    "before_period": [
+      "2022-11-01",
+      "2023-01-31"
+    ],
+    "after_period": [
+      "2025-01-01",
+      "2025-03-31"
+    ],
+    "vegetation_change": {
+      "before_ndvi": 0.537,
+      "after_ndvi": 0.504,
+      "ndvi_difference": -0.03300000000000003,
+      "interpretation": "No significant vegetation change"
+    },
+    "buildup_change": {
+      "before_ndbi": 0.157,
+      "after_ndbi": 0.124,
+      "ndbi_difference": -0.033,
+      "interpretation": "Possible demolition or clearing"
+    },
+    "water_change": {
+      "before_ndwi": 0.097,
+      "after_ndwi": 0.094,
+      "ndwi_difference": -0.0030000000000000027,
+      "interpretation": "No significant water change"
+    },
+    "significant_change": false,
+    "change_summary": "Built-up: Possible demolition or clearing"
+  }
+}

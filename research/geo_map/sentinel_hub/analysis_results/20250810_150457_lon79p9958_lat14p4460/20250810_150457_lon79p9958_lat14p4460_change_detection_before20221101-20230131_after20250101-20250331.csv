@@ -1,0 +1,24 @@
+ANALYSIS METADATA,
+Timestamp,2025-08-10T15:04:57.893676
+Analysis Type,change_detection
+"Coordinates (Longitude, Latitude)","[[79.9957724429183, 14.446024455437907], [79.99587101412848, 14.44600887103552], [79.99586363806654, 14.44594718263318], [79.9957664079881, 14.445960169624453]]"
+Bounding Box Min Lon,79.995766
+Bounding Box Min Lat,14.445947
+Bounding Box Max Lon,79.995871
+Bounding Box Max Lat,14.446024
+Resolution (meters),10
+Max Cloud Coverage (%),20.0
+Before Period Start,2022-11-01
+Before Period End,2023-01-31
+After Period Start,2025-01-01
+After Period End,2025-03-31
+,
+ANALYSIS RESULTS,
+Change Type,Before Value,After Value,Difference,Interpretation,Significance
+Vegetation (NDVI),0.5370,0.5040,-0.0330,No significant vegetation change,Not Significant
+Built-up Area (NDBI),0.1570,0.1240,-0.0330,Possible demolition or clearing,Not Significant
+Water/Moisture (NDWI),0.0970,0.0940,-0.0030,No significant water change,Not Significant
+,
+OVERALL SUMMARY,
+Significant Change Detected,No
+Change Summary,Built-up: Possible demolition or clearing

@@ -1,0 +1,50 @@
+SMALL AREA PROPERTY ANALYSIS,
+Timestamp,2025-08-10T14:57:15.454244
+Property Area (sq ft),833.4
+Property Area (sq m),77.4
+Analysis Method,small_area_specialized
+Analysis Period,"('2024-01-01', '2024-01-31')"
+,
+LIMITATIONS,
+,Property smaller than 1 Sentinel-2 pixel (100 sq m)
+,Limited statistical significance due to small sample size
+,Weather and cloud coverage can significantly impact results
+,Temporal analysis may be limited by data availability
+,
+OPTICAL ANALYSIS,
+Property Pixel Values,
+NDVI,48.0000
+NDBI,17.0000
+NDWI,0.0000
+NDRE,0.0000
+Brightness,145.0000
+Moisture,17.0000
+,
+Surrounding Area Values,
+NDVI,37.1250
+NDBI,17.0000
+NDWI,0.0000
+,
+Property Characteristics,
+,Excellent vegetation health
+,High built-up area
+,Low water presence
+Comparison with Surroundings,
+,Better vegetation than surroundings
+Recommendations,
+,High development - monitor for changes
+,
+ALTERNATIVE DATA SOURCES,
+"For better small area analysis, consider:",
+,Planet Labs (3-5m resolution)
+,  Coverage: Daily
+,"  Best for: Small area monitoring, construction tracking"
+,
+,Maxar (0.3-1.5m resolution)
+,  Coverage: On-demand
+,"  Best for: Very detailed analysis, infrastructure monitoring"
+,
+,Airbus Pleiades (0.5-2m resolution)
+,  Coverage: On-demand
+,  Best for: High-resolution property analysis
+,

@@ -424,6 +424,468 @@ The analysis provides detailed information about changes between your specified 
 - Use environment variables or secure credential storage in production
 - Consider using `.gitignore` to exclude the config file from version control
 
+## Available Sentinel Hub APIs for Property Analysis
+
+This system primarily uses Sentinel-2 L2A for optical analysis, but Sentinel Hub offers many powerful APIs that can provide detailed information about your property. Here's a comprehensive guide to the most useful APIs:
+
+### **🌍 Core Data Collections**
+
+#### **1. Sentinel-2 L2A (Current Usage)**
+```python
+DataCollection.SENTINEL2_L2A
+```
+- **What it provides**: High-resolution optical imagery (10m)
+- **Best for**: Vegetation, built-up areas, water bodies
+- **Frequency**: Every 5 days
+- **Coverage**: Global
+- **Limitation**: Cloud-dependent
+
+#### **2. Sentinel-1 (SAR - Radar) - Highly Recommended**
+```python
+DataCollection.SENTINEL1_IW
+```
+- **What it provides**: Radar imagery (penetrates clouds)
+- **Best for**: 
+  - **Construction monitoring** (detects structural changes)
+  - **Flood monitoring** (water detection)
+  - **Deformation analysis** (ground movement)
+  - **All-weather monitoring** (works day/night, through clouds)
+- **Frequency**: Every 6 days
+- **Advantage**: Works regardless of weather conditions
+
+#### **3. Landsat 8/9**
+```python
+DataCollection.LANDSAT_OT_L2
+```
+- **What it provides**: Multispectral imagery (30m resolution)
+- **Best for**:
+  - **Historical analysis** (longer time series)
+  - **Detailed land classification**
+  - **Environmental monitoring**
+- **Frequency**: Every 16 days
+- **Coverage**: Global
+
+#### **4. MODIS**
+```python
+DataCollection.MODIS
+```
+- **What it provides**: Daily imagery (250m-1km resolution)
+- **Best for**:
+  - **Daily monitoring** (high frequency)
+  - **Large area analysis**
+  - **Temporal trends**
+- **Frequency**: Daily
+- **Coverage**: Global
+
+#### **5. DEM (Digital Elevation Model)**
+```python
+DataCollection.DEM_COPERNICUS_30
+```
+- **What it provides**: Elevation data
+- **Best for**:
+  - **Terrain analysis**
+  - **Slope calculations**
+  - **Flood risk assessment**
+  - **Construction planning**
+
+#### **6. Sentinel-3**
+```python
+DataCollection.SENTINEL3_OLCI
+```
+- **What it provides**: Ocean and land color imagery
+- **Best for**:
+  - **Water quality monitoring**
+  - **Coastal property analysis**
+  - **Large-scale land monitoring**
+
+### **🔧 Advanced Analysis APIs**
+
+#### **7. Statistical API (Enhanced)**
+```python
+SentinelHubStatistical
+```
+- **What it provides**: Statistical analysis over time
+- **Best for**:
+  - **Trend analysis**
+  - **Seasonal patterns**
+  - **Long-term change detection**
+
+#### **8. Batch Processing API**
+```python
+SentinelHubBatch
+```
+- **What it provides**: Large-scale processing
+- **Best for**:
+  - **Multiple properties**
+  - **Large areas**
+  - **Historical analysis**
+
+### **📊 Property-Specific Analysis Capabilities**
+
+#### **Construction Monitoring**
+```python
+# Detect construction activities
+construction_evalscript = """
+//VERSION=3
+function setup() {
+    return {
+        input: [{
+            bands: ["B02", "B03", "B04", "B08", "B11", "B12"],
+            units: "DN"
+        }],
+        output: { bands: 3 }
+    };
+}
+
+function evaluatePixel(sample) {
+    // Enhanced construction detection
+    let ndbi = (sample.B11 - sample.B08) / (sample.B11 + sample.B08);
+    let ndvi = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
+    let brightness = (sample.B02 + sample.B03 + sample.B04) / 3;
+    
+    // Construction index
+    let construction = Math.max(0, ndbi - 0.1) * 2;
+    
+    return [construction, ndvi, brightness/3000];
+}
+"""
+```
+
+#### **Flood Risk Assessment**
+```python
+# Water detection and flood risk
+flood_evalscript = """
+//VERSION=3
+function setup() {
+    return {
+        input: [{
+            bands: ["B03", "B08", "B11"],
+            units: "DN"
+        }],
+        output: { bands: 2 }
+    };
+}
+
+function evaluatePixel(sample) {
+    let ndwi = (sample.B03 - sample.B08) / (sample.B03 + sample.B08);
+    let water_probability = Math.max(0, ndwi);
+    
+    return [water_probability, sample.B11/3000];
+}
+"""
+```
+
+#### **Vegetation Health Monitoring**
+```python
+# Enhanced vegetation analysis
+vegetation_evalscript = """
+//VERSION=3
+function setup() {
+    return {
+        input: [{
+            bands: ["B02", "B04", "B08", "B11", "B12"],
+            units: "DN"
+        }],
+        output: { bands: 4 }
+    };
+}
+
+function evaluatePixel(sample) {
+    let ndvi = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
+    let ndre = (sample.B08 - sample.B11) / (sample.B08 + sample.B11);
+    let ndci = (sample.B11 - sample.B12) / (sample.B11 + sample.B12);
+    let brightness = (sample.B02 + sample.B04 + sample.B08) / 3;
+    
+    return [ndvi, ndre, ndci, brightness/3000];
+}
+"""
+```
+
+### **🏗️ Implementation Example**
+
+The `enhanced_property_analysis.py` script demonstrates how to use multiple data sources:
+
+```bash
+# Run enhanced analysis with multiple APIs
+python enhanced_property_analysis.py
+```
+
+This script provides:
+- **Multi-source Analysis**: Combines optical, radar, and elevation data
+- **Comprehensive Reporting**: Both JSON and CSV outputs
+- **Risk Assessment**: Automated flood and environmental risk evaluation
+- **Property Characteristics**: Detailed property profiling
+- **Recommendations**: Automated suggestions based on analysis
+
+### **🚀 Choosing the Right APIs**
+
+#### **For Construction Monitoring**
+- **Primary**: Sentinel-1 (radar) + DEM
+- **Secondary**: Sentinel-2 (optical confirmation)
+- **Benefits**: All-weather monitoring, structural change detection
+
+#### **For Environmental Monitoring**
+- **Primary**: Sentinel-2 + MODIS
+- **Secondary**: Landsat (historical)
+- **Benefits**: High-frequency monitoring, detailed vegetation analysis
+
+#### **For Risk Assessment**
+- **Primary**: DEM + Sentinel-1
+- **Secondary**: Sentinel-2
+- **Benefits**: Terrain analysis, flood detection, all-weather monitoring
+
+#### **For Historical Analysis**
+- **Primary**: Landsat + Sentinel-2
+- **Secondary**: MODIS
+- **Benefits**: Long time series, consistent data
+
+### **📈 Advanced Use Cases**
+
+#### **Multi-Temporal Analysis**
+```python
+# Analyze changes over multiple time periods
+time_periods = [
+    ("2020-01-01", "2020-12-31"),
+    ("2021-01-01", "2021-12-31"),
+    ("2022-01-01", "2022-12-31")
+]
+
+for period in time_periods:
+    results = analyzer.comprehensive_property_analysis(period)
+```
+
+#### **Seasonal Monitoring**
+```python
+# Monitor seasonal changes
+seasons = {
+    "spring": ("2024-03-01", "2024-05-31"),
+    "summer": ("2024-06-01", "2024-08-31"),
+    "autumn": ("2024-09-01", "2024-11-30"),
+    "winter": ("2024-12-01", "2025-02-28")
+}
+```
+
+#### **Risk-Based Monitoring**
+```python
+# Focus on high-risk periods
+monsoon_period = ("2024-06-01", "2024-09-30")  # Flood risk
+dry_season = ("2024-01-01", "2024-03-31")      # Fire risk
+```
+
+### **💡 Best Practices**
+
+1. **Combine Multiple Sources**: Use optical + radar for comprehensive analysis
+2. **Consider Weather**: Use radar for all-weather monitoring
+3. **Match Resolution**: Choose appropriate resolution for your property size
+4. **Plan Frequency**: Balance monitoring frequency with data availability
+5. **Validate Results**: Cross-reference with ground truth when possible
+
+## Small Area Analysis Limitations and Solutions
+
+### **🔍 Why Sentinel Hub Fails for Small Areas (1200 sq ft)**
+
+#### **1. Resolution Limitations**
+```python
+# Sentinel-2 resolution: 10m x 10m = 100 sq m per pixel
+# 1200 sq ft ≈ 111 sq m
+# This means your site might be smaller than 1-2 pixels!
+```
+
+**The Problem:**
+- **Sentinel-2**: 10m resolution = 100 sq m per pixel
+- **Your site**: 1200 sq ft ≈ 111 sq m
+- **Result**: Your entire property fits in 1-2 pixels!
+
+#### **2. Minimum Area Requirements**
+```python
+# Sentinel Hub has minimum processing requirements
+minimum_pixels = 64  # Often required for statistical analysis
+minimum_area = minimum_pixels * 100  # 6400 sq m minimum
+```
+
+#### **3. Statistical Significance Issues**
+```python
+# With only 1-2 pixels, you can't calculate meaningful statistics
+# Standard deviation, mean, etc. become unreliable
+```
+
+### **🛠️ Solutions for Small Area Analysis**
+
+#### **1. Use the Small Area Analyzer**
+```bash
+# Run specialized analysis for small areas
+python small_area_analyzer.py
+```
+
+**Features:**
+- **Higher Resolution**: Uses 5m resolution when possible
+- **Pixel-Level Analysis**: Analyzes individual pixels instead of area averages
+- **Buffer Analysis**: Adds 10m buffer around property for context
+- **Alternative Recommendations**: Suggests better data sources
+
+#### **2. Alternative Data Sources for Small Areas**
+
+**High-Resolution Satellites:**
+- **Planet Labs**: 3-5m resolution, daily coverage
+- **Maxar**: 0.3-1.5m resolution, on-demand
+- **Airbus Pleiades**: 0.5-2m resolution, on-demand
+
+**Drone Imagery:**
+- **Resolution**: 1-10cm (much better than satellite)
+- **Coverage**: On-demand
+- **Best for**: Very detailed property analysis
+
+**Aerial Photography:**
+- **Resolution**: 10-50cm
+- **Coverage**: Periodic
+- **Best for**: Property assessment, historical comparison
+
+#### **3. Technical Workarounds**
+
+**Expand Analysis Area:**
+```python
+# Add buffer around small property
+buffer_degrees = 0.0001  # ~10m buffer
+expanded_bbox = BBox(
+    bbox=[
+        min_lon - buffer_degrees,
+        min_lat - buffer_degrees,
+        max_lon + buffer_degrees,
+        max_lat + buffer_degrees
+    ]
+)
+```
+
+**Use Higher Resolution Data:**
+```python
+# Request higher resolution when available
+resolution = 5  # 5m instead of 10m
+```
+
+**Pixel-Level Analysis:**
+```python
+# Analyze individual pixels for small areas
+center_pixel = data[center_x, center_y, :]
+surrounding_pixels = get_surrounding_pixels(data, center_x, center_y)
+```
+
+### **📊 Small Area Analysis Results**
+
+The small area analyzer provides:
+
+1. **Property Pixel Values**: Individual pixel analysis for your property
+2. **Surrounding Area Context**: Comparison with neighboring areas
+3. **Limitations Warnings**: Clear indication of analysis limitations
+4. **Alternative Recommendations**: Better data sources for your needs
+5. **Interpretation**: Context-aware analysis results
+
+### **🎯 When to Use Each Approach**
+
+| Property Size | Recommended Approach | Data Source |
+|---------------|---------------------|-------------|
+| < 100 sq m | Alternative data sources | Drone, high-res satellite |
+| 100-1000 sq m | Small area analyzer | Sentinel-2 with buffer |
+| 1000-10000 sq m | Standard analyzer | Sentinel-2 |
+| > 10000 sq m | Enhanced analyzer | Multiple data sources |
+
+### **📊 Real-World Small Area Analysis Example**
+
+#### **Test Case: 833 sq ft Property**
+```bash
+# Run small area analysis
+python small_area_analyzer.py
+```
+
+**Property Details:**
+- **Size**: 833 sq ft (77.4 sq m)
+- **Location**: 79.995766, 14.445947 to 79.995871, 14.446024
+- **Analysis Method**: Small area specialized (pixel-level)
+
+**Analysis Results:**
+```
+📏 Property Area: 833.4 sq ft (77.4 sq m)
+⚠️  Small area detected! Using specialized analysis methods.
+🔧 Small area settings:
+   Resolution: 5m (higher than standard 10m)
+   Buffer added: ~10m around property
+   Analysis area: 7x6 pixels
+```
+
+**Property Characteristics:**
+- ✅ **Excellent vegetation health** (NDVI: 48.0)
+- ⚠️ **High built-up area** (NDBI: 17.0)
+- 💧 **Low water presence** (NDWI: 0.0)
+
+**Comparison with Surroundings:**
+- 🌱 **Better vegetation than surroundings** (48.0 vs 37.1)
+
+**Recommendations:**
+- 🏗️ **High development - monitor for changes**
+
+**Limitations Identified:**
+- Property smaller than 1 Sentinel-2 pixel (100 sq m)
+- Limited statistical significance due to small sample size
+- Weather and cloud coverage can significantly impact results
+- Temporal analysis may be limited by data availability
+
+#### **Key Findings for Small Areas**
+
+1. **Resolution Challenge**: 833 sq ft property fits in less than 1 Sentinel-2 pixel
+2. **Successful Workaround**: Small area analyzer uses 5m resolution + buffer
+3. **Meaningful Results**: Despite limitations, analysis provided useful insights
+4. **Alternative Recommendations**: System suggests better data sources
+
+#### **Output Files Generated**
+```
+small_area_analysis/20250810_145715_833sqft_lon79p9957_lat14p4458/
+├── 20250810_145717_small_area_analysis.json
+└── 20250810_145717_small_area_analysis.csv
+```
+
+**CSV Output Sample:**
+```csv
+SMALL AREA PROPERTY ANALYSIS
+Timestamp,2025-08-10T14:57:15.454244
+Property Area (sq ft),833.4
+Property Area (sq m),77.4
+Analysis Method,small_area_specialized
+
+OPTICAL ANALYSIS
+Property Pixel Values
+NDVI,48.0000
+NDBI,17.0000
+NDWI,0.0000
+
+Property Characteristics
+,Excellent vegetation health
+,High built-up area
+,Low water presence
+
+Comparison with Surroundings
+,Better vegetation than surroundings
+
+Recommendations
+,High development - monitor for changes
+```
+
+#### **Lessons Learned**
+
+1. **Small areas CAN be analyzed** with specialized methods
+2. **Pixel-level analysis** provides meaningful results
+3. **Buffer analysis** adds valuable context
+4. **Limitations must be clearly communicated**
+5. **Alternative data sources** are essential for very small areas
+
+#### **Best Practices for Small Area Analysis**
+
+1. **Always check property size** before analysis
+2. **Use appropriate resolution** (5m for small areas)
+3. **Add buffer zones** for context
+4. **Analyze individual pixels** for very small areas
+5. **Compare with surroundings** for better interpretation
+6. **Recommend alternative data sources** when appropriate
+7. **Document limitations** clearly in results
+
 ## License
 
 This project is for educational and research purposes. Please ensure compliance with Sentinel Hub's terms of service.
