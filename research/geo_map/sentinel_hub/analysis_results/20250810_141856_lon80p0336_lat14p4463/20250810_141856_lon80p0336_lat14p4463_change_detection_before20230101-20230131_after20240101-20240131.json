@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-10T14:18:56.602286",
+    "analysis_type": "change_detection",
+    "coordinates": [
+      [
+        80.033289,
+        14.446383
+      ],
+      [
+        80.033892,
+        14.446587
+      ],
+      [
+        80.033909,
+        14.446203
+      ],
+      [
+        80.033298,
+        14.446032
+      ]
+    ],
+    "bbox": {
+      "min_lon": 80.033289,
+      "min_lat": 14.446032,
+      "max_lon": 80.033909,
+      "max_lat": 14.446587
+    },
+    "resolution": 10,
+    "max_cloud_coverage": 20.0,
+    "date_ranges": [
+      [
+        "2023-01-01",
+        "2023-01-31"
+      ],
+      [
+        "2024-01-01",
+        "2024-01-31"
+      ]
+    ]
+  },
+  "analysis_result": {
+    "before_period": [
+      "2023-01-01",
+      "2023-01-31"
+    ],
+    "after_period": [
+      "2024-01-01",
+      "2024-01-31"
+    ],
+    "vegetation_change": {
+      "before_ndvi": 0.507,
+      "after_ndvi": 0.532,
+      "ndvi_difference": 0.025000000000000022,
+      "interpretation": "No significant vegetation change"
+    },
+    "buildup_change": {
+      "before_ndbi": 0.127,
+      "after_ndbi": 0.152,
+      "ndbi_difference": 0.024999999999999994,
+      "interpretation": "No significant built-up change"
+    },
+    "water_change": {
+      "before_ndwi": 0.08700000000000001,
+      "after_ndwi": 0.092,
+      "ndwi_difference": 0.0049999999999999906,
+      "interpretation": "No significant water change"
+    },
+    "significant_change": false,
+    "change_summary": "No significant changes detected"
+  }
+}

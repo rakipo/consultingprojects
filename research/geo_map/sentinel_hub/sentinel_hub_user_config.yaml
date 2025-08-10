@@ -1,0 +1,66 @@
+# Sentinel Hub User Configuration File
+# This file contains user-specific settings like coordinates and personal preferences
+# Users should modify this file with their own monitoring areas and preferences
+
+# Land Area Coordinates (WGS84)
+# Format: [longitude, latitude] pairs defining the monitoring area
+# Replace these coordinates with your own land area coordinates
+coordinates:
+  - [79.9957724429183, 14.446024455437907]  # West-North
+  - [79.99587101412848, 14.44600887103552]  # East-North  
+  - [79.99586363806654, 14.44594718263318]  # East-South
+  - [79.9957664079881, 14.445960169624453]  # West-South
+
+# User-specific monitoring preferences
+monitoring_preferences:
+  # Custom change detection thresholds for your specific use case
+  custom_thresholds:
+    ndvi:
+      major_increase: 0.15
+      moderate_increase: 0.05
+      major_decrease: -0.15
+      moderate_decrease: -0.05
+    ndbi:
+      significant_construction: 0.1
+      minor_increase: 0.03
+      demolition: -0.03
+    ndwi:
+      water_appearance: 0.1
+      water_reduction: -0.1
+  
+  # Custom monitoring intervals (in days)
+  custom_intervals:
+    default_interval_days: 30
+    period_length_days: 15
+  
+  # Custom date ranges for your analysis
+  custom_date_ranges:
+    before_period:
+      start: "2022-11-01"
+      end: "2023-01-31"
+    after_period:
+      start: "2025-01-01"
+      end: "2025-03-31"
+    continuous_monitoring:
+      start: "2023-01-01"
+      end: "2025-07-31"
+
+# User-specific email settings
+user_email:
+  sender_email: "your_email@gmail.com"
+  sender_password: "your_app_password"  # Use App Password for Gmail
+  recipient_email: "recipient@gmail.com"
+  enable_alerts: true
+
+# User-specific output preferences
+user_output:
+  save_comparison_images: true
+  comparison_image_path: "my_land_comparison.png"
+  dpi: 300
+
+# Additional user notes and metadata
+user_metadata:
+  location_name: "My Land Parcel"
+  description: "Agricultural land monitoring"
+  contact_info: "user@example.com"
+  notes: "Monitoring for crop development and land use changes"

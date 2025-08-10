@@ -1,19 +1,15 @@
 # Sentinel Hub Configuration File
-# This file contains all configuration parameters for the land monitoring system
+# This file contains system-level configuration parameters for the land monitoring system
+# User-specific settings are in sentinel_hub_user_config.csv
 
-# Sentinel Hub Authentication
+# Sentinel Hub Authentication (OAuth - no instance ID needed)
 sentinel_hub:
-  instance_id: "your-instance-id"  # From Sentinel Hub Dashboard
-  client_id: "your-client-id"      # OAuth credentials
-  client_secret: "your-client-secret"
+  client_id: "1ecf7748-4066-4ba1-a3df-3ea2517cf7f6"      # OAuth credentials
+  client_secret: "lCK9t1qjeD1mKjcmW9sZ1wqMCFwD1RsQ"
 
-# Land Area Coordinates (WGS84)
-# Format: [longitude, latitude] pairs defining the monitoring area
-coordinates:
-  - [80.033289, 14.446383]  # West-North
-  - [80.033892, 14.446587]  # East-North  
-  - [80.033909, 14.446203]  # East-South
-  - [80.033298, 14.446032]  # West-South
+# User Configuration File Path
+# Path to the YAML file containing user-specific settings like coordinates
+user_config_path: "sentinel_hub_user_config.yaml"
 
 # Image Processing Settings
 image_processing:
@@ -53,20 +49,21 @@ email:
 # Default Date Ranges for Examples
 default_dates:
   before_period:
-    start: "2023-01-01"
+    start: "2022-11-01"
     end: "2023-01-31"
   after_period:
-    start: "2024-01-01"
-    end: "2024-01-31"
+    start: "2025-01-01"
+    end: "2025-03-31"
   continuous_monitoring:
     start: "2023-01-01"
-    end: "2024-12-31"
+    end: "2025-07-31"
 
 # Output Settings
 output:
   save_comparison_images: true
   comparison_image_path: "land_comparison.png"
   dpi: 300
+  base_directory: "analysis_results"  # Base directory for all analysis outputs
 
 # Evaluation Scripts (JavaScript for Sentinel Hub)
 evalscripts:
