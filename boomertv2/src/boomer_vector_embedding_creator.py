@@ -7,16 +7,14 @@ for a given input string using SentenceTransformer('all-MiniLM-L6-v2').
 This server communicates over stdio per the Model Context Protocol (MCP).
 """
 
-import asyncio
 import logging
 from typing import Dict, Any, List
 
 from sentence_transformers import SentenceTransformer
 
 try:
-    # MCP Python SDK
-    from mcp.server import Server
-    from mcp.server.stdio import stdio_server
+    # MCP Python SDK (FastMCP)
+    from mcp.server.fastmcp import FastMCP
 except Exception as e:  # pragma: no cover
     raise RuntimeError(
         "mcp package is required. Install with `pip install mcp`."
@@ -43,10 +41,10 @@ def _get_embedding_model() -> SentenceTransformer:
     return _embedding_model
 
 
-server = Server(SERVER_NAME)
+mcp = FastMCP(SERVER_NAME)
 
 
-@server.tool()
+@mcp.tool()
 async def create_embedding(text: str) -> Dict[str, Any]:
     """Create a vector embedding for the provided text.
 
@@ -79,11 +77,6 @@ async def create_embedding(text: str) -> Dict[str, Any]:
     }
 
 
-async def _main() -> None:
-    logger.info("Starting MCP stdio server: %s", SERVER_NAME)
-    async with stdio_server() as (read_stream, write_stream):
-        await server.serve(read_stream, write_stream)
-
-
 if __name__ == "__main__":
-    asyncio.run(_main()) 
+    logger.info("Starting MCP stdio server: %s", SERVER_NAME)
+    mcp.run(transport="stdio") 

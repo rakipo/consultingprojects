@@ -84,6 +84,11 @@ class Neo4jDataLoader(PostgresQueryRunner):
             "total_records_processed": 0,
             "errors": []
         }
+        # Track cypher templates executed and how many times
+        # Key: (category, name, cypher_text) -> count
+        self.cypher_usage: Dict[Tuple[str, str, str], int] = {}
+        # Store Postgres records without the 'content' field for metrics
+        self.postgres_records_wo_content: List[Dict[str, Any]] = []
         logger.info("Neo4j Data Loader initialized")
     
     def load_neo4j_model(self, model_path: str) -> Dict[str, Any]:
@@ -323,6 +328,11 @@ class Neo4jDataLoader(PostgresQueryRunner):
         
         return chunks
     
+    def _record_cypher(self, category: str, name: str, cypher: str) -> None:
+        """Record a cypher template and increment execution count for metrics."""
+        key = (category, name, cypher.strip())
+        self.cypher_usage[key] = self.cypher_usage.get(key, 0) + 1
+
     def generate_embeddings(self, texts: List[str]) -> List[List[float]]:
         """
         Generate embeddings for text chunks.
@@ -458,7 +468,7 @@ class Neo4jDataLoader(PostgresQueryRunner):
             error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error executing Cypher query: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
-    
+ 
     def process_vector_embeddings(self, data_records: List[Dict[str, Any]], model: Dict[str, Any], config: Dict[str, Any] = None) -> List[Dict[str, Any]]:
         """
         Process vector embeddings for data records.
@@ -536,7 +546,58 @@ class Neo4jDataLoader(PostgresQueryRunner):
             error_msg = f"{Neo4jLoaderErrorCodes.EMBEDDING_ERROR}: Error processing vector embeddings: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
-    
+ 
+    def _compute_required_node_properties_from_relationships(self, model: Dict[str, Any]) -> Dict[str, set]:
+        """Determine which node properties are referenced by relationships so we can set them on nodes."""
+        label_to_required_props: Dict[str, set] = {}
+        for rel in model.get('relationships', []):
+            start_label = rel.get('start_node')
+            end_label = rel.get('end_node')
+            start_prop = rel.get('start_property')
+            end_prop = rel.get('end_property')
+            if start_label and start_prop:
+                label_to_required_props.setdefault(start_label, set()).add(start_prop)
+            if end_label and end_prop:
+                label_to_required_props.setdefault(end_label, set()).add(end_prop)
+        return label_to_required_props
+
+    def apply_schema_from_model(self, model: Dict[str, Any], vector_dimension_override: Optional[int] = None) -> None:
+        """Create constraints and indexes defined in the model before loading data."""
+        logger.info("Applying constraints from model")
+        for constraint in model.get('constraints', []):
+            cypher = constraint.get('cypher')
+            if not cypher:
+                continue
+            try:
+                self.execute_cypher_query(cypher)
+            except Exception as e:
+                logger.warning(f"Failed to create constraint '{constraint.get('node_label', '')}.{constraint.get('property', '')}': {str(e)}")
+
+        logger.info("Applying indexes from model")
+        for index in model.get('indexes', []):
+            cypher = index.get('cypher')
+            index_type = index.get('type', '')
+            node_label = index.get('node_label', '')
+            property_name = index.get('property', '')
+
+            # Adjust vector index to match actual embedding dimension if provided
+            if index_type == 'VECTOR' and node_label == 'Chunk' and property_name == 'embedding':
+                dim = vector_dimension_override or index.get('vector_dimension') or 384
+                similarity = index.get('vector_similarity', 'cosine')
+                cypher = (
+                    f"CREATE VECTOR INDEX chunk_embedding_vector IF NOT EXISTS "
+                    f"FOR (n:Chunk) ON (n.embedding) OPTIONS {{indexConfig: {{`vector.dimensions`: {dim}, "
+                    f"`vector.similarity_function`: '{similarity}'}}}}"
+                )
+
+            if not cypher:
+                continue
+            try:
+                self._record_cypher('schema', f"INDEX {node_label}.{property_name}", cypher)
+                self.execute_cypher_query(cypher)
+            except Exception as e:
+                logger.warning(f"Failed to create index '{node_label}.{property_name}' ({index_type}): {str(e)}")
+
     def load_nodes_to_neo4j(self, data_records: List[Dict[str, Any]], model: Dict[str, Any]) -> None:
         """
         Load nodes to Neo4j based on the model configuration.
@@ -548,6 +609,8 @@ class Neo4jDataLoader(PostgresQueryRunner):
         logger.info("Loading nodes to Neo4j")
         
         try:
+            # Ensure that properties used in relationships are present on nodes
+            required_props_by_label = self._compute_required_node_properties_from_relationships(model)
             for node_config in model.get('nodes', []):
                 node_label = node_config['label']
                 logger.info(f"Processing {node_label} nodes")
@@ -557,6 +620,21 @@ class Neo4jDataLoader(PostgresQueryRunner):
                 
                 for record in data_records:
                     try:
+                        # Special handling for Author nodes: use 'name' field sourced from record['author']
+                        if node_label == 'Author':
+                            author_value = record.get('author')
+                            if not author_value:
+                                # Skip if no author provided
+                                continue
+                            cypher = """
+                            MERGE (n:Author {name: $name})
+                            """
+                            params = {"name": author_value}
+                            self._record_cypher('nodes', 'Author', cypher)
+                            result = self.execute_cypher_query(cypher, params)
+                            nodes_created += result['summary']['nodes_created']
+                            continue
+
                         # Build node properties
                         node_properties = {}
                         node_id_property = node_config.get('node_id_property')
@@ -566,7 +644,12 @@ class Neo4jDataLoader(PostgresQueryRunner):
                             if prop_name in record and record[prop_name] is not None:
                                 alias = prop_config.get('alias', prop_name)
                                 node_properties[alias] = record[prop_name]
-                        
+
+                        # Also include any relationship-referenced properties for this label
+                        for rel_prop in required_props_by_label.get(node_label, set()):
+                            if rel_prop not in node_properties and rel_prop in record and record[rel_prop] is not None:
+                                node_properties[rel_prop] = record[rel_prop]
+ 
                         if node_id_property and node_id_property in record:
                             # Use MERGE for better data integrity
                             cypher = f"""
@@ -584,6 +667,7 @@ class Neo4jDataLoader(PostgresQueryRunner):
                                 'properties': node_properties
                             }
                             
+                            self._record_cypher('nodes', node_label, cypher)
                             result = self.execute_cypher_query(cypher, parameters)
                             nodes_created += result['summary']['nodes_created']
                         
@@ -602,7 +686,7 @@ class Neo4jDataLoader(PostgresQueryRunner):
             error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error loading nodes: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
-    
+ 
     def load_relationships_to_neo4j(self, data_records: List[Dict[str, Any]], model: Dict[str, Any]) -> None:
         """
         Load relationships to Neo4j based on the model configuration.
@@ -616,6 +700,12 @@ class Neo4jDataLoader(PostgresQueryRunner):
         try:
             for rel_config in model.get('relationships', []):
                 rel_type = rel_config['type']
+                
+                # Skip HAS_CHUNK relationships - they are handled separately in load_chunk_relationships
+                if rel_type == 'HAS_CHUNK':
+                    logger.info(f"Skipping {rel_type} relationships - handled separately during chunk loading")
+                    continue
+                    
                 logger.info(f"Processing {rel_type} relationships")
                 
                 relationships_created = 0
@@ -650,6 +740,7 @@ class Neo4jDataLoader(PostgresQueryRunner):
                                 'properties': rel_properties
                             }
                             
+                            self._record_cypher('relationships', rel_type, cypher)
                             result = self.execute_cypher_query(cypher, parameters)
                             relationships_created += result['summary']['relationships_created']
                     
@@ -668,7 +759,147 @@ class Neo4jDataLoader(PostgresQueryRunner):
             error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error loading relationships: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
-    
+ 
+    def load_chunk_relationships(self, chunk_records: List[Dict[str, Any]]) -> None:
+        """Create HAS_CHUNK relationships between Article and Chunk nodes using chunk metadata."""
+        if not chunk_records:
+            return
+        logger.info("Creating HAS_CHUNK relationships from chunk records")
+        try:
+            rel_type = 'HAS_CHUNK'
+            relationships_created = 0
+            relationships_failed = 0
+            for rec in chunk_records:
+                try:
+                    cypher = """
+                    MATCH (start:Article {id: $article_id})
+                    MATCH (end:Chunk {chunk_id: $chunk_id})
+                    MERGE (start)-[r:HAS_CHUNK]->(end)
+                    SET r.chunk_order = $chunk_order, r.chunk_position = $chunk_position
+                    """
+                    params = {
+                        'article_id': rec.get('content_id'),
+                        'chunk_id': rec.get('chunk_id'),
+                        'chunk_order': rec.get('chunk_order'),
+                        'chunk_position': rec.get('chunk_position'),
+                    }
+                    self._record_cypher('relationships', 'HAS_CHUNK', cypher)
+                    result = self.execute_cypher_query(cypher, params)
+                    relationships_created += result['summary']['relationships_created']
+                except Exception as e:
+                    relationships_failed += 1
+                    err = f"Failed to create HAS_CHUNK relationship: {str(e)}"
+                    logger.error(err)
+                    self.load_metrics["errors"].append(err)
+            self.load_metrics["relationships_created"].setdefault('HAS_CHUNK', 0)
+            self.load_metrics["relationships_failed"].setdefault('HAS_CHUNK', 0)
+            self.load_metrics["relationships_created"][rel_type] += relationships_created
+            self.load_metrics["relationships_failed"][rel_type] += relationships_failed
+            logger.info(f"Completed HAS_CHUNK relationships: {relationships_created} created, {relationships_failed} failed")
+        except Exception as e:
+            error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error loading HAS_CHUNK relationships: {str(e)}"
+            logger.error(error_msg)
+            raise Exception(error_msg) from e
+
+    def load_tag_nodes_and_relationships(self, data_records: List[Dict[str, Any]]) -> None:
+        """Create Tag nodes from 'tags' array and TAGGED_WITH relationships to Article."""
+        logger.info("Creating Tag nodes and TAGGED_WITH relationships")
+        try:
+            nodes_created = 0
+            rels_created = 0
+            nodes_failed = 0
+            rels_failed = 0
+            for rec in data_records:
+                article_id = rec.get('id')
+                tags_value = rec.get('tags')
+                if not article_id or tags_value is None:
+                    continue
+                # Normalize tags to list[str]
+                if isinstance(tags_value, str):
+                    # Attempt comma-separated
+                    tag_list = [t.strip() for t in tags_value.split(',') if t.strip()]
+                elif isinstance(tags_value, list):
+                    tag_list = [str(t).strip() for t in tags_value if str(t).strip()]
+                else:
+                    continue
+                for tag_name in tag_list:
+                    try:
+                        cy_node = """
+                        MERGE (t:Tag {tag_name: $tag_name})
+                        """
+                        self._record_cypher('nodes', 'Tag', cy_node)
+                        res_node = self.execute_cypher_query(cy_node, {"tag_name": tag_name})
+                        nodes_created += res_node['summary']['nodes_created']
+
+                        cy_rel = """
+                        MATCH (a:Article {id: $article_id})
+                        MATCH (t:Tag {tag_name: $tag_name})
+                        MERGE (a)-[r:TAGGED_WITH]->(t)
+                        """
+                        self._record_cypher('relationships', 'TAGGED_WITH', cy_rel)
+                        res_rel = self.execute_cypher_query(cy_rel, {"article_id": article_id, "tag_name": tag_name})
+                        rels_created += res_rel['summary']['relationships_created']
+                    except Exception as e:
+                        # track failure
+                        nodes_failed += 0  # node failure captured via exception; continue
+                        rels_failed += 1
+                        err = f"Failed TAGGED_WITH for article {article_id} tag '{tag_name}': {str(e)}"
+                        logger.error(err)
+                        self.load_metrics["errors"].append(err)
+
+            # Aggregate counts into metrics
+            self.load_metrics["nodes_created"].setdefault('Tag', 0)
+            self.load_metrics["nodes_created"]["Tag"] += nodes_created
+            self.load_metrics["nodes_failed"].setdefault('Tag', 0)
+            self.load_metrics["nodes_failed"]["Tag"] += nodes_failed
+            self.load_metrics["relationships_created"].setdefault('TAGGED_WITH', 0)
+            self.load_metrics["relationships_created"]["TAGGED_WITH"] += rels_created
+            self.load_metrics["relationships_failed"].setdefault('TAGGED_WITH', 0)
+            self.load_metrics["relationships_failed"]["TAGGED_WITH"] += rels_failed
+            logger.info(f"Completed Tag nodes and TAGGED_WITH: {nodes_created} tags, {rels_created} relationships created")
+        except Exception as e:
+            error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error loading tags: {str(e)}"
+            logger.error(error_msg)
+            raise Exception(error_msg) from e
+
+    def load_written_by_relationships(self, data_records: List[Dict[str, Any]]) -> None:
+        """Create WRITTEN_BY relationships using record['author'] to Author{name} and Article{id}."""
+        logger.info("Creating WRITTEN_BY relationships")
+        try:
+            created = 0
+            failed = 0
+            for rec in data_records:
+                author = rec.get('author')
+                article_id = rec.get('id')
+                publish_date = rec.get('publish_date')
+                if not author or not article_id:
+                    continue
+                try:
+                    cy = """
+                    MATCH (a:Article {id: $article_id})
+                    MERGE (auth:Author {name: $author})
+                    MERGE (a)-[r:WRITTEN_BY]->(auth)
+                    SET r.publish_date = $publish_date
+                    """
+                    params = {"article_id": article_id, "author": author, "publish_date": publish_date}
+                    self._record_cypher('relationships', 'WRITTEN_BY', cy)
+                    res = self.execute_cypher_query(cy, params)
+                    created += res['summary']['relationships_created']
+                except Exception as e:
+                    failed += 1
+                    err = f"Failed WRITTEN_BY for article {article_id} author '{author}': {str(e)}"
+                    logger.error(err)
+                    self.load_metrics["errors"].append(err)
+            self.load_metrics["relationships_created"].setdefault('WRITTEN_BY', 0)
+            self.load_metrics["relationships_created"]["WRITTEN_BY"] += created
+            self.load_metrics["relationships_failed"].setdefault('WRITTEN_BY', 0)
+            self.load_metrics["relationships_failed"]["WRITTEN_BY"] += failed
+            logger.info(f"Completed WRITTEN_BY relationships: {created} created, {failed} failed")
+        except Exception as e:
+            error_msg = f"{Neo4jLoaderErrorCodes.NEO4J_EXECUTION_ERROR}: Error loading WRITTEN_BY relationships: {str(e)}"
+            logger.error(error_msg)
+            raise Exception(error_msg) from e
+ 
     def write_load_metrics(self, metrics_file: str) -> None:
         """
         Write load metrics to file.
@@ -730,14 +961,38 @@ class Neo4jDataLoader(PostgresQueryRunner):
                     file.write("-" * 10 + "\n")
                     for i, error in enumerate(self.load_metrics["errors"], 1):
                         file.write(f"{i}. {error}\n")
-            
+
+                # Cypher queries used
+                if self.cypher_usage:
+                    file.write(f"\nCYPHER QUERIES USED:\n")
+                    file.write("-" * 22 + "\n")
+                    # Group and list
+                    for (category, name, cypher_text), count in sorted(self.cypher_usage.items(), key=lambda x: (x[0][0], x[0][1])):
+                        file.write(f"[{category}] {name} (executed {count}x)\n")
+                        file.write(cypher_text.strip() + "\n\n")
+
+                # Postgres records (excluding 'content')
+                if self.postgres_records_wo_content:
+                    file.write(f"\nPOSTGRES RECORDS (excluding 'content'):\n")
+                    file.write("-" * 40 + "\n")
+                    max_to_write = len(self.postgres_records_wo_content)
+                    for i in range(max_to_write):
+                        rec = self.postgres_records_wo_content[i]
+                        try:
+                            rec_json = json.dumps(rec, default=str)
+                        except Exception:
+                            rec_json = str(rec)
+                        if len(rec_json) > 5000:
+                            rec_json = rec_json[:5000] + '...'
+                        file.write(f"Record {i+1}: {rec_json}\n")
+ 
             logger.info(f"Load metrics written successfully to {metrics_file}")
             
         except Exception as e:
             error_msg = f"{Neo4jLoaderErrorCodes.METRICS_WRITE_ERROR}: Error writing metrics: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
-    
+ 
     def load_data_to_neo4j(self, config_path: str, model_path: str, metrics_file: str) -> None:
         """
         Main function to load data from PostgreSQL to Neo4j.
@@ -766,7 +1021,19 @@ class Neo4jDataLoader(PostgresQueryRunner):
             
             # Connect to databases
             self.connect_to_neo4j(neo4j_config)
-            
+
+            # Apply schema (constraints and indexes) before loading
+            # Determine embedding dimension to use for vector indexes
+            vector_dim = None
+            try:
+                # Lazy compute embedding dimension by encoding a small sample
+                self.initialize_embedding_model()
+                test_vec = self.embedding_model.encode(["test"], convert_to_tensor=False)[0]
+                vector_dim = len(test_vec.tolist() if hasattr(test_vec, 'tolist') else list(test_vec))
+            except Exception:
+                vector_dim = 384
+            self.apply_schema_from_model(model, vector_dimension_override=vector_dim)
+
             # Use the specific "trending" query as mentioned in requirements
             query_name = "trending"
             
@@ -789,7 +1056,21 @@ class Neo4jDataLoader(PostgresQueryRunner):
                     if i < len(column_names):
                         record[column_names[i]] = value
                 data_records.append(record)
-            
+ 
+            # Print/log retrieval values excluding the 'content' column
+            try:
+                self.postgres_records_wo_content = [
+                    {k: v for k, v in rec.items() if k != 'content'} for rec in data_records
+                ]
+                for idx, rec_wo_content in enumerate(self.postgres_records_wo_content, start=1):
+                    # Limit log size to avoid extremely large outputs
+                    rec_json = json.dumps(rec_wo_content, default=str)
+                    if len(rec_json) > 2000:
+                        rec_json = rec_json[:2000] + '...'
+                    logger.info(f"Postgres record #{idx} (excluding 'content'): {rec_json}")
+            except Exception as e:
+                logger.warning(f"Failed to log Postgres records without 'content': {str(e)}")
+ 
             self.load_metrics["total_records_processed"] = len(data_records)
             
             # Process vector embeddings if needed
@@ -816,10 +1097,17 @@ class Neo4jDataLoader(PostgresQueryRunner):
                 }
                 logger.info(f"Loading {len(chunk_records)} chunk nodes to Neo4j")
                 self.load_nodes_to_neo4j(chunk_records, chunk_model)
-            
+
+                # Create HAS_CHUNK relationships between Article and Chunk
+                self.load_chunk_relationships(chunk_records)
+ 
             # Load relationships to Neo4j
             self.load_relationships_to_neo4j(data_records, model)
-            
+
+            # Create derived entities/relationships not covered properly by the model
+            self.load_tag_nodes_and_relationships(data_records)
+            self.load_written_by_relationships(data_records)
+ 
             # Write metrics
             self.write_load_metrics(metrics_file)
             

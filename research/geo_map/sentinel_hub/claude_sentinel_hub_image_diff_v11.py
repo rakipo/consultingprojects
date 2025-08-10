@@ -13,6 +13,8 @@ from email.mime.text import MimeText
 from email.mime.multipart import MimeMultipart
 from email.mime.image import MimeImage
 import warnings
+import yaml
+import os
 warnings.filterwarnings('ignore')
 
 # Install required packages:
@@ -31,28 +33,24 @@ from sentinelhub import (
 )
 
 class SentinelHubLandMonitor:
-    def __init__(self, instance_id: str, client_id: str, client_secret: str):
+    def __init__(self, config_path: str = "sentinel_hub_config.yml"):
         """
         Initialize Sentinel Hub monitoring system
         
         Args:
-            instance_id: Your Sentinel Hub instance ID
-            client_id: OAuth client ID
-            client_secret: OAuth client secret
+            config_path: Path to the YAML configuration file
         """
+        # Load configuration from YAML file
+        self.config_data = self._load_config(config_path)
+        
         # Configure Sentinel Hub
         self.config = SHConfig()
-        self.config.instance_id = instance_id
-        self.config.sh_client_id = client_id
-        self.config.sh_client_secret = client_secret
+        self.config.instance_id = self.config_data['sentinel_hub']['instance_id']
+        self.config.sh_client_id = self.config_data['sentinel_hub']['client_id']
+        self.config.sh_client_secret = self.config_data['sentinel_hub']['client_secret']
         
-        # Define your land coordinates (adjusted for proper bbox format)
-        self.coordinates = [
-            [80.033289, 14.446383],  # West-North
-            [80.033892, 14.446587],  # East-North  
-            [80.033909, 14.446203],  # East-South
-            [80.033298, 14.446032],  # West-South
-        ]
+        # Load coordinates from config
+        self.coordinates = self.config_data['coordinates']
         
         # Create bounding box (min_x, min_y, max_x, max_y)
         lons = [coord[0] for coord in self.coordinates]
@@ -63,121 +61,28 @@ class SentinelHubLandMonitor:
             crs=CRS.WGS84
         )
         
-        # Calculate image dimensions (higher resolution = more detail)
-        self.resolution = 10  # 10m per pixel for Sentinel-2
+        # Load image processing settings from config
+        self.resolution = self.config_data['image_processing']['resolution']
+        self.max_cloud_coverage = self.config_data['image_processing']['max_cloud_coverage']
         self.size = bbox_to_dimensions(self.bbox, resolution=self.resolution)
         
         print(f"Monitoring area: {self.bbox}")
         print(f"Image dimensions: {self.size}")
         
-        # Define evaluation scripts for different indices
-        self.evalscripts = {
-            'true_color': self._get_true_color_evalscript(),
-            'ndvi': self._get_ndvi_evalscript(),
-            'ndbi': self._get_ndbi_evalscript(),
-            'ndwi': self._get_ndwi_evalscript(),
-            'change_detection': self._get_change_detection_evalscript()
-        }
+        # Load evaluation scripts from config
+        self.evalscripts = self.config_data['evalscripts']
     
-    def _get_true_color_evalscript(self) -> str:
-        """Evaluation script for true color RGB imagery"""
-        return """
-        //VERSION=3
-        function setup() {
-            return {
-                input: ["B02", "B03", "B04", "dataMask"],
-                output: { bands: 4 }
-            };
-        }
+    def _load_config(self, config_path: str) -> Dict:
+        """Load configuration from YAML file"""
+        if not os.path.exists(config_path):
+            raise FileNotFoundError(f"Configuration file not found: {config_path}")
         
-        function evaluatePixel(sample) {
-            return [2.5 * sample.B04, 2.5 * sample.B03, 2.5 * sample.B02, sample.dataMask];
-        }
-        """
+        with open(config_path, 'r') as file:
+            config = yaml.safe_load(file)
+        
+        return config
     
-    def _get_ndvi_evalscript(self) -> str:
-        """Evaluation script for NDVI calculation"""
-        return """
-        //VERSION=3
-        function setup() {
-            return {
-                input: ["B04", "B08", "dataMask"],
-                output: { bands: 2 }
-            };
-        }
-        
-        function evaluatePixel(sample) {
-            let ndvi = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
-            return [ndvi, sample.dataMask];
-        }
-        """
-    
-    def _get_ndbi_evalscript(self) -> str:
-        """Evaluation script for NDBI (Built-up areas)"""
-        return """
-        //VERSION=3
-        function setup() {
-            return {
-                input: ["B08", "B11", "dataMask"],
-                output: { bands: 2 }
-            };
-        }
-        
-        function evaluatePixel(sample) {
-            let ndbi = (sample.B11 - sample.B08) / (sample.B11 + sample.B08);
-            return [ndbi, sample.dataMask];
-        }
-        """
-    
-    def _get_ndwi_evalscript(self) -> str:
-        """Evaluation script for NDWI (Water detection)"""
-        return """
-        //VERSION=3
-        function setup() {
-            return {
-                input: ["B03", "B08", "dataMask"],
-                output: { bands: 2 }
-            };
-        }
-        
-        function evaluatePixel(sample) {
-            let ndwi = (sample.B03 - sample.B08) / (sample.B03 + sample.B08);
-            return [ndwi, sample.dataMask];
-        }
-        """
-    
-    def _get_change_detection_evalscript(self) -> str:
-        """Multi-temporal evaluation script for change detection"""
-        return """
-        //VERSION=3
-        function setup() {
-            return {
-                input: [
-                    {
-                        bands: ["B02", "B03", "B04", "B08", "B11"],
-                        units: "DN"
-                    }
-                ],
-                output: { bands: 5 },
-                mosaicking: "ORBIT"
-            };
-        }
-        
-        function evaluatePixel(samples) {
-            // Return the most recent valid sample
-            let sample = samples[0];
-            
-            // Calculate indices
-            let ndvi = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
-            let ndbi = (sample.B11 - sample.B08) / (sample.B11 + sample.B08);
-            let ndwi = (sample.B03 - sample.B08) / (sample.B03 + sample.B08);
-            
-            // Brightness index
-            let brightness = (sample.B02 + sample.B03 + sample.B04) / 3;
-            
-            return [ndvi, ndbi, ndwi, brightness/3000, 1];
-        }
-        """
+
     
     def get_satellite_image(self, date_range: Tuple[str, str], 
                            evalscript_type: str = 'true_color',

@@ -7,14 +7,14 @@ database:
     user: serptrend_user
     password: SERPTREND_1349_SCRAPING
   neo4j: |
-    host: localhost
+    host: ai50-neo4j-db-server-987.westus2.cloudapp.azure.com
     port: 7687
     database: neo4j
     user: neo4j
-    password: password123
+    password: jhF7&asjkldfoie489w
 
 queries:
-  trending: 'SELECT * from structured_content limit 20;'
+  trending: 'SELECT * from structured_content;'
 
 # Neo4j Data Loading Configuration
 neo4j_load_config:

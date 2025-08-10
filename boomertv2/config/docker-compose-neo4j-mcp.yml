@@ -86,7 +86,7 @@ services:
     command: >
       sh -c "
         pip install --no-cache-dir -r requirements.txt &&
-        python -u src/boomer_vector_embedding_creator.py
+        sleep infinity
       "
     restart: unless-stopped
     networks:

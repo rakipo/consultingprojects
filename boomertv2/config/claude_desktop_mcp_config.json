@@ -1,0 +1,45 @@
+{
+    "mcpServers": {
+      "mcp-cypher": {
+        "command": "/Users/ravikiranponduri/.local/bin/uvx",
+        "args": [
+          "mcp-neo4j-cypher@0.2.3"
+        ],
+        "env": {
+          "NEO4J_URL": "bolt://localhost:7687",
+          "NEO4J_USERNAME": "neo4j",
+          "NEO4J_PASSWORD": "password123",
+          "NEO4J_DATABASE": "neo4j"
+        }
+      },
+      "boomer-vector-embedding-creator": {
+        "command": "docker",
+        "args": [
+          "exec",
+          "-i",
+          "boomer_vector_embedding_creator",
+          "python",
+          "-u",
+          "src/boomer_vector_embedding_creator.py"
+        ]
+      }
+    }
+  }
+
+
+
+  // instructions
+//   "command": "/Users/ravikiranponduri/.local/bin/uvx", --> update with your local where the uvx is present. if not present, install uvx, type "which uvx" and place that path there.
+
+// sending you the program which creates vector embedings for questions for searches.
+//   "src/boomer_vector_embedding_creator.py" . modify accordingly the location.
+
+// modify the credentials
+// "NEO4J_URL": "bolt://localhost:7687",
+// "NEO4J_USERNAME": "neo4j",
+// "NEO4J_PASSWORD": "password123",
+// "NEO4J_DATABASE": "neo4j"
+
+// if you are not using the embedding part, remove that section above. no need to anyting else.
+
+// copy past the above code into the claude desktop--> settings--> developer -->edit mcp server config. restart the claude desktop.
