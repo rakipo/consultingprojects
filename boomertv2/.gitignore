@@ -140,6 +140,15 @@ output/logs/*.log
 !output/metrics/.gitkeep
 !output/logs/.gitkeep
 
+# Logs folders (all levels)
+logs/
+**/logs/
+
+# Files containing "key" in name (security)
+*key*
+*KEY*
+*Key*
+
 # Configuration files with sensitive data
 config/*_local.yml
 config/*_private.yml

@@ -74,9 +74,15 @@ installation/cert_backup/
 installation/new_cert/
 installation/neo4j/cert/
 
+# Files containing "key" in name (security)
+*key*
+*KEY*
+*Key*
+
 # Logs
 *.log
 logs/
+**/logs/
 
 # Docker volumes and data
 docker-data/
