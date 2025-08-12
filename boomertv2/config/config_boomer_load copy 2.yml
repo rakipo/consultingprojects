@@ -23,18 +23,16 @@ neo4j_load_config:
   
   # Vector embedding settings
   embedding:
-    model_name: "all-MiniLM-L6-v2"
-    chunk_size: 512
-    chunk_overlap: 50
-    use_llm_chunking: false
+    model_name: "text-embedding-3-small"
+    chunk_size: 1000
+    chunk_overlap: 100
+    use_llm_chunking: true
     content_properties:
       - "content"
-      - "summary"
-      - "description"
   
   # OpenAI LLM settings for intelligent chunking
   openai:
-    model: "gpt-3.5-turbo"
+    model: "text-embedding-3-small"
     max_tokens: 2000
     temperature: 0.1
     api_key_env: "OPENAI_API_KEY"  # Environment variable name for API key

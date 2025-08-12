@@ -266,7 +266,6 @@ class Neo4jDataLoader(PostgresQueryRunner):
                         chunks.append({
                             'chunk_id': chunk_id,
                             'chunk_text': chunk_text,
-                            'chunk_position': i,
                             'chunk_order': i,
                             'summary': chunk_data.get('summary', '') if isinstance(chunk_data, dict) else '',
                             'chunking_method': 'llm'
@@ -485,19 +484,34 @@ class Neo4jDataLoader(PostgresQueryRunner):
         try:
             chunk_records = []
             
-            # Find vector properties in the model
+            # Find vector properties and chunking configuration in the model
             vector_properties = []
             content_property = None
+            chunking_node = None
             
             for node in model.get('nodes', []):
+                # Check if this node has chunking enabled
+                if node.get('chunking_enabled', False):
+                    chunking_node = node
+                    content_property = node.get('source_content_field')
+                    logger.info(f"Found chunking node: {node.get('label')} with source field: {content_property}")
+                
+                # Find vector properties
                 for prop in node.get('properties', []):
                     if prop.get('type') == 'vector':
                         vector_properties.append(prop)
-                    elif prop.get('name') in ['content', 'text', 'description']:
-                        content_property = prop.get('name')
+            
+            # If no chunking node found, look for content fields in data
+            if not content_property and data_records:
+                sample_record = data_records[0]
+                for field_name in ['content', 'text', 'description', 'summary', 'meta_description']:
+                    if field_name in sample_record and sample_record[field_name]:
+                        content_property = field_name
+                        logger.info(f"Using field '{field_name}' as content source")
+                        break
             
             if not vector_properties or not content_property:
-                logger.info("No vector properties or content property found, skipping embedding processing")
+                logger.info(f"No vector properties ({len(vector_properties)}) or content property ({content_property}) found, skipping embedding processing")
                 return []
             
             # Process each record
@@ -775,7 +789,7 @@ class Neo4jDataLoader(PostgresQueryRunner):
                     MATCH (start:Article {id: $article_id})
                     MATCH (end:Chunk {chunk_id: $chunk_id})
                     MERGE (start)-[r:HAS_CHUNK]->(end)
-                    SET r.chunk_order = $chunk_order, r.chunk_position = $chunk_position
+                    SET r.chunk_order = $chunk_order
                     """
                     params = {
                         'article_id': rec.get('content_id'),

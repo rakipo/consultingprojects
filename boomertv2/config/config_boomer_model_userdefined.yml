@@ -19,11 +19,11 @@ queries:
 # Text Chunking Configuration
 chunking_config:
   enabled: true
-  default_chunk_size: 512
-  default_chunk_overlap: 50
-  use_llm_chunking: false
-  embedding_model: "all-MiniLM-L6-v2"
-  embedding_dimension: 384
+  default_chunk_size: 1000
+  default_chunk_overlap: 100
+  use_llm_chunking: true
+  embedding_model: "text-embedding-3-small"
+  embedding_dimension: 1536
 
 # Neo4j Model Configuration
 neo4j_model_config:
@@ -49,7 +49,7 @@ neo4j_model_config:
     # Node definitions with labels, properties, and node IDs
     nodes:
       - label: "Article"
-        node_id_property: "id"
+        node_id_property: "url"
         properties:
           - name: "url"
             type: "string"
@@ -108,8 +108,6 @@ neo4j_model_config:
           - name: "chunk_text"
             type: "text"
           - name: "chunk_position"
-            type: "integer"
-          - name: "chunk_order"
             type: "integer"
           - name: "created_from_field"
             type: "string"

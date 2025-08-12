@@ -666,7 +666,7 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                     logger.error(f"Failed to copy data to container: {copy_result.stderr}")
                     raise subprocess.CalledProcessError(copy_result.returncode, copy_cmd, copy_result.stderr)
                 
-                # Create MCP initialization and tool discovery requests
+                # Create MCP initialization request
                 init_request = {
                     "jsonrpc": "2.0",
                     "id": 1,
@@ -678,26 +678,36 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                     }
                 }
                 
-                tools_list_request = {
-                    "jsonrpc": "2.0",
-                    "id": 2,
-                    "method": "tools/list",
-                    "params": {}
-                }
+                # Try different possible tool names based on Neo4j data modeling
+                possible_tools = [
+                    "analyze_data_structure",
+                    "generate_data_model", 
+                    "create_neo4j_model",
+                    "model_data",
+                    "analyze_schema",
+                    "generate_graph_model"
+                ]
                 
-                # For now, we'll try a generic data modeling request
-                # This will need to be updated based on actual MCP server capabilities
-                modeling_request = {
-                    "jsonrpc": "2.0",
-                    "id": 3,
-                    "method": "tools/call",
-                    "params": {
-                        "name": "generate_neo4j_model",
-                        "arguments": {
-                            "data_file": "/tmp/data.json"
+                # We'll try each tool name to see which one works
+                modeling_requests = []
+                for i, tool_name in enumerate(possible_tools, 2):
+                    modeling_requests.append({
+                        "jsonrpc": "2.0",
+                        "id": i,
+                        "method": "tools/call",
+                        "params": {
+                            "name": tool_name,
+                            "arguments": {
+                                "data": data,
+                                "schema_analysis": True,
+                                "neo4j_connection": {
+                                    "uri": "bolt://neo4j:7687",
+                                    "username": "neo4j",
+                                    "password": "password123"
+                                }
+                            }
                         }
-                    }
-                }
+                    })
                 
                 # Start MCP server and send request
                 docker_cmd = [
@@ -716,11 +726,11 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                     text=True
                 )
                 
-                # Send initialization, tools list, and modeling requests
-                requests = [init_request, tools_list_request, modeling_request]
-                request_json = "\n".join([json.dumps(req) for req in requests]) + "\n"
-                logger.info(f"Sending MCP requests: initialization, tools/list, and modeling")
-                logger.info(f"Request payload: {request_json}")
+                # Send initialization first, then try different tool calls
+                all_requests = [init_request] + modeling_requests
+                request_json = "\n".join([json.dumps(req) for req in all_requests]) + "\n"
+                logger.info(f"Sending MCP requests: initialization and {len(modeling_requests)} tool attempts")
+                logger.info(f"Trying tools: {possible_tools}")
                 
                 stdout, stderr = process.communicate(input=request_json, timeout=120)
                 result_returncode = process.returncode
@@ -736,32 +746,41 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                 logger.info(f"Raw MCP stderr: {stderr}")
                 
                 try:
-                    # MCP responses might have multiple JSON objects, get the last one
+                    # Parse all responses to find a successful one
                     lines = stdout.strip().split('\n')
-                    mcp_response_line = None
+                    successful_response = None
                     
-                    for line in reversed(lines):
+                    for line in lines:
                         if line.strip().startswith('{'):
-                            mcp_response_line = line.strip()
-                            break
+                            try:
+                                response = json.loads(line.strip())
+                                # Check if this is a successful tool call response
+                                if 'result' in response and response.get('id', 0) > 1:  # Skip init response (id=1)
+                                    successful_response = response
+                                    tool_id = response.get('id', 0) - 2  # Adjust for init request
+                                    if tool_id < len(possible_tools):
+                                        logger.info(f"✅ Successfully called tool: {possible_tools[tool_id]}")
+                                    break
+                            except json.JSONDecodeError:
+                                continue
                     
-                    if not mcp_response_line:
-                        logger.error("No valid JSON response found in MCP output")
-                        logger.info("Falling back to basic model generation")
-                        return self._generate_fallback_model(data)
-                    
-                    mcp_response = json.loads(mcp_response_line)
-                    logger.info("✅ MCP server response parsed successfully")
-                    
-                    # Extract result from JSON-RPC response
-                    if 'result' in mcp_response:
-                        model_data = mcp_response['result']
+                    if successful_response and 'result' in successful_response:
+                        model_data = successful_response['result']
                         # Enhance MCP response with metadata
                         enhanced_model = self._enhance_mcp_model(model_data, data)
                         logger.info(f"Generated MCP-powered Neo4j model with {len(enhanced_model.get('nodes', []))} nodes")
                         return enhanced_model
                     else:
-                        logger.error(f"MCP response missing 'result' field: {mcp_response}")
+                        logger.warning("No successful MCP tool calls found")
+                        logger.info("All attempted tools failed, checking responses:")
+                        for line in lines:
+                            if line.strip().startswith('{'):
+                                try:
+                                    response = json.loads(line.strip())
+                                    if 'error' in response:
+                                        logger.info(f"Tool call error (id={response.get('id')}): {response['error']['message']}")
+                                except json.JSONDecodeError:
+                                    continue
                         logger.info("Falling back to basic model generation")
                         return self._generate_fallback_model(data)
                     
