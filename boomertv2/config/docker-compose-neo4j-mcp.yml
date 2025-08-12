@@ -41,7 +41,7 @@ services:
       sh -c "
         apt-get update &&
         pip install uv &&
-        uvx mcp-neo4j-cypher@latest
+        uvx mcp-neo4j-cypher@latest &&
         echo 'Official Neo4j MCP Cypher server installed and ready' &&
         sleep infinity
       "
