@@ -64,46 +64,9 @@ class Neo4jModelGenerator(PostgresQueryRunner):
     """
     
     def __init__(self):
-        """Initialize the Neo4j Model Generator with enhanced logging."""
+        """Initialize the Neo4j Model Generator."""
         super().__init__()
-        self._setup_enhanced_logging()
-        logger.info("Neo4j Model Generator initialized with enhanced logging")
-    
-    def _setup_enhanced_logging(self):
-        """Setup enhanced logging with file output to output/logs folder."""
-        try:
-            # Create output/logs directory if it doesn't exist
-            logs_dir = Path("output/logs")
-            logs_dir.mkdir(parents=True, exist_ok=True)
-            
-            # Generate timestamp for log file
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            log_filename = f"neo4j_model_generator_{timestamp}.log"
-            log_filepath = logs_dir / log_filename
-            
-            # Create file handler for detailed logging
-            file_handler = logging.FileHandler(log_filepath, mode='w', encoding='utf-8')
-            file_handler.setLevel(logging.DEBUG)
-            
-            # Create detailed formatter for file logs
-            file_formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - [%(funcName)s:%(lineno)d] - %(message)s'
-            )
-            file_handler.setFormatter(file_formatter)
-            
-            # Add file handler to logger
-            logger.addHandler(file_handler)
-            
-            # Store log file path for reference
-            self.log_file_path = str(log_filepath)
-            
-            logger.info(f"Enhanced logging initialized - log file: {self.log_file_path}")
-            logger.info("=" * 80)
-            logger.info("NEO4J MODEL GENERATOR - ENHANCED LOGGING SESSION STARTED")
-            logger.info("=" * 80)
-            
-        except Exception as e:
-            logger.warning(f"Failed to setup enhanced logging: {str(e)}, continuing with console logging only")
+        logger.info("Neo4j Model Generator initialized")
     
     def generate_timestamp(self) -> str:
         """
@@ -193,7 +156,7 @@ class Neo4jModelGenerator(PostgresQueryRunner):
             model_config: User-defined model configuration
             
         Returns:
-            Neo4j model as dictionary (single clean model without duplication)
+            Neo4j model as dictionary
         """
         logger.info("Calling MCP Neo4j data modeling service")
         
@@ -204,12 +167,33 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                 temp_file_path = temp_file.name
             
             try:
-                # Determine which model generation approach to use
+                # Prepare the modeling prompt with user configuration
+                modeling_prompt = f"""
+                Analyze the following PostgreSQL data and create a Neo4j graph data model:
+                
+                Data Summary:
+                - Source: PostgreSQL
+                - Columns: {', '.join(data['table_info']['columns'])}
+                - Records: {data['metadata']['total_records']}
+                
+                User Configuration:
+                {json.dumps(model_config, indent=2) if model_config else 'No specific configuration provided'}
+                
+                Please provide:
+                1. Node labels and their properties (considering user specifications)
+                2. Relationship types and directions (as defined by user)
+                3. Constraints and indexes recommendations (including user-specified extras)
+                4. Sample Cypher queries for data import
+                5. Graph schema visualization suggestions
+                
+                Data file: {temp_file_path}
+                """
+                
+                # Call MCP service (simulated - in real implementation this would call actual MCP)
+                # For now, we'll generate a model based on user configuration
                 if model_config:
-                    logger.info("User configuration provided - generating configured model")
                     neo4j_model = self._generate_configured_neo4j_model(data, model_config)
                 else:
-                    logger.info("No user configuration - generating default model")
                     neo4j_model = self._generate_basic_neo4j_model(data)
                 
                 logger.info("MCP Neo4j modeling completed successfully")
@@ -240,87 +224,52 @@ class Neo4jModelGenerator(PostgresQueryRunner):
         Returns:
             Configured Neo4j model structure
         """
-        logger.info("🏗️  GENERATING CONFIGURED NEO4J MODEL")
-        logger.info(f"Source data: {data['metadata']['total_records']} records from PostgreSQL")
-        logger.info(f"Configuration sections: {list(model_config.keys())}")
+        logger.info("Generating configured Neo4j model structure")
         
         try:
-            # Create model structure in chronological order
-            from collections import OrderedDict
-            model = OrderedDict([
-                ("model_info", {
+            model = {
+                "model_info": {
                     "generated_by": "Neo4j Model Generator (Configured)",
                     "generated_at": datetime.now().isoformat(),
                     "source_table_columns": data['table_info']['columns'],
                     "total_records": data['metadata']['total_records'],
                     "configuration_applied": True
-                }),
-                ("nodes", []),
-                ("relationships", []),
-                ("constraints", []),
-                ("indexes", []),
-                ("import_queries", [])
-            ])
+                },
+                "nodes": [],
+                "relationships": [],
+                "constraints": [],
+                "indexes": [],
+                "import_queries": [],
+                "configuration": model_config
+            }
             
             # Filter columns if specified
             include_columns = model_config.get('include_columns', data['table_info']['columns'])
             filtered_columns = [col for col in data['table_info']['columns'] if col in include_columns]
             
             # Process node definitions
-            logger.info("📊 Processing node definitions")
             if 'nodes' in model_config:
-                for i, node_config in enumerate(model_config['nodes'], 1):
-                    logger.info(f"   Creating node {i}/{len(model_config['nodes'])}: {node_config['label']}")
+                for node_config in model_config['nodes']:
                     node = self._create_node_from_config(node_config, filtered_columns)
                     model['nodes'].append(node)
                     
-                    # Log node properties
-                    properties_count = len(node_config.get('properties', []))
-                    logger.info(f"      Properties: {properties_count}")
-                    
-                    # Log chunking configuration if present
-                    if node_config.get('chunking_enabled', False):
-                        logger.info(f"      🧠 CHUNKING ENABLED: source field '{node_config.get('source_content_field')}'")
-                        chunking_config = node_config.get('chunking_config', {})
-                        logger.info(f"         Chunk size: {chunking_config.get('chunk_size', 'default')}")
-                        logger.info(f"         Chunk overlap: {chunking_config.get('chunk_overlap', 'default')}")
-                        logger.info(f"         Use LLM chunking: {chunking_config.get('use_llm_chunking', 'default')}")
-                    
-                    # Log vector properties
-                    vector_props = [p for p in node_config.get('properties', []) if p.get('type') == 'vector']
-                    if vector_props:
-                        for prop in vector_props:
-                            logger.info(f"      🔢 VECTOR PROPERTY: {prop['name']} (dim: {prop.get('vector_dimension', 'default')})")
-                
-                logger.info(f"✅ Created {len(model['nodes'])} node definitions")
-            
-            # Process constraints and indexes
-            logger.info("🔒 Processing constraints and indexes")
-            if 'nodes' in model_config:
-                for node_config in model_config['nodes']:
                     # Create constraints for unique properties
                     for prop in node_config.get('properties', []):
                         if prop.get('unique', False):
                             constraint = self._create_constraint(node_config['label'], prop['name'])
                             model['constraints'].append(constraint)
-                            logger.info(f"      Created constraint: {node_config['label']}.{prop['name']}")
                     
                     # Create indexes for indexed properties
                     for prop in node_config.get('properties', []):
                         if prop.get('indexed', False):
                             index = self._create_index(node_config['label'], prop['name'], prop.get('type', 'TEXT'))
                             model['indexes'].append(index)
-                            logger.info(f"      Created index: {node_config['label']}.{prop['name']} ({prop.get('type', 'TEXT')})")
             
             # Process relationships
-            logger.info("🔗 Processing relationships")
             if 'relationships' in model_config:
-                for i, rel_config in enumerate(model_config['relationships'], 1):
-                    logger.info(f"   Creating relationship {i}/{len(model_config['relationships'])}: {rel_config['type']}")
-                    logger.info(f"      {rel_config['start_node']} → {rel_config['end_node']}")
+                for rel_config in model_config['relationships']:
                     relationship = self._create_relationship_from_config(rel_config)
                     model['relationships'].append(relationship)
-                logger.info(f"✅ Created {len(model['relationships'])} relationship definitions")
             
             # Process extra indexes
             if 'extra_indexes' in model_config:
@@ -352,7 +301,7 @@ class Neo4jModelGenerator(PostgresQueryRunner):
             raise Exception(error_msg) from e
     
     def _create_node_from_config(self, node_config: Dict[str, Any], available_columns: List[str]) -> Dict[str, Any]:
-        """Create node definition from configuration with enhanced chunking support."""
+        """Create node definition from configuration."""
         node = {
             "label": node_config['label'],
             "node_id_property": node_config.get('node_id_property'),
@@ -364,21 +313,9 @@ class Neo4jModelGenerator(PostgresQueryRunner):
         if 'multiple_labels' in node_config:
             node['multiple_labels'] = node_config['multiple_labels']
         
-        # Add chunking configuration if this is a Chunk node
-        if node_config.get('chunking_enabled', False):
-            node['chunking_enabled'] = True
-            node['source_content_field'] = node_config.get('source_content_field')
-            if 'chunking_config' in node_config:
-                node['chunking_config'] = node_config['chunking_config']
-            logger.info(f"Enhanced {node_config['label']} node with chunking configuration")
-        
         # Process properties
         for prop_config in node_config.get('properties', []):
-            # Include all properties for chunk nodes, or properties that exist in available columns
-            if (prop_config['name'] in available_columns or 
-                prop_config.get('type') == 'vector' or 
-                node_config.get('chunking_enabled', False)):
-                
+            if prop_config['name'] in available_columns or prop_config.get('type') == 'vector':
                 prop = {
                     "name": prop_config['name'],
                     "type": prop_config.get('type', 'string')
@@ -390,8 +327,6 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                     prop['indexed'] = True
                 if 'alias' in prop_config:
                     prop['alias'] = prop_config['alias']
-                if 'default_value' in prop_config:
-                    prop['default_value'] = prop_config['default_value']
                 
                 # Add vector-specific properties
                 if prop_config.get('type') == 'vector':
@@ -405,7 +340,7 @@ class Neo4jModelGenerator(PostgresQueryRunner):
         return node
     
     def _create_relationship_from_config(self, rel_config: Dict[str, Any]) -> Dict[str, Any]:
-        """Create relationship definition from configuration with enhanced properties."""
+        """Create relationship definition from configuration."""
         relationship = {
             "type": rel_config['type'],
             "start_node": rel_config['start_node'],
@@ -413,12 +348,8 @@ class Neo4jModelGenerator(PostgresQueryRunner):
             "start_property": rel_config['start_property'],
             "end_property": rel_config['end_property'],
             "properties": rel_config.get('properties', []),
-            "description": rel_config.get('description', f"Relationship {rel_config['type']} from {rel_config['start_node']} to {rel_config['end_node']}")
+            "description": f"Relationship {rel_config['type']} from {rel_config['start_node']} to {rel_config['end_node']}"
         }
-        
-        # Add enhanced relationship properties
-        if 'auto_generated' in rel_config:
-            relationship['auto_generated'] = rel_config['auto_generated']
         
         return relationship
     
@@ -633,208 +564,20 @@ class Neo4jModelGenerator(PostgresQueryRunner):
 
     def _generate_basic_neo4j_model(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Generate Neo4j model using MCP Neo4j data modeling server.
+        Generate a basic Neo4j model from the data structure.
+        This is a fallback method when MCP is not available.
         
         Args:
             data: Structured data for modeling
             
         Returns:
-            Neo4j model structure generated by MCP server
+            Basic Neo4j model structure
         """
-        logger.info("🤖 Calling MCP Neo4j Data Modeling Server")
-        
-        try:
-            # Create temporary file with data for MCP server
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as temp_file:
-                json.dump(data, temp_file, indent=2)
-                temp_file_path = temp_file.name
-                logger.info(f"Created temporary data file: {temp_file_path}")
-            
-            try:
-                # Call MCP Neo4j data modeling server via Docker
-                logger.info("Executing MCP Neo4j data modeling via Docker container")
-                
-                # Start MCP server in stdio mode and communicate with it
-                logger.info("Starting MCP Neo4j data modeling server in stdio mode")
-                
-                # Copy data file to container first
-                copy_cmd = ["docker", "cp", temp_file_path, "mcp_neo4j_data_modeling:/tmp/data.json"]
-                logger.info(f"Copying data to container: {' '.join(copy_cmd)}")
-                
-                copy_result = subprocess.run(copy_cmd, capture_output=True, text=True, timeout=30)
-                if copy_result.returncode != 0:
-                    logger.error(f"Failed to copy data to container: {copy_result.stderr}")
-                    raise subprocess.CalledProcessError(copy_result.returncode, copy_cmd, copy_result.stderr)
-                
-                # Create MCP initialization and tool discovery requests
-                init_request = {
-                    "jsonrpc": "2.0",
-                    "id": 1,
-                    "method": "initialize",
-                    "params": {
-                        "protocolVersion": "2024-11-05",
-                        "capabilities": {},
-                        "clientInfo": {"name": "neo4j-model-generator", "version": "1.0.0"}
-                    }
-                }
-                
-                tools_list_request = {
-                    "jsonrpc": "2.0",
-                    "id": 2,
-                    "method": "tools/list",
-                    "params": {}
-                }
-                
-                # For now, we'll try a generic data modeling request
-                # This will need to be updated based on actual MCP server capabilities
-                modeling_request = {
-                    "jsonrpc": "2.0",
-                    "id": 3,
-                    "method": "tools/call",
-                    "params": {
-                        "name": "generate_neo4j_model",
-                        "arguments": {
-                            "data_file": "/tmp/data.json"
-                        }
-                    }
-                }
-                
-                # Start MCP server and send request
-                docker_cmd = [
-                    "docker", "exec", "-i", "mcp_neo4j_data_modeling",
-                    "sh", "-c", "uvx mcp-neo4j-data-modeling --transport stdio"
-                ]
-                
-                logger.info(f"Starting MCP server: {' '.join(docker_cmd)}")
-                
-                # Send JSON-RPC request to MCP server
-                process = subprocess.Popen(
-                    docker_cmd,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True
-                )
-                
-                # Send initialization, tools list, and modeling requests
-                requests = [init_request, tools_list_request, modeling_request]
-                request_json = "\n".join([json.dumps(req) for req in requests]) + "\n"
-                logger.info(f"Sending MCP requests: initialization, tools/list, and modeling")
-                logger.info(f"Request payload: {request_json}")
-                
-                stdout, stderr = process.communicate(input=request_json, timeout=120)
-                result_returncode = process.returncode
-                
-                if result_returncode != 0:
-                    logger.error(f"MCP server execution failed: {stderr}")
-                    logger.info("Falling back to basic model generation")
-                    return self._generate_fallback_model(data)
-                
-                # Parse MCP server response
-                logger.info("Parsing MCP server response")
-                logger.info(f"Raw MCP stdout: {stdout}")
-                logger.info(f"Raw MCP stderr: {stderr}")
-                
-                try:
-                    # MCP responses might have multiple JSON objects, get the last one
-                    lines = stdout.strip().split('\n')
-                    mcp_response_line = None
-                    
-                    for line in reversed(lines):
-                        if line.strip().startswith('{'):
-                            mcp_response_line = line.strip()
-                            break
-                    
-                    if not mcp_response_line:
-                        logger.error("No valid JSON response found in MCP output")
-                        logger.info("Falling back to basic model generation")
-                        return self._generate_fallback_model(data)
-                    
-                    mcp_response = json.loads(mcp_response_line)
-                    logger.info("✅ MCP server response parsed successfully")
-                    
-                    # Extract result from JSON-RPC response
-                    if 'result' in mcp_response:
-                        model_data = mcp_response['result']
-                        # Enhance MCP response with metadata
-                        enhanced_model = self._enhance_mcp_model(model_data, data)
-                        logger.info(f"Generated MCP-powered Neo4j model with {len(enhanced_model.get('nodes', []))} nodes")
-                        return enhanced_model
-                    else:
-                        logger.error(f"MCP response missing 'result' field: {mcp_response}")
-                        logger.info("Falling back to basic model generation")
-                        return self._generate_fallback_model(data)
-                    
-                except json.JSONDecodeError as e:
-                    logger.error(f"Failed to parse MCP response as JSON: {str(e)}")
-                    logger.info(f"Raw MCP output: {stdout}")
-                    logger.info("Falling back to basic model generation")
-                    return self._generate_fallback_model(data)
-                
-            finally:
-                # Clean up temporary file
-                if os.path.exists(temp_file_path):
-                    os.unlink(temp_file_path)
-                    logger.info("Cleaned up temporary data file")
-                    
-        except subprocess.TimeoutExpired:
-            error_msg = f"{Neo4jErrorCodes.MCP_EXECUTION_ERROR}: MCP server execution timed out"
-            logger.error(error_msg)
-            logger.info("Falling back to basic model generation")
-            return self._generate_fallback_model(data)
-        except Exception as e:
-            error_msg = f"{Neo4jErrorCodes.MCP_CONNECTION_ERROR}: Error calling MCP Neo4j modeling server: {str(e)}"
-            logger.error(error_msg)
-            logger.info("Falling back to basic model generation")
-            return self._generate_fallback_model(data)
-    
-    def _enhance_mcp_model(self, mcp_response: Dict[str, Any], data: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Enhance MCP server response with additional metadata and structure.
-        
-        Args:
-            mcp_response: Response from MCP server
-            data: Original data for context
-            
-        Returns:
-            Enhanced Neo4j model
-        """
-        logger.info("Enhancing MCP model with metadata")
-        
-        from collections import OrderedDict
-        enhanced_model = OrderedDict([
-            ("model_info", {
-                "generated_by": "Neo4j Model Generator (MCP-Powered)",
-                "generated_at": datetime.now().isoformat(),
-                "source_table_columns": data['table_info']['columns'],
-                "total_records": data['metadata']['total_records'],
-                "configuration_applied": False,
-                "mcp_server_used": True
-            }),
-            ("nodes", mcp_response.get('nodes', [])),
-            ("relationships", mcp_response.get('relationships', [])),
-            ("constraints", mcp_response.get('constraints', [])),
-            ("indexes", mcp_response.get('indexes', [])),
-            ("import_queries", mcp_response.get('import_queries', []))
-        ])
-        
-        logger.info("MCP model enhanced successfully")
-        return enhanced_model
-    
-    def _generate_fallback_model(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Generate fallback model when MCP server is unavailable.
-        
-        Args:
-            data: Structured data for modeling
-            
-        Returns:
-            Basic fallback Neo4j model structure
-        """
-        logger.info("Generating fallback Neo4j model structure")
+        logger.info("Generating basic Neo4j model structure")
         
         try:
             columns = data['table_info']['columns']
+            sample_data = data['table_info']['sample_data']
             
             # Analyze columns to suggest node structure
             id_columns = [col for col in columns if 'id' in col.lower()]
@@ -844,24 +587,20 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                           for keyword in ['date', 'time', 'created', 'updated'])]
             url_columns = [col for col in columns if 'url' in col.lower()]
             
-            # Generate basic model with chronological ordering
-            from collections import OrderedDict
-            model = OrderedDict([
-                ("model_info", {
-                    "generated_by": "Neo4j Model Generator (Fallback)",
+            # Generate basic model
+            model = {
+                "model_info": {
+                    "generated_by": "Neo4j Model Generator",
                     "generated_at": datetime.now().isoformat(),
                     "source_table_columns": columns,
-                    "total_records": data['metadata']['total_records'],
-                    "configuration_applied": False,
-                    "mcp_server_used": False,
-                    "fallback_reason": "MCP server unavailable"
-                }),
-                ("nodes", []),
-                ("relationships", []),
-                ("constraints", []),
-                ("indexes", []),
-                ("import_queries", [])
-            ])
+                    "total_records": data['metadata']['total_records']
+                },
+                "nodes": [],
+                "relationships": [],
+                "constraints": [],
+                "indexes": [],
+                "import_queries": []
+            }
             
             # Suggest primary node based on data structure
             primary_node = "Content" if text_columns else "Record"
@@ -916,11 +655,11 @@ class Neo4jModelGenerator(PostgresQueryRunner):
                 "cypher": import_query.strip()
             })
             
-            logger.info(f"Generated fallback Neo4j model with {len(model['nodes'])} nodes")
+            logger.info(f"Generated basic Neo4j model with {len(model['nodes'])} nodes")
             return model
             
         except Exception as e:
-            error_msg = f"{Neo4jErrorCodes.MODEL_GENERATION_ERROR}: Error generating fallback Neo4j model: {str(e)}"
+            error_msg = f"{Neo4jErrorCodes.MODEL_GENERATION_ERROR}: Error generating basic Neo4j model: {str(e)}"
             logger.error(error_msg)
             raise Exception(error_msg) from e
     
@@ -966,120 +705,21 @@ class Neo4jModelGenerator(PostgresQueryRunner):
             query_name: Name of the query
             
         Returns:
-            Model configuration if found and valid, None otherwise
+            Model configuration if found, None otherwise
         """
         logger.info(f"Looking for Neo4j model configuration for query: {query_name}")
         
         try:
             if 'neo4j_model_config' in config and query_name in config['neo4j_model_config']:
                 model_config = config['neo4j_model_config'][query_name]
-                
-                # Validate that the model configuration has required structure
-                if self._validate_model_config(model_config):
-                    logger.info(f"Found valid model configuration for query: {query_name}")
-                    return model_config
-                else:
-                    logger.warning(f"Model configuration for query '{query_name}' is invalid, using default model")
-                    return None
+                logger.info(f"Found model configuration for query: {query_name}")
+                return model_config
             else:
-                logger.info(f"No specific model configuration found for query: {query_name}, using default model")
+                logger.info(f"No specific model configuration found for query: {query_name}, using default")
                 return None
         except Exception as e:
-            logger.warning(f"Error retrieving model configuration: {str(e)}, using default model")
+            logger.warning(f"Error retrieving model configuration: {str(e)}")
             return None
-    
-    def _validate_model_config(self, model_config: Dict[str, Any]) -> bool:
-        """
-        Validate that the model configuration has the required structure.
-        
-        Args:
-            model_config: Model configuration to validate
-            
-        Returns:
-            True if valid, False otherwise
-        """
-        try:
-            # Check if it has nodes definition
-            if 'nodes' not in model_config:
-                logger.warning("Model configuration missing 'nodes' section")
-                return False
-            
-            # Check if nodes is a list and not empty
-            if not isinstance(model_config['nodes'], list) or len(model_config['nodes']) == 0:
-                logger.warning("Model configuration 'nodes' must be a non-empty list")
-                return False
-            
-            # Validate each node has required fields
-            for i, node in enumerate(model_config['nodes']):
-                if not isinstance(node, dict):
-                    logger.warning(f"Node {i} must be a dictionary")
-                    return False
-                
-                if 'label' not in node:
-                    logger.warning(f"Node {i} missing required 'label' field")
-                    return False
-                
-                if 'node_id_property' not in node:
-                    logger.warning(f"Node {i} missing required 'node_id_property' field")
-                    return False
-            
-            logger.info("Model configuration validation passed")
-            return True
-            
-        except Exception as e:
-            logger.warning(f"Error validating model configuration: {str(e)}")
-            return False
-    
-    def _clean_model_output(self, model: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Clean the model output to ensure no duplicate sections and proper chronological ordering.
-        
-        Args:
-            model: Raw model dictionary
-            
-        Returns:
-            Cleaned model dictionary with sections in logical chronological order
-        """
-        logger.info("Cleaning model output to remove duplicates and ensure chronological ordering")
-        
-        try:
-            # Define the sections in proper chronological order
-            ordered_sections = [
-                'model_info',      # 1. Metadata about the model
-                'nodes',           # 2. Node definitions (core structure)
-                'relationships',   # 3. Relationship definitions (core structure)
-                'constraints',     # 4. Database constraints (schema)
-                'indexes',         # 5. Database indexes (schema)
-                'import_queries'   # 6. Import queries (implementation)
-            ]
-            
-            # Create clean model with sections in chronological order
-            cleaned_model = {}
-            for section in ordered_sections:
-                if section in model and model[section]:  # Only include non-empty sections
-                    cleaned_model[section] = model[section]
-            
-            # Log what was cleaned and reordered
-            removed_sections = set(model.keys()) - set(ordered_sections)
-            if removed_sections:
-                logger.info(f"Removed duplicate/unnecessary sections: {', '.join(removed_sections)}")
-            
-            # Log the final section order
-            included_sections = list(cleaned_model.keys())
-            logger.info(f"Model sections in chronological order: {' → '.join(included_sections)}")
-            
-            # Validate the cleaned model has essential sections
-            essential_sections = ['model_info', 'nodes']
-            missing_sections = [section for section in essential_sections if section not in cleaned_model]
-            if missing_sections:
-                logger.warning(f"Cleaned model missing essential sections: {', '.join(missing_sections)}")
-            
-            logger.info(f"Model cleaned and ordered successfully - contains {len(cleaned_model.get('nodes', []))} nodes, {len(cleaned_model.get('relationships', []))} relationships")
-            return cleaned_model
-            
-        except Exception as e:
-            logger.warning(f"Error cleaning model output: {str(e)}, returning original model")
-            return model
 
     def generate_neo4j_model_from_query(self, config_path: str, query_name: str, output_file: str) -> None:
         """
@@ -1090,89 +730,43 @@ class Neo4jModelGenerator(PostgresQueryRunner):
             query_name: Name of query to execute
             output_file: Path to output JSON file
         """
-        logger.info("=" * 80)
-        logger.info(f"STARTING NEO4J MODEL GENERATION")
-        logger.info(f"Query: {query_name}")
-        logger.info(f"Config: {config_path}")
-        logger.info(f"Output: {output_file}")
-        logger.info("=" * 80)
+        logger.info(f"Starting Neo4j model generation from query: {query_name}")
         
         try:
             # Load configuration
-            logger.info("STEP 1: Loading configuration")
             config = load_config(config_path)
-            logger.info(f"Configuration sections found: {list(config.keys())}")
             
             # Check if postgres config exists
             if 'database' not in config or 'postgres' not in config['database']:
                 raise Exception(f"{BaseErrorCodes.MISSING_DB_CONFIG}: PostgreSQL configuration not found in config file")
             
             # Parse database configuration
-            logger.info("STEP 2: Parsing database configuration")
             postgres_config_str = config['database']['postgres']
             db_config = parse_postgres_config(postgres_config_str)
-            logger.info(f"PostgreSQL connection: {db_config['host']}:{db_config['port']}/{db_config['database']}")
             
             # Get query
-            logger.info("STEP 3: Retrieving query")
             query = get_query_from_config(config, query_name)
-            logger.info(f"Query retrieved: {query[:100]}{'...' if len(query) > 100 else ''}")
             
             # Get model configuration
-            logger.info("STEP 4: Analyzing model configuration")
             model_config = self.get_model_config(config, query_name)
             
-            # Log which model type will be generated
-            if model_config:
-                logger.info(f"✅ CONFIGURED MODEL will be used for query '{query_name}'")
-                logger.info(f"Configuration includes {len(model_config.get('nodes', []))} node types")
-                logger.info(f"Configuration includes {len(model_config.get('relationships', []))} relationship types")
-                
-                # Log chunking configuration if present
-                chunking_nodes = [node for node in model_config.get('nodes', []) if node.get('chunking_enabled', False)]
-                if chunking_nodes:
-                    logger.info(f"🧠 CHUNKING ENABLED for {len(chunking_nodes)} node type(s)")
-                    for node in chunking_nodes:
-                        logger.info(f"   - {node['label']} will chunk field '{node.get('source_content_field')}'")
-            else:
-                logger.info(f"⚠️  DEFAULT MODEL will be generated for query '{query_name}' (no configuration found)")
-            
             # Execute query using parent class functionality
-            logger.info("STEP 5: Executing PostgreSQL query")
             with self.get_db_connection(db_config) as connection:
                 results, column_names = self.execute_query(connection, query)
-            logger.info(f"Query executed successfully: {len(results)} rows, {len(column_names)} columns")
-            logger.info(f"Columns: {', '.join(column_names)}")
             
             # Prepare data for modeling
-            logger.info("STEP 6: Preparing data for modeling")
             modeling_data = self.prepare_data_for_modeling(results, column_names)
-            logger.info(f"Data prepared: {modeling_data['metadata']['total_records']} records")
             
-            # Generate Neo4j model - either configured or default, but never both
-            logger.info("STEP 7: Generating Neo4j model")
+            # Generate Neo4j model using MCP with configuration
             neo4j_model = self.call_mcp_neo4j_modeling(modeling_data, model_config)
-            logger.info(f"Model generated with {len(neo4j_model.get('nodes', []))} nodes, {len(neo4j_model.get('relationships', []))} relationships")
-            
-            # Validate and clean the model before saving
-            logger.info("STEP 8: Cleaning and validating model")
-            cleaned_model = self._clean_model_output(neo4j_model)
             
             # Save model to file
-            logger.info("STEP 9: Saving model to file")
-            self.save_neo4j_model(cleaned_model, output_file)
+            self.save_neo4j_model(neo4j_model, output_file)
             
-            logger.info("=" * 80)
-            logger.info("✅ NEO4J MODEL GENERATION COMPLETED SUCCESSFULLY")
-            logger.info(f"📁 Model saved to: {output_file}")
-            logger.info(f"📋 Log file: {getattr(self, 'log_file_path', 'console only')}")
-            logger.info("=" * 80)
+            logger.info("Neo4j model generation completed successfully")
             
         except Exception as e:
-            logger.error("=" * 80)
-            logger.error("❌ NEO4J MODEL GENERATION FAILED")
-            logger.error(f"Error: {str(e)}")
-            logger.error("=" * 80)
+            logger.error(f"Neo4j model generation failed: {str(e)}")
             raise
 
 

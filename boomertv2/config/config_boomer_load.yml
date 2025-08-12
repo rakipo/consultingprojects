@@ -19,14 +19,14 @@ queries:
 # Neo4j Data Loading Configuration
 neo4j_load_config:
   # Batch processing settings
-  batch_size: 1000
+  batch_size: 10
   
   # Vector embedding settings
   embedding:
     model_name: "all-MiniLM-L6-v2"
     chunk_size: 512
     chunk_overlap: 50
-    use_llm_chunking: true
+    use_llm_chunking: false
     content_properties:
       - "content"
       - "summary"

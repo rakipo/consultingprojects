@@ -30,18 +30,17 @@
       "node_id_property": "id",
       "properties": [
         {
-          "name": "id",
+          "name": "url",
           "type": "string",
           "unique": true
         },
         {
-          "name": "title",
-          "type": "string",
-          "indexed": true
+          "name": "postgres_id",
+          "type": "string"
         },
         {
-          "name": "content",
-          "type": "text",
+          "name": "title",
+          "type": "string",
           "indexed": true
         },
         {
@@ -51,20 +50,12 @@
         {
           "name": "publish_date",
           "type": "datetime"
-        },
-        {
-          "name": "word_count",
-          "type": "integer"
-        },
-        {
-          "name": "is_latest",
-          "type": "boolean"
         }
       ],
       "description": "Node representing Article entities"
     },
     {
-      "label": "Website",
+      "label": "Domain",
       "node_id_property": "domain",
       "properties": [
         {
@@ -75,15 +66,10 @@
         },
         {
           "name": "site_name",
-          "type": "string",
-          "indexed": true,
-          "alias": "name"
+          "type": "string"
         }
       ],
-      "description": "Node representing Website entities",
-      "multiple_labels": [
-        "Source"
-      ]
+      "description": "Node representing Website entities"
     },
     {
       "label": "Author",
@@ -99,12 +85,6 @@
       "end_node": "Website",
       "start_property": "domain",
       "end_property": "domain",
-      "properties": [
-        {
-          "name": "url",
-          "type": "string"
-        }
-      ],
       "description": "Relationship PUBLISHED_ON from Article to Website"
     },
     {

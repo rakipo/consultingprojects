@@ -39,9 +39,8 @@ services:
       - NEO4J_DATABASE=neo4j
     command: >
       sh -c "
-        apt-get update &&
-        pip install uv &&
-        uvx mcp-neo4j-cypher@latest
+        apt-get update && apt-get install -y git &&
+        pip install git+https://github.com/neo4j-contrib/mcp-neo4j.git#subdirectory=servers/mcp-neo4j-cypher &&
         echo 'Official Neo4j MCP Cypher server installed and ready' &&
         sleep infinity
       "
@@ -66,9 +65,8 @@ services:
       - ./mcp-neo4j-data:/app/data  # For data exchange
     command: >
       sh -c "
-        apt-get update &&
-        pip install uv &&
-        uvx mcp-neo4j-data-modeling@latest &&
+        apt-get update && apt-get install -y git &&
+        pip install git+https://github.com/neo4j-contrib/mcp-neo4j.git#subdirectory=servers/mcp-neo4j-data-modeling &&
         echo 'Official Neo4j MCP Data Modeling server installed and ready' &&
         sleep infinity
       "
