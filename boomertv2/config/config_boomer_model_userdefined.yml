@@ -7,14 +7,21 @@ database:
     user: serptrend_user
     password: SERPTREND_1349_SCRAPING
   neo4j: |
+    # host: ai50-neo4j-db-server-987.westus2.cloudapp.azure.com
     host: localhost
     port: 7687
     database: neo4j
     user: neo4j
+    # password: jhF7&asjkldfoie489w
     password: password123
 
 queries:
-  trending: 'SELECT * from structured_content limit 2;'
+  trending: 'SELECT * from structured_content WHERE status_neo4j = false OR status_neo4j IS NULL;'
+
+# Batch Processing Configuration
+batch_config:
+  batch_size: 5  # Process 5 records at a time
+  enable_status_tracking: true  # Update status_neo4j after each batch
 
 # Text Chunking Configuration
 chunking_config:

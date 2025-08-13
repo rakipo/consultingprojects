@@ -1,0 +1,42 @@
+# Neo4j Database Configuration
+# This file contains the connection credentials for the remote Neo4j database
+# 
+# WARNING: Keep this file secure and never commit it to version control
+# Consider using environment variables or a secure secrets manager in production
+
+neo4j:
+  # Neo4j connection URI (e.g., bolt+s://your-server.com:7687)
+  # For remote connections, use bolt+s:// for secure connections
+  uri: "bolt://ai50-neo4j-db-server-987.westus2.cloudapp.azure.com:7687"
+  
+  # Neo4j username
+  username: "neo4j"
+  
+  # Neo4j password
+  # WARNING: Store this securely in production environments
+  password: "jhF7&asjkldfoie489w"
+  
+  # Database name (default is 'neo4j')
+  database: "neo4j"
+  
+  # Connection timeout in seconds (optional)
+  connection_timeout: 30
+  
+  # Maximum connection pool size (optional)
+  max_connection_pool_size: 50
+
+# Logging configuration (optional)
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+  
+# Script behavior configuration (optional)
+script:
+  # Whether to show detailed progress information
+  verbose: true
+  
+  # Whether to ask for confirmation before resetting
+  require_confirmation: true
+  
+  # Transaction batch size for large deletions
+  batch_size: 1000

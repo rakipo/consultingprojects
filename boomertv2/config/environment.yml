@@ -1,4 +1,5 @@
-name: postgres-neo4j-pipeline
+# name: postgres-neo4j-pipeline
+name: agentic-rag-neo4j-new
 channels:
   - conda-forge
   - defaults

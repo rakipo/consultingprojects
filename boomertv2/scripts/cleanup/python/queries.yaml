@@ -1,0 +1,136 @@
+# Neo4j Database Reset Queries Configuration
+# This file contains all the Cypher queries used for resetting the Neo4j database
+# 
+# The queries are organized by operation type and can be customized as needed
+
+# Data deletion queries
+delete_relationships: |
+  MATCH ()-[r]-()
+  CALL {
+    WITH r
+    DELETE r
+  } IN TRANSACTIONS OF 1000 ROWS;
+
+delete_nodes: |
+  MATCH (n)
+  CALL {
+    WITH n
+    DELETE n
+  } IN TRANSACTIONS OF 1000 ROWS;
+
+# Index management queries
+drop_indexes: |
+  SHOW INDEXES YIELD name, type
+  WHERE type <> 'LOOKUP' AND NOT name STARTS WITH '__'
+  WITH collect(name) AS indexNames
+  UNWIND indexNames AS indexName
+  CALL {
+    WITH indexName
+    EXECUTE 'DROP INDEX ' + indexName + ' IF EXISTS'
+  }
+  RETURN count(*) AS droppedIndexes;
+
+# Fallback indexes to drop if the dynamic query fails
+fallback_indexes:
+  - "article_title_text"
+  - "article_content_text"
+  - "article_publish_date_range"
+  - "article_id_text"
+  - "website_site_name_text"
+  - "website_domain_text"
+  - "chunk_embedding_vector"
+  - "chunk_embeddings"
+  - "author_name_text"
+  - "category_name_text"
+  - "tag_name_text"
+
+# Constraint management queries
+drop_constraints: |
+  SHOW CONSTRAINTS YIELD name
+  WHERE NOT name STARTS WITH '__'
+  WITH collect(name) AS constraintNames
+  UNWIND constraintNames AS constraintName
+  CALL {
+    WITH constraintName
+    EXECUTE 'DROP CONSTRAINT ' + constraintName + ' IF EXISTS'
+  }
+  RETURN count(*) AS droppedConstraints;
+
+# Fallback constraints to drop if the dynamic query fails
+fallback_constraints:
+  - "article_id_unique"
+  - "article_url_unique"
+  - "website_domain_unique"
+  - "author_name_unique"
+  - "chunk_chunk_id_unique"
+  - "category_name_unique"
+  - "tag_name_unique"
+
+# Verification queries
+verification:
+  count_nodes: "MATCH (n) RETURN count(n) AS count;"
+  count_relationships: "MATCH ()-[r]-() RETURN count(r) AS count;"
+  list_indexes: "SHOW INDEXES YIELD name, type RETURN name, type;"
+  list_constraints: "SHOW CONSTRAINTS YIELD name RETURN name;"
+
+# Additional utility queries (optional)
+utilities:
+  # Check database size
+  database_size: |
+    CALL dbms.queryJmx("neo4j.metrics:name=neo4j.page_cache_*") 
+    YIELD attributes 
+    RETURN attributes;
+  
+  # Check available databases
+  list_databases: "SHOW DATABASES;"
+  
+  # Check current database
+  current_database: "CALL db.info() YIELD name RETURN name;"
+  
+  # Check Neo4j version
+  version: "CALL dbms.components() YIELD name, versions, edition RETURN name, versions[0] as version, edition;"
+
+# Custom queries for specific node types (optional)
+# These can be used to delete specific types of nodes if needed
+custom_deletions:
+  delete_articles: |
+    MATCH (a:Article)
+    CALL {
+      WITH a
+      DELETE a
+    } IN TRANSACTIONS OF 1000 ROWS;
+  
+  delete_websites: |
+    MATCH (w:Website)
+    CALL {
+      WITH w
+      DELETE w
+    } IN TRANSACTIONS OF 1000 ROWS;
+  
+  delete_authors: |
+    MATCH (a:Author)
+    CALL {
+      WITH a
+      DELETE a
+    } IN TRANSACTIONS OF 1000 ROWS;
+  
+  delete_chunks: |
+    MATCH (c:Chunk)
+    CALL {
+      WITH c
+      DELETE c
+    } IN TRANSACTIONS OF 1000 ROWS;
+  
+  delete_categories: |
+    MATCH (c:Category)
+    CALL {
+      WITH c
+      DELETE c
+    } IN TRANSACTIONS OF 1000 ROWS;
+  
+  delete_tags: |
+    MATCH (t:Tag)
+    CALL {
+      WITH t
+      DELETE t
+    } IN TRANSACTIONS OF 1000 ROWS;

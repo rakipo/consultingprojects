@@ -1,0 +1,16 @@
+# Python dependencies for Neo4j Database Reset Script
+# 
+# Core dependencies
+neo4j>=5.0.0,<6.0.0
+PyYAML>=6.0,<7.0
+
+# Optional dependencies for enhanced functionality
+# Uncomment if you need additional features
+# cryptography>=3.4.0  # For secure password handling
+# python-dotenv>=0.19.0  # For environment variable loading
+# click>=8.0.0  # For enhanced CLI (alternative to argparse)
+
+# Development dependencies (optional)
+# pytest>=6.0.0  # For testing
+# black>=21.0.0  # For code formatting
+# flake8>=3.9.0  # For linting
