@@ -1,0 +1,88 @@
+{
+  "source_metrics": {
+    "pull_query": "SELECT * from structured_content where status_neo4j=false ;",
+    "records_pulled": 52
+  },
+  "batch_metrics": {
+    "total_batches": 6,
+    "completed_batches": 6,
+    "failed_batches": 0,
+    "total_records_processed": 0,
+    "batch_errors": []
+  },
+  "load_metrics": {
+    "nodes_created": {
+      "Article": 30,
+      "Website": 3,
+      "Author": 8,
+      "Chunk": 929,
+      "Tag": 41
+    },
+    "relationships_created": {
+      "HAS_CHUNK": 929,
+      "PUBLISHED_ON": 30,
+      "WRITTEN_BY": 10,
+      "TAGGED_WITH": 102
+    },
+    "nodes_failed": {},
+    "relationships_failed": {},
+    "chunks_created": 929,
+    "embeddings_generated": 929,
+    "total_records_processed": 30,
+    "errors": []
+  },
+  "before_metrics": {
+    "nodes_existing_count": {
+      "Article": 60,
+      "Website": 21,
+      "Author": 16,
+      "Chunk": 1702,
+      "Tag": 117
+    },
+    "relationships_existing_count": {
+      "HAS_CHUNK": 1702,
+      "PUBLISHED_ON": 60,
+      "WRITTEN_BY": 17,
+      "TAGGED_WITH": 222
+    }
+  },
+  "after_metrics": {
+    "nodes_existing_count": {
+      "Article": 90,
+      "Website": 24,
+      "Author": 24,
+      "Chunk": 2631,
+      "Tag": 158
+    },
+    "relationships_existing_count": {
+      "HAS_CHUNK": 2631,
+      "PUBLISHED_ON": 90,
+      "WRITTEN_BY": 27,
+      "TAGGED_WITH": 324
+    }
+  },
+  "adhoc_tests": {
+    "orphan_nodes": {
+      "Article": 0,
+      "Website": 0,
+      "Author": 0,
+      "Chunk": 0,
+      "Tag": 0
+    },
+    "orphan_relationships": {},
+    "data_integrity_issues": [
+      "Orphan relationship check error: ERR_L002: Cypher execution failed: {code: Neo.ClientError.Statement.SyntaxError} {message: Type mismatch: r defined with conflicting type Relationship (expected Node) (line 3, column 51 (offset: 78))\n\"                WHERE NOT EXISTS((r)-[:HAS_CHUNK]-())\"\n                                   ^}",
+      "Found 90 articles without content"
+    ],
+    "test_results": {}
+  },
+  "cypher_usage": {},
+  "failure_summary": {
+    "total_batch_failures": 0,
+    "total_record_failures": 0,
+    "total_node_failures": 0,
+    "total_relationship_failures": 0,
+    "total_constraint_violations": 0
+  },
+  "timestamp": "2025-08-13T16:35:06.130457"
+}

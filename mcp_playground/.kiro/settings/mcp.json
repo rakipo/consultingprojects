@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "mcp-vector-cypher-search": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "mcp_vector_cypher_search",
+        "python",
+        "-u",
+        "/app/mcp_vector_cypher_search.py"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "vector_cypher_search",
+        "debug_configuration",
+        "configure_search_parameters"
+      ]
+    }
+  }
+}

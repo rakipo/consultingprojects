@@ -31,7 +31,7 @@ try:
         parse_postgres_config,
         get_query_from_config
     )
-    from .neo4j_data_loader import Neo4jDataLoader, Neo4jLoaderErrorCodes
+    from .neo4j_data_loader import Neo4jDataLoader
 except ImportError:
     # Fallback for direct execution
     from postgres_query_runner import (
@@ -41,38 +41,14 @@ except ImportError:
         parse_postgres_config,
         get_query_from_config
     )
-    from neo4j_data_loader import Neo4jDataLoader, Neo4jLoaderErrorCodes
-
-# Import MCP clients (available globally)
-try:
-    from mcp_client import get_mcp_cypher_client, get_mcp_vector_search_client
-except ImportError:
-    get_mcp_cypher_client = None
-    get_mcp_vector_search_client = None
+    from neo4j_data_loader import Neo4jDataLoader
 
 # Configure logging
-import os
-from datetime import datetime
-
-# Create logs directory if it doesn't exist
-log_dir = "output/logs"
-os.makedirs(log_dir, exist_ok=True)
-
-# Create log filename with timestamp
-log_filename = f"batch_loader_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-log_filepath = os.path.join(log_dir, log_filename)
-
-# Configure logging to both file and console
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - [%(funcName)s:%(lineno)d] - %(message)s',
-    handlers=[
-        logging.FileHandler(log_filepath),
-        logging.StreamHandler()  # This keeps console output
-    ]
+    format='%(asctime)s - %(name)s - %(levelname)s - [%(funcName)s:%(lineno)d] - %(message)s'
 )
 logger = logging.getLogger(__name__)
-logger.info(f"Logging to file: {log_filepath}")
 
 # Extended error codes for batch loading
 class BatchLoaderErrorCodes:
@@ -94,29 +70,6 @@ class BatchNeo4jLoader(Neo4jDataLoader):
         """Initialize the Batch Neo4j Data Loader."""
         super().__init__()
         self.batch_size = 10  # Default batch size
-        
-        # Initialize MCP clients
-        self.mcp_cypher_client = None
-        self.mcp_vector_client = None
-        try:
-            if get_mcp_cypher_client:
-                self.mcp_cypher_client = get_mcp_cypher_client()
-            if get_mcp_vector_search_client:
-                self.mcp_vector_client = get_mcp_vector_search_client()
-            if self.mcp_cypher_client:
-                logger.info("MCP Cypher client initialized successfully")
-            if self.mcp_vector_client:
-                logger.info("MCP Vector Search client initialized successfully")
-        except Exception as e:
-            logger.warning(f"Failed to initialize MCP clients: {str(e)}")
-        
-        # Source PostgreSQL metrics
-        self.source_metrics = {
-            "pull_query": "",
-            "records_pulled": 0
-        }
-        
-        # Batch processing metrics
         self.batch_metrics = {
             "total_batches": 0,
             "completed_batches": 0,
@@ -124,305 +77,7 @@ class BatchNeo4jLoader(Neo4jDataLoader):
             "total_records_processed": 0,
             "batch_errors": []
         }
-        
-        # Current run metrics (what was created in this run)
-        self.load_metrics = {
-            "nodes_created": {},
-            "relationships_created": {},
-            "nodes_failed": {},
-            "relationships_failed": {},
-            "chunks_created": 0,
-            "embeddings_generated": 0,
-            "total_records_processed": 0,
-            "errors": []
-        }
-        
-        # Failure tracking system
-        self.failure_tracker = {
-            "batch_failures": [],
-            "record_failures": [],
-            "node_failures": [],
-            "relationship_failures": [],
-            "constraint_violations": [],
-            "data_validation_errors": []
-        }
-        
-        # Before run metrics (existing counts in Neo4j)
-        self.before_metrics = {
-            "nodes_existing_count": {},
-            "relationships_existing_count": {}
-        }
-        
-        # After run metrics (total counts in Neo4j after run)
-        self.after_metrics = {
-            "nodes_current": {},
-            "relationships_current": {}
-        }
-        
-        # Adhoc tests for data integrity
-        self.adhoc_tests = {
-            "orphan_nodes": {},
-            "orphan_relationships": {},
-            "data_integrity_issues": [],
-            "test_results": {}
-        }
-        
-        self.cypher_usage = {}
         logger.info("Batch Neo4j Data Loader initialized")
-    
-    def get_neo4j_counts(self) -> Dict[str, Dict[str, int]]:
-        """
-        Get current node and relationship counts from Neo4j.
-        
-        Returns:
-            Dictionary with node and relationship counts
-        """
-        try:
-            counts = {
-                "nodes_existing_count": {},
-                "relationships_existing_count": {}
-            }
-            
-            # Get node counts
-            node_labels = ["Article", "Website", "Author", "Chunk", "Tag"]
-            for label in node_labels:
-                cypher = f"MATCH (n:{label}) RETURN count(n) as count"
-                result = self.execute_cypher_query(cypher, {})
-                if result and "records" in result and len(result["records"]) > 0:
-                    counts["nodes_existing_count"][label] = result["records"][0]["count"]
-                else:
-                    counts["nodes_existing_count"][label] = 0
-            
-            # Get relationship counts
-            rel_types = ["HAS_CHUNK", "PUBLISHED_ON", "WRITTEN_BY", "TAGGED_WITH"]
-            for rel_type in rel_types:
-                cypher = f"MATCH ()-[r:{rel_type}]->() RETURN count(r) as count"
-                result = self.execute_cypher_query(cypher, {})
-                if result and "records" in result and len(result["records"]) > 0:
-                    counts["relationships_existing_count"][rel_type] = result["records"][0]["count"]
-                else:
-                    counts["relationships_existing_count"][rel_type] = 0
-            
-            return counts
-            
-        except Exception as e:
-            logger.error(f"Error getting Neo4j counts: {str(e)}")
-            return {
-                "nodes_existing_count": {},
-                "relationships_existing_count": {}
-            }
-    
-    def calculate_actual_changes(self) -> None:
-        """
-        Calculate the actual changes made during this run by comparing before and after metrics.
-        This provides accurate counts of what was actually added to the database.
-        """
-        try:
-            # Calculate actual node changes
-            actual_nodes_created = {}
-            for node_label in ['Article', 'Website', 'Author', 'Chunk', 'Tag']:
-                before_count = self.before_metrics.get("nodes_existing_count", {}).get(node_label, 0)
-                after_count = self.after_metrics.get("nodes_existing_count", {}).get(node_label, 0)
-                actual_nodes_created[node_label] = after_count - before_count
-            
-            # Calculate actual relationship changes
-            actual_relationships_created = {}
-            for rel_type in ['HAS_CHUNK', 'PUBLISHED_ON', 'WRITTEN_BY', 'TAGGED_WITH']:
-                before_count = self.before_metrics.get("relationships_existing_count", {}).get(rel_type, 0)
-                after_count = self.after_metrics.get("relationships_existing_count", {}).get(rel_type, 0)
-                actual_relationships_created[rel_type] = after_count - before_count
-            
-            # Update load_metrics with actual changes
-            self.load_metrics["nodes_created"] = actual_nodes_created
-            self.load_metrics["relationships_created"] = actual_relationships_created
-            
-            # Calculate total chunks and embeddings based on actual changes
-            self.load_metrics["chunks_created"] = actual_nodes_created.get("Chunk", 0)
-            self.load_metrics["embeddings_generated"] = actual_nodes_created.get("Chunk", 0)
-            
-            logger.info(f"Actual changes calculated: {actual_nodes_created} nodes, {actual_relationships_created} relationships")
-            
-        except Exception as e:
-            logger.error(f"Error calculating actual changes: {str(e)}")
-            # Keep existing load_metrics if calculation fails
-    
-    def run_adhoc_tests(self) -> None:
-        """
-        Run adhoc tests to check data integrity and identify issues.
-        """
-        logger.info("Running adhoc tests for data integrity...")
-        
-        try:
-            # Test 1: Check for orphan nodes (nodes without relationships)
-            self.check_orphan_nodes()
-            
-            # Test 2: Check for orphan relationships (relationships pointing to non-existent nodes)
-            self.check_orphan_relationships()
-            
-            # Test 3: Check for data consistency issues
-            self.check_data_consistency()
-            
-            # Test 4: Check for duplicate nodes
-            self.check_duplicate_nodes()
-            
-            logger.info("Adhoc tests completed")
-            
-        except Exception as e:
-            logger.error(f"Error running adhoc tests: {str(e)}")
-            self.adhoc_tests["data_integrity_issues"].append(f"Test execution error: {str(e)}")
-    
-    def check_orphan_nodes(self) -> None:
-        """
-        Check for orphan nodes (nodes without any relationships).
-        """
-        try:
-            node_labels = ["Article", "Website", "Author", "Chunk", "Tag"]
-            
-            for label in node_labels:
-                # Find nodes without any relationships
-                cypher = f"""
-                MATCH (n:{label})
-                WHERE NOT EXISTS((n)-[]-())
-                RETURN count(n) as orphan_count
-                """
-                result = self.execute_cypher_query(cypher, {})
-                
-                if result and "records" in result and len(result["records"]) > 0:
-                    orphan_count = result["records"][0]["orphan_count"]
-                    self.adhoc_tests["orphan_nodes"][label] = orphan_count
-                    
-                    if orphan_count > 0:
-                        logger.warning(f"Found {orphan_count} orphan {label} nodes")
-                        
-                        # Get details of orphan nodes (first 5 for logging)
-                        detail_cypher = f"""
-                        MATCH (n:{label})
-                        WHERE NOT EXISTS((n)-[]-())
-                        RETURN n LIMIT 5
-                        """
-                        detail_result = self.execute_cypher_query(detail_cypher, {})
-                        
-                        if detail_result and "records" in detail_result:
-                            orphan_details = []
-                            for node in detail_result["records"]:
-                                if 'n' in node:
-                                    node_data = dict(node['n'])
-                                    orphan_details.append(node_data)
-                            
-                            self.adhoc_tests["test_results"][f"{label}_orphan_details"] = orphan_details
-                else:
-                    self.adhoc_tests["orphan_nodes"][label] = 0
-                    
-        except Exception as e:
-            logger.error(f"Error checking orphan nodes: {str(e)}")
-            self.adhoc_tests["data_integrity_issues"].append(f"Orphan node check error: {str(e)}")
-    
-    def check_orphan_relationships(self) -> None:
-        """
-        Check for orphan relationships (relationships pointing to non-existent nodes).
-        """
-        try:
-            rel_types = ["HAS_CHUNK", "PUBLISHED_ON", "WRITTEN_BY", "TAGGED_WITH"]
-            
-            for rel_type in rel_types:
-                # Find relationships where start or end node doesn't exist
-                cypher = f"""
-                MATCH ()-[r:{rel_type}]->()
-                WHERE NOT EXISTS((r)-[:{rel_type}]-())
-                RETURN count(r) as orphan_rel_count
-                """
-                result = self.execute_cypher_query(cypher, {})
-                
-                if result and "records" in result and len(result["records"]) > 0:
-                    orphan_count = result["records"][0]["orphan_rel_count"]
-                    self.adhoc_tests["orphan_relationships"][rel_type] = orphan_count
-                    
-                    if orphan_count > 0:
-                        logger.warning(f"Found {orphan_count} orphan {rel_type} relationships")
-                else:
-                    self.adhoc_tests["orphan_relationships"][rel_type] = 0
-                    
-        except Exception as e:
-            logger.error(f"Error checking orphan relationships: {str(e)}")
-            self.adhoc_tests["data_integrity_issues"].append(f"Orphan relationship check error: {str(e)}")
-    
-    def check_data_consistency(self) -> None:
-        """
-        Check for data consistency issues.
-        """
-        try:
-            # Check 1: Articles without content
-            cypher = """
-            MATCH (a:Article)
-            WHERE a.content IS NULL OR a.content = ""
-            RETURN count(a) as empty_content_count
-            """
-            result = self.execute_cypher_query(cypher, {})
-            if result and "records" in result and len(result["records"]) > 0:
-                empty_count = result["records"][0]["empty_content_count"]
-                if empty_count > 0:
-                    self.adhoc_tests["data_integrity_issues"].append(f"Found {empty_count} articles without content")
-            
-            # Check 2: Chunks without embeddings
-            cypher = """
-            MATCH (c:Chunk)
-            WHERE c.embedding IS NULL
-            RETURN count(c) as no_embedding_count
-            """
-            result = self.execute_cypher_query(cypher, {})
-            if result and "records" in result and len(result["records"]) > 0:
-                no_embedding_count = result["records"][0]["no_embedding_count"]
-                if no_embedding_count > 0:
-                    self.adhoc_tests["data_integrity_issues"].append(f"Found {no_embedding_count} chunks without embeddings")
-            
-            # Check 3: Articles without chunks
-            cypher = """
-            MATCH (a:Article)
-            WHERE NOT EXISTS((a)-[:HAS_CHUNK]->())
-            RETURN count(a) as no_chunks_count
-            """
-            result = self.execute_cypher_query(cypher, {})
-            if result and "records" in result and len(result["records"]) > 0:
-                no_chunks_count = result["records"][0]["no_chunks_count"]
-                if no_chunks_count > 0:
-                    self.adhoc_tests["data_integrity_issues"].append(f"Found {no_chunks_count} articles without chunks")
-                    
-        except Exception as e:
-            logger.error(f"Error checking data consistency: {str(e)}")
-            self.adhoc_tests["data_integrity_issues"].append(f"Data consistency check error: {str(e)}")
-    
-    def check_duplicate_nodes(self) -> None:
-        """
-        Check for duplicate nodes based on unique properties.
-        """
-        try:
-            # Check for duplicate articles by URL
-            cypher = """
-            MATCH (a:Article)
-            WITH a.url as url, count(a) as count
-            WHERE count > 1
-            RETURN url, count
-            """
-            result = self.execute_cypher_query(cypher, {})
-            if result and "records" in result and len(result["records"]) > 0:
-                duplicate_articles = len(result["records"])
-                self.adhoc_tests["data_integrity_issues"].append(f"Found {duplicate_articles} duplicate article URLs")
-            
-            # Check for duplicate websites by domain
-            cypher = """
-            MATCH (w:Website)
-            WITH w.domain as domain, count(w) as count
-            WHERE count > 1
-            RETURN domain, count
-            """
-            result = self.execute_cypher_query(cypher, {})
-            if result and "records" in result and len(result["records"]) > 0:
-                duplicate_websites = len(result["records"])
-                self.adhoc_tests["data_integrity_issues"].append(f"Found {duplicate_websites} duplicate website domains")
-                
-        except Exception as e:
-            logger.error(f"Error checking duplicate nodes: {str(e)}")
-            self.adhoc_tests["data_integrity_issues"].append(f"Duplicate node check error: {str(e)}")
     
     def get_batch_config(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -753,7 +408,7 @@ class BatchNeo4jLoader(Neo4jDataLoader):
                                 'chunk_position': chunk['chunk_position'],
                                 'chunk_order': chunk['chunk_order'],
                                 'embedding': embeddings[i],
-                                'source_id': record.get('id'),  # Link back to original content
+                                'content_id': record.get('id'),  # Link back to original content
                                 'source_record': record
                             }
                             chunk_records.append(chunk_record)
@@ -819,13 +474,6 @@ class BatchNeo4jLoader(Neo4jDataLoader):
                         
                     except Exception as e:
                         failed_count += 1
-                        # Track the failure with detailed information
-                        self.track_node_failure(
-                            node_label=node_label,
-                            node_data=record,
-                            error=str(e),
-                            postgres_column=node_id_property
-                        )
                         logger.warning(f"Failed to create {node_label} node: {str(e)}")
                 
                 # Update metrics (accumulate instead of overwrite)
@@ -896,13 +544,6 @@ class BatchNeo4jLoader(Neo4jDataLoader):
                         
                     except Exception as e:
                         failed_count += 1
-                        # Track the failure with detailed information
-                        self.track_relationship_failure(
-                            relationship_type=rel_type,
-                            source_data={start_property: start_value},
-                            target_data={end_property: end_value},
-                            error=str(e)
-                        )
                         logger.warning(f"Failed to create {rel_type} relationship: {str(e)}")
                 
                 # Update metrics (accumulate instead of overwrite)
@@ -936,7 +577,7 @@ class BatchNeo4jLoader(Neo4jDataLoader):
             
             for chunk_record in chunk_records:
                 try:
-                    article_id = chunk_record.get('source_id')
+                    article_id = chunk_record.get('content_id')
                     chunk_id = chunk_record.get('chunk_id')
                     chunk_order = chunk_record.get('chunk_order', 0)
                     
@@ -1101,75 +742,6 @@ class BatchNeo4jLoader(Neo4jDataLoader):
             logger.error(error_msg)
             raise Exception(error_msg) from e
     
-    def generate_cypher_with_mcp(self, query_request: str) -> str:
-        """
-        Generate Cypher query using MCP Cypher server.
-        
-        Args:
-            query_request: Natural language request for Cypher query
-            
-        Returns:
-            Generated Cypher query
-        """
-        if self.mcp_cypher_client:
-            try:
-                return self.mcp_cypher_client.call_mcp_cypher_server(query_request)
-            except Exception as e:
-                logger.error(f"Error calling MCP Cypher server: {str(e)}")
-        
-        # Fallback to basic query generation
-        logger.warning("Using fallback Cypher generation")
-        return self._generate_basic_cypher(query_request)
-    
-    def search_with_mcp_vector(self, question: str, top_k: int = 5) -> str:
-        """
-        Generate vector search query using MCP Vector Search server.
-        
-        Args:
-            question: Natural language question
-            top_k: Number of top results
-            
-        Returns:
-            Vector search Cypher query
-        """
-        if self.mcp_vector_client:
-            try:
-                return self.mcp_vector_client.call_mcp_vector_search(question, top_k)
-            except Exception as e:
-                logger.error(f"Error calling MCP Vector Search server: {str(e)}")
-        
-        # Fallback to basic vector search
-        logger.warning("Using fallback vector search generation")
-        return f"""
-        MATCH (c:Chunk)
-        WHERE c.embedding IS NOT NULL
-        RETURN c.chunk_text, c.chunk_id
-        LIMIT {top_k}
-        """
-    
-    def _generate_basic_cypher(self, query_request: str) -> str:
-        """
-        Generate basic Cypher query (fallback when MCP is not available).
-        
-        Args:
-            query_request: Request description
-            
-        Returns:
-            Basic Cypher query
-        """
-        query_lower = query_request.lower()
-        
-        if "create article" in query_request.lower():
-            return "MERGE (n:Article {id: $id}) SET n += $properties"
-        elif "create relationship" in query_request.lower():
-            return "MATCH (a), (b) WHERE a.id = $start_id AND b.id = $end_id MERGE (a)-[r:RELATES_TO]->(b)"
-        elif "find" in query_request.lower() or "search" in query_request.lower():
-            return "MATCH (n) WHERE n.title CONTAINS $search_term RETURN n LIMIT 10"
-        elif "count" in query_request.lower():
-            return "MATCH (n) RETURN count(n) as total_count"
-        else:
-            return "MATCH (n) RETURN n LIMIT 10"
-    
     def get_batch_query(self, base_query: str, offset: int, limit: int) -> str:
         """
         Modify the base query to include LIMIT and OFFSET for batch processing.
@@ -1327,7 +899,7 @@ class BatchNeo4jLoader(Neo4jDataLoader):
                             {"name": "chunk_text", "type": "text"},
                             {"name": "chunk_position", "type": "integer"},
                             {"name": "chunk_order", "type": "integer"},
-                            {"name": "source_id", "type": "string"},
+                            {"name": "content_id", "type": "string"},
                             {"name": "embedding", "type": "vector", "vector_dimension": 384, "vector_similarity": "cosine"}
                         ]
                     }]
@@ -1392,14 +964,8 @@ class BatchNeo4jLoader(Neo4jDataLoader):
             # Get base query
             base_query = get_query_from_config(config, 'trending')
             
-            # Store source metrics
-            self.source_metrics["pull_query"] = base_query
-            self.source_metrics["records_pulled"] = 0  # Will be updated after count
-            
             # Get total record count
             total_records = self.get_total_record_count(db_config, base_query)
-            self.source_metrics["records_pulled"] = total_records
-            
             if total_records == 0:
                 logger.info("No records to process")
                 return
@@ -1416,54 +982,27 @@ class BatchNeo4jLoader(Neo4jDataLoader):
             # Initialize Neo4j connection
             self.initialize_neo4j_connection(config)
             
-            # Get before run metrics (existing counts in Neo4j)
-            logger.info("Getting existing Neo4j counts before run...")
-            self.before_metrics = self.get_neo4j_counts()
-            
             # Process batches
             for batch_num in range(1, total_batches + 1):
                 offset = (batch_num - 1) * self.batch_size
                 
-                try:
-                    success, record_ids = self.process_batch(
-                        config, model, db_config, base_query, offset, batch_num
-                    )
-                    
-                    if success:
-                        self.batch_metrics["completed_batches"] += 1
-                        self.load_metrics["total_records_processed"] += len(record_ids)
-                    else:
-                        self.batch_metrics["failed_batches"] += 1
-                        self.track_batch_failure(batch_num, offset, self.batch_size, "Batch processing failed", record_ids)
-                        logger.error(f"Batch {batch_num} failed, but continuing with next batch")
-                        
-                except Exception as e:
+                success, record_ids = self.process_batch(
+                    config, model, db_config, base_query, offset, batch_num
+                )
+                
+                if success:
+                    self.batch_metrics["completed_batches"] += 1
+                    self.load_metrics["total_records_processed"] += len(record_ids)
+                else:
                     self.batch_metrics["failed_batches"] += 1
-                    self.track_batch_failure(batch_num, offset, self.batch_size, str(e), [])
-                    logger.error(f"Batch {batch_num} failed with exception: {str(e)}")
+                    logger.error(f"Batch {batch_num} failed, but continuing with next batch")
                 
                 # Log progress
                 progress = (batch_num / total_batches) * 100
                 logger.info(f"Progress: {progress:.1f}% ({batch_num}/{total_batches} batches completed)")
             
-            # Get after run metrics (total counts in Neo4j after run)
-            logger.info("Getting final Neo4j counts after run...")
-            self.after_metrics = self.get_neo4j_counts()
-            
-            # Calculate actual changes (difference between before and after)
-            self.calculate_actual_changes()
-            
-            # Run adhoc tests for data integrity
-            self.run_adhoc_tests()
-            
             # Write final metrics
             self.write_batch_metrics(metrics_file)
-            
-            # Write failure report if there are any failures
-            if any(len(failures) > 0 for failures in self.failure_tracker.values()):
-                failure_file = metrics_file.replace('.json', '_failures.json')
-                self.write_failure_report(failure_file)
-                logger.warning(f"Failures detected. Check failure report: {failure_file}")
             
             logger.info("Batch Neo4j data loading completed successfully")
             
@@ -1480,147 +1019,6 @@ class BatchNeo4jLoader(Neo4jDataLoader):
                 self.neo4j_driver.close()
                 logger.info("Neo4j connection closed")
     
-    def track_batch_failure(self, batch_num: int, offset: int, limit: int, error: str, record_ids: List[int] = None) -> None:
-        """
-        Track a batch failure with detailed information.
-        
-        Args:
-            batch_num: Batch number that failed
-            offset: Database offset for the batch
-            limit: Batch size limit
-            error: Error message
-            record_ids: List of record IDs in the batch (if available)
-        """
-        failure_info = {
-            "batch_num": batch_num,
-            "offset": offset,
-            "limit": limit,
-            "error": error,
-            "record_ids": record_ids or [],
-            "timestamp": datetime.now().isoformat()
-        }
-        self.failure_tracker["batch_failures"].append(failure_info)
-        logger.error(f"Batch {batch_num} failed: {error}")
-
-    def track_record_failure(self, record_id: int, record_data: Dict[str, Any], error: str, failure_type: str) -> None:
-        """
-        Track a record failure with detailed information.
-        
-        Args:
-            record_id: PostgreSQL record ID
-            record_data: Record data that failed
-            error: Error message
-            failure_type: Type of failure (e.g., 'validation', 'constraint', 'neo4j_error')
-        """
-        failure_info = {
-            "record_id": record_id,
-            "record_data": record_data,
-            "error": error,
-            "failure_type": failure_type,
-            "timestamp": datetime.now().isoformat()
-        }
-        self.failure_tracker["record_failures"].append(failure_info)
-        logger.error(f"Record {record_id} failed ({failure_type}): {error}")
-
-    def track_node_failure(self, node_label: str, node_data: Dict[str, Any], error: str, postgres_column: str = None) -> None:
-        """
-        Track a node creation failure.
-        
-        Args:
-            node_label: Neo4j node label
-            node_data: Node data that failed
-            error: Error message
-            postgres_column: PostgreSQL column name that caused the failure
-        """
-        failure_info = {
-            "node_label": node_label,
-            "node_data": node_data,
-            "error": error,
-            "postgres_column": postgres_column,
-            "timestamp": datetime.now().isoformat()
-        }
-        self.failure_tracker["node_failures"].append(failure_info)
-        logger.error(f"Node creation failed for {node_label}: {error}")
-
-    def track_relationship_failure(self, relationship_type: str, source_data: Dict[str, Any], target_data: Dict[str, Any], error: str) -> None:
-        """
-        Track a relationship creation failure.
-        
-        Args:
-            relationship_type: Neo4j relationship type
-            source_data: Source node data
-            target_data: Target node data
-            error: Error message
-        """
-        failure_info = {
-            "relationship_type": relationship_type,
-            "source_data": source_data,
-            "target_data": target_data,
-            "error": error,
-            "timestamp": datetime.now().isoformat()
-        }
-        self.failure_tracker["relationship_failures"].append(failure_info)
-        logger.error(f"Relationship creation failed for {relationship_type}: {error}")
-
-    def track_constraint_violation(self, constraint_name: str, constraint_type: str, data: Dict[str, Any], error: str) -> None:
-        """
-        Track a constraint violation.
-        
-        Args:
-            constraint_name: Name of the violated constraint
-            constraint_type: Type of constraint (unique, not_null, etc.)
-            data: Data that violated the constraint
-            error: Error message
-        """
-        failure_info = {
-            "constraint_name": constraint_name,
-            "constraint_type": constraint_type,
-            "data": data,
-            "error": error,
-            "timestamp": datetime.now().isoformat()
-        }
-        self.failure_tracker["constraint_violations"].append(failure_info)
-        logger.error(f"Constraint violation for {constraint_name}: {error}")
-
-    def write_failure_report(self, failure_file: str) -> None:
-        """
-        Write detailed failure report to file.
-        
-        Args:
-            failure_file: Path to failure report file
-        """
-        try:
-            # Create summary statistics
-            summary = {
-                "total_batch_failures": len(self.failure_tracker["batch_failures"]),
-                "total_record_failures": len(self.failure_tracker["record_failures"]),
-                "total_node_failures": len(self.failure_tracker["node_failures"]),
-                "total_relationship_failures": len(self.failure_tracker["relationship_failures"]),
-                "total_constraint_violations": len(self.failure_tracker["constraint_violations"]),
-                "total_data_validation_errors": len(self.failure_tracker["data_validation_errors"])
-            }
-            
-            # Group failures by type for easier analysis
-            failure_report = {
-                "summary": summary,
-                "batch_failures": self.failure_tracker["batch_failures"],
-                "record_failures": self.failure_tracker["record_failures"],
-                "node_failures": self.failure_tracker["node_failures"],
-                "relationship_failures": self.failure_tracker["relationship_failures"],
-                "constraint_violations": self.failure_tracker["constraint_violations"],
-                "data_validation_errors": self.failure_tracker["data_validation_errors"],
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            with open(failure_file, 'w') as f:
-                json.dump(failure_report, f, indent=2, default=str)
-            
-            logger.info(f"Failure report written to {failure_file}")
-            
-        except Exception as e:
-            error_msg = f"{BatchLoaderErrorCodes.BATCH_CONFIG_ERROR}: Failed to write failure report: {str(e)}"
-            logger.error(error_msg)
-
     def write_batch_metrics(self, metrics_file: str) -> None:
         """
         Write batch processing metrics to file.
@@ -1630,20 +1028,9 @@ class BatchNeo4jLoader(Neo4jDataLoader):
         """
         try:
             metrics = {
-                "source_metrics": self.source_metrics,
                 "batch_metrics": self.batch_metrics,
                 "load_metrics": self.load_metrics,
-                "before_metrics": self.before_metrics,
-                "after_metrics": self.after_metrics,
-                "adhoc_tests": self.adhoc_tests,
                 "cypher_usage": dict(self.cypher_usage),
-                "failure_summary": {
-                    "total_batch_failures": len(self.failure_tracker["batch_failures"]),
-                    "total_record_failures": len(self.failure_tracker["record_failures"]),
-                    "total_node_failures": len(self.failure_tracker["node_failures"]),
-                    "total_relationship_failures": len(self.failure_tracker["relationship_failures"]),
-                    "total_constraint_violations": len(self.failure_tracker["constraint_violations"])
-                },
                 "timestamp": datetime.now().isoformat()
             }
             

@@ -1,0 +1,282 @@
+{
+  "model_info": {
+    "generated_by": "Neo4j Model Generator (Configured)",
+    "generated_at": "2025-08-12T15:35:02.986718",
+    "source_table_columns": [
+      "id",
+      "url",
+      "raw_html_id",
+      "domain",
+      "site_name",
+      "title",
+      "author",
+      "publish_date",
+      "content",
+      "summary",
+      "tags",
+      "language",
+      "word_count",
+      "meta_description",
+      "extracted_at",
+      "is_latest",
+      "run_id",
+      "status_neo4j"
+    ],
+    "total_records": 2,
+    "configuration_applied": true
+  },
+  "nodes": [
+    {
+      "label": "Article",
+      "node_id_property": "url",
+      "properties": [
+        {
+          "name": "url",
+          "type": "string",
+          "unique": true
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "indexed": true
+        },
+        {
+          "name": "summary",
+          "type": "text"
+        },
+        {
+          "name": "publish_date",
+          "type": "datetime"
+        },
+        {
+          "name": "language",
+          "type": "text"
+        },
+        {
+          "name": "meta_description",
+          "type": "text"
+        }
+      ],
+      "description": "Node representing Article entities"
+    },
+    {
+      "label": "Website",
+      "node_id_property": "domain",
+      "properties": [
+        {
+          "name": "domain",
+          "type": "string",
+          "unique": true,
+          "alias": "site_domain"
+        },
+        {
+          "name": "site_name",
+          "type": "string",
+          "alias": "name"
+        }
+      ],
+      "description": "Node representing Website entities"
+    },
+    {
+      "label": "Author",
+      "node_id_property": "name",
+      "properties": [],
+      "description": "Node representing Author entities"
+    },
+    {
+      "label": "Chunk",
+      "node_id_property": "chunk_id",
+      "properties": [
+        {
+          "name": "chunk_id",
+          "type": "string",
+          "unique": true
+        },
+        {
+          "name": "embedding",
+          "type": "vector",
+          "vector_dimension": 1536,
+          "vector_similarity": "cosine"
+        },
+        {
+          "name": "chunk_text",
+          "type": "text"
+        },
+        {
+          "name": "chunk_order",
+          "type": "integer"
+        },
+        {
+          "name": "created_from_field",
+          "type": "string",
+          "default_value": "content"
+        },
+        {
+          "name": "source_id",
+          "type": "string"
+        }
+      ],
+      "description": "Node representing Chunk entities",
+      "chunking_enabled": true,
+      "source_content_field": "content",
+      "chunking_config": {
+        "chunk_size": 1000,
+        "chunk_overlap": 100,
+        "use_llm_chunking": true
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "PUBLISHED_ON",
+      "start_node": "Article",
+      "end_node": "Website",
+      "start_property": "url",
+      "end_property": "domain",
+      "properties": [],
+      "description": "Relationship PUBLISHED_ON from Article to Website"
+    },
+    {
+      "type": "HAS_CHUNK",
+      "start_node": "Article",
+      "end_node": "Chunk",
+      "start_property": "url",
+      "end_property": "source_id",
+      "description": "Relationship created by chunking Article content",
+      "auto_generated": true
+    },
+    {
+      "type": "WRITTEN_BY",
+      "start_node": "Article",
+      "end_node": "Author",
+      "start_property": "author",
+      "end_property": "name",
+      "properties": [],
+      "description": "Relationship WRITTEN_BY from Article to Author"
+    },
+    {
+      "type": "TAGGED_WITH",
+      "start_node": "Article",
+      "end_node": "Tag",
+      "start_property": "url",
+      "end_property": "tag_name",
+      "properties": [],
+      "description": "Relationship TAGGED_WITH from Article to Tag"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "UNIQUE",
+      "node_label": "Article",
+      "property": "url",
+      "cypher": "CREATE CONSTRAINT article_url_unique IF NOT EXISTS FOR (n:Article) REQUIRE n.url IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Website",
+      "property": "domain",
+      "cypher": "CREATE CONSTRAINT website_domain_unique IF NOT EXISTS FOR (n:Website) REQUIRE n.domain IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Author",
+      "property": "name",
+      "cypher": "CREATE CONSTRAINT author_name_unique IF NOT EXISTS FOR (n:Author) REQUIRE n.name IS UNIQUE"
+    },
+    {
+      "type": "UNIQUE",
+      "node_label": "Chunk",
+      "property": "chunk_id",
+      "cypher": "CREATE CONSTRAINT chunk_chunk_id_unique IF NOT EXISTS FOR (n:Chunk) REQUIRE n.chunk_id IS UNIQUE"
+    }
+  ],
+  "indexes": [
+    {
+      "type": "STRING",
+      "node_label": "Article",
+      "property": "id",
+      "cypher": "CREATE INDEX article_id_text IF NOT EXISTS FOR (n:Article) ON (n.id)"
+    },
+    {
+      "type": "STRING",
+      "node_label": "Article",
+      "property": "title",
+      "cypher": "CREATE INDEX article_title_text IF NOT EXISTS FOR (n:Article) ON (n.title)"
+    },
+    {
+      "type": "RANGE",
+      "node_label": "Article",
+      "property": "publish_date",
+      "cypher": "CREATE INDEX article_publish_date_range IF NOT EXISTS FOR (n:Article) ON (n.publish_date)"
+    },
+    {
+      "type": "TEXT",
+      "node_label": "Website",
+      "property": "domain",
+      "cypher": "CREATE INDEX website_domain_text IF NOT EXISTS FOR (n:Website) ON (n.domain)"
+    },
+    {
+      "type": "VECTOR",
+      "node_label": "Chunk",
+      "property": "embedding",
+      "vector_dimension": 1536,
+      "vector_similarity": "cosine",
+      "cypher": "CREATE VECTOR INDEX chunk_embedding_vector IF NOT EXISTS FOR (n:Chunk) ON (n.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 1536, `vector.similarity_function`: 'cosine'}}"
+    }
+  ],
+  "import_queries": [
+    {
+      "description": "Import Article nodes (Best Practice: MERGE)",
+      "cypher": "// Create Article nodes using MERGE with ID only (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        WITH row WHERE row.id IS NOT NULL\n                        MERGE (n:Article {id: row.id})\nSET n.url = CASE WHEN row.url IS NOT NULL THEN row.url ELSE n.url END, n.title = CASE WHEN row.title IS NOT NULL THEN row.title ELSE n.title END, n.summary = CASE WHEN row.summary IS NOT NULL THEN row.summary ELSE n.summary END, n.publish_date = CASE WHEN row.publish_date IS NOT NULL THEN row.publish_date ELSE n.publish_date END, n.language = CASE WHEN row.language IS NOT NULL THEN row.language ELSE n.language END, n.meta_description = CASE WHEN row.meta_description IS NOT NULL THEN row.meta_description ELSE n.meta_description END",
+      "node_type": "Article",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Import Website nodes (Best Practice: MERGE)",
+      "cypher": "// Create Website nodes using MERGE with ID only (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        WITH row WHERE row.domain IS NOT NULL\n                        MERGE (n:Website {site_domain: row.domain})\nSET n.name = CASE WHEN row.site_name IS NOT NULL THEN row.site_name ELSE n.name END",
+      "node_type": "Website",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Import Author nodes (Best Practice: MERGE)",
+      "cypher": "// Create Author nodes using MERGE\n                    LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                    MERGE (n:Author {})",
+      "node_type": "Author",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Import Chunk nodes (Best Practice: MERGE)",
+      "cypher": "// Create Chunk nodes using MERGE\n                    LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                    MERGE (n:Chunk {embedding: row.embedding})",
+      "node_type": "Chunk",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Create PUBLISHED_ON relationships (Best Practice: MERGE)",
+      "cypher": "// Create PUBLISHED_ON relationships using MERGE (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        MATCH (start:Article {url: row.url})\n                        MATCH (end:Website {domain: row.domain})\n                        MERGE (start)-[r:PUBLISHED_ON]->(end)",
+      "relationship_type": "PUBLISHED_ON",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Create HAS_CHUNK relationships (Best Practice: MERGE)",
+      "cypher": "// Create HAS_CHUNK relationships using MERGE (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        MATCH (start:Article {url: row.url})\n                        MATCH (end:Chunk {source_id: row.source_id})\n                        MERGE (start)-[r:HAS_CHUNK]->(end)",
+      "relationship_type": "HAS_CHUNK",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Create WRITTEN_BY relationships (Best Practice: MERGE)",
+      "cypher": "// Create WRITTEN_BY relationships using MERGE (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        MATCH (start:Article {author: row.author})\n                        MATCH (end:Author {name: row.name})\n                        MERGE (start)-[r:WRITTEN_BY]->(end)",
+      "relationship_type": "WRITTEN_BY",
+      "uses_best_practices": true
+    },
+    {
+      "description": "Create TAGGED_WITH relationships (Best Practice: MERGE)",
+      "cypher": "// Create TAGGED_WITH relationships using MERGE (Best Practice)\n                        LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row\n                        MATCH (start:Article {url: row.url})\n                        MATCH (end:Tag {tag_name: row.tag_name})\n                        MERGE (start)-[r:TAGGED_WITH]->(end)",
+      "relationship_type": "TAGGED_WITH",
+      "uses_best_practices": true
+    }
+  ]
+}
