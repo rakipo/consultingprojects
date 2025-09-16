@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "description": "Sentinel-2 Rule Engine Configuration Template",
+    "version": "1.0",
+    "created_date": "2024-09-16",
+    "instructions": "Modify the rules below to customize environmental change detection. See README_RULE_ENGINE.md for detailed documentation."
+  },
+  "rule_guidelines": {
+    "variables": {
+      "dvi": "Delta Vegetation Index (NDVI_baseline - NDVI_target)",
+      "dbi": "Delta Built-up Index (NDBI_baseline - NDBI_target)", 
+      "dwi": "Delta Water Index (NDWI_baseline - NDWI_target)"
+    },
+    "operators": {
+      "comparison": [">", "<", ">=", "<=", "==", "!="],
+      "logical": ["AND", "OR"],
+      "grouping": ["()"]
+    },
+    "threshold_guidelines": {
+      "dvi": {
+        "slight_change": "0.05-0.15",
+        "moderate_change": "0.15-0.30", 
+        "deep_change": ">0.30"
+      },
+      "dbi": {
+        "slight_change": "0.05-0.15",
+        "moderate_change": "0.15-0.30",
+        "deep_change": ">0.30"
+      },
+      "dwi": {
+        "slight_change": "0.10-0.20",
+        "moderate_change": "0.20-0.40",
+        "deep_change": ">0.40"
+      }
+    }
+  },
+  "land_types": {
+    "Forest": {
+      "description": "Dense forest areas with high vegetation and low construction",
+      "vegetation_rule": "dvi > 0.15 OR (dbi < 0.03 AND dwi < 0.15)",
+      "construction_rule": "dvi < -0.12 OR dbi > 0.08",
+      "flooding_rule": "dvi < -0.15 OR dwi > 0.30",
+      "notes": "Strict thresholds for forest conservation monitoring"
+    },
+    "Urban Area": {
+      "description": "Urban and built-up areas with mixed land use",
+      "vegetation_rule": "dvi > 0.03 OR (dbi < 0.15 AND dwi < 0.03)",
+      "construction_rule": "dvi < -0.02 OR dbi > 0.15",
+      "flooding_rule": "dvi < -0.03 OR dwi > 0.12",
+      "notes": "Relaxed thresholds for urban environment monitoring"
+    },
+    "Agriculture Wet Land": {
+      "description": "Agricultural areas with irrigation and water management",
+      "vegetation_rule": "dvi > 0.10 OR (dbi < 0.03 AND dwi < 0.12)",
+      "construction_rule": "dvi < -0.08 OR dbi > 0.10",
+      "flooding_rule": "dvi < -0.12 OR dwi > 0.30",
+      "notes": "Balanced thresholds for agricultural monitoring"
+    },
+    "Agriculture Dry Land": {
+      "description": "Dry agricultural areas with limited water access",
+      "vegetation_rule": "dvi > 0.08 OR (dbi < 0.05 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.06 OR dbi > 0.12",
+      "flooding_rule": "dvi < -0.10 OR dwi > 0.18",
+      "notes": "Conservative thresholds for dry land agriculture"
+    },
+    "Grassland": {
+      "description": "Grassland and prairie areas with seasonal variations",
+      "vegetation_rule": "dvi > 0.10 OR (dbi < 0.05 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.08 OR dbi > 0.10",
+      "flooding_rule": "dvi < -0.12 OR dwi > 0.20",
+      "notes": "Standard thresholds for grassland monitoring"
+    },
+    "Wetland": {
+      "description": "Wetland areas with high water content and vegetation",
+      "vegetation_rule": "dvi > 0.08 OR (dbi < 0.03 AND dwi < 0.15)",
+      "construction_rule": "dvi < -0.06 OR dbi > 0.08",
+      "flooding_rule": "dvi < -0.10 OR dwi > 0.25",
+      "notes": "Sensitive thresholds for wetland conservation"
+    },
+    "Desert": {
+      "description": "Arid and desert areas with minimal vegetation",
+      "vegetation_rule": "dvi > 0.02 OR (dbi < 0.10 AND dwi < 0.02)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.12",
+      "flooding_rule": "dvi < -0.02 OR dwi > 0.08",
+      "notes": "Very sensitive thresholds for desert environments"
+    },
+    "Mountain": {
+      "description": "Mountainous areas with elevation-based vegetation",
+      "vegetation_rule": "dvi > 0.12 OR (dbi < 0.03 AND dwi < 0.12)",
+      "construction_rule": "dvi < -0.10 OR dbi > 0.08",
+      "flooding_rule": "dvi < -0.15 OR dwi > 0.18",
+      "notes": "Elevation-adjusted thresholds for mountain monitoring"
+    },
+    "Coastal Area": {
+      "description": "Coastal areas with saltwater influence",
+      "vegetation_rule": "dvi > 0.06 OR (dbi < 0.03 AND dwi < 0.18)",
+      "construction_rule": "dvi < -0.04 OR dbi > 0.08",
+      "flooding_rule": "dvi < -0.08 OR dwi > 0.25",
+      "notes": "Saltwater-tolerant thresholds for coastal monitoring"
+    },
+    "Industrial Area": {
+      "description": "Industrial zones with high built-up areas",
+      "vegetation_rule": "dvi > 0.02 OR (dbi < 0.25 AND dwi < 0.03)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.25",
+      "flooding_rule": "dvi < -0.02 OR dwi > 0.12",
+      "notes": "Industrial-specific thresholds for urban monitoring"
+    }
+  },
+  "example_modifications": {
+    "scenario_1": {
+      "description": "Make forest rules more sensitive to detect early deforestation",
+      "changes": {
+        "Forest": {
+          "vegetation_rule": "dvi > 0.08 OR (dbi < 0.02 AND dwi < 0.10)",
+          "construction_rule": "dvi < -0.08 OR dbi > 0.05"
+        }
+      }
+    },
+    "scenario_2": {
+      "description": "Make urban rules less sensitive to reduce false positives",
+      "changes": {
+        "Urban Area": {
+          "vegetation_rule": "dvi > 0.05 OR (dbi < 0.20 AND dwi < 0.05)",
+          "construction_rule": "dvi < -0.05 OR dbi > 0.20"
+        }
+      }
+    },
+    "scenario_3": {
+      "description": "Create custom rules for a new land type",
+      "changes": {
+        "Custom Land Type": {
+          "vegetation_rule": "dvi > 0.12 OR (dbi < 0.04 AND dwi < 0.12)",
+          "construction_rule": "dvi < -0.10 OR dbi > 0.10",
+          "flooding_rule": "dvi < -0.12 OR dwi > 0.25"
+        }
+      }
+    }
+  },
+  "usage_instructions": {
+    "step_1": "Copy this template to create your own rules_config.json",
+    "step_2": "Modify the rules in the 'land_types' section",
+    "step_3": "Test your rules using rule_engine_examples.py",
+    "step_4": "Load your rules into the database using the import function",
+    "step_5": "Run the main analysis with your custom rules"
+  }
+}
+

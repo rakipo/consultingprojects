@@ -1,0 +1,109 @@
+{
+  "analysis_timestamp": "2025-09-11T12:29:14.898710",
+  "property_coordinates": [
+    [
+      79.9957724429183,
+      14.446024455437907
+    ],
+    [
+      79.99587101412848,
+      14.44600887103552
+    ],
+    [
+      79.99586363806654,
+      14.44594718263318
+    ],
+    [
+      79.9957664079881,
+      14.445960169624453
+    ]
+  ],
+  "property_area": {
+    "square_feet": 833.4492550614245,
+    "square_meters": 77.42932507073807
+  },
+  "bounding_box": {
+    "min_lon": 79.9956664079881,
+    "min_lat": 14.44584718263318,
+    "max_lon": 79.99597101412849,
+    "max_lat": 14.446124455437907
+  },
+  "analysis_period": [
+    "2024-01-01",
+    "2024-01-31"
+  ],
+  "analysis_method": "small_area_specialized",
+  "limitations": [
+    "Property smaller than 1 Sentinel-2 pixel (100 sq m)",
+    "Limited statistical significance due to small sample size",
+    "Weather and cloud coverage can significantly impact results",
+    "Temporal analysis may be limited by data availability"
+  ],
+  "optical_analysis": {
+    "property_pixel": {
+      "ndvi": 48.0,
+      "ndbi": 17.0,
+      "ndwi": 0.0,
+      "ndre": 0.0,
+      "brightness": 145.0,
+      "moisture": 17.0
+    },
+    "surrounding_area": {
+      "ndvi": 37.125,
+      "ndbi": 17.0,
+      "ndwi": 0.0,
+      "ndre": 0.0,
+      "brightness": 157.625,
+      "moisture": 16.75
+    },
+    "analysis_method": "pixel-level (small area)",
+    "pixel_count": 9,
+    "interpretation": {
+      "property_characteristics": [
+        "Excellent vegetation health",
+        "High built-up area",
+        "Low water presence"
+      ],
+      "comparison_with_surroundings": [
+        "Better vegetation than surroundings"
+      ],
+      "recommendations": [
+        "High development - monitor for changes"
+      ]
+    }
+  },
+  "alternative_data_sources": {
+    "high_resolution_satellites": [
+      {
+        "name": "Planet Labs",
+        "resolution": "3-5m",
+        "coverage": "Daily",
+        "best_for": "Small area monitoring, construction tracking"
+      },
+      {
+        "name": "Maxar",
+        "resolution": "0.3-1.5m",
+        "coverage": "On-demand",
+        "best_for": "Very detailed analysis, infrastructure monitoring"
+      },
+      {
+        "name": "Airbus Pleiades",
+        "resolution": "0.5-2m",
+        "coverage": "On-demand",
+        "best_for": "High-resolution property analysis"
+      }
+    ],
+    "drone_imagery": {
+      "resolution": "1-10cm",
+      "coverage": "On-demand",
+      "best_for": "Very detailed property analysis, construction monitoring",
+      "limitations": "Requires drone access, weather dependent"
+    },
+    "aerial_photography": {
+      "resolution": "10-50cm",
+      "coverage": "Periodic",
+      "best_for": "Property assessment, historical comparison",
+      "limitations": "Limited temporal coverage"
+    }
+  }
+}

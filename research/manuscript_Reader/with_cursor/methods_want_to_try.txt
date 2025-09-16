@@ -1,0 +1,53 @@
+🔹 పద్ధతి 1: Google Drive + Google Docs
+
+మీ స్కాన్ చేసిన PDF లేదా ఇమేజ్ ఫైల్‌ని Google Drive లోకి అప్‌లోడ్ చేయండి.
+
+ఆ ఫైల్‌పై right-click చేసి → Open with → Google Docs ఎంచుకోండి.
+
+Google Docs ఆటోమేటిక్‌గా OCR చేసి, తెలుగు అక్షరాలు టెక్స్ట్‌గా మార్చుతుంది.
+
+(గమనిక: హస్తప్రతి చాలా క్లియర్‌గా ఉంటే మాత్రమే బాగా పనిచేస్తుంది).
+
+🔹 పద్ధతి 2: Google Cloud Vision API
+
+Google Cloud Console లోకి వెళ్లి Vision API enable చేయాలి.
+
+curl లేదా Python client వాడి OCR request పంపవచ్చు.
+
+from google.cloud import vision
+
+client = vision.ImageAnnotatorClient()
+with open("test_manu.pdf", "rb") as f:
+    content = f.read()
+
+image = vision.Image(content=content)
+response = client.document_text_detection(image=image)
+
+print(response.full_text_annotation.text)
+
+
+ఇది handwriting కూడా బాగా గుర్తిస్తుంది.
+
+🔹 పద్ధతి 3: eScript / i2OCR (Free Telugu OCR tools)
+
+https://www.i2ocr.com/free-online-telugu-ocr
+
+https://escriptor.in/ocr
+
+ఇక్కడ మీరు PDF లేదా Image upload చేస్తే నేరుగా Unicode Telugu text వస్తుంది.
+
+🔹 పద్ధతి 4: Tesseract (local installation)
+
+మీ కంప్యూటర్లో Tesseract OCR install చేయండి.
+
+Telugu language pack ఇన్‌స్టాల్ చేయండి:
+
+sudo apt install tesseract-ocr-tel
+
+
+తర్వాత రన్ చేయండి:
+
+tesseract input.png output.txt -l tel
+
+
+Telugu text ఒక .txt ఫైల్లో వస్తుంది.

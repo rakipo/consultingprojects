@@ -1,0 +1,120 @@
+KML Combined Analysis URLs - All Polygons Per Analysis Type
+Generated: 2025-08-24 15:02:57
+================================================================================
+
+This creates ONE URL per analysis type (NDVI, NDBI, NDWI) that shows 
+ALL the colored boxes together, just like your Google Earth screenshot.
+
+Each URL displays all polygons from one analysis type with consistent colors:
+🟢 NDVI (Vegetation Analysis) - Green boxes
+🔴 NDBI (Built-up Analysis) - Red boxes  
+🔵 NDWI (Water Analysis) - Blue boxes
+
+================================================================================
+
+SUMMARY:
+Analysis Types: 2
+Total Polygons: 12
+Combined KML Files Created: 0
+
+  - NDBI BuiltUp Analysis: 8 polygons
+  - NDWI Water Analysis: 4 polygons
+
+================================================================================
+
+🔴 NDBI BUILTUP ANALYSIS
+Source: NDBI_BuiltUp_Analysis.kml
+Polygons: 8 areas
+------------------------------------------------------------
+
+📍 COMBINED VIEW - ALL 8 POLYGONS TOGETHER:
+
+🎯 Interactive Map with All Colored Boxes (BEST):
+https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22FeatureCollection%22%2C%22features%22%3A%5B%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%205%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%205%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5239096024176%2C14.380583637765067%5D%2C%5B79.52450067069601%2C14.380583637765067%5D%2C%5B79.52450067069601%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.380583637765067%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%206%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%206%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52154532930398%2C14.38115618265904%5D%2C%5B79.52213639758239%2C14.38115618265904%5D%2C%5B79.52213639758239%2C14.381728727553014%5D%2C%5B79.52154532930398%2C14.381728727553014%5D%2C%5B79.52154532930398%2C14.38115618265904%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%208%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%208%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52272746586078%2C14.38115618265904%5D%2C%5B79.5233185341392%2C14.38115618265904%5D%2C%5B79.5233185341392%2C14.381728727553014%5D%2C%5B79.52272746586078%2C14.381728727553014%5D%2C%5B79.52272746586078%2C14.38115618265904%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%209%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%209%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5233185341392%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.381728727553014%5D%2C%5B79.5233185341392%2C14.381728727553014%5D%2C%5B79.5233185341392%2C14.38115618265904%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%2011%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%2011%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52154532930398%2C14.381728727553014%5D%2C%5B79.52213639758239%2C14.381728727553014%5D%2C%5B79.52213639758239%2C14.382301272446988%5D%2C%5B79.52154532930398%2C14.382301272446988%5D%2C%5B79.52154532930398%2C14.381728727553014%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%2015%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%2015%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5239096024176%2C14.381728727553014%5D%2C%5B79.52450067069601%2C14.381728727553014%5D%2C%5B79.52450067069601%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.381728727553014%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%2016%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%2016%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52154532930398%2C14.382301272446988%5D%2C%5B79.52213639758239%2C14.382301272446988%5D%2C%5B79.52213639758239%2C14.382873817340961%5D%2C%5B79.52154532930398%2C14.382873817340961%5D%2C%5B79.52154532930398%2C14.382301272446988%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDBI%20Square%2019%22%2C%22description%22%3A%22NDBI%20BuiltUp%20Analysis%20-%20NDBI%20Square%2019%22%2C%22stroke%22%3A%22%23ff0000%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%23ff0000%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5233185341392%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.382873817340961%5D%2C%5B79.5233185341392%2C14.382873817340961%5D%2C%5B79.5233185341392%2C14.382301272446988%5D%5D%5D%7D%7D%5D%7D
+
+🌍 Google Earth Web (All Areas):
+https://earth.google.com/web/@14.38174304117536,79.52296389317213,500a,35y,0h,0t,0r
+
+🗺️ Google Maps (Satellite View):
+https://www.google.com/maps/@14.381743041175362,79.52296389317216,18z/data=!3m1!1e3
+
+📁 Combined KML File (for Google Earth Pro):
+NDBI_BuiltUp_Analysis_combined.kml
+→ Double-click to open all polygons in Google Earth Pro
+
+📐 Overall Coverage Area:
+   Center: 14.381743, 79.522964
+   Bounds: (14.380584, 79.521545) to (14.382874, 79.524501)
+
+📋 Included Polygons:
+   1. NDBI Square 5
+   2. NDBI Square 6
+   3. NDBI Square 8
+   4. NDBI Square 9
+   5. NDBI Square 11
+   6. NDBI Square 15
+   7. NDBI Square 16
+   8. NDBI Square 19
+
+============================================================
+
+🔵 NDWI WATER ANALYSIS
+Source: NDWI_Water_Analysis.kml
+Polygons: 4 areas
+------------------------------------------------------------
+
+📍 COMBINED VIEW - ALL 4 POLYGONS TOGETHER:
+
+🎯 Interactive Map with All Colored Boxes (BEST):
+https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22FeatureCollection%22%2C%22features%22%3A%5B%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDWI%20Square%207%22%2C%22description%22%3A%22NDWI%20Water%20Analysis%20-%20NDWI%20Square%207%22%2C%22stroke%22%3A%22%230000ff%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%230000ff%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52213639758239%2C14.38115618265904%5D%2C%5B79.5227274658608%2C14.38115618265904%5D%2C%5B79.5227274658608%2C14.381728727553014%5D%2C%5B79.52213639758239%2C14.381728727553014%5D%2C%5B79.52213639758239%2C14.38115618265904%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDWI%20Square%209%22%2C%22description%22%3A%22NDWI%20Water%20Analysis%20-%20NDWI%20Square%209%22%2C%22stroke%22%3A%22%230000ff%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%230000ff%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5233185341392%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.38115618265904%5D%2C%5B79.5239096024176%2C14.381728727553014%5D%2C%5B79.5233185341392%2C14.381728727553014%5D%2C%5B79.5233185341392%2C14.38115618265904%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDWI%20Square%2012%22%2C%22description%22%3A%22NDWI%20Water%20Analysis%20-%20NDWI%20Square%2012%22%2C%22stroke%22%3A%22%230000ff%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%230000ff%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.52213639758239%2C14.381728727553014%5D%2C%5B79.5227274658608%2C14.381728727553014%5D%2C%5B79.5227274658608%2C14.382301272446988%5D%2C%5B79.52213639758239%2C14.382301272446988%5D%2C%5B79.52213639758239%2C14.381728727553014%5D%5D%5D%7D%7D%2C%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22NDWI%20Square%2015%22%2C%22description%22%3A%22NDWI%20Water%20Analysis%20-%20NDWI%20Square%2015%22%2C%22stroke%22%3A%22%230000ff%22%2C%22stroke-width%22%3A2%2C%22stroke-opacity%22%3A1%2C%22fill%22%3A%22%230000ff%22%2C%22fill-opacity%22%3A0.3%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B79.5239096024176%2C14.381728727553014%5D%2C%5B79.52450067069601%2C14.381728727553014%5D%2C%5B79.52450067069601%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.382301272446988%5D%2C%5B79.5239096024176%2C14.381728727553014%5D%5D%5D%7D%7D%5D%7D
+
+🌍 Google Earth Web (All Areas):
+https://earth.google.com/web/@14.38167147306362,79.52311166024177,500a,35y,0h,0t,0r
+
+🗺️ Google Maps (Satellite View):
+https://www.google.com/maps/@14.381671473063616,79.52311166024175,18z/data=!3m1!1e3
+
+📁 Combined KML File (for Google Earth Pro):
+NDWI_Water_Analysis_combined.kml
+→ Double-click to open all polygons in Google Earth Pro
+
+📐 Overall Coverage Area:
+   Center: 14.381671, 79.523112
+   Bounds: (14.381156, 79.522136) to (14.382301, 79.524501)
+
+📋 Included Polygons:
+   1. NDWI Square 7
+   2. NDWI Square 9
+   3. NDWI Square 12
+   4. NDWI Square 15
+
+============================================================
+
+
+USAGE INSTRUCTIONS:
+==================================================
+
+🎯 TO VIEW ALL BOXES LIKE YOUR SCREENSHOT:
+1. Click the "Interactive Map with All Colored Boxes" URLs above
+2. Each URL shows ALL polygons from one analysis type together
+3. Colors match the analysis type (Green=NDVI, Red=NDBI, Blue=NDWI)
+4. Zoom and pan to explore all areas at once
+
+🌍 FOR GOOGLE EARTH VIEWING:
+1. Click Google Earth Web URLs for 3D satellite view
+2. Or double-click the combined .kml files for Google Earth Pro
+3. All polygons from each analysis will be visible together
+
+📱 FOR QUICK REFERENCE:
+1. Use Google Maps URLs for general area overview
+2. Shows the satellite imagery of the overall analysis region
+
+💡 RECOMMENDED WORKFLOW:
+- Use the GeoJSON.io URLs to see all colored boundaries together
+- Each analysis type gets its own URL showing all its polygons
+- Perfect for comparing different analysis results side by side
+
+🔗 SHARING:
+- Each URL is self-contained and shows all polygons for that analysis
+- No need to open multiple links - one URL per analysis type
+- Easy to share with colleagues or include in reports

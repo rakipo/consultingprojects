@@ -1,0 +1,2438 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Significant Indices Squares</name>
+    <description>Squares with significant NDVI, NDBI, or NDWI values</description>
+    <Style id="ndvi">
+      <PolyStyle>
+        <color>ff0000ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>2</width>
+      </LineStyle>
+    </Style>
+    <Style id="ndbi">
+      <PolyStyle>
+        <color>ffff00ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ffff00ff</color>
+        <width>2</width>
+      </LineStyle>
+    </Style>
+    <Style id="ndwi">
+      <PolyStyle>
+        <color>ff8000ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff8000ff</color>
+        <width>2</width>
+      </LineStyle>
+    </Style>
+    <Placemark>
+      <name>Square 1 - Water/Moisture</name>
+      <description>
+            Square ID: 1
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3752 (Significant: No)
+            NDBI: -0.1069 (Significant: No)
+            NDWI: 0.0535 (Significant: Yes)
+            
+            Center: 14.378007, 79.518886
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.377720913295201,0 79.51918105619036,14.377720913295201,0 79.51918105619036,14.378293458189175,0 79.51858998791195,14.378293458189175,0 79.51858998791195,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 4 - Built-up</name>
+      <description>
+            Square ID: 4
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: -0.0396 (Significant: No)
+            NDBI: 0.1499 (Significant: Yes)
+            NDWI: -0.0659 (Significant: No)
+            
+            Center: 14.378007, 79.520659
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.377720913295201,0 79.52095426102558,14.377720913295201,0 79.52095426102558,14.378293458189175,0 79.52036319274717,14.378293458189175,0 79.52036319274717,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 7 - Vegetation</name>
+      <description>
+            Square ID: 7
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4806 (Significant: Yes)
+            NDBI: -0.0375 (Significant: No)
+            NDWI: -0.1536 (Significant: No)
+            
+            Center: 14.378007, 79.522432
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.377720913295201,0 79.5227274658608,14.377720913295201,0 79.5227274658608,14.378293458189175,0 79.52213639758239,14.378293458189175,0 79.52213639758239,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 8 - Built-up</name>
+      <description>
+            Square ID: 8
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2103 (Significant: No)
+            NDBI: 0.0544 (Significant: Yes)
+            NDWI: -0.2751 (Significant: No)
+            
+            Center: 14.378007, 79.523023
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5227274658608,14.377720913295201,0 79.52331853413921,14.377720913295201,0 79.52331853413921,14.378293458189175,0 79.5227274658608,14.378293458189175,0 79.5227274658608,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 10 - Vegetation</name>
+      <description>
+            Square ID: 10
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4544 (Significant: Yes)
+            NDBI: -0.0086 (Significant: No)
+            NDWI: -0.2989 (Significant: No)
+            
+            Center: 14.378007, 79.524205
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.377720913295201,0 79.52450067069601,14.377720913295201,0 79.52450067069601,14.378293458189175,0 79.5239096024176,14.378293458189175,0 79.5239096024176,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 11 - Vegetation</name>
+      <description>
+            Square ID: 11
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4339 (Significant: Yes)
+            NDBI: 0.0306 (Significant: Yes)
+            NDWI: 0.1849 (Significant: Yes)
+            
+            Center: 14.378007, 79.524796
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.377720913295201,0 79.52509173897442,14.377720913295201,0 79.52509173897442,14.378293458189175,0 79.52450067069601,14.378293458189175,0 79.52450067069601,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 13 - Water/Moisture</name>
+      <description>
+            Square ID: 13
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: -0.0062 (Significant: No)
+            NDBI: -0.2924 (Significant: No)
+            NDWI: 0.0731 (Significant: Yes)
+            
+            Center: 14.378007, 79.525978
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.377720913295201,0 79.52627387553123,14.377720913295201,0 79.52627387553123,14.378293458189175,0 79.52568280725282,14.378293458189175,0 79.52568280725282,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 15 - Vegetation</name>
+      <description>
+            Square ID: 15
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6723 (Significant: Yes)
+            NDBI: -0.3483 (Significant: No)
+            NDWI: -0.2266 (Significant: No)
+            
+            Center: 14.378007, 79.527160
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.377720913295201,0 79.52745601208805,14.377720913295201,0 79.52745601208805,14.378293458189175,0 79.52686494380964,14.378293458189175,0 79.52686494380964,14.377720913295201,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 19 - Vegetation</name>
+      <description>
+            Square ID: 19
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6446 (Significant: Yes)
+            NDBI: -0.4697 (Significant: No)
+            NDWI: -0.3547 (Significant: No)
+            
+            Center: 14.378580, 79.520659
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.378293458189175,0 79.52095426102558,14.378293458189175,0 79.52095426102558,14.378866003083148,0 79.52036319274717,14.378866003083148,0 79.52036319274717,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 20 - Water/Moisture</name>
+      <description>
+            Square ID: 20
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.1293 (Significant: No)
+            NDBI: -0.0638 (Significant: No)
+            NDWI: 0.0347 (Significant: Yes)
+            
+            Center: 14.378580, 79.521250
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52095426102558,14.378293458189175,0 79.52154532930399,14.378293458189175,0 79.52154532930399,14.378866003083148,0 79.52095426102558,14.378866003083148,0 79.52095426102558,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 22 - Built-up</name>
+      <description>
+            Square ID: 22
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2581 (Significant: No)
+            NDBI: 0.0361 (Significant: Yes)
+            NDWI: -0.5159 (Significant: No)
+            
+            Center: 14.378580, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.378293458189175,0 79.5227274658608,14.378293458189175,0 79.5227274658608,14.378866003083148,0 79.52213639758239,14.378866003083148,0 79.52213639758239,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 23 - Vegetation</name>
+      <description>
+            Square ID: 23
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.7514 (Significant: Yes)
+            NDBI: -0.0819 (Significant: No)
+            NDWI: -0.3289 (Significant: No)
+            
+            Center: 14.378580, 79.523023
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5227274658608,14.378293458189175,0 79.52331853413921,14.378293458189175,0 79.52331853413921,14.378866003083148,0 79.5227274658608,14.378866003083148,0 79.5227274658608,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 25 - Water/Moisture</name>
+      <description>
+            Square ID: 25
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.1451 (Significant: No)
+            NDBI: -0.0846 (Significant: No)
+            NDWI: 0.1383 (Significant: Yes)
+            
+            Center: 14.378580, 79.524205
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.378293458189175,0 79.52450067069601,14.378293458189175,0 79.52450067069601,14.378866003083148,0 79.5239096024176,14.378866003083148,0 79.5239096024176,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 26 - Vegetation</name>
+      <description>
+            Square ID: 26
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4532 (Significant: Yes)
+            NDBI: -0.207 (Significant: No)
+            NDWI: 0.0848 (Significant: Yes)
+            
+            Center: 14.378580, 79.524796
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.378293458189175,0 79.52509173897442,14.378293458189175,0 79.52509173897442,14.378866003083148,0 79.52450067069601,14.378866003083148,0 79.52450067069601,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 28 - Built-up</name>
+      <description>
+            Square ID: 28
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3824 (Significant: No)
+            NDBI: 0.2176 (Significant: Yes)
+            NDWI: -0.1078 (Significant: No)
+            
+            Center: 14.378580, 79.525978
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.378293458189175,0 79.52627387553123,14.378293458189175,0 79.52627387553123,14.378866003083148,0 79.52568280725282,14.378866003083148,0 79.52568280725282,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 29 - Vegetation</name>
+      <description>
+            Square ID: 29
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4294 (Significant: Yes)
+            NDBI: -0.1436 (Significant: No)
+            NDWI: -0.2499 (Significant: No)
+            
+            Center: 14.378580, 79.526569
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.378293458189175,0 79.52686494380964,14.378293458189175,0 79.52686494380964,14.378866003083148,0 79.52627387553123,14.378866003083148,0 79.52627387553123,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 30 - Built-up</name>
+      <description>
+            Square ID: 30
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.1027 (Significant: No)
+            NDBI: 0.0434 (Significant: Yes)
+            NDWI: -0.2177 (Significant: No)
+            
+            Center: 14.378580, 79.527160
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.378293458189175,0 79.52745601208805,14.378293458189175,0 79.52745601208805,14.378866003083148,0 79.52686494380964,14.378866003083148,0 79.52686494380964,14.378293458189175,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 37 - Vegetation</name>
+      <description>
+            Square ID: 37
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.559 (Significant: Yes)
+            NDBI: 0.0873 (Significant: Yes)
+            NDWI: -0.0468 (Significant: No)
+            
+            Center: 14.379152, 79.522432
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.378866003083148,0 79.5227274658608,14.378866003083148,0 79.5227274658608,14.379438547977122,0 79.52213639758239,14.379438547977122,0 79.52213639758239,14.378866003083148,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 39 - Vegetation</name>
+      <description>
+            Square ID: 39
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6014 (Significant: Yes)
+            NDBI: -0.183 (Significant: No)
+            NDWI: 0.1828 (Significant: Yes)
+            
+            Center: 14.379152, 79.523614
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.378866003083148,0 79.52390960241762,14.378866003083148,0 79.52390960241762,14.379438547977122,0 79.52331853413921,14.379438547977122,0 79.52331853413921,14.378866003083148,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 40 - Vegetation</name>
+      <description>
+            Square ID: 40
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4104 (Significant: Yes)
+            NDBI: -0.0204 (Significant: No)
+            NDWI: 0.1186 (Significant: Yes)
+            
+            Center: 14.379152, 79.524205
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.378866003083148,0 79.52450067069601,14.378866003083148,0 79.52450067069601,14.379438547977122,0 79.5239096024176,14.379438547977122,0 79.5239096024176,14.378866003083148,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 42 - Vegetation</name>
+      <description>
+            Square ID: 42
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.7059 (Significant: Yes)
+            NDBI: 0.149 (Significant: Yes)
+            NDWI: -0.3477 (Significant: No)
+            
+            Center: 14.379152, 79.525387
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.378866003083148,0 79.52568280725284,14.378866003083148,0 79.52568280725284,14.379438547977122,0 79.52509173897442,14.379438547977122,0 79.52509173897442,14.378866003083148,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 45 - Vegetation</name>
+      <description>
+            Square ID: 45
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5533 (Significant: Yes)
+            NDBI: -0.222 (Significant: No)
+            NDWI: -0.386 (Significant: No)
+            
+            Center: 14.379152, 79.527160
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.378866003083148,0 79.52745601208805,14.378866003083148,0 79.52745601208805,14.379438547977122,0 79.52686494380964,14.379438547977122,0 79.52686494380964,14.378866003083148,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 50 - Vegetation</name>
+      <description>
+            Square ID: 50
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5544 (Significant: Yes)
+            NDBI: 0.0424 (Significant: Yes)
+            NDWI: -0.1166 (Significant: No)
+            
+            Center: 14.379725, 79.521250
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52095426102558,14.379438547977122,0 79.52154532930399,14.379438547977122,0 79.52154532930399,14.380011092871095,0 79.52095426102558,14.380011092871095,0 79.52095426102558,14.379438547977122,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 52 - Built-up</name>
+      <description>
+            Square ID: 52
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3504 (Significant: No)
+            NDBI: 0.0024 (Significant: Yes)
+            NDWI: -0.462 (Significant: No)
+            
+            Center: 14.379725, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.379438547977122,0 79.5227274658608,14.379438547977122,0 79.5227274658608,14.380011092871095,0 79.52213639758239,14.380011092871095,0 79.52213639758239,14.379438547977122,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 56 - Vegetation</name>
+      <description>
+            Square ID: 56
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.7744 (Significant: Yes)
+            NDBI: -0.313 (Significant: No)
+            NDWI: 0.1588 (Significant: Yes)
+            
+            Center: 14.379725, 79.524796
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.379438547977122,0 79.52509173897442,14.379438547977122,0 79.52509173897442,14.380011092871095,0 79.52450067069601,14.380011092871095,0 79.52450067069601,14.379438547977122,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 57 - Built-up</name>
+      <description>
+            Square ID: 57
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3214 (Significant: No)
+            NDBI: 0.2701 (Significant: Yes)
+            NDWI: -0.1912 (Significant: No)
+            
+            Center: 14.379725, 79.525387
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.379438547977122,0 79.52568280725284,14.379438547977122,0 79.52568280725284,14.380011092871095,0 79.52509173897442,14.380011092871095,0 79.52509173897442,14.379438547977122,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 58 - Water/Moisture</name>
+      <description>
+            Square ID: 58
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.0337 (Significant: No)
+            NDBI: -0.0628 (Significant: No)
+            NDWI: 0.0392 (Significant: Yes)
+            
+            Center: 14.379725, 79.525978
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.379438547977122,0 79.52627387553123,14.379438547977122,0 79.52627387553123,14.380011092871095,0 79.52568280725282,14.380011092871095,0 79.52568280725282,14.379438547977122,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 61 - Vegetation</name>
+      <description>
+            Square ID: 61
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4126 (Significant: Yes)
+            NDBI: 0.0601 (Significant: Yes)
+            NDWI: -0.3314 (Significant: No)
+            
+            Center: 14.380297, 79.518886
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.380011092871095,0 79.51918105619036,14.380011092871095,0 79.51918105619036,14.380583637765069,0 79.51858998791195,14.380583637765069,0 79.51858998791195,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 62 - Vegetation</name>
+      <description>
+            Square ID: 62
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4164 (Significant: Yes)
+            NDBI: -0.2939 (Significant: No)
+            NDWI: -0.0573 (Significant: No)
+            
+            Center: 14.380297, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.380011092871095,0 79.51977212446877,14.380011092871095,0 79.51977212446877,14.380583637765069,0 79.51918105619036,14.380583637765069,0 79.51918105619036,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 64 - Built-up</name>
+      <description>
+            Square ID: 64
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.0397 (Significant: No)
+            NDBI: 0.028 (Significant: Yes)
+            NDWI: 0.1396 (Significant: Yes)
+            
+            Center: 14.380297, 79.520659
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.380011092871095,0 79.52095426102558,14.380011092871095,0 79.52095426102558,14.380583637765069,0 79.52036319274717,14.380583637765069,0 79.52036319274717,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 65 - Vegetation</name>
+      <description>
+            Square ID: 65
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4919 (Significant: Yes)
+            NDBI: -0.3614 (Significant: No)
+            NDWI: -0.0893 (Significant: No)
+            
+            Center: 14.380297, 79.521250
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52095426102558,14.380011092871095,0 79.52154532930399,14.380011092871095,0 79.52154532930399,14.380583637765069,0 79.52095426102558,14.380583637765069,0 79.52095426102558,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 66 - Water/Moisture</name>
+      <description>
+            Square ID: 66
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.2515 (Significant: No)
+            NDBI: -0.0577 (Significant: No)
+            NDWI: 0.0038 (Significant: Yes)
+            
+            Center: 14.380297, 79.521841
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.380011092871095,0 79.5221363975824,14.380011092871095,0 79.5221363975824,14.380583637765069,0 79.52154532930399,14.380583637765069,0 79.52154532930399,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 67 - Built-up</name>
+      <description>
+            Square ID: 67
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.0044 (Significant: No)
+            NDBI: 0.1206 (Significant: Yes)
+            NDWI: -0.1556 (Significant: No)
+            
+            Center: 14.380297, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.380011092871095,0 79.5227274658608,14.380011092871095,0 79.5227274658608,14.380583637765069,0 79.52213639758239,14.380583637765069,0 79.52213639758239,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 69 - Water/Moisture</name>
+      <description>
+            Square ID: 69
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3388 (Significant: No)
+            NDBI: -0.1696 (Significant: No)
+            NDWI: 0.015 (Significant: Yes)
+            
+            Center: 14.380297, 79.523614
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.380011092871095,0 79.52390960241762,14.380011092871095,0 79.52390960241762,14.380583637765069,0 79.52331853413921,14.380583637765069,0 79.52331853413921,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 70 - Built-up</name>
+      <description>
+            Square ID: 70
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3316 (Significant: No)
+            NDBI: 0.2287 (Significant: Yes)
+            NDWI: -0.029 (Significant: No)
+            
+            Center: 14.380297, 79.524205
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.380011092871095,0 79.52450067069601,14.380011092871095,0 79.52450067069601,14.380583637765069,0 79.5239096024176,14.380583637765069,0 79.5239096024176,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 71 - Vegetation</name>
+      <description>
+            Square ID: 71
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4177 (Significant: Yes)
+            NDBI: -0.122 (Significant: No)
+            NDWI: -0.5417 (Significant: No)
+            
+            Center: 14.380297, 79.524796
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.380011092871095,0 79.52509173897442,14.380011092871095,0 79.52509173897442,14.380583637765069,0 79.52450067069601,14.380583637765069,0 79.52450067069601,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 72 - Built-up</name>
+      <description>
+            Square ID: 72
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.1059 (Significant: No)
+            NDBI: 0.0579 (Significant: Yes)
+            NDWI: -0.043 (Significant: No)
+            
+            Center: 14.380297, 79.525387
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.380011092871095,0 79.52568280725284,14.380011092871095,0 79.52568280725284,14.380583637765069,0 79.52509173897442,14.380583637765069,0 79.52509173897442,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 73 - Vegetation</name>
+      <description>
+            Square ID: 73
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5517 (Significant: Yes)
+            NDBI: -0.0749 (Significant: No)
+            NDWI: -0.4712 (Significant: No)
+            
+            Center: 14.380297, 79.525978
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.380011092871095,0 79.52627387553123,14.380011092871095,0 79.52627387553123,14.380583637765069,0 79.52568280725282,14.380583637765069,0 79.52568280725282,14.380011092871095,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 76 - Vegetation</name>
+      <description>
+            Square ID: 76
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.487 (Significant: Yes)
+            NDBI: 0.1073 (Significant: Yes)
+            NDWI: 0.1011 (Significant: Yes)
+            
+            Center: 14.380870, 79.518886
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.380583637765069,0 79.51918105619036,14.380583637765069,0 79.51918105619036,14.381156182659042,0 79.51858998791195,14.381156182659042,0 79.51858998791195,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 77 - Vegetation</name>
+      <description>
+            Square ID: 77
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5998 (Significant: Yes)
+            NDBI: -0.1046 (Significant: No)
+            NDWI: -0.4146 (Significant: No)
+            
+            Center: 14.380870, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.380583637765069,0 79.51977212446877,14.380583637765069,0 79.51977212446877,14.381156182659042,0 79.51918105619036,14.381156182659042,0 79.51918105619036,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 81 - Vegetation</name>
+      <description>
+            Square ID: 81
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6087 (Significant: Yes)
+            NDBI: -0.0898 (Significant: No)
+            NDWI: -0.4034 (Significant: No)
+            
+            Center: 14.380870, 79.521841
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.380583637765069,0 79.5221363975824,14.380583637765069,0 79.5221363975824,14.381156182659042,0 79.52154532930399,14.381156182659042,0 79.52154532930399,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 84 - Water/Moisture</name>
+      <description>
+            Square ID: 84
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.1221 (Significant: No)
+            NDBI: -0.2142 (Significant: No)
+            NDWI: 0.1259 (Significant: Yes)
+            
+            Center: 14.380870, 79.523614
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.380583637765069,0 79.52390960241762,14.380583637765069,0 79.52390960241762,14.381156182659042,0 79.52331853413921,14.381156182659042,0 79.52331853413921,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 85 - Vegetation</name>
+      <description>
+            Square ID: 85
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.412 (Significant: Yes)
+            NDBI: -0.2181 (Significant: No)
+            NDWI: -0.4644 (Significant: No)
+            
+            Center: 14.380870, 79.524205
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.380583637765069,0 79.52450067069601,14.380583637765069,0 79.52450067069601,14.381156182659042,0 79.5239096024176,14.381156182659042,0 79.5239096024176,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 86 - Vegetation</name>
+      <description>
+            Square ID: 86
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4256 (Significant: Yes)
+            NDBI: -0.0086 (Significant: No)
+            NDWI: -0.037 (Significant: No)
+            
+            Center: 14.380870, 79.524796
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.380583637765069,0 79.52509173897442,14.380583637765069,0 79.52509173897442,14.381156182659042,0 79.52450067069601,14.381156182659042,0 79.52450067069601,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 89 - Vegetation</name>
+      <description>
+            Square ID: 89
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4438 (Significant: Yes)
+            NDBI: -0.047 (Significant: No)
+            NDWI: -0.0065 (Significant: No)
+            
+            Center: 14.380870, 79.526569
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.380583637765069,0 79.52686494380964,14.380583637765069,0 79.52686494380964,14.381156182659042,0 79.52627387553123,14.381156182659042,0 79.52627387553123,14.380583637765069,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 92 - Vegetation</name>
+      <description>
+            Square ID: 92
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4423 (Significant: Yes)
+            NDBI: -0.376 (Significant: No)
+            NDWI: 0.0528 (Significant: Yes)
+            
+            Center: 14.381442, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.381156182659042,0 79.51977212446877,14.381156182659042,0 79.51977212446877,14.381728727553016,0 79.51918105619036,14.381728727553016,0 79.51918105619036,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 93 - Vegetation</name>
+      <description>
+            Square ID: 93
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5204 (Significant: Yes)
+            NDBI: -0.1937 (Significant: No)
+            NDWI: -0.2715 (Significant: No)
+            
+            Center: 14.381442, 79.520068
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.381156182659042,0 79.52036319274717,14.381156182659042,0 79.52036319274717,14.381728727553016,0 79.51977212446876,14.381728727553016,0 79.51977212446876,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 96 - Built-up</name>
+      <description>
+            Square ID: 96
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.369 (Significant: No)
+            NDBI: 0.0829 (Significant: Yes)
+            NDWI: -0.4295 (Significant: No)
+            
+            Center: 14.381442, 79.521841
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.381156182659042,0 79.5221363975824,14.381156182659042,0 79.5221363975824,14.381728727553016,0 79.52154532930399,14.381728727553016,0 79.52154532930399,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 97 - Vegetation</name>
+      <description>
+            Square ID: 97
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4304 (Significant: Yes)
+            NDBI: -0.1033 (Significant: No)
+            NDWI: -0.4148 (Significant: No)
+            
+            Center: 14.381442, 79.522432
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.381156182659042,0 79.5227274658608,14.381156182659042,0 79.5227274658608,14.381728727553016,0 79.52213639758239,14.381728727553016,0 79.52213639758239,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 98 - Vegetation</name>
+      <description>
+            Square ID: 98
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5231 (Significant: Yes)
+            NDBI: 0.0551 (Significant: Yes)
+            NDWI: -0.2923 (Significant: No)
+            
+            Center: 14.381442, 79.523023
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5227274658608,14.381156182659042,0 79.52331853413921,14.381156182659042,0 79.52331853413921,14.381728727553016,0 79.5227274658608,14.381728727553016,0 79.5227274658608,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 103 - Vegetation</name>
+      <description>
+            Square ID: 103
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6608 (Significant: Yes)
+            NDBI: -0.2537 (Significant: No)
+            NDWI: -0.3076 (Significant: No)
+            
+            Center: 14.381442, 79.525978
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.381156182659042,0 79.52627387553123,14.381156182659042,0 79.52627387553123,14.381728727553016,0 79.52568280725282,14.381728727553016,0 79.52568280725282,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 104 - Water/Moisture</name>
+      <description>
+            Square ID: 104
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.2953 (Significant: No)
+            NDBI: -0.3147 (Significant: No)
+            NDWI: 0.0476 (Significant: Yes)
+            
+            Center: 14.381442, 79.526569
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.381156182659042,0 79.52686494380964,14.381156182659042,0 79.52686494380964,14.381728727553016,0 79.52627387553123,14.381728727553016,0 79.52627387553123,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 105 - Vegetation</name>
+      <description>
+            Square ID: 105
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4962 (Significant: Yes)
+            NDBI: -0.3296 (Significant: No)
+            NDWI: -0.241 (Significant: No)
+            
+            Center: 14.381442, 79.527160
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.381156182659042,0 79.52745601208805,14.381156182659042,0 79.52745601208805,14.381728727553016,0 79.52686494380964,14.381728727553016,0 79.52686494380964,14.381156182659042,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 106 - Built-up</name>
+      <description>
+            Square ID: 106
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2066 (Significant: No)
+            NDBI: 0.0926 (Significant: Yes)
+            NDWI: -0.0454 (Significant: No)
+            
+            Center: 14.382015, 79.518886
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.381728727553014,0 79.51918105619036,14.381728727553014,0 79.51918105619036,14.382301272446988,0 79.51858998791195,14.382301272446988,0 79.51858998791195,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 107 - Vegetation</name>
+      <description>
+            Square ID: 107
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6213 (Significant: Yes)
+            NDBI: -0.006 (Significant: No)
+            NDWI: -0.5905 (Significant: No)
+            
+            Center: 14.382015, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.381728727553014,0 79.51977212446877,14.381728727553014,0 79.51977212446877,14.382301272446988,0 79.51918105619036,14.382301272446988,0 79.51918105619036,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 108 - Vegetation</name>
+      <description>
+            Square ID: 108
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4427 (Significant: Yes)
+            NDBI: -0.0635 (Significant: No)
+            NDWI: -0.1055 (Significant: No)
+            
+            Center: 14.382015, 79.520068
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.381728727553014,0 79.52036319274717,14.381728727553014,0 79.52036319274717,14.382301272446988,0 79.51977212446876,14.382301272446988,0 79.51977212446876,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 109 - Built-up</name>
+      <description>
+            Square ID: 109
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2534 (Significant: No)
+            NDBI: 0.0539 (Significant: Yes)
+            NDWI: 0.2484 (Significant: Yes)
+            
+            Center: 14.382015, 79.520659
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.381728727553014,0 79.52095426102558,14.381728727553014,0 79.52095426102558,14.382301272446988,0 79.52036319274717,14.382301272446988,0 79.52036319274717,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 111 - Water/Moisture</name>
+      <description>
+            Square ID: 111
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.1627 (Significant: No)
+            NDBI: -0.199 (Significant: No)
+            NDWI: 0.083 (Significant: Yes)
+            
+            Center: 14.382015, 79.521841
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.381728727553014,0 79.5221363975824,14.381728727553014,0 79.5221363975824,14.382301272446988,0 79.52154532930399,14.382301272446988,0 79.52154532930399,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 115 - Vegetation</name>
+      <description>
+            Square ID: 115
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4203 (Significant: Yes)
+            NDBI: -0.0175 (Significant: No)
+            NDWI: -0.3265 (Significant: No)
+            
+            Center: 14.382015, 79.524205
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 117 - Vegetation</name>
+      <description>
+            Square ID: 117
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.442 (Significant: Yes)
+            NDBI: -0.2531 (Significant: No)
+            NDWI: 0.1203 (Significant: Yes)
+            
+            Center: 14.382015, 79.525387
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.381728727553014,0 79.52568280725284,14.381728727553014,0 79.52568280725284,14.382301272446988,0 79.52509173897442,14.382301272446988,0 79.52509173897442,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 118 - Built-up</name>
+      <description>
+            Square ID: 118
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2559 (Significant: No)
+            NDBI: 0.1167 (Significant: Yes)
+            NDWI: -0.1372 (Significant: No)
+            
+            Center: 14.382015, 79.525978
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.381728727553014,0 79.52627387553123,14.381728727553014,0 79.52627387553123,14.382301272446988,0 79.52568280725282,14.382301272446988,0 79.52568280725282,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 120 - Vegetation</name>
+      <description>
+            Square ID: 120
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6757 (Significant: Yes)
+            NDBI: -0.1021 (Significant: No)
+            NDWI: -0.5278 (Significant: No)
+            
+            Center: 14.382015, 79.527160
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.381728727553014,0 79.52745601208805,14.381728727553014,0 79.52745601208805,14.382301272446988,0 79.52686494380964,14.382301272446988,0 79.52686494380964,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 122 - Built-up</name>
+      <description>
+            Square ID: 122
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3594 (Significant: No)
+            NDBI: 0.0248 (Significant: Yes)
+            NDWI: -0.1008 (Significant: No)
+            
+            Center: 14.382588, 79.519477
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.382301272446988,0 79.51977212446877,14.382301272446988,0 79.51977212446877,14.382873817340961,0 79.51918105619036,14.382873817340961,0 79.51918105619036,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 124 - Built-up</name>
+      <description>
+            Square ID: 124
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: -0.0885 (Significant: No)
+            NDBI: 0.0154 (Significant: Yes)
+            NDWI: -0.1146 (Significant: No)
+            
+            Center: 14.382588, 79.520659
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.382301272446988,0 79.52095426102558,14.382301272446988,0 79.52095426102558,14.382873817340961,0 79.52036319274717,14.382873817340961,0 79.52036319274717,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 127 - Built-up</name>
+      <description>
+            Square ID: 127
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: -0.0997 (Significant: No)
+            NDBI: 0.0266 (Significant: Yes)
+            NDWI: -0.2202 (Significant: No)
+            
+            Center: 14.382588, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.382301272446988,0 79.5227274658608,14.382301272446988,0 79.5227274658608,14.382873817340961,0 79.52213639758239,14.382873817340961,0 79.52213639758239,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 132 - Built-up</name>
+      <description>
+            Square ID: 132
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3284 (Significant: No)
+            NDBI: 0.1174 (Significant: Yes)
+            NDWI: -0.2075 (Significant: No)
+            
+            Center: 14.382588, 79.525387
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.382301272446988,0 79.52568280725284,14.382301272446988,0 79.52568280725284,14.382873817340961,0 79.52509173897442,14.382873817340961,0 79.52509173897442,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 134 - Vegetation</name>
+      <description>
+            Square ID: 134
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.565 (Significant: Yes)
+            NDBI: -0.1254 (Significant: No)
+            NDWI: -0.2531 (Significant: No)
+            
+            Center: 14.382588, 79.526569
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.382301272446988,0 79.52686494380964,14.382301272446988,0 79.52686494380964,14.382873817340961,0 79.52627387553123,14.382873817340961,0 79.52627387553123,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 135 - Built-up</name>
+      <description>
+            Square ID: 135
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2126 (Significant: No)
+            NDBI: 0.109 (Significant: Yes)
+            NDWI: -0.086 (Significant: No)
+            
+            Center: 14.382588, 79.527160
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.382301272446988,0 79.52745601208805,14.382301272446988,0 79.52745601208805,14.382873817340961,0 79.52686494380964,14.382873817340961,0 79.52686494380964,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 136 - Vegetation</name>
+      <description>
+            Square ID: 136
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6057 (Significant: Yes)
+            NDBI: -0.1886 (Significant: No)
+            NDWI: 0.1719 (Significant: Yes)
+            
+            Center: 14.383160, 79.518886
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.382873817340961,0 79.51918105619036,14.382873817340961,0 79.51918105619036,14.383446362234935,0 79.51858998791195,14.383446362234935,0 79.51858998791195,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 138 - Vegetation</name>
+      <description>
+            Square ID: 138
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.7195 (Significant: Yes)
+            NDBI: 0.1897 (Significant: Yes)
+            NDWI: 0.0219 (Significant: Yes)
+            
+            Center: 14.383160, 79.520068
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.382873817340961,0 79.52036319274717,14.382873817340961,0 79.52036319274717,14.383446362234935,0 79.51977212446876,14.383446362234935,0 79.51977212446876,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 139 - Vegetation</name>
+      <description>
+            Square ID: 139
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4642 (Significant: Yes)
+            NDBI: 0.0513 (Significant: Yes)
+            NDWI: -0.394 (Significant: No)
+            
+            Center: 14.383160, 79.520659
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.382873817340961,0 79.52095426102558,14.382873817340961,0 79.52095426102558,14.383446362234935,0 79.52036319274717,14.383446362234935,0 79.52036319274717,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 144 - Vegetation</name>
+      <description>
+            Square ID: 144
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4614 (Significant: Yes)
+            NDBI: -0.0217 (Significant: No)
+            NDWI: -0.36 (Significant: No)
+            
+            Center: 14.383160, 79.523614
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.382873817340961,0 79.52390960241762,14.382873817340961,0 79.52390960241762,14.383446362234935,0 79.52331853413921,14.383446362234935,0 79.52331853413921,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 145 - Vegetation</name>
+      <description>
+            Square ID: 145
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6182 (Significant: Yes)
+            NDBI: -0.199 (Significant: No)
+            NDWI: -0.2496 (Significant: No)
+            
+            Center: 14.383160, 79.524205
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.382873817340961,0 79.52450067069601,14.382873817340961,0 79.52450067069601,14.383446362234935,0 79.5239096024176,14.383446362234935,0 79.5239096024176,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 146 - Water/Moisture</name>
+      <description>
+            Square ID: 146
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3526 (Significant: No)
+            NDBI: -0.0058 (Significant: No)
+            NDWI: 0.0507 (Significant: Yes)
+            
+            Center: 14.383160, 79.524796
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.382873817340961,0 79.52509173897442,14.382873817340961,0 79.52509173897442,14.383446362234935,0 79.52450067069601,14.383446362234935,0 79.52450067069601,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 147 - Built-up</name>
+      <description>
+            Square ID: 147
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.1079 (Significant: No)
+            NDBI: 0.0036 (Significant: Yes)
+            NDWI: -0.1602 (Significant: No)
+            
+            Center: 14.383160, 79.525387
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52509173897442,14.382873817340961,0 79.52568280725284,14.382873817340961,0 79.52568280725284,14.383446362234935,0 79.52509173897442,14.383446362234935,0 79.52509173897442,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 148 - Built-up</name>
+      <description>
+            Square ID: 148
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.15 (Significant: No)
+            NDBI: 0.0921 (Significant: Yes)
+            NDWI: -0.3057 (Significant: No)
+            
+            Center: 14.383160, 79.525978
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.382873817340961,0 79.52627387553123,14.382873817340961,0 79.52627387553123,14.383446362234935,0 79.52568280725282,14.383446362234935,0 79.52568280725282,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 149 - Vegetation</name>
+      <description>
+            Square ID: 149
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6279 (Significant: Yes)
+            NDBI: -0.1324 (Significant: No)
+            NDWI: 0.1956 (Significant: Yes)
+            
+            Center: 14.383160, 79.526569
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.382873817340961,0 79.52686494380964,14.382873817340961,0 79.52686494380964,14.383446362234935,0 79.52627387553123,14.383446362234935,0 79.52627387553123,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 150 - Built-up</name>
+      <description>
+            Square ID: 150
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.3206 (Significant: No)
+            NDBI: 0.0813 (Significant: Yes)
+            NDWI: -0.0944 (Significant: No)
+            
+            Center: 14.383160, 79.527160
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.382873817340961,0 79.52745601208805,14.382873817340961,0 79.52745601208805,14.383446362234935,0 79.52686494380964,14.383446362234935,0 79.52686494380964,14.382873817340961,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 152 - Vegetation</name>
+      <description>
+            Square ID: 152
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4561 (Significant: Yes)
+            NDBI: -0.138 (Significant: No)
+            NDWI: -0.0655 (Significant: No)
+            
+            Center: 14.383733, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.383446362234935,0 79.51977212446877,14.383446362234935,0 79.51977212446877,14.384018907128908,0 79.51918105619036,14.384018907128908,0 79.51918105619036,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 153 - Vegetation</name>
+      <description>
+            Square ID: 153
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4613 (Significant: Yes)
+            NDBI: -0.1394 (Significant: No)
+            NDWI: -0.2615 (Significant: No)
+            
+            Center: 14.383733, 79.520068
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.383446362234935,0 79.52036319274717,14.383446362234935,0 79.52036319274717,14.384018907128908,0 79.51977212446876,14.384018907128908,0 79.51977212446876,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 154 - Water/Moisture</name>
+      <description>
+            Square ID: 154
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: -0.0285 (Significant: No)
+            NDBI: -0.0891 (Significant: No)
+            NDWI: 0.0646 (Significant: Yes)
+            
+            Center: 14.383733, 79.520659
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.383446362234935,0 79.52095426102558,14.383446362234935,0 79.52095426102558,14.384018907128908,0 79.52036319274717,14.384018907128908,0 79.52036319274717,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 156 - Vegetation</name>
+      <description>
+            Square ID: 156
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4604 (Significant: Yes)
+            NDBI: 0.0071 (Significant: Yes)
+            NDWI: -0.3168 (Significant: No)
+            
+            Center: 14.383733, 79.521841
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.383446362234935,0 79.5221363975824,14.383446362234935,0 79.5221363975824,14.384018907128908,0 79.52154532930399,14.384018907128908,0 79.52154532930399,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 157 - Built-up</name>
+      <description>
+            Square ID: 157
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2455 (Significant: No)
+            NDBI: 0.2389 (Significant: Yes)
+            NDWI: -0.0297 (Significant: No)
+            
+            Center: 14.383733, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.383446362234935,0 79.5227274658608,14.383446362234935,0 79.5227274658608,14.384018907128908,0 79.52213639758239,14.384018907128908,0 79.52213639758239,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 159 - Vegetation</name>
+      <description>
+            Square ID: 159
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.801 (Significant: Yes)
+            NDBI: -0.1659 (Significant: No)
+            NDWI: -0.3792 (Significant: No)
+            
+            Center: 14.383733, 79.523614
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.383446362234935,0 79.52390960241762,14.383446362234935,0 79.52390960241762,14.384018907128908,0 79.52331853413921,14.384018907128908,0 79.52331853413921,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 160 - Water/Moisture</name>
+      <description>
+            Square ID: 160
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3453 (Significant: No)
+            NDBI: -0.1559 (Significant: No)
+            NDWI: 0.1624 (Significant: Yes)
+            
+            Center: 14.383733, 79.524205
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.383446362234935,0 79.52450067069601,14.383446362234935,0 79.52450067069601,14.384018907128908,0 79.5239096024176,14.384018907128908,0 79.5239096024176,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 163 - Vegetation</name>
+      <description>
+            Square ID: 163
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4358 (Significant: Yes)
+            NDBI: -0.4315 (Significant: No)
+            NDWI: -0.0896 (Significant: No)
+            
+            Center: 14.383733, 79.525978
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.383446362234935,0 79.52627387553123,14.383446362234935,0 79.52627387553123,14.384018907128908,0 79.52568280725282,14.384018907128908,0 79.52568280725282,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 165 - Vegetation</name>
+      <description>
+            Square ID: 165
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.7545 (Significant: Yes)
+            NDBI: -0.1364 (Significant: No)
+            NDWI: -0.1095 (Significant: No)
+            
+            Center: 14.383733, 79.527160
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52686494380964,14.383446362234935,0 79.52745601208805,14.383446362234935,0 79.52745601208805,14.384018907128908,0 79.52686494380964,14.384018907128908,0 79.52686494380964,14.383446362234935,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 166 - Vegetation</name>
+      <description>
+            Square ID: 166
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4036 (Significant: Yes)
+            NDBI: -0.0868 (Significant: No)
+            NDWI: -0.111 (Significant: No)
+            
+            Center: 14.384305, 79.518886
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.384018907128908,0 79.51918105619036,14.384018907128908,0 79.51918105619036,14.384591452022882,0 79.51858998791195,14.384591452022882,0 79.51858998791195,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 167 - Water/Moisture</name>
+      <description>
+            Square ID: 167
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3248 (Significant: No)
+            NDBI: -0.1133 (Significant: No)
+            NDWI: 0.0357 (Significant: Yes)
+            
+            Center: 14.384305, 79.519477
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.384018907128908,0 79.51977212446877,14.384018907128908,0 79.51977212446877,14.384591452022882,0 79.51918105619036,14.384591452022882,0 79.51918105619036,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 168 - Water/Moisture</name>
+      <description>
+            Square ID: 168
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: -0.0571 (Significant: No)
+            NDBI: -0.1704 (Significant: No)
+            NDWI: 0.0445 (Significant: Yes)
+            
+            Center: 14.384305, 79.520068
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.384018907128908,0 79.52036319274717,14.384018907128908,0 79.52036319274717,14.384591452022882,0 79.51977212446876,14.384591452022882,0 79.51977212446876,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 169 - Vegetation</name>
+      <description>
+            Square ID: 169
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.5385 (Significant: Yes)
+            NDBI: -0.1645 (Significant: No)
+            NDWI: 0.1183 (Significant: Yes)
+            
+            Center: 14.384305, 79.520659
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.384018907128908,0 79.52095426102558,14.384018907128908,0 79.52095426102558,14.384591452022882,0 79.52036319274717,14.384591452022882,0 79.52036319274717,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 171 - Vegetation</name>
+      <description>
+            Square ID: 171
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4011 (Significant: Yes)
+            NDBI: 0.0441 (Significant: Yes)
+            NDWI: -0.4531 (Significant: No)
+            
+            Center: 14.384305, 79.521841
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.384018907128908,0 79.5221363975824,14.384018907128908,0 79.5221363975824,14.384591452022882,0 79.52154532930399,14.384591452022882,0 79.52154532930399,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 173 - Vegetation</name>
+      <description>
+            Square ID: 173
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.491 (Significant: Yes)
+            NDBI: -0.0842 (Significant: No)
+            NDWI: -0.1055 (Significant: No)
+            
+            Center: 14.384305, 79.523023
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5227274658608,14.384018907128908,0 79.52331853413921,14.384018907128908,0 79.52331853413921,14.384591452022882,0 79.5227274658608,14.384591452022882,0 79.5227274658608,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 176 - Water/Moisture</name>
+      <description>
+            Square ID: 176
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3416 (Significant: No)
+            NDBI: -0.1912 (Significant: No)
+            NDWI: 0.0079 (Significant: Yes)
+            
+            Center: 14.384305, 79.524796
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.384018907128908,0 79.52509173897442,14.384018907128908,0 79.52509173897442,14.384591452022882,0 79.52450067069601,14.384591452022882,0 79.52450067069601,14.384018907128908,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 182 - Vegetation</name>
+      <description>
+            Square ID: 182
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.4364 (Significant: Yes)
+            NDBI: 0.1402 (Significant: Yes)
+            NDWI: -0.1993 (Significant: No)
+            
+            Center: 14.384878, 79.519477
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51918105619036,14.384591452022882,0 79.51977212446877,14.384591452022882,0 79.51977212446877,14.385163996916855,0 79.51918105619036,14.385163996916855,0 79.51918105619036,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 183 - Vegetation</name>
+      <description>
+            Square ID: 183
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.419 (Significant: Yes)
+            NDBI: -0.3084 (Significant: No)
+            NDWI: -0.3805 (Significant: No)
+            
+            Center: 14.384878, 79.520068
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51977212446876,14.384591452022882,0 79.52036319274717,14.384591452022882,0 79.52036319274717,14.385163996916855,0 79.51977212446876,14.385163996916855,0 79.51977212446876,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 184 - Vegetation</name>
+      <description>
+            Square ID: 184
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.506 (Significant: Yes)
+            NDBI: 0.076 (Significant: Yes)
+            NDWI: 0.012 (Significant: Yes)
+            
+            Center: 14.384878, 79.520659
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.384591452022882,0 79.52095426102558,14.384591452022882,0 79.52095426102558,14.385163996916855,0 79.52036319274717,14.385163996916855,0 79.52036319274717,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 187 - Built-up</name>
+      <description>
+            Square ID: 187
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2686 (Significant: No)
+            NDBI: 0.0733 (Significant: Yes)
+            NDWI: -0.0091 (Significant: No)
+            
+            Center: 14.384878, 79.522432
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.384591452022882,0 79.5227274658608,14.384591452022882,0 79.5227274658608,14.385163996916855,0 79.52213639758239,14.385163996916855,0 79.52213639758239,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 188 - Built-up</name>
+      <description>
+            Square ID: 188
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.0928 (Significant: No)
+            NDBI: 0.0333 (Significant: Yes)
+            NDWI: -0.5527 (Significant: No)
+            
+            Center: 14.384878, 79.523023
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5227274658608,14.384591452022882,0 79.52331853413921,14.384591452022882,0 79.52331853413921,14.385163996916855,0 79.5227274658608,14.385163996916855,0 79.5227274658608,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 189 - Water/Moisture</name>
+      <description>
+            Square ID: 189
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: 0.3044 (Significant: No)
+            NDBI: -0.0798 (Significant: No)
+            NDWI: 0.0606 (Significant: Yes)
+            
+            Center: 14.384878, 79.523614
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.384591452022882,0 79.52390960241762,14.384591452022882,0 79.52390960241762,14.385163996916855,0 79.52331853413921,14.385163996916855,0 79.52331853413921,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 191 - Built-up</name>
+      <description>
+            Square ID: 191
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.0787 (Significant: No)
+            NDBI: 0.1999 (Significant: Yes)
+            NDWI: -0.1971 (Significant: No)
+            
+            Center: 14.384878, 79.524796
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.384591452022882,0 79.52509173897442,14.384591452022882,0 79.52509173897442,14.385163996916855,0 79.52450067069601,14.385163996916855,0 79.52450067069601,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 193 - Vegetation</name>
+      <description>
+            Square ID: 193
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.462 (Significant: Yes)
+            NDBI: -0.0703 (Significant: No)
+            NDWI: -0.3628 (Significant: No)
+            
+            Center: 14.384878, 79.525978
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52568280725282,14.384591452022882,0 79.52627387553123,14.384591452022882,0 79.52627387553123,14.385163996916855,0 79.52568280725282,14.385163996916855,0 79.52568280725282,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 194 - Water/Moisture</name>
+      <description>
+            Square ID: 194
+            LP No: 2
+            Primary Significance: Water/Moisture
+            
+            NDVI: -0.0291 (Significant: No)
+            NDBI: -0.1263 (Significant: No)
+            NDWI: 0.049 (Significant: Yes)
+            
+            Center: 14.384878, 79.526569
+            </description>
+      <styleUrl>#ndwi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52627387553123,14.384591452022882,0 79.52686494380964,14.384591452022882,0 79.52686494380964,14.385163996916855,0 79.52627387553123,14.385163996916855,0 79.52627387553123,14.384591452022882,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 196 - Vegetation</name>
+      <description>
+            Square ID: 196
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6727 (Significant: Yes)
+            NDBI: -0.0019 (Significant: No)
+            NDWI: -0.1369 (Significant: No)
+            
+            Center: 14.385450, 79.518886
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.51858998791195,14.385163996916855,0 79.51918105619036,14.385163996916855,0 79.51918105619036,14.385736541810829,0 79.51858998791195,14.385736541810829,0 79.51858998791195,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 199 - Vegetation</name>
+      <description>
+            Square ID: 199
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.6766 (Significant: Yes)
+            NDBI: -0.1357 (Significant: No)
+            NDWI: -0.1845 (Significant: No)
+            
+            Center: 14.385450, 79.520659
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52036319274717,14.385163996916855,0 79.52095426102558,14.385163996916855,0 79.52095426102558,14.385736541810829,0 79.52036319274717,14.385736541810829,0 79.52036319274717,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 201 - Built-up</name>
+      <description>
+            Square ID: 201
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.0425 (Significant: No)
+            NDBI: 0.0347 (Significant: Yes)
+            NDWI: -0.0754 (Significant: No)
+            
+            Center: 14.385450, 79.521841
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930399,14.385163996916855,0 79.5221363975824,14.385163996916855,0 79.5221363975824,14.385736541810829,0 79.52154532930399,14.385736541810829,0 79.52154532930399,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 202 - Vegetation</name>
+      <description>
+            Square ID: 202
+            LP No: 2
+            Primary Significance: Vegetation
+            
+            NDVI: 0.878 (Significant: Yes)
+            NDBI: 0.0597 (Significant: Yes)
+            NDWI: -0.2857 (Significant: No)
+            
+            Center: 14.385450, 79.522432
+            </description>
+      <styleUrl>#ndvi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.385163996916855,0 79.5227274658608,14.385163996916855,0 79.5227274658608,14.385736541810829,0 79.52213639758239,14.385736541810829,0 79.52213639758239,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 204 - Built-up</name>
+      <description>
+            Square ID: 204
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2306 (Significant: No)
+            NDBI: 0.0043 (Significant: Yes)
+            NDWI: -0.0438 (Significant: No)
+            
+            Center: 14.385450, 79.523614
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52331853413921,14.385163996916855,0 79.52390960241762,14.385163996916855,0 79.52390960241762,14.385736541810829,0 79.52331853413921,14.385736541810829,0 79.52331853413921,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 206 - Built-up</name>
+      <description>
+            Square ID: 206
+            LP No: 2
+            Primary Significance: Built-up
+            
+            NDVI: 0.2601 (Significant: No)
+            NDBI: 0.041 (Significant: Yes)
+            NDWI: -0.083 (Significant: No)
+            
+            Center: 14.385450, 79.524796
+            </description>
+      <styleUrl>#ndbi</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52450067069601,14.385163996916855,0 79.52509173897442,14.385163996916855,0 79.52509173897442,14.385736541810829,0 79.52450067069601,14.385736541810829,0 79.52450067069601,14.385163996916855,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

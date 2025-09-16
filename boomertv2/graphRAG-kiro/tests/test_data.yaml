@@ -1,0 +1,240 @@
+# Test data for GraphRAG Retrieval Agent modules
+
+embedding_tests:
+  - name: "basic_embedding_generation"
+    description: "Test basic embedding generation with simple text"
+    input: "This is a test query for embedding generation"
+    expected_type: "list"
+    expected_dimension: 384
+    expected_min_norm: 0.1
+    expected_max_norm: 10.0
+  
+  - name: "empty_text_error"
+    description: "Test that empty text raises appropriate error"
+    input: ""
+    expected_error: "EmbeddingError"
+    expected_error_code: 3002
+  
+  - name: "whitespace_only_error"
+    description: "Test that whitespace-only text raises appropriate error"
+    input: "   \n\t  "
+    expected_error: "EmbeddingError"
+    expected_error_code: 3002
+  
+  - name: "long_text_embedding"
+    description: "Test embedding generation with longer text"
+    input: "This is a much longer text that contains multiple sentences. It should still generate a valid embedding vector. The embedding should have the same dimensionality as shorter texts."
+    expected_type: "list"
+    expected_dimension: 384
+    expected_min_norm: 0.1
+    expected_max_norm: 10.0
+  
+  - name: "special_characters_embedding"
+    description: "Test embedding generation with special characters"
+    input: "Text with special chars: @#$%^&*()_+-=[]{}|;':\",./<>?"
+    expected_type: "list"
+    expected_dimension: 384
+    expected_min_norm: 0.1
+    expected_max_norm: 10.0
+  
+  - name: "unicode_text_embedding"
+    description: "Test embedding generation with unicode characters"
+    input: "Unicode text: café, naïve, résumé, 中文, العربية, русский"
+    expected_type: "list"
+    expected_dimension: 384
+    expected_min_norm: 0.1
+    expected_max_norm: 10.0
+
+model_info_tests:
+  - name: "model_info_structure"
+    description: "Test that model info returns expected structure"
+    expected_keys: ["model_name", "embedding_dimension", "max_sequence_length", "device"]
+    expected_model_name: "all-MiniLM-L6-v2"
+    expected_dimension: 384
+
+neo4j_tests:
+  - name: "connection_error_handling"
+    description: "Test Neo4j connection error handling with invalid credentials"
+    connection_params:
+      uri: "bolt://localhost:7687"
+      username: "invalid_user"
+      password: "invalid_password"
+    expected_error: "Neo4jError"
+    expected_error_code: 2002
+  
+  - name: "connection_timeout_handling"
+    description: "Test Neo4j connection timeout with unreachable server"
+    connection_params:
+      uri: "bolt://unreachable-server:7687"
+      username: "neo4j"
+      password: "password"
+    expected_error: "Neo4jError"
+    expected_error_code: 2001
+  
+  - name: "vector_search_with_mock_data"
+    description: "Test vector search functionality with mock data"
+    mock_data: true
+    embedding: [0.1, 0.2, 0.3, 0.4, 0.5]  # Simplified 5-dimensional embedding for testing
+    limit: 3
+    expected_result_structure:
+      - "chunk_id"
+      - "chunk_text" 
+      - "score"
+      - "article_id"
+      - "article_title"
+      - "author_id"
+      - "author_name"
+  
+  - name: "expand_graph_with_mock_data"
+    description: "Test graph expansion functionality with mock data"
+    mock_data: true
+    chunk_ids: ["chunk_1", "chunk_2"]
+    expected_result_structure:
+      - "chunk_id"
+      - "chunk_text"
+      - "article_id"
+      - "article_title"
+      - "author_id"
+      - "author_name"
+      - "related_chunks"
+      - "other_articles"
+  
+  - name: "empty_chunk_ids_expansion"
+    description: "Test graph expansion with empty chunk IDs list"
+    mock_data: true
+    chunk_ids: []
+    expected_result: []
+  
+  - name: "health_check_functionality"
+    description: "Test Neo4j health check functionality"
+    mock_data: true
+    expected_keys: ["connection", "database", "indexes", "node_counts", "timestamp"]
+
+retrieval_tests:
+  - name: "empty_query_error"
+    description: "Test that empty query raises appropriate error"
+    query: ""
+    expected_error: "RetrievalError"
+    expected_error_code: 5001
+  
+  - name: "whitespace_query_error"
+    description: "Test that whitespace-only query raises appropriate error"
+    query: "   \n\t  "
+    expected_error: "RetrievalError"
+    expected_error_code: 5001
+  
+  - name: "basic_retrieval_with_expansion"
+    description: "Test basic retrieval with graph expansion"
+    mock_data: true
+    query: "What is machine learning?"
+    limit: 3
+    expand_graph: true
+    expected_result_structure:
+      - "chunk_id"
+      - "chunk_text"
+      - "score"
+      - "article"
+      - "author"
+      - "context"
+  
+  - name: "basic_retrieval_without_expansion"
+    description: "Test basic retrieval without graph expansion"
+    mock_data: true
+    query: "What is artificial intelligence?"
+    limit: 5
+    expand_graph: false
+    expected_result_structure:
+      - "chunk_id"
+      - "chunk_text"
+      - "score"
+      - "article"
+      - "author"
+      - "context"
+  
+  - name: "retrieval_with_no_results"
+    description: "Test retrieval when no chunks are found"
+    mock_data: true
+    query: "nonexistent topic that returns no results"
+    limit: 5
+    expand_graph: true
+    expected_result: []
+    mock_empty_results: true
+  
+  - name: "system_stats_functionality"
+    description: "Test system statistics functionality"
+    mock_data: true
+    expected_keys: ["embedding_model", "neo4j", "system_ready"]
+
+mcp_server_tests:
+  - name: "config_loading_success"
+    description: "Test successful configuration loading"
+    config_data:
+      neo4j:
+        uri: "bolt://localhost:7687"
+        username: "neo4j"
+        password: "password"
+        database: "neo4j"
+      embedding:
+        model_name: "all-MiniLM-L6-v2"
+    expected_success: true
+  
+  - name: "config_missing_neo4j_section"
+    description: "Test configuration validation with missing neo4j section"
+    config_data:
+      embedding:
+        model_name: "all-MiniLM-L6-v2"
+    expected_error: "ConfigurationError"
+    expected_error_code: 1003
+  
+  - name: "config_missing_neo4j_fields"
+    description: "Test configuration validation with missing neo4j fields"
+    config_data:
+      neo4j:
+        uri: "bolt://localhost:7687"
+        # missing username and password
+      embedding:
+        model_name: "all-MiniLM-L6-v2"
+    expected_error: "ConfigurationError"
+    expected_error_code: 1003
+  
+  - name: "mcp_tool_list"
+    description: "Test MCP server tool listing"
+    mock_data: true
+    expected_tools: ["graph_retrieve"]
+  
+  - name: "mcp_graph_retrieve_success"
+    description: "Test successful graph_retrieve tool call"
+    mock_data: true
+    tool_name: "graph_retrieve"
+    arguments:
+      query: "What is machine learning?"
+      limit: 3
+      expand_graph: true
+    expected_success: true
+  
+  - name: "mcp_graph_retrieve_missing_query"
+    description: "Test graph_retrieve tool call with missing query parameter"
+    mock_data: true
+    tool_name: "graph_retrieve"
+    arguments:
+      limit: 5
+    expected_error: "MCPServerError"
+    expected_error_code: 4002
+  
+  - name: "mcp_graph_retrieve_invalid_limit"
+    description: "Test graph_retrieve tool call with invalid limit parameter"
+    mock_data: true
+    tool_name: "graph_retrieve"
+    arguments:
+      query: "test query"
+      limit: 25  # exceeds maximum of 20
+    expected_error: "MCPServerError"
+    expected_error_code: 4002
+  
+  - name: "mcp_unknown_tool"
+    description: "Test MCP server with unknown tool call"
+    mock_data: true
+    tool_name: "unknown_tool"
+    arguments: {}
+    expected_error: "MCPServerError"
+    expected_error_code: 4003

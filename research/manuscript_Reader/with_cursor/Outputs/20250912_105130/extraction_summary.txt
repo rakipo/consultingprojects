@@ -1,0 +1,16 @@
+Telugu Table Extraction Summary
+========================================
+
+Timestamp: 20250912_105130
+Total Pages: 5
+
+Total Table Rows Extracted: 5
+Average Confidence: 54.9%
+
+Page-by-Page Summary:
+------------------------------
+Page 1: 1 rows, 2 cols, 67.9% confidence
+Page 2: 1 rows, 2 cols, 70.0% confidence
+Page 3: 1 rows, 5 cols, 53.1% confidence
+Page 4: 1 rows, 2 cols, 44.9% confidence
+Page 5: 1 rows, 3 cols, 38.9% confidence

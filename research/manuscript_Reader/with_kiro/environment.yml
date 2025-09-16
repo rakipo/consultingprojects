@@ -1,0 +1,162 @@
+name: telugu_ocr
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python
+  - python=3.9
+  
+  # Core dependencies
+  - pip
+  - setuptools
+  - wheel
+  
+  # Image processing and computer vision
+  - opencv
+  - pillow=10.4.0
+  - scikit-image
+  - imageio
+  
+  # PDF processing
+  - pdf2image
+  - poppler
+  - poppler-data
+  
+  # Data processing
+  - numpy=1.26.4
+  - pandas=2.0.3
+  - scipy=1.11.4
+  
+  # Configuration and utilities
+  - pyyaml
+  - pathlib
+  - argparse
+  - datetime
+  - pathspec
+  - typing-extensions
+  
+  # Tesseract OCR
+  - tesseract=5.5.1
+  - leptonica
+  
+  # Machine Learning and Deep Learning (for EasyOCR, PaddleOCR, TrOCR)
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cpuonly  # Remove this line if you want GPU support
+  
+  # Jupyter and development tools (optional)
+  - jupyter
+  - jupyterlab
+  - notebook
+  
+  # Visualization (optional)
+  - matplotlib=3.7.2
+  # Note: seaborn temporarily disabled due to scipy compatibility issues
+  
+  # Testing (optional)
+  - pytest
+  
+  # Pip dependencies (packages not available in conda)
+  - pip:
+    # OCR engines
+    - pytesseract==0.3.13
+    - easyocr==1.7.2
+    - paddleocr  # Optional, for PaddleOCR support
+    - transformers  # For TrOCR support
+    
+    # Cloud OCR APIs (optional)
+    - google-cloud-vision  # For Google Vision API
+    - azure-cognitiveservices-vision-computervision  # For Azure Vision
+    - boto3  # For AWS Textract
+    
+    # Additional image processing
+    - opencv-python-headless
+    - scikit-image
+    - python-bidi  # For text direction handling
+    - shapely  # For geometric operations
+    - pyclipper  # For text region processing
+    
+    # Text processing
+    - nltk  # For natural language processing
+    - fuzzywuzzy  # For text similarity
+    - python-levenshtein  # For edit distance
+    
+    # Utilities
+    - tqdm  # For progress bars
+    - colorama  # For colored terminal output
+    - click  # For CLI interface
+    
+    # Quality assessment and reporting
+    - jinja2  # For HTML report generation
+    - markdown  # For markdown processing
+    
+    # Configuration and logging
+    - python-dotenv  # For environment variables
+    - configparser  # For configuration files
+    
+    # File handling
+    - pathlib2  # Enhanced path handling
+    - glob2  # Enhanced glob patterns
+    
+    # Performance monitoring
+    - psutil  # For system resource monitoring
+    - memory-profiler  # For memory usage tracking
+    
+    # Development and testing
+    - black  # Code formatting
+    - flake8  # Code linting
+    - mypy  # Type checking
+    - pytest-cov  # Test coverage
+    
+    # Documentation
+    - sphinx  # Documentation generation
+    - sphinx-rtd-theme  # Documentation theme
+
+# Platform-specific notes:
+# For macOS ARM64 (M1/M2):
+#   - All packages should work with Apple Silicon
+#   - Tesseract includes Telugu language support
+#
+# For Linux:
+#   - May need additional system packages:
+#     sudo apt-get install tesseract-ocr tesseract-ocr-tel
+#     sudo apt-get install poppler-utils
+#
+# For Windows:
+#   - Install Tesseract separately from: https://github.com/UB-Mannheim/tesseract/wiki
+#   - Download Telugu language data manually if needed
+#
+# GPU Support:
+#   - Remove 'cpuonly' from dependencies
+#   - Add appropriate CUDA toolkit version for your system
+#   - For CUDA 11.8: pytorch-cuda=11.8
+#   - For CUDA 12.1: pytorch-cuda=12.1
+
+# Environment variables to set after installation:
+# export TESSDATA_PREFIX=/path/to/tessdata  # If needed
+# export GOOGLE_APPLICATION_CREDENTIALS=/path/to/google-credentials.json  # For Google Vision API
+# export AZURE_COMPUTER_VISION_SUBSCRIPTION_KEY=your_key  # For Azure Vision API
+# export AZURE_COMPUTER_VISION_ENDPOINT=your_endpoint  # For Azure Vision API
+# export AWS_ACCESS_KEY_ID=your_key  # For AWS Textract
+# export AWS_SECRET_ACCESS_KEY=your_secret  # For AWS Textract
+# export AWS_DEFAULT_REGION=your_region  # For AWS Textract
+
+# Installation instructions:
+# 1. Create environment: conda env create -f environment.yml
+# 2. Activate environment: conda activate telugu_ocr
+# 3. Verify installation: python -m telugu_ocr test
+# 4. Configure API keys in config/engines.yaml if using cloud OCR services
+# 5. Test with sample PDF: python -m telugu_ocr process sample.pdf
+
+# Minimum system requirements:
+# - RAM: 4GB (8GB recommended for better performance)
+# - Storage: 2GB free space (for models and dependencies)
+# - CPU: Multi-core processor recommended
+# - GPU: Optional but recommended for faster processing with EasyOCR/PaddleOCR
+
+# Optional GPU configuration for better performance:
+# If you have NVIDIA GPU and want to use it:
+# 1. Remove 'cpuonly' from dependencies above
+# 2. Install CUDA toolkit matching your GPU
+# 3. Set gpu=true in config/engines.yaml for supported engines

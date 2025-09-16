@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KML Viewer - NDVI Analysis</title>
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <h3>NDVI Vegetation Analysis</h3>
+        <p><strong>File:</strong> NDVI_Vegetation_Analysis.kml</p>
+        <p><strong>Placemarks:</strong> 16 NDVI squares</p>
+        <p><strong>Color:</strong> Blue borders (vegetation)</p>
+        <p><strong>Location:</strong> 14.38°N, 79.52°E</p>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: { lat: 14.382015, lng: 79.523023 },
+                mapTypeId: "satellite"
+            });
+
+            // Load KML layer
+            const kmlLayer = new google.maps.KmlLayer({
+                url: "http://localhost:8000/NDVI_Vegetation_Analysis.kml",
+                map: map,
+                preserveViewport: false
+            });
+
+            // Add error handling
+            google.maps.event.addListener(kmlLayer, 'status_changed', function() {
+                const status = kmlLayer.getStatus();
+                if (status === 'OK') {
+                    console.log('KML loaded successfully');
+                } else {
+                    console.error('KML loading failed:', status);
+                    document.querySelector('.info-panel').innerHTML += 
+                        '<p style="color: red;">⚠️ KML loading failed. Try refreshing or check the server.</p>';
+                }
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+</body>
+</html>

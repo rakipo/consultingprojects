@@ -1,0 +1,129 @@
+# Satellite API Configuration
+# Configuration file for satellite image retrieval from multiple APIs
+
+# API Credentials (replace with your actual keys)
+api_credentials:
+  google:
+    api_key: "YOUR_GOOGLE_STATIC_MAPS_API_KEY"
+    base_url: "https://maps.googleapis.com/maps/api/staticmap"
+    
+  mapbox:
+    access_token: "YOUR_MAPBOX_ACCESS_TOKEN"
+    base_url: "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static"
+    
+  bing:
+    api_key: "YOUR_BING_MAPS_API_KEY"
+    base_url: "https://dev.virtualearth.net/REST/v1/Imagery/Map/Aerial"
+    
+  esri:
+    base_url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export"
+    info_url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+    
+  osm:
+    tile_servers:
+      - "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+      - "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+      - "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+
+# Default Parameters
+default_settings:
+  google:
+    zoom: 18
+    size: "640x640"
+    maptype: "satellite"
+    
+  mapbox:
+    zoom: 15
+    width: 512
+    height: 512
+    style: "satellite-v9"
+    high_res: true
+    
+  bing:
+    zoom: 18
+    width: 512
+    height: 512
+    format: "png"
+    
+  esri:
+    width: 1024
+    height: 1024
+    buffer: 0.005
+    format: "png"
+    coordinate_system: "4326"
+    interpolation: "+RSP_BilinearInterpolation"
+    
+  osm:
+    zoom: 16
+    width: 512
+    height: 512
+    timeout: 10
+
+# Location Settings
+example_locations:
+  times_square:
+    name: "Times Square, NYC"
+    latitude: 40.7589
+    longitude: -73.9851
+    
+  golden_gate:
+    name: "Golden Gate Bridge"
+    latitude: 37.8199
+    longitude: -122.4783
+    
+  data_legos:
+    name: "Data Legos Location"
+    latitude: 14.443014
+    longitude: 80.000370
+
+# Output Settings
+output:
+  base_directory: "outputs"
+  create_timestamped_folders: true
+  timestamp_format: "%Y%m%d_%H%M%S"
+  
+  file_naming:
+    image_template: "{api_name}_satellite_{lat:.6f}_{lon:.6f}_{timestamp}.png"
+    metadata_template: "{api_name}_metadata_{lat:.6f}_{lon:.6f}_{timestamp}.json"
+    combined_metadata_template: "combined_metadata_{lat:.6f}_{lon:.6f}_{timestamp}.json"
+  
+  save_metadata: true
+  metadata_format: "json"
+  metadata_indent: 2
+
+# Processing Settings
+processing:
+  retry_attempts: 3
+  timeout_seconds: 30
+  user_agent: "Python Satellite Downloader"
+  
+  image_quality:
+    save_format: "PNG"
+    compression_level: 6
+    
+  error_handling:
+    continue_on_failure: true
+    log_errors: true
+    create_fallback_images: false
+
+# API Priority Order (for testing)
+api_priority:
+  free_apis: ["esri", "osm"]
+  premium_apis: ["google", "mapbox", "bing"]
+  
+# Default Coordinates (if not specified)
+default_coordinates:
+  latitude: 14.443014
+  longitude: 80.000370
+
+# Metadata Collection Settings
+metadata:
+  include_service_info: true
+  include_request_details: true
+  include_processing_info: true
+  include_acquisition_info: true
+  
+  custom_fields:
+    project_name: "Satellite Image Collection"
+    created_by: "Satellite API Tool"
+    version: "2.0"

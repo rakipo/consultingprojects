@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KML Analysis Areas Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .analysis-section {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .analysis-title {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .polygon-item {
+            background: #f8f9fa;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .polygon-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .coordinates {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .links {
+            margin-top: 15px;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px 10px 5px 0;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .maps-link {
+            background-color: #4285f4;
+            color: white;
+        }
+        .maps-link:hover {
+            background-color: #3367d6;
+            transform: translateY(-2px);
+        }
+        .earth-link {
+            background-color: #34a853;
+            color: white;
+        }
+        .earth-link:hover {
+            background-color: #2d8f47;
+            transform: translateY(-2px);
+        }
+        .summary {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        .ndbi { border-left-color: #ff5722; }
+        .ndvi { border-left-color: #4caf50; }
+        .ndwi { border-left-color: #2196f3; }
+        
+        .description {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗺️ KML Analysis Areas Viewer</h1>
+        <p>Click the links below to view analysis boundaries in Google Maps or Google Earth</p>
+    </div>
+    
+    <div class="summary">
+        <h3>📊 Summary</h3>
+        <p><strong>Total Analysis Areas:</strong> 20</p>
+        <p><strong>NDVI Vegetation Analysis:</strong> 8 areas</p>
+        <p><strong>NDBI BuiltUp Analysis:</strong> 8 areas</p>
+        <p><strong>NDWI Water Analysis:</strong> 4 areas</p>
+    </div>
+
+    <div class="analysis-section">
+        <h2 class="analysis-title">📍 NDVI Vegetation Analysis</h2>
+        <p><em>Source: NDVI_Vegetation_Analysis.kml</em></p>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 1</div>
+            <div class="coordinates">
+                📍 Center: 14.380813, 79.521782 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 1<br>            Center: (14.380870, 79.521841)<br>            Corners:<br>            - NW: (14.381156, 79.521545)<br>            - NE: (14.381156, 79.522136)<br>            - SE: (14.380584, 79.522136)<br>            - SW: (14.380584, 79.521545)<br>            NDVI: 0.401 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.822<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.380812655722655,79.52178175661534,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.380812655722655,79.52178175661534,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 3</div>
+            <div class="coordinates">
+                📍 Center: 14.380813, 79.522964 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 3<br>            Center: (14.380870, 79.523023)<br>            Corners:<br>            - NW: (14.381156, 79.522727)<br>            - NE: (14.381156, 79.523319)<br>            - SE: (14.380584, 79.523319)<br>            - SW: (14.380584, 79.522727)<br>            NDVI: 0.4126 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.919<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.380812655722655,79.52296389317215,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.380812655722655,79.52296389317215,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 4</div>
+            <div class="coordinates">
+                📍 Center: 14.380813, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 4<br>            Center: (14.380870, 79.523614)<br>            Corners:<br>            - NW: (14.381156, 79.523319)<br>            - NE: (14.381156, 79.523910)<br>            - SE: (14.380584, 79.523910)<br>            - SW: (14.380584, 79.523319)<br>            NDVI: 0.4099 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.876<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.380812655722655,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.380812655722655,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 5</div>
+            <div class="coordinates">
+                📍 Center: 14.380813, 79.524146 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 5<br>            Center: (14.380870, 79.524205)<br>            Corners:<br>            - NW: (14.381156, 79.523910)<br>            - NE: (14.381156, 79.524501)<br>            - SE: (14.380584, 79.524501)<br>            - SW: (14.380584, 79.523910)<br>            NDVI: 0.4213 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.76<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.380812655722655,79.52414602972897,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.380812655722655,79.52414602972897,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 8</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.522964 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 8<br>            Center: (14.381442, 79.523023)<br>            Corners:<br>            - NW: (14.381729, 79.522727)<br>            - NE: (14.381729, 79.523319)<br>            - SE: (14.381156, 79.523319)<br>            - SW: (14.381156, 79.522727)<br>            NDVI: 0.45 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.804<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52296389317215,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52296389317215,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 13</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.522964 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 13<br>            Center: (14.382015, 79.523023)<br>            Corners:<br>            - NW: (14.382301, 79.522727)<br>            - NE: (14.382301, 79.523319)<br>            - SE: (14.381729, 79.523319)<br>            - SW: (14.381729, 79.522727)<br>            NDVI: 0.5242 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.851<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52296389317215,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52296389317215,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 14</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 14<br>            Center: (14.382015, 79.523614)<br>            Corners:<br>            - NW: (14.382301, 79.523319)<br>            - NE: (14.382301, 79.523910)<br>            - SE: (14.381729, 79.523910)<br>            - SW: (14.381729, 79.523319)<br>            NDVI: 0.4435 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.859<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndvi">
+            <div class="polygon-name">NDVI Square 19</div>
+            <div class="coordinates">
+                📍 Center: 14.382530, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 19<br>            Center: (14.382588, 79.523614)<br>            Corners:<br>            - NW: (14.382874, 79.523319)<br>            - NE: (14.382874, 79.523910)<br>            - SE: (14.382301, 79.523910)<br>            - SW: (14.382301, 79.523319)<br>            NDVI: 0.5746 (Significant: Yes)<br>            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland<br>            Quality Score: 0.86<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.382530290404578,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.382530290404578,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="analysis-section">
+        <h2 class="analysis-title">📍 NDBI BuiltUp Analysis</h2>
+        <p><em>Source: NDBI_BuiltUp_Analysis.kml</em></p>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 5</div>
+            <div class="coordinates">
+                📍 Center: 14.380813, 79.524146 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 5<br>            Center: (14.380870, 79.524205)<br>            Corners:<br>            - NW: (14.381156, 79.523910)<br>            - NE: (14.381156, 79.524501)<br>            - SE: (14.380584, 79.524501)<br>            - SW: (14.380584, 79.523910)<br>            NDBI: 0.0048 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.76<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.380812655722655,79.52414602972897,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.380812655722655,79.52414602972897,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 6</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.521782 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 6<br>            Center: (14.381442, 79.521841)<br>            Corners:<br>            - NW: (14.381729, 79.521545)<br>            - NE: (14.381729, 79.522136)<br>            - SE: (14.381156, 79.522136)<br>            - SW: (14.381156, 79.521545)<br>            NDBI: 0.0151 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.895<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52178175661534,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52178175661534,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 8</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.522964 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 8<br>            Center: (14.381442, 79.523023)<br>            Corners:<br>            - NW: (14.381729, 79.522727)<br>            - NE: (14.381729, 79.523319)<br>            - SE: (14.381156, 79.523319)<br>            - SW: (14.381156, 79.522727)<br>            NDBI: 0.0313 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.804<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52296389317215,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52296389317215,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 9</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 9<br>            Center: (14.381442, 79.523614)<br>            Corners:<br>            - NW: (14.381729, 79.523319)<br>            - NE: (14.381729, 79.523910)<br>            - SE: (14.381156, 79.523910)<br>            - SW: (14.381156, 79.523319)<br>            NDBI: 0.0537 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.811<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 11</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.521782 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 11<br>            Center: (14.382015, 79.521841)<br>            Corners:<br>            - NW: (14.382301, 79.521545)<br>            - NE: (14.382301, 79.522136)<br>            - SE: (14.381729, 79.522136)<br>            - SW: (14.381729, 79.521545)<br>            NDBI: 0.083 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.93<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52178175661534,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52178175661534,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 15</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.524146 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 15<br>            Center: (14.382015, 79.524205)<br>            Corners:<br>            - NW: (14.382301, 79.523910)<br>            - NE: (14.382301, 79.524501)<br>            - SE: (14.381729, 79.524501)<br>            - SW: (14.381729, 79.523910)<br>            NDBI: 0.1068 (Significant: Yes)<br>            NDBI Inference: Moderate built-up - Suburban/residential areas<br>            Quality Score: 0.963<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52414602972897,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52414602972897,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 16</div>
+            <div class="coordinates">
+                📍 Center: 14.382530, 79.521782 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 16<br>            Center: (14.382588, 79.521841)<br>            Corners:<br>            - NW: (14.382874, 79.521545)<br>            - NE: (14.382874, 79.522136)<br>            - SE: (14.382301, 79.522136)<br>            - SW: (14.382301, 79.521545)<br>            NDBI: 0.0001 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.887<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.382530290404578,79.52178175661534,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.382530290404578,79.52178175661534,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndbi">
+            <div class="polygon-name">NDBI Square 19</div>
+            <div class="coordinates">
+                📍 Center: 14.382530, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 19<br>            Center: (14.382588, 79.523614)<br>            Corners:<br>            - NW: (14.382874, 79.523319)<br>            - NE: (14.382874, 79.523910)<br>            - SE: (14.382301, 79.523910)<br>            - SW: (14.382301, 79.523319)<br>            NDBI: 0.091 (Significant: Yes)<br>            NDBI Inference: Low built-up - Rural settlements/roads<br>            Quality Score: 0.86<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.382530290404578,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.382530290404578,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="analysis-section">
+        <h2 class="analysis-title">📍 NDWI Water Analysis</h2>
+        <p><em>Source: NDWI_Water_Analysis.kml</em></p>
+
+        <div class="polygon-item ndwi">
+            <div class="polygon-name">NDWI Square 7</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.522373 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 7<br>            Center: (14.381442, 79.522432)<br>            Corners:<br>            - NW: (14.381729, 79.522136)<br>            - NE: (14.381729, 79.522727)<br>            - SE: (14.381156, 79.522727)<br>            - SW: (14.381156, 79.522136)<br>            NDWI: 0.0727 (Significant: Yes)<br>            NDWI Inference: Low water - Slightly moist areas<br>            Quality Score: 0.707<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52237282489375,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52237282489375,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndwi">
+            <div class="polygon-name">NDWI Square 9</div>
+            <div class="coordinates">
+                📍 Center: 14.381385, 79.523555 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 9<br>            Center: (14.381442, 79.523614)<br>            Corners:<br>            - NW: (14.381729, 79.523319)<br>            - NE: (14.381729, 79.523910)<br>            - SE: (14.381156, 79.523910)<br>            - SW: (14.381156, 79.523319)<br>            NDWI: 0.0253 (Significant: Yes)<br>            NDWI Inference: Low water - Slightly moist areas<br>            Quality Score: 0.811<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381385200616629,79.52355496145056,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381385200616629,79.52355496145056,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndwi">
+            <div class="polygon-name">NDWI Square 12</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.522373 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 12<br>            Center: (14.382015, 79.522432)<br>            Corners:<br>            - NW: (14.382301, 79.522136)<br>            - NE: (14.382301, 79.522727)<br>            - SE: (14.381729, 79.522727)<br>            - SW: (14.381729, 79.522136)<br>            NDWI: 0.0038 (Significant: Yes)<br>            NDWI Inference: Low water - Slightly moist areas<br>            Quality Score: 0.731<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52237282489375,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52237282489375,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+        <div class="polygon-item ndwi">
+            <div class="polygon-name">NDWI Square 15</div>
+            <div class="coordinates">
+                📍 Center: 14.381958, 79.524146 | 
+                📐 5 boundary points
+            </div>
+
+            <div class="description">
+                Square ID: 15<br>            Center: (14.382015, 79.524205)<br>            Corners:<br>            - NW: (14.382301, 79.523910)<br>            - NE: (14.382301, 79.524501)<br>            - SE: (14.381729, 79.524501)<br>            - SW: (14.381729, 79.523910)<br>            NDWI: 0.121 (Significant: Yes)<br>            NDWI Inference: Moderate water - Moist soil/irrigated areas<br>            Quality Score: 0.963<br>            Temporal Consistency: 1.0
+            </div>
+
+            <div class="links">
+                <a href="https://www.google.com/maps/@14.381957745510604,79.52414602972897,19z" target="_blank" class="link-button maps-link">
+                    🌍 Open in Google Maps
+                </a>
+                <a href="https://earth.google.com/web/@14.381957745510604,79.52414602972897,1000a,35y,0h,0t,0r" target="_blank" class="link-button earth-link">
+                    🌎 Open in Google Earth
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="summary">
+        <h3>💡 Tips</h3>
+        <ul>
+            <li><strong>Google Maps:</strong> Shows the general area but may not display exact polygon boundaries</li>
+            <li><strong>Google Earth:</strong> Better for visualizing geographic context and terrain</li>
+            <li><strong>Best Visualization:</strong> Import the generated <code>combined_analysis_areas.kml</code> file into Google Earth Pro for precise boundary display</li>
+            <li><strong>Mobile:</strong> Links work on mobile devices - Google Earth will open in the app if installed</li>
+        </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px; color: #666;">
+        <p>Generated by KML Web Viewer | <a href="combined_analysis_areas.kml">Download Combined KML</a></p>
+    </div>
+</body>
+</html>

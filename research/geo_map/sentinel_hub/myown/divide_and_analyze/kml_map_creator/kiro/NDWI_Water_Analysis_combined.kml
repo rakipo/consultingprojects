@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>NDWI Water Analysis - All Areas</name>
+    <description>All analysis areas for NDWI Water Analysis</description>
+    
+    <Style id="polygon_style">
+      <LineStyle>
+        <color>ffff0000</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>1</fill>
+        <color>4dff0000</color>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+
+    <Placemark>
+      <name>NDWI Square 7</name>
+      <description><![CDATA[
+        <h3>NDWI Square 7</h3>
+        <p><strong>Analysis:</strong> NDWI Water Analysis</p>
+        <p><strong>Center:</strong> 14.381385, 79.522373</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.38115618265904,0 79.5227274658608,14.38115618265904,0 79.5227274658608,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.38115618265904,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 9</name>
+      <description><![CDATA[
+        <h3>NDWI Square 9</h3>
+        <p><strong>Analysis:</strong> NDWI Water Analysis</p>
+        <p><strong>Center:</strong> 14.381385, 79.523555</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 12</name>
+      <description><![CDATA[
+        <h3>NDWI Square 12</h3>
+        <p><strong>Analysis:</strong> NDWI Water Analysis</p>
+        <p><strong>Center:</strong> 14.381958, 79.522373</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.381728727553014,0 79.5227274658608,14.381728727553014,0 79.5227274658608,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.381728727553014,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 15</name>
+      <description><![CDATA[
+        <h3>NDWI Square 15</h3>
+        <p><strong>Analysis:</strong> NDWI Water Analysis</p>
+        <p><strong>Center:</strong> 14.381958, 79.524146</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

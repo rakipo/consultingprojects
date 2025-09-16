@@ -1,0 +1,21 @@
+preprocessing:
+  resize_factor: 2.0
+  noise_reduction: true
+  contrast_enhancement: true
+  deskew: true
+  binarization: true
+  
+output:
+  formats: ["csv", "xlsx", "txt"]
+  include_confidence: true
+  preserve_structure: true
+  
+quality:
+  minimum_confidence: 0.6
+  telugu_detection_threshold: 0.7
+  table_detection_threshold: 0.5
+  
+processing:
+  max_concurrent_engines: 3
+  timeout_seconds: 300
+  retry_attempts: 2

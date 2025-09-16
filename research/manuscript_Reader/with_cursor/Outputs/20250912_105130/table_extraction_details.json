@@ -1,0 +1,76 @@
+[
+  {
+    "page_number": 1,
+    "confidence": 67.875,
+    "config_used": "telugu_psm3",
+    "raw_text": "620061   ఓ 620౧0663 5్‌",
+    "table_rows": [
+      [
+        "620061",
+        "ఓ 620౧0663 5్‌"
+      ]
+    ],
+    "row_count": 1,
+    "col_count": 2
+  },
+  {
+    "page_number": 2,
+    "confidence": 70.0,
+    "config_used": "telugu_psm3",
+    "raw_text": "62౧౧61   [౬11.5",
+    "table_rows": [
+      [
+        "62౧౧61",
+        "[౬11.5"
+      ]
+    ],
+    "row_count": 1,
+    "col_count": 2
+  },
+  {
+    "page_number": 3,
+    "confidence": 53.05263157894737,
+    "config_used": "telugu_psm3",
+    "raw_text": "మా. హన ఖ్‌   క మస్నుమ్న ర పేరు | సదొ అనుభ   62౧౧61 క్‌ [|| [౬ (||",
+    "table_rows": [
+      [
+        "మా. హన ఖ్‌",
+        "క మస్నుమ్న ర పేరు",
+        "సదొ అనుభ",
+        "62౧౧61 క్‌ [",
+        "[౬ ("
+      ]
+    ],
+    "row_count": 1,
+    "col_count": 5
+  },
+  {
+    "page_number": 4,
+    "confidence": 44.916666666666664,
+    "config_used": "telugu_psm3",
+    "raw_text": "పరు అక్‌ న. టి స ర్‌ గ్‌   2౧౧61 వ్‌ _.౦గ౬)! శ",
+    "table_rows": [
+      [
+        "పరు అక్‌ న. టి స ర్‌ గ్‌",
+        "2౧౧61 వ్‌ _.౦గ౬)! శ"
+      ]
+    ],
+    "row_count": 1,
+    "col_count": 2
+  },
+  {
+    "page_number": 5,
+    "confidence": 38.86206896551724,
+    "config_used": "telugu_psm4",
+    "raw_text": "న కా! త్త టాం కన గాన లు \"| 11111 న్న ఇర (11 | [1 గ్ర = నా క మాజా ల చ హ్‌ 1 లే సస [రు స్టే 1న",
+    "table_rows": [
+      [
+        "న కా! త్త టాం కన గాన లు \"",
+        "11111 న్న ఇర (11",
+        "[1 గ్ర = నా క మాజా ల చ హ్‌ 1 లే సస [రు స్టే 1న"
+      ]
+    ],
+    "row_count": 1,
+    "col_count": 3
+  }
+]

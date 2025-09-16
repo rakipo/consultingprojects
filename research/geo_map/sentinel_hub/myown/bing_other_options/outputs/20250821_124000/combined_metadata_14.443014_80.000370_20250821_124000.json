@@ -1,0 +1,150 @@
+{
+  "session_info": {
+    "timestamp": "20250821_124000",
+    "output_directory": "outputs/20250821_124000",
+    "total_apis_tested": 2,
+    "successful_apis": [
+      "esri",
+      "osm"
+    ],
+    "coordinates": {
+      "latitude": 14.443014,
+      "longitude": 80.00037
+    },
+    "generated_at": "2025-08-21T12:40:21.029072",
+    "project_name": "Satellite Image Collection",
+    "created_by": "Satellite API Tool",
+    "version": "2.0"
+  },
+  "api_metadata": {
+    "esri": {
+      "api_source": "ESRI World Imagery",
+      "coordinates": {
+        "latitude": 14.443014,
+        "longitude": 80.00037,
+        "bbox": "79.99537000000001,14.438013999999999,80.00537,14.448014"
+      },
+      "image_properties": {
+        "actual_size": [
+          1024,
+          1024
+        ],
+        "format": "PNG",
+        "mode": "P",
+        "file_size_bytes": 944797
+      },
+      "request_settings": {
+        "width": 1024,
+        "height": 1024,
+        "buffer": 0.005,
+        "format": "png",
+        "coordinate_system": "4326",
+        "interpolation": "+RSP_BilinearInterpolation"
+      },
+      "request_details": {
+        "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export",
+        "response_status": 200,
+        "content_type": "image/png",
+        "server": "",
+        "cache_control": "max-age=0,must-revalidate"
+      },
+      "acquisition_info": {
+        "capture_date": "Unknown (ESRI composite imagery)",
+        "satellite": "ESRI World Imagery Composite",
+        "resolution": "Varies by location (typically 1-3 meters)",
+        "coverage": "Global"
+      },
+      "processing_info": {
+        "requested_at": "2025-08-21T12:40:20.711215",
+        "buffer_distance_degrees": 0.005,
+        "coordinate_system": "EPSG:4326",
+        "interpolation": "+RSP_BilinearInterpolation"
+      },
+      "service_info": {
+        "name": "Unknown",
+        "description": "<DIV STYLE=\"text-align:Left;font-size:12pt\"><P><SPAN>World Imagery provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide. The map includes 15m TerraColor imagery at small and mid-scales (~1:591M down to ~1:288k) for the world. The map features Maxar imagery at 0.3m resolution for select metropolitan areas around the world, 0.5m resolution across the United States and parts of Western Europe, and 1m resolution imagery across the rest of the world. In addition to commercial sources, the World Imagery map features high-resolution aerial photography contributed by the GIS User Community. This imagery ranges from 0.3m to 0.03m resolution (down to ~1:280 in select communities). For more information on this map, including the terms of use, visit us online at https://goto.arcgisonline.com/maps/World_Imagery</SPAN></P></DIV>",
+        "copyright": "Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community",
+        "spatial_reference": {
+          "wkid": 102100,
+          "latestWkid": 3857,
+          "xyTolerance": 0.001,
+          "zTolerance": 0.001,
+          "mTolerance": 0.001,
+          "falseX": -20037700,
+          "falseY": -30241100,
+          "xyUnits": 10000,
+          "falseZ": -100000,
+          "zUnits": 10000,
+          "falseM": -100000,
+          "mUnits": 10000
+        },
+        "initial_extent": {
+          "xmin": -22815791.376046296,
+          "ymin": -21991988.08761979,
+          "xmax": 22815791.376046296,
+          "ymax": 22036142.269084483,
+          "spatialReference": {
+            "cs": "pcs",
+            "wkid": 102100
+          }
+        },
+        "full_extent": {
+          "xmin": -20037507.22959434,
+          "ymin": -19971868.88040859,
+          "xmax": 20037507.22959434,
+          "ymax": 19971868.880408563,
+          "spatialReference": {
+            "cs": "pcs",
+            "wkid": 102100
+          }
+        }
+      }
+    },
+    "osm": {
+      "api_source": "OpenStreetMap Tile Server 1",
+      "coordinates": {
+        "latitude": 14.443014,
+        "longitude": 80.00037,
+        "zoom_level": 16,
+        "tile_coordinates": {
+          "x": 47331,
+          "y": 30110
+        }
+      },
+      "image_properties": {
+        "actual_size": [
+          256,
+          256
+        ],
+        "format": "JPEG",
+        "mode": "RGB",
+        "file_size_bytes": 23386
+      },
+      "request_settings": {
+        "zoom": 16,
+        "width": 512,
+        "height": 512,
+        "timeout": 10
+      },
+      "request_details": {
+        "server_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        "response_status": 200,
+        "content_type": "image/jpeg",
+        "server": "Apache",
+        "cache_control": "max-age=86400"
+      },
+      "acquisition_info": {
+        "capture_date": "Unknown (tile-based imagery)",
+        "satellite": "Various (tile server composite)",
+        "resolution": "~2.4 meters per pixel at equator",
+        "coverage": "Global"
+      },
+      "processing_info": {
+        "requested_at": "2025-08-21T12:40:21.019849",
+        "zoom_level": 16,
+        "tile_size": "256x256 pixels (standard)",
+        "coordinate_system": "Web Mercator (EPSG:3857)"
+      }
+    }
+  }
+}

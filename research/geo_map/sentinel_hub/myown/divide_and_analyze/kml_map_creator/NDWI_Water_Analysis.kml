@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>NDWI (Water/Moisture) Analysis - 20250824_100752</name>
+    <description>NDWI (Water/Moisture) significant squares - Generated on 20250824_100752</description>
+    <Style id="ndwi_style">
+      <LineStyle>
+        <color>ff00ffff</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>NDWI Square 7</name>
+      <description>
+            Square ID: 7
+            Center: (14.381442, 79.522432)
+            Corners:
+            - NW: (14.381729, 79.522136)
+            - NE: (14.381729, 79.522727)
+            - SE: (14.381156, 79.522727)
+            - SW: (14.381156, 79.522136)
+            NDWI: 0.0727 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.707
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndwi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.38115618265904,0 79.5227274658608,14.38115618265904,0 79.5227274658608,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 9</name>
+      <description>
+            Square ID: 9
+            Center: (14.381442, 79.523614)
+            Corners:
+            - NW: (14.381729, 79.523319)
+            - NE: (14.381729, 79.523910)
+            - SE: (14.381156, 79.523910)
+            - SW: (14.381156, 79.523319)
+            NDWI: 0.0253 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.811
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndwi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 12</name>
+      <description>
+            Square ID: 12
+            Center: (14.382015, 79.522432)
+            Corners:
+            - NW: (14.382301, 79.522136)
+            - NE: (14.382301, 79.522727)
+            - SE: (14.381729, 79.522727)
+            - SW: (14.381729, 79.522136)
+            NDWI: 0.0038 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.731
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndwi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.381728727553014,0 79.5227274658608,14.381728727553014,0 79.5227274658608,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDWI Square 15</name>
+      <description>
+            Square ID: 15
+            Center: (14.382015, 79.524205)
+            Corners:
+            - NW: (14.382301, 79.523910)
+            - NE: (14.382301, 79.524501)
+            - SE: (14.381729, 79.524501)
+            - SW: (14.381729, 79.523910)
+            NDWI: 0.121 (Significant: Yes)
+            NDWI Inference: Moderate water - Moist soil/irrigated areas
+            Quality Score: 0.963
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndwi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

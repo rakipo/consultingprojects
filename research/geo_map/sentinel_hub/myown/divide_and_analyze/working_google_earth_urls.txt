@@ -1,0 +1,41 @@
+🌐 WORKING GOOGLE EARTH WEB URLs
+============================================================
+URLs that should show KML overlays
+============================================================
+
+📁 🌱 NDVI (Vegetation) - Blue Borders
+📄 File: output/20250824_100752/NDVI_Vegetation_Analysis.kml
+✅ Status: success
+🎨 Has Overlay: True
+🔗 Working URL: https://earth.google.com/web/@14.381385200616625,79.5231855437765,2000a,2000d,35y,0h,0t,0r/data=H4sIAEjLqmgC%2F82W207jMBBA3%2FmKKPsK8S2%2BrdxUrBASElqh3S2vldVaJSK1u4lL6d%2FvUNRtCgVSCaE8zvhMxp6jWDbDx3mVPLi6KYMfpCTDaeL8JExLPxukoz%2BXZyodFifmHiggfTNI72JcfEdotVplYeH8rGwy7yICAtGMpsVJkpiLMFnOnY9PAYTezl3x8%2BL2anzrZi7aCM3G595W6waqodKgDfJM31R24ua2vn%2BO2%2FXJ779LW7uEtAsAaOK6cqO6Kr756UM53oQG%2Fc9usZtQrWfBb2PIhGV09Y%2Bw9FNbr6%2Ba3QqsXZfe2foXTKKdhoVJCDUMyEbXFFJnnBKec0Y1w0yrU5JnTGGumGBSCo6FPMXJBqMEclpyRZk%2BCiOEC6Ko4BrnW%2Bp1z27Ui5YGtU%2FTPj46dH6D3piYQXvDhXDfYherrF9WqaQyF1wJLN%2BzyhhRnOWEaXoMdcjW647dqB47zfvltKMsjbXANCdSHEMdktXJ%2B0e76pNQ3jOhnVTlHEOEBaDkKOygrU7eP9hXn5Sqvt%2B7n%2FdjEUkVfJ5zhsl7125HbK%2Fl1yg1aPe4Mk%2BvruIfMPorCcQJAAA%3D
+🔗 Simple URL: https://earth.google.com/web/@14.381385200616625,79.5231855437765,2000a,2000d,35y,0h,0t,0r
+
+----------------------------------------
+
+📁 🏢 NDBI (Built-up Areas) - Red Borders
+📄 File: output/20250824_100752/NDBI_BuiltUp_Analysis.kml
+✅ Status: success
+🎨 Has Overlay: True
+🔗 Working URL: https://earth.google.com/web/@14.38174304117536,79.52296389317213,2000a,2000d,35y,0h,0t,0r/data=H4sIAEjLqmgC%2F82WW0%2FbQBCF3%2FkVlnml3vsNbYwaISSkqkIteY5MskotnN3gS9P8%2Bw6JAg444PSh8uPZ%2BUbjPUc7sr36syyi366s8uBHMUlwHDk%2FC%2FPcL0bx5P7mi46v0jP7CBSQvhrFv%2Bp6dYnQer1Owsr5RV4l3tUICEQTGqdnUWSvw6xZOl8%2FC5A%2BW7r0%2B%2FX4djpu8qKerKZffVZsKmiFNou29R16V2Qzt8zKx51uN0c%2Fn5qsdJFoNwBQ1ZvCTcoiPffzh3y6lRa9nO6xu1BsFsHvNZyEpnblODR%2BnpWb2%2Bq1ArVvuXdZ%2BQNsaB9DYRZCCe5ktatSZRJBmcFGYsqJkheEJ0xjoZlkSkmBpbrA0ZbiAoPCElByEkaIkERTKQzme%2BrdyF7Qm4EWta%2FSvjvqurxFR%2Byy6MBZkIcR9olUDitSIrhg1DDMjD5uMCVgp1FCg9UnUYpqRZUQDJMXrGNkT%2Bxg5pBC1cMKlYKZXAotsfogVMaIFowTZugpUFdWHQN7YoON1Axs9fYK65%2BWZWdU%2FXL%2F5KuGlCchg1%2B8nU%2Bm3059j1Eow3vjXBqtj%2B%2FUntibof8nWItef67s819X%2Bhd5yLD2xAkAAA%3D%3D
+🔗 Simple URL: https://earth.google.com/web/@14.38174304117536,79.52296389317213,2000a,2000d,35y,0h,0t,0r
+
+----------------------------------------
+
+📁 💧 NDWI (Water/Moisture) - Yellow Borders
+📄 File: output/20250824_100752/NDWI_Water_Analysis.kml
+✅ Status: success
+🎨 Has Overlay: True
+🔗 Working URL: https://earth.google.com/web/@14.38167147306362,79.52311166024177,2000a,2000d,35y,0h,0t,0r/data=H4sIAEjLqmgC%2F82V22rCQBCG732KkN7a7Cm72S1rSosUhFKkB3opQRcbjLttDk19%2B45Ka6wK8aq5nJlvmJ35%2BVl9%2FbXMvE%2BTF6mzA58E2PeMnbpZaucD%2F%2BX57lL613FPL4AC0hYD%2F60s368Qqus6cO%2FGztMisKZEQCAaUD%2FueZ4eumm1NLZcBxDaZGnih%2BHraPKalCaf3NgkWxXQCE0abapbcJwlU7NM8sU2brZ6Tx9VkhsvajYAUJSrzLzkWXxhZ3U62YQa%2FWZ%2FsLHLVnNnf2LIuAqecusqO0vy1ajYVaB2n1qT5I9whGYaClPncrgNbFHEkQo4pYQJpiIuKVN9EgZMEsIFkVRwhcM%2B9rZURKNQcCmwPAeKqIQc5wyTHXU4sCW2N1Kj5irN3dGx5TU6cS6N9i4L4b6EbSRV3ZKUMSI5CwlT9LRYTGElMA1JJM6Bjkl1OK8d1Vk9Ce28R49app3%2F%2FlIUqpAMQ6GkPG2%2FltifmZ2SlXfMp63cFXKMRYQFoOQs7KhgBzPbUf%2Biqka7b1iv%2F%2Bf4Gxznif%2FuBwAA
+🔗 Simple URL: https://earth.google.com/web/@14.38167147306362,79.52311166024177,2000a,2000d,35y,0h,0t,0r
+
+----------------------------------------
+
+📁 🌍 Combined (All Indices) - Multi-color
+📄 File: output/20250824_100752/enhanced_significant_indices_squares.kml
+✅ Status: success
+🎨 Has Overlay: True
+🔗 Working URL: https://earth.google.com/web/@14.381576048914603,79.52288508406843,2000a,2000d,35y,0h,0t,0r/data=H4sIAEjLqmgC%2F82WTW%2BbMBiA7%2F0ViF1b%2FIVtmBwqTVOlSjtU23pGHnjEKtgZNk3z7%2BemSpustCGXlePr9%2FHX%2B4BtcfnQtdG96p22ZhGjBMaRMpWttWkW8e3Pq4ssvizOxF2gAmncIl56v%2FoMwHq9TuxKmUa7xCgPAgFwguPiLIrEV1sNnTL%2BMQihkZ0qlFlKU6m6dLox%2BreupPGlNrWulCvdn0H2yiVhFAG2%2BFPPm1ZWqpP93VO8G%2BvHFo%2FQPhtyzm9addu3xaelbpZlgFrtN%2BW9apSXPuxQgGdk1%2BfGtpvGml0cWuzgVf%2FFDqaW%2FebavWRC7ps2SvbfQ3X2m0OisrYPRZNeuYLnCcWIppTgnECSZ%2BcoTUgGaUYY4ZxRyPg5jLYYRqEt5zTDJD8JQ4gylGFGc5juqNdzTqP%2BmVKA%2Fd3sbx%2BM7V%2BANyomwEFxQ3ho84hdMmO7mGOeMpoxyN%2BzSwjKKEkRyfEp1Ji11zNOo%2BbpNp2x24nScpgziFPE2SnUmLRJ%2Fo%2BtaiZi6ZtiO1XroftgtZOkpRSGCLKAopOwUW%2BTvoAj65qJXDbtr%2F016NYPqw%2B9bEcPx0mX6AjFcRbOVUoJRO%2FdtROxgzn%2Fj1kBXl5k4vGpVvwF8PYCG%2FkJAAA%3D
+🔗 Simple URL: https://earth.google.com/web/@14.381576048914603,79.52288508406843,2000a,2000d,35y,0h,0t,0r
+
+----------------------------------------
+

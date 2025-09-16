@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>NDVI (Vegetation) Analysis - 20250824_100752</name>
+    <description>NDVI (Vegetation) significant squares - Generated on 20250824_100752</description>
+    <Style id="ndvi_style">
+      <LineStyle>
+        <color>ffff0000</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>NDVI Square 1</name>
+      <description>
+            Square ID: 1
+            Center: (14.380870, 79.521841)
+            Corners:
+            - NW: (14.381156, 79.521545)
+            - NE: (14.381156, 79.522136)
+            - SE: (14.380584, 79.522136)
+            - SW: (14.380584, 79.521545)
+            NDVI: 0.401 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.822
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.380583637765067,0 79.52213639758239,14.380583637765067,0 79.52213639758239,14.38115618265904,0 79.52154532930398,14.38115618265904,0 79.52154532930398,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 3</name>
+      <description>
+            Square ID: 3
+            Center: (14.380870, 79.523023)
+            Corners:
+            - NW: (14.381156, 79.522727)
+            - NE: (14.381156, 79.523319)
+            - SE: (14.380584, 79.523319)
+            - SW: (14.380584, 79.522727)
+            NDVI: 0.4126 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.919
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.380583637765067,0 79.5233185341392,14.380583637765067,0 79.5233185341392,14.38115618265904,0 79.52272746586078,14.38115618265904,0 79.52272746586078,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 4</name>
+      <description>
+            Square ID: 4
+            Center: (14.380870, 79.523614)
+            Corners:
+            - NW: (14.381156, 79.523319)
+            - NE: (14.381156, 79.523910)
+            - SE: (14.380584, 79.523910)
+            - SW: (14.380584, 79.523319)
+            NDVI: 0.4099 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.876
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.380583637765067,0 79.5239096024176,14.380583637765067,0 79.5239096024176,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 5</name>
+      <description>
+            Square ID: 5
+            Center: (14.380870, 79.524205)
+            Corners:
+            - NW: (14.381156, 79.523910)
+            - NE: (14.381156, 79.524501)
+            - SE: (14.380584, 79.524501)
+            - SW: (14.380584, 79.523910)
+            NDVI: 0.4213 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.76
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.380583637765067,0 79.52450067069601,14.380583637765067,0 79.52450067069601,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 8</name>
+      <description>
+            Square ID: 8
+            Center: (14.381442, 79.523023)
+            Corners:
+            - NW: (14.381729, 79.522727)
+            - NE: (14.381729, 79.523319)
+            - SE: (14.381156, 79.523319)
+            - SW: (14.381156, 79.522727)
+            NDVI: 0.45 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.804
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.381728727553014,0 79.52272746586078,14.381728727553014,0 79.52272746586078,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 13</name>
+      <description>
+            Square ID: 13
+            Center: (14.382015, 79.523023)
+            Corners:
+            - NW: (14.382301, 79.522727)
+            - NE: (14.382301, 79.523319)
+            - SE: (14.381729, 79.523319)
+            - SW: (14.381729, 79.522727)
+            NDVI: 0.5242 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.851
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.382301272446988,0 79.52272746586078,14.382301272446988,0 79.52272746586078,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 14</name>
+      <description>
+            Square ID: 14
+            Center: (14.382015, 79.523614)
+            Corners:
+            - NW: (14.382301, 79.523319)
+            - NE: (14.382301, 79.523910)
+            - SE: (14.381729, 79.523910)
+            - SW: (14.381729, 79.523319)
+            NDVI: 0.4435 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.859
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.381728727553014,0 79.5239096024176,14.381728727553014,0 79.5239096024176,14.382301272446988,0 79.5233185341392,14.382301272446988,0 79.5233185341392,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDVI Square 19</name>
+      <description>
+            Square ID: 19
+            Center: (14.382588, 79.523614)
+            Corners:
+            - NW: (14.382874, 79.523319)
+            - NE: (14.382874, 79.523910)
+            - SE: (14.382301, 79.523910)
+            - SW: (14.382301, 79.523319)
+            NDVI: 0.5746 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.86
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndvi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

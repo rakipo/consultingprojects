@@ -1,0 +1,24 @@
+{
+  "generated_time": "2025-09-13T13:07:33.290483",
+  "best_performing_engine": "tesseract",
+  "quality_rankings": [
+    [
+      "tesseract",
+      0.41739695937766663
+    ]
+  ],
+  "processing_times": {
+    "tesseract": 4.837851810455322
+  },
+  "cost_analysis": {
+    "tesseract": 0.0
+  },
+  "engine_results": {
+    "tesseract": {
+      "confidence_score": 0.45655,
+      "processing_time": 4.6754539012908936,
+      "text_length": 1019,
+      "bounding_boxes_count": 200
+    }
+  }
+}

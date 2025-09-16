@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>NDBI (Built-up) Analysis - 20250824_100752</name>
+    <description>NDBI (Built-up) significant squares - Generated on 20250824_100752</description>
+    <Style id="ndbi_style">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>NDBI Square 5</name>
+      <description>
+            Square ID: 5
+            Center: (14.380870, 79.524205)
+            Corners:
+            - NW: (14.381156, 79.523910)
+            - NE: (14.381156, 79.524501)
+            - SE: (14.380584, 79.524501)
+            - SW: (14.380584, 79.523910)
+            NDBI: 0.0048 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.76
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.380583637765067,0 79.52450067069601,14.380583637765067,0 79.52450067069601,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 6</name>
+      <description>
+            Square ID: 6
+            Center: (14.381442, 79.521841)
+            Corners:
+            - NW: (14.381729, 79.521545)
+            - NE: (14.381729, 79.522136)
+            - SE: (14.381156, 79.522136)
+            - SW: (14.381156, 79.521545)
+            NDBI: 0.0151 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.895
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.38115618265904,0 79.52213639758239,14.38115618265904,0 79.52213639758239,14.381728727553014,0 79.52154532930398,14.381728727553014,0 79.52154532930398,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 8</name>
+      <description>
+            Square ID: 8
+            Center: (14.381442, 79.523023)
+            Corners:
+            - NW: (14.381729, 79.522727)
+            - NE: (14.381729, 79.523319)
+            - SE: (14.381156, 79.523319)
+            - SW: (14.381156, 79.522727)
+            NDBI: 0.0313 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.804
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.381728727553014,0 79.52272746586078,14.381728727553014,0 79.52272746586078,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 9</name>
+      <description>
+            Square ID: 9
+            Center: (14.381442, 79.523614)
+            Corners:
+            - NW: (14.381729, 79.523319)
+            - NE: (14.381729, 79.523910)
+            - SE: (14.381156, 79.523910)
+            - SW: (14.381156, 79.523319)
+            NDBI: 0.0537 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.811
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 11</name>
+      <description>
+            Square ID: 11
+            Center: (14.382015, 79.521841)
+            Corners:
+            - NW: (14.382301, 79.521545)
+            - NE: (14.382301, 79.522136)
+            - SE: (14.381729, 79.522136)
+            - SW: (14.381729, 79.521545)
+            NDBI: 0.083 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.93
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.382301272446988,0 79.52154532930398,14.382301272446988,0 79.52154532930398,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 15</name>
+      <description>
+            Square ID: 15
+            Center: (14.382015, 79.524205)
+            Corners:
+            - NW: (14.382301, 79.523910)
+            - NE: (14.382301, 79.524501)
+            - SE: (14.381729, 79.524501)
+            - SW: (14.381729, 79.523910)
+            NDBI: 0.1068 (Significant: Yes)
+            NDBI Inference: Moderate built-up - Suburban/residential areas
+            Quality Score: 0.963
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 16</name>
+      <description>
+            Square ID: 16
+            Center: (14.382588, 79.521841)
+            Corners:
+            - NW: (14.382874, 79.521545)
+            - NE: (14.382874, 79.522136)
+            - SE: (14.382301, 79.522136)
+            - SW: (14.382301, 79.521545)
+            NDBI: 0.0001 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.887
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.382873817340961,0 79.52154532930398,14.382873817340961,0 79.52154532930398,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 19</name>
+      <description>
+            Square ID: 19
+            Center: (14.382588, 79.523614)
+            Corners:
+            - NW: (14.382874, 79.523319)
+            - NE: (14.382874, 79.523910)
+            - SE: (14.382301, 79.523910)
+            - SW: (14.382301, 79.523319)
+            NDBI: 0.091 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.86
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#ndbi_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

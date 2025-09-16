@@ -1,0 +1,60 @@
+Telugu Manuscript Extraction Results
+Timestamp: 20250912_073919
+Total Pages: 5
+============================================================
+
+=== Page 1 ===
+Best Method: conservative
+Best Config: telugu_psm3
+Confidence: 80.9%
+Text Length: 519 characters
+
+EXTRACTED TEXT:
+అడంగలు / పహాణి సంవత్సరము న (గ్రామము : షే | హ్‌ మండలము : రం మం ॥ | 11 జిల్లా:   వ్యవసాయ గణాంకములు - సాగు వివరములు                    | 24 గడిలోని వి స్తీర్ణములో విస్తీర్ణము నీటి పారుదల అయిన విస్తీర్ణ * వివరములు                 గ్రామ పరిపాలనాధికారి తనిభీ తేది మరియు రిమార్కులు/ రెవెన్యూ ఇన్స్సెక్టరు తనిఖీ తేది - మరియు రిమార్కులు           మండల రెవెన్యూ అధికారి మరియు ఇతర అధికార్లు తనిఖీ జేసిన తేది మరియు          కోత సమయములో అంచనా వేయబడిన దిగుబడి వివరములు ఎకరము ఒక్కింటికి కేజీలలో రిమూర్కులు         5020066 ౪/10 5020061
+
+==================================================
+
+=== Page 2 ===
+Best Method: enhanced
+Best Config: telugu_psm4
+Confidence: 95.0%
+Text Length: 0 characters
+
+EXTRACTED TEXT:
+
+
+==================================================
+
+=== Page 3 ===
+Best Method: enhanced
+Best Config: telugu_psm4
+Confidence: 95.0%
+Text Length: 0 characters
+
+EXTRACTED TEXT:
+
+
+==================================================
+
+=== Page 4 ===
+Best Method: conservative
+Best Config: telugu_psm4
+Confidence: 69.1%
+Text Length: 161 characters
+
+EXTRACTED TEXT:
+వయ బ్రౌపిన్స్‌, 19-9-94 = క్‌ లక్షలు గ్రామ లెక్కనెం.3 అడంగల్‌/పహాణి / సర్వే మరియు సెటిల్‌మెంట్‌ బందోబస్తు బ్రో అనుభవదారు పేరు 08 కా   ఆ 5020066 ౪/14 0గ౬| 5020061
+
+==================================================
+
+=== Page 5 ===
+Best Method: enhanced
+Best Config: telugu_psm4
+Confidence: 95.0%
+Text Length: 0 characters
+
+EXTRACTED TEXT:
+
+
+==================================================
+

@@ -1,0 +1,68 @@
+# Telugu OCR System - Engine Configuration Template
+# Copy this file to engines.yaml and fill in your API keys
+
+engines:
+  # Free/Open Source Engines (No API keys required)
+  tesseract:
+    enabled: true
+    language: "tel"
+    config: "--psm 6"
+    
+  easyocr:
+    enabled: true
+    languages: ["te", "en"]
+    gpu: false
+    
+  paddleocr:
+    enabled: true
+    language: "te"
+    use_gpu: false
+    
+  trocr:
+    enabled: false
+    model_name: "microsoft/trocr-base-printed"
+    
+  # Cloud-based APIs (API keys required)
+  google_vision:
+    enabled: false
+    # Download JSON key from Google Cloud Console and specify path
+    api_key_path: "/path/to/google_key.json"
+    
+  azure_vision:
+    enabled: false
+    # Get from Azure Portal -> Computer Vision -> Keys and Endpoint
+    subscription_key: "your_azure_key"
+    endpoint: "https://your-resource.cognitiveservices.azure.com/"
+    
+  aws_textract:
+    enabled: false
+    region: "us-east-1"
+    # Get from AWS Console -> IAM -> Users -> Security credentials
+    access_key: "your_aws_key"
+    secret_key: "your_aws_secret"
+    
+  # Premium APIs (API keys required)
+  abbyy:
+    enabled: false
+    # Get from ABBYY Cloud portal
+    api_key: "your_abbyy_key"
+    endpoint: "https://cloud-eu.abbyy.com"
+    
+  nanonets:
+    enabled: false
+    # Get from Nanonets dashboard after training Telugu model
+    api_key: "your_nanonets_key"
+    model_id: "your_model_id"
+    
+  mathpix:
+    enabled: false
+    # Get from Mathpix dashboard
+    app_id: "your_mathpix_id"
+    app_key: "your_mathpix_key"
+
+# Configuration Instructions:
+# 1. Copy this file to config/engines.yaml
+# 2. Replace placeholder values with your actual API keys
+# 3. Set enabled: true for engines you want to use
+# 4. Keep your engines.yaml file secure and never commit it to version control
+# 5. See docs/API_KEYS_SETUP.md for detailed setup instructions

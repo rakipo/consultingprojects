@@ -1,0 +1,25 @@
+# GraphRAG Retrieval Agent Configuration
+
+# Neo4j database connection settings
+neo4j:
+  uri: "bolt://localhost:7687"
+  username: "neo4j"
+  password: "password"
+  database: "neo4j"
+
+# Embedding model configuration
+embedding:
+  model_name: "all-MiniLM-L6-v2"
+
+# Retrieval system settings
+retrieval:
+  default_limit: 5
+  max_limit: 20
+  default_expand_graph: true
+
+# MCP server configuration
+mcp:
+  server_name: "graphrag-retrieval-agent"
+  tools:
+    - "graph_retrieve"
+  description: "GraphRAG retrieval system for knowledge graph queries"

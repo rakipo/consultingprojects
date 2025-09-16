@@ -1,0 +1,15 @@
+planet data item-coverage --geom <your-geojson-file> --mode UDM2 --band clear <ITEM_TYPE> <ITEM_ID>
+
+
+Today the only way to visualise the PlanetScope Tropical Visual Monthly Monitoring basemaps in QGIS is through the Planet Explorer plugin, which requires sharing a single user login (or PLAK API key) with every analyst.
+This becomes a security and quota-management issue when several interpreters (2–5 in our case) need to perform visual land-cover assessments simultaneously.
+
+Suggested improvement
+
+Make the Tropical Visual Monthly Basemap collection available in Sentinel-Hub Commercial Data Import, just like PSScene and other Planet products.
+
+Once enabled, each analyst could stream the 4 m basemap tiles via WMTS/WMS using their own OAuth Client (client_id / client_secret), generated in Planet’s OAuth portal.
+
+This removes the need to share personal credentials, keeps PU usage under individual tokens, and leverages the Sentinel-Hub cache/proxy already supported by the QGIS Sentinel-Hub plugin.
+
+

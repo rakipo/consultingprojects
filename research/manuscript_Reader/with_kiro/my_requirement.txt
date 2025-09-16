@@ -1,0 +1,9 @@
+test_manu.pdf has the images/scanned copy of the telugu language documents. these are having printed tables and manual telugu script with the entries. 
+I know there is no method which is perfect to extract the manuscript that too in the telugu. 
+try all the available tools and let me know the details of any API creation steps. 
+preference is free version first. if any paid one which can give better rate, I am fine. 
+
+initial version I would like to achive with total automation . then will involve man in the middle.
+
+write the specs for above python based application. 
+only require python program NO API or UI required for now.

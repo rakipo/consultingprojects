@@ -1,0 +1,50 @@
+# Docker Compose for GraphRAG Retrieval Agent (connects to local Neo4j)
+version: '3.8'
+
+services:
+  # GraphRAG Retrieval Agent
+  graphrag-agent:
+    build: .
+    container_name: graphrag-agent
+    environment:
+      # Neo4j connection settings (connects to host Neo4j)
+      - NEO4J_URI=bolt://localhost:7687
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=password123
+      - NEO4J_DATABASE=neo4j
+      # Logging settings
+      - LOG_LEVEL=INFO
+      - PYTHONPATH=/app
+    volumes:
+      # Mount logs directory for external access
+      - ./logs:/app/logs
+      # Mount config for easy updates
+      - ./config:/app/config:ro
+    network_mode: "host"  # Use host networking to access host Neo4j
+    restart: unless-stopped
+    stdin_open: true  # For MCP server stdio
+    tty: true
+    healthcheck:
+      test: ["CMD", "python", "-c", "from modules.config import load_config; from modules.logging_config import setup_logging; setup_logging(); print('Health check passed')"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 60s
+
+  # Optional: GraphRAG CLI service for one-off commands
+  graphrag-cli:
+    build: .
+    container_name: graphrag-cli
+    environment:
+      - NEO4J_URI=bolt://localhost:7687
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=password123
+      - NEO4J_DATABASE=neo4j
+      - PYTHONPATH=/app
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config:ro
+    network_mode: "host"  # Use host networking to access host Neo4j
+    profiles:
+      - cli  # Only start with --profile cli
+    command: ["python", "main.py", "status"]

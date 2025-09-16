@@ -1,0 +1,41 @@
+# Minimal requirements for Telugu OCR System
+# This file contains only the essential packages needed to run the system
+
+# Core dependencies
+numpy>=1.21.0
+pillow>=8.0.0
+opencv-python-headless>=4.5.0
+pdf2image>=1.16.0
+pyyaml>=6.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# OCR engines
+pytesseract>=0.3.10
+easyocr>=1.6.0
+
+# Text processing
+python-bidi>=0.4.0
+shapely>=1.8.0
+pyclipper>=1.3.0
+
+# Utilities
+tqdm>=4.60.0
+click>=8.0.0
+pathlib2>=2.3.0
+
+# Optional: Cloud OCR APIs (uncomment if needed)
+# google-cloud-vision>=3.0.0
+# azure-cognitiveservices-vision-computervision>=0.9.0
+# boto3>=1.20.0
+
+# Optional: Advanced OCR engines (uncomment if needed)
+# paddleocr>=2.6.0
+# transformers>=4.20.0
+# torch>=1.12.0
+# torchvision>=0.13.0
+
+# Development tools (optional)
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=4.0.0

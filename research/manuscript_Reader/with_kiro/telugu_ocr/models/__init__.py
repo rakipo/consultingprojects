@@ -1,0 +1,1 @@
+"""Data models for Telugu OCR system."""

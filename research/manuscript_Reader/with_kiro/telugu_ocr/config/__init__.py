@@ -1,0 +1,1 @@
+"""Configuration management for Telugu OCR system."""

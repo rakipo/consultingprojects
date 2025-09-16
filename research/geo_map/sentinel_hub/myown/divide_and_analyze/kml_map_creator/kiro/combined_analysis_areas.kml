@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Combined Analysis Areas</name>
+    <description>Combined boundaries from multiple analysis files</description>
+    
+    <Style id="ndbi_style">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    
+    <Style id="ndvi_style">
+      <LineStyle>
+        <color>ff00ff00</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    
+    <Style id="ndwi_style">
+      <LineStyle>
+        <color>ffff0000</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+
+    <Folder>
+      <name>NDVI Vegetation Analysis</name>
+      <description>Areas from NDVI_Vegetation_Analysis.kml</description>
+
+      <Placemark>
+        <name>NDVI Square 1</name>
+        <description>
+            Square ID: 1
+            Center: (14.380870, 79.521841)
+            Corners:
+            - NW: (14.381156, 79.521545)
+            - NE: (14.381156, 79.522136)
+            - SE: (14.380584, 79.522136)
+            - SW: (14.380584, 79.521545)
+            NDVI: 0.401 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.822
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52154532930398,14.380583637765067,0 79.52213639758239,14.380583637765067,0 79.52213639758239,14.38115618265904,0 79.52154532930398,14.38115618265904,0 79.52154532930398,14.380583637765067,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 3</name>
+        <description>
+            Square ID: 3
+            Center: (14.380870, 79.523023)
+            Corners:
+            - NW: (14.381156, 79.522727)
+            - NE: (14.381156, 79.523319)
+            - SE: (14.380584, 79.523319)
+            - SW: (14.380584, 79.522727)
+            NDVI: 0.4126 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.919
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52272746586078,14.380583637765067,0 79.5233185341392,14.380583637765067,0 79.5233185341392,14.38115618265904,0 79.52272746586078,14.38115618265904,0 79.52272746586078,14.380583637765067,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 4</name>
+        <description>
+            Square ID: 4
+            Center: (14.380870, 79.523614)
+            Corners:
+            - NW: (14.381156, 79.523319)
+            - NE: (14.381156, 79.523910)
+            - SE: (14.380584, 79.523910)
+            - SW: (14.380584, 79.523319)
+            NDVI: 0.4099 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.876
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.380583637765067,0 79.5239096024176,14.380583637765067,0 79.5239096024176,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.380583637765067,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 5</name>
+        <description>
+            Square ID: 5
+            Center: (14.380870, 79.524205)
+            Corners:
+            - NW: (14.381156, 79.523910)
+            - NE: (14.381156, 79.524501)
+            - SE: (14.380584, 79.524501)
+            - SW: (14.380584, 79.523910)
+            NDVI: 0.4213 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.76
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5239096024176,14.380583637765067,0 79.52450067069601,14.380583637765067,0 79.52450067069601,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.380583637765067,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 8</name>
+        <description>
+            Square ID: 8
+            Center: (14.381442, 79.523023)
+            Corners:
+            - NW: (14.381729, 79.522727)
+            - NE: (14.381729, 79.523319)
+            - SE: (14.381156, 79.523319)
+            - SW: (14.381156, 79.522727)
+            NDVI: 0.45 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.804
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52272746586078,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.381728727553014,0 79.52272746586078,14.381728727553014,0 79.52272746586078,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 13</name>
+        <description>
+            Square ID: 13
+            Center: (14.382015, 79.523023)
+            Corners:
+            - NW: (14.382301, 79.522727)
+            - NE: (14.382301, 79.523319)
+            - SE: (14.381729, 79.523319)
+            - SW: (14.381729, 79.522727)
+            NDVI: 0.5242 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.851
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52272746586078,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.382301272446988,0 79.52272746586078,14.382301272446988,0 79.52272746586078,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 14</name>
+        <description>
+            Square ID: 14
+            Center: (14.382015, 79.523614)
+            Corners:
+            - NW: (14.382301, 79.523319)
+            - NE: (14.382301, 79.523910)
+            - SE: (14.381729, 79.523910)
+            - SW: (14.381729, 79.523319)
+            NDVI: 0.4435 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.859
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.381728727553014,0 79.5239096024176,14.381728727553014,0 79.5239096024176,14.382301272446988,0 79.5233185341392,14.382301272446988,0 79.5233185341392,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDVI Square 19</name>
+        <description>
+            Square ID: 19
+            Center: (14.382588, 79.523614)
+            Corners:
+            - NW: (14.382874, 79.523319)
+            - NE: (14.382874, 79.523910)
+            - SE: (14.382301, 79.523910)
+            - SW: (14.382301, 79.523319)
+            NDVI: 0.5746 (Significant: Yes)
+            NDVI Inference: Moderate vegetation - Mixed vegetation/grassland
+            Quality Score: 0.86
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndvi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>NDBI BuiltUp Analysis</name>
+      <description>Areas from NDBI_BuiltUp_Analysis.kml</description>
+
+      <Placemark>
+        <name>NDBI Square 5</name>
+        <description>
+            Square ID: 5
+            Center: (14.380870, 79.524205)
+            Corners:
+            - NW: (14.381156, 79.523910)
+            - NE: (14.381156, 79.524501)
+            - SE: (14.380584, 79.524501)
+            - SW: (14.380584, 79.523910)
+            NDBI: 0.0048 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.76
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5239096024176,14.380583637765067,0 79.52450067069601,14.380583637765067,0 79.52450067069601,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.380583637765067,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 6</name>
+        <description>
+            Square ID: 6
+            Center: (14.381442, 79.521841)
+            Corners:
+            - NW: (14.381729, 79.521545)
+            - NE: (14.381729, 79.522136)
+            - SE: (14.381156, 79.522136)
+            - SW: (14.381156, 79.521545)
+            NDBI: 0.0151 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.895
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52154532930398,14.38115618265904,0 79.52213639758239,14.38115618265904,0 79.52213639758239,14.381728727553014,0 79.52154532930398,14.381728727553014,0 79.52154532930398,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 8</name>
+        <description>
+            Square ID: 8
+            Center: (14.381442, 79.523023)
+            Corners:
+            - NW: (14.381729, 79.522727)
+            - NE: (14.381729, 79.523319)
+            - SE: (14.381156, 79.523319)
+            - SW: (14.381156, 79.522727)
+            NDBI: 0.0313 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.804
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52272746586078,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.381728727553014,0 79.52272746586078,14.381728727553014,0 79.52272746586078,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 9</name>
+        <description>
+            Square ID: 9
+            Center: (14.381442, 79.523614)
+            Corners:
+            - NW: (14.381729, 79.523319)
+            - NE: (14.381729, 79.523910)
+            - SE: (14.381156, 79.523910)
+            - SW: (14.381156, 79.523319)
+            NDBI: 0.0537 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.811
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 11</name>
+        <description>
+            Square ID: 11
+            Center: (14.382015, 79.521841)
+            Corners:
+            - NW: (14.382301, 79.521545)
+            - NE: (14.382301, 79.522136)
+            - SE: (14.381729, 79.522136)
+            - SW: (14.381729, 79.521545)
+            NDBI: 0.083 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.93
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52154532930398,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.382301272446988,0 79.52154532930398,14.382301272446988,0 79.52154532930398,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 15</name>
+        <description>
+            Square ID: 15
+            Center: (14.382015, 79.524205)
+            Corners:
+            - NW: (14.382301, 79.523910)
+            - NE: (14.382301, 79.524501)
+            - SE: (14.381729, 79.524501)
+            - SW: (14.381729, 79.523910)
+            NDBI: 0.1068 (Significant: Yes)
+            NDBI Inference: Moderate built-up - Suburban/residential areas
+            Quality Score: 0.963
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 16</name>
+        <description>
+            Square ID: 16
+            Center: (14.382588, 79.521841)
+            Corners:
+            - NW: (14.382874, 79.521545)
+            - NE: (14.382874, 79.522136)
+            - SE: (14.382301, 79.522136)
+            - SW: (14.382301, 79.521545)
+            NDBI: 0.0001 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.887
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52154532930398,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.382873817340961,0 79.52154532930398,14.382873817340961,0 79.52154532930398,14.382301272446988,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDBI Square 19</name>
+        <description>
+            Square ID: 19
+            Center: (14.382588, 79.523614)
+            Corners:
+            - NW: (14.382874, 79.523319)
+            - NE: (14.382874, 79.523910)
+            - SE: (14.382301, 79.523910)
+            - SW: (14.382301, 79.523319)
+            NDBI: 0.091 (Significant: Yes)
+            NDBI Inference: Low built-up - Rural settlements/roads
+            Quality Score: 0.86
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndbi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>NDWI Water Analysis</name>
+      <description>Areas from NDWI_Water_Analysis.kml</description>
+
+      <Placemark>
+        <name>NDWI Square 7</name>
+        <description>
+            Square ID: 7
+            Center: (14.381442, 79.522432)
+            Corners:
+            - NW: (14.381729, 79.522136)
+            - NE: (14.381729, 79.522727)
+            - SE: (14.381156, 79.522727)
+            - SW: (14.381156, 79.522136)
+            NDWI: 0.0727 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.707
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndwi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52213639758239,14.38115618265904,0 79.5227274658608,14.38115618265904,0 79.5227274658608,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDWI Square 9</name>
+        <description>
+            Square ID: 9
+            Center: (14.381442, 79.523614)
+            Corners:
+            - NW: (14.381729, 79.523319)
+            - NE: (14.381729, 79.523910)
+            - SE: (14.381156, 79.523910)
+            - SW: (14.381156, 79.523319)
+            NDWI: 0.0253 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.811
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndwi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDWI Square 12</name>
+        <description>
+            Square ID: 12
+            Center: (14.382015, 79.522432)
+            Corners:
+            - NW: (14.382301, 79.522136)
+            - NE: (14.382301, 79.522727)
+            - SE: (14.381729, 79.522727)
+            - SW: (14.381729, 79.522136)
+            NDWI: 0.0038 (Significant: Yes)
+            NDWI Inference: Low water - Slightly moist areas
+            Quality Score: 0.731
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndwi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.52213639758239,14.381728727553014,0 79.5227274658608,14.381728727553014,0 79.5227274658608,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>NDWI Square 15</name>
+        <description>
+            Square ID: 15
+            Center: (14.382015, 79.524205)
+            Corners:
+            - NW: (14.382301, 79.523910)
+            - NE: (14.382301, 79.524501)
+            - SE: (14.381729, 79.524501)
+            - SW: (14.381729, 79.523910)
+            NDWI: 0.121 (Significant: Yes)
+            NDWI Inference: Moderate water - Moist soil/irrigated areas
+            Quality Score: 0.963
+            Temporal Consistency: 1.0
+            </description>
+        <styleUrl>#ndwi_style</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,0 +1,323 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Enhanced Significant Indices Squares - 20250823_213753</name>
+    <description>Squares with significant NDVI, NDBI, or NDWI values (Optimized Analysis) - Generated on 20250823_213753</description>
+    <Style id="high_quality_vegetation">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Style id="medium_quality_vegetation">
+      <LineStyle>
+        <color>ff0000aa</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Style id="high_quality_builtup">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Style id="medium_quality_builtup">
+      <LineStyle>
+        <color>ff0000aa</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Style id="high_quality_water">
+      <LineStyle>
+        <color>ff00ffff</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Style id="medium_quality_water">
+      <LineStyle>
+        <color>ff00ffaa</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>0</fill>
+        <outline>1</outline>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>Square 1</name>
+      <description>
+            Square ID: 1
+            Center: (14.380870, 79.521841)
+            Corners:
+            - NW: (14.381156, 79.521545)
+            - NE: (14.381156, 79.522136)
+            - SE: (14.380584, 79.522136)
+            - SW: (14.380584, 79.521545)
+            NDVI: 0.3676 (Significant: No)
+            NDBI: 0.1398 (Significant: Yes)
+            NDWI: 0.0267 (Significant: Yes)
+            Quality Score: 0.886
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_builtup</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.380583637765067,0 79.52213639758239,14.380583637765067,0 79.52213639758239,14.38115618265904,0 79.52154532930398,14.38115618265904,0 79.52154532930398,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 2</name>
+      <description>
+            Square ID: 2
+            Center: (14.380870, 79.522432)
+            Corners:
+            - NW: (14.381156, 79.522136)
+            - NE: (14.381156, 79.522727)
+            - SE: (14.380584, 79.522727)
+            - SW: (14.380584, 79.522136)
+            NDVI: 0.539 (Significant: Yes)
+            NDBI: 0.0472 (Significant: Yes)
+            NDWI: -0.2455 (Significant: No)
+            Quality Score: 0.839
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52213639758239,14.380583637765067,0 79.5227274658608,14.380583637765067,0 79.5227274658608,14.38115618265904,0 79.52213639758239,14.38115618265904,0 79.52213639758239,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 4</name>
+      <description>
+            Square ID: 4
+            Center: (14.380870, 79.523614)
+            Corners:
+            - NW: (14.381156, 79.523319)
+            - NE: (14.381156, 79.523910)
+            - SE: (14.380584, 79.523910)
+            - SW: (14.380584, 79.523319)
+            NDVI: 0.4538 (Significant: Yes)
+            NDBI: -0.0018 (Significant: No)
+            NDWI: -0.0173 (Significant: No)
+            Quality Score: 0.863
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.380583637765067,0 79.5239096024176,14.380583637765067,0 79.5239096024176,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.380583637765067,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 6</name>
+      <description>
+            Square ID: 6
+            Center: (14.381442, 79.521841)
+            Corners:
+            - NW: (14.381729, 79.521545)
+            - NE: (14.381729, 79.522136)
+            - SE: (14.381156, 79.522136)
+            - SW: (14.381156, 79.521545)
+            NDVI: 0.587 (Significant: Yes)
+            NDBI: 0.0442 (Significant: Yes)
+            NDWI: -0.021 (Significant: No)
+            Quality Score: 0.8
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#medium_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.38115618265904,0 79.52213639758239,14.38115618265904,0 79.52213639758239,14.381728727553014,0 79.52154532930398,14.381728727553014,0 79.52154532930398,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 9</name>
+      <description>
+            Square ID: 9
+            Center: (14.381442, 79.523614)
+            Corners:
+            - NW: (14.381729, 79.523319)
+            - NE: (14.381729, 79.523910)
+            - SE: (14.381156, 79.523910)
+            - SW: (14.381156, 79.523319)
+            NDVI: 0.3566 (Significant: No)
+            NDBI: -0.1042 (Significant: No)
+            NDWI: 0.02 (Significant: Yes)
+            Quality Score: 0.807
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_water</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 10</name>
+      <description>
+            Square ID: 10
+            Center: (14.381442, 79.524205)
+            Corners:
+            - NW: (14.381729, 79.523910)
+            - NE: (14.381729, 79.524501)
+            - SE: (14.381156, 79.524501)
+            - SW: (14.381156, 79.523910)
+            NDVI: 0.408 (Significant: Yes)
+            NDBI: -0.0521 (Significant: No)
+            NDWI: -0.2681 (Significant: No)
+            Quality Score: 0.758
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#medium_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.38115618265904,0 79.52450067069601,14.38115618265904,0 79.52450067069601,14.381728727553014,0 79.5239096024176,14.381728727553014,0 79.5239096024176,14.38115618265904,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 14</name>
+      <description>
+            Square ID: 14
+            Center: (14.382015, 79.523614)
+            Corners:
+            - NW: (14.382301, 79.523319)
+            - NE: (14.382301, 79.523910)
+            - SE: (14.381729, 79.523910)
+            - SW: (14.381729, 79.523319)
+            NDVI: 0.4624 (Significant: Yes)
+            NDBI: -0.0309 (Significant: No)
+            NDWI: -0.0004 (Significant: No)
+            Quality Score: 0.866
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.381728727553014,0 79.5239096024176,14.381728727553014,0 79.5239096024176,14.382301272446988,0 79.5233185341392,14.382301272446988,0 79.5233185341392,14.381728727553014,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 18</name>
+      <description>
+            Square ID: 18
+            Center: (14.382588, 79.523023)
+            Corners:
+            - NW: (14.382874, 79.522727)
+            - NE: (14.382874, 79.523319)
+            - SE: (14.382301, 79.523319)
+            - SW: (14.382301, 79.522727)
+            NDVI: 0.2945 (Significant: No)
+            NDBI: 0.0423 (Significant: Yes)
+            NDWI: -0.0525 (Significant: No)
+            Quality Score: 0.948
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_builtup</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.382301272446988,0 79.5233185341392,14.382301272446988,0 79.5233185341392,14.382873817340961,0 79.52272746586078,14.382873817340961,0 79.52272746586078,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 19</name>
+      <description>
+            Square ID: 19
+            Center: (14.382588, 79.523614)
+            Corners:
+            - NW: (14.382874, 79.523319)
+            - NE: (14.382874, 79.523910)
+            - SE: (14.382301, 79.523910)
+            - SW: (14.382301, 79.523319)
+            NDVI: 0.572 (Significant: Yes)
+            NDBI: -0.2042 (Significant: No)
+            NDWI: -0.0885 (Significant: No)
+            Quality Score: 0.769
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#medium_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Square 20</name>
+      <description>
+            Square ID: 20
+            Center: (14.382588, 79.524205)
+            Corners:
+            - NW: (14.382874, 79.523910)
+            - NE: (14.382874, 79.524501)
+            - SE: (14.382301, 79.524501)
+            - SW: (14.382301, 79.523910)
+            NDVI: 0.4544 (Significant: Yes)
+            NDBI: -0.1562 (Significant: No)
+            NDWI: -0.0166 (Significant: No)
+            Quality Score: 0.953
+            Temporal Consistency: 1.0
+            </description>
+      <styleUrl>#high_quality_vegetation</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.382301272446988,0 79.52450067069601,14.382301272446988,0 79.52450067069601,14.382873817340961,0 79.5239096024176,14.382873817340961,0 79.5239096024176,14.382301272446988,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

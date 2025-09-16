@@ -1,0 +1,181 @@
+# Sentinel Hub Configuration File
+# Configuration for real vs enhanced satellite image comparison
+
+# API Credentials
+api_credentials:
+  sentinel_hub:
+    client_id: "1ecf7748-4066-4ba1-a3df-3ea2517cf7f6"
+    client_secret: "lCK9t1qjeD1mKjcmW9sZ1wqMCFwD1RsQ"
+    base_url: "https://services.sentinel-hub.com"
+
+# Image Processing Scripts
+evalscripts:
+  true_color:
+    name: "True Color - Real Satellite Photos"
+    description: "Natural colors as human eyes would see"
+    script: |
+      //VERSION=3
+      function setup() {
+          return {
+              input: ["B02", "B03", "B04"],    // Blue, Green, Red visible bands
+              output: { bands: 3 }
+          };
+      }
+
+      function evaluatePixel(sample) {
+          // Natural colors as human eyes would see
+          return [
+              sample.B04 * 2.5,  // Red
+              sample.B03 * 2.5,  // Green  
+              sample.B02 * 2.5   // Blue
+          ];
+      }
+    output_description: "Real photograph-like image - Buildings look like buildings, water is blue, vegetation is green"
+
+  false_color:
+    name: "False Color Infrared - Enhanced Vegetation"
+    description: "Infrared visualization for vegetation analysis"
+    script: |
+      //VERSION=3
+      function setup() {
+          return {
+              input: ["B03", "B04", "B08"],    // Green, Red, Near-Infrared
+              output: { bands: 3 }
+          };
+      }
+
+      function evaluatePixel(sample) {
+          // Infrared visualization
+          return [
+              sample.B08 * 2.5,  // NIR -> Red channel (vegetation = bright red)
+              sample.B04 * 2.5,  // Red -> Green channel
+              sample.B03 * 2.5   // Green -> Blue channel
+          ];
+      }
+    output_description: "Artistic/analytical image - Healthy vegetation = bright red/pink, water = dark blue/black"
+
+  ndvi:
+    name: "NDVI - Vegetation Health Heatmap"
+    description: "Normalized Difference Vegetation Index"
+    script: |
+      //VERSION=3
+      function setup() {
+          return {
+              input: ["B04", "B08"],    // Red and Near-Infrared
+              output: { bands: 1 }
+          };
+      }
+
+      function evaluatePixel(sample) {
+          // Calculate vegetation index
+          let ndvi = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
+          
+          // Color mapping for visualization
+          if (ndvi < -0.2) return [0.05, 0.05, 0.4];      // Water = blue
+          if (ndvi < 0.1) return [0.75, 0.75, 0.75];      // Bare soil = gray  
+          if (ndvi < 0.3) return [0.8, 0.8, 0.1];         // Sparse vegetation = yellow
+          if (ndvi < 0.6) return [0.1, 0.8, 0.1];         // Moderate vegetation = green
+          return [0.05, 0.4, 0.05];                        // Dense vegetation = dark green
+      }
+    output_description: "Color-coded heatmap - Blue = water, Gray = no vegetation, Yellow to green = increasing vegetation health"
+
+  enhanced_true_color:
+    name: "Enhanced True Color - Improved Real Photos"
+    description: "Real satellite photo with enhancements and cloud masking"
+    script: |
+      //VERSION=3
+      function setup() {
+          return {
+              input: ["B02", "B03", "B04", "SCL"],
+              output: { bands: 3 }
+          };
+      }
+
+      function evaluatePixel(sample) {
+          // Enhanced true color with cloud masking
+          let gain = 2.5;
+          
+          // Handle clouds differently
+          if (sample.SCL == 3 || sample.SCL == 8 || sample.SCL == 9) {
+              // Clouds - reduce saturation
+              gain = 2.0;
+          }
+          
+          // Natural but enhanced colors
+          return [
+              Math.min(1, sample.B04 * gain),  // Red
+              Math.min(1, sample.B03 * gain),  // Green
+              Math.min(1, sample.B02 * gain)   // Blue
+          ];
+      }
+    output_description: "Real satellite photo with enhancements - Better contrast and brightness, cloud handling"
+
+# Default Parameters
+default_settings:
+  bbox_size: 0.01
+  width: 1024
+  height: 1024
+  max_cloud_coverage: 20.0
+  timeout_seconds: 60
+
+# Example Locations
+example_locations:
+  data_legos:
+    name: "Data Legos Location"
+    latitude: 14.382015
+    longitude: 79.523023
+    description: "Sample location for testing"
+  
+  golden_gate:
+    name: "Golden Gate Bridge"
+    latitude: 37.8199
+    longitude: -122.4783
+    description: "Famous landmark for comparison"
+
+# Output Configuration
+output:
+  base_directory: "outputs"
+  create_timestamped_folders: true
+  timestamp_format: "%Y%m%d_%H%M%S"
+  
+  file_naming:
+    image_template: "sentinel_{image_type}_{lat:.6f}_{lon:.6f}_{timestamp}.png"
+    comparison_template: "comparison_{lat:.6f}_{lon:.6f}_{timestamp}.png"
+    metadata_template: "metadata_{image_type}_{lat:.6f}_{lon:.6f}_{timestamp}.json"
+    combined_metadata_template: "combined_metadata_{lat:.6f}_{lon:.6f}_{timestamp}.json"
+  
+  save_metadata: true
+  metadata_format: "json"
+  metadata_indent: 2
+
+# Processing Settings
+processing:
+  retry_attempts: 3
+  user_agent: "Sentinel Hub Image Comparison Tool"
+  
+  image_quality:
+    save_format: "PNG"
+    compression_level: 6
+    
+  error_handling:
+    continue_on_failure: true
+    log_errors: true
+    create_placeholder_images: false
+
+# Default Coordinates (if not specified)
+default_coordinates:
+  latitude: 14.382015
+  longitude: 79.523023
+  date: "2024-06-15"
+
+# Metadata Collection Settings
+metadata:
+  include_request_details: true
+  include_processing_info: true
+  include_image_properties: true
+  
+  custom_fields:
+    project_name: "Sentinel Hub Image Type Comparison"
+    created_by: "Sentinel Hub Tool"
+    version: "2.0"
+    purpose: "Compare different satellite image processing types"

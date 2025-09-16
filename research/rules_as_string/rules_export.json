@@ -1,0 +1,80 @@
+{
+  "export_date": "2025-09-16T12:35:22.800128",
+  "land_types": {
+    "Red Soil": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Black Soil": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Sand Quarry": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Rock Quarry": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "River Bed": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Agriculture Wet Land": {
+      "vegetation_rule": "dvi > 0.10 OR (dbi < 0.03 AND dwi < 0.12)",
+      "construction_rule": "dvi < -0.08 OR dbi > 0.10",
+      "flooding_rule": "dvi < -0.12 OR dwi > 0.30"
+    },
+    "Agriculture Dry Land": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Urban Area": {
+      "vegetation_rule": "dvi > 0.03 OR (dbi < 0.15 AND dwi < 0.03)",
+      "construction_rule": "dvi < -0.02 OR dbi > 0.15",
+      "flooding_rule": "dvi < -0.03 OR dwi > 0.12"
+    },
+    "Forest": {
+      "vegetation_rule": "dvi > 0.2 OR (dbi < 0.02 AND dwi < 0.12)",
+      "construction_rule": "dvi < -0.12 OR dbi > 0.08",
+      "flooding_rule": "dvi < -0.15 OR dwi > 0.30"
+    },
+    "Grassland": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Wetland": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Desert": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Mountain": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Coastal Area": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    },
+    "Industrial Area": {
+      "vegetation_rule": "dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)",
+      "construction_rule": "dvi < -0.01 OR dbi > 0.05",
+      "flooding_rule": "dvi < -0.01 OR dwi > 0.05"
+    }
+  }
+}

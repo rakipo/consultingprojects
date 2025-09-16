@@ -1,0 +1,88 @@
+# Sentinel Hub Image Creation Configuration
+# This file contains settings for retrieving satellite images using Sentinel Hub API
+
+# Sentinel Hub Authentication (OAuth credentials)
+sentinel_hub:
+  client_id: "1ecf7748-4066-4ba1-a3df-3ea2517cf7f6"
+  client_secret: "lCK9t1qjeD1mKjcmW9sZ1wqMCFwD1RsQ"
+
+# Image Request Settings
+image_settings:
+  resolution: 10  # 10m per pixel for Sentinel-2
+  max_cloud_coverage: 20.0  # Maximum allowed cloud coverage percentage
+  output_width: 512  # Output image width in pixels
+  output_height: 512  # Output image height in pixels
+
+# Sample Coordinates (WGS84 format)
+# You can modify these coordinates for your area of interest
+coordinates:
+  # Sample coordinates from the existing scripts
+  sample_area_1:
+    name: "Sample Land Parcel 1"
+    bbox: [79.9957, 14.4459, 79.9959, 14.4461]  # [min_lon, min_lat, max_lon, max_lat]
+    center: [79.9958, 14.4460]  # [longitude, latitude]
+  
+  sample_area_2:
+    name: "Sample Land Parcel 2"
+    bbox: [80.0330, 14.4460, 80.0335, 14.4465]
+    center: [80.0332, 14.4462]
+
+# Sample Date Ranges
+# You can modify these dates for your analysis
+date_ranges:
+  recent_summer:
+    name: "Recent Summer Period"
+    start_date: "2024-06-01"
+    end_date: "2024-08-31"
+  
+  recent_winter:
+    name: "Recent Winter Period"
+    start_date: "2024-12-01"
+    end_date: "2025-02-28"
+  
+  historical_comparison:
+    name: "Historical Comparison"
+    start_date: "2023-06-01"
+    end_date: "2023-08-31"
+
+# Image Types and Processing
+image_types:
+  true_color:
+    name: "True Color (RGB)"
+    description: "Natural color representation using red, green, and blue bands"
+    bands: ["B04", "B03", "B02"]  # Red, Green, Blue
+  
+  false_color:
+    name: "False Color (NIR)"
+    description: "False color using near-infrared, red, and green bands"
+    bands: ["B08", "B04", "B03"]  # NIR, Red, Green
+  
+  ndvi:
+    name: "NDVI (Vegetation Index)"
+    description: "Normalized Difference Vegetation Index"
+    bands: ["B08", "B04"]  # NIR, Red
+  
+  ndbi:
+    name: "NDBI (Built-up Index)"
+    description: "Normalized Difference Built-up Index"
+    bands: ["B11", "B08"]  # SWIR, NIR
+  
+  ndwi:
+    name: "NDWI (Water Index)"
+    description: "Normalized Difference Water Index"
+    bands: ["B03", "B08"]  # Green, NIR
+
+# Output Settings
+output:
+  save_images: true
+  output_format: "PNG"  # PNG, JPEG, TIFF
+  output_directory: "retrieved_images"
+  dpi: 300
+  include_metadata: true
+
+# Processing Options
+processing:
+  apply_cloud_mask: true
+  apply_atmospheric_correction: true
+  enhance_contrast: false
+  normalize_values: true

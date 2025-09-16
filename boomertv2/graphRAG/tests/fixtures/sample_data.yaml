@@ -1,0 +1,82 @@
+# Sample data for GraphRAG testing
+
+# Sample chunks with embeddings for testing
+sample_chunks:
+  - id: "chunk_1"
+    text: "Machine learning is a subset of artificial intelligence that focuses on algorithms that can learn from data."
+    embedding: [0.1, 0.2, 0.3, 0.4, 0.5]  # Simplified 5D embedding for testing
+    article_id: "article_1"
+    author_id: "author_1"
+  
+  - id: "chunk_2"
+    text: "Deep learning uses neural networks with multiple layers to model complex patterns in data."
+    embedding: [0.2, 0.3, 0.4, 0.5, 0.6]
+    article_id: "article_1"
+    author_id: "author_1"
+  
+  - id: "chunk_3"
+    text: "Natural language processing enables computers to understand and generate human language."
+    embedding: [0.3, 0.4, 0.5, 0.6, 0.7]
+    article_id: "article_2"
+    author_id: "author_2"
+
+# Sample articles
+sample_articles:
+  - id: "article_1"
+    title: "Introduction to Machine Learning"
+    author_id: "author_1"
+  
+  - id: "article_2"
+    title: "Natural Language Processing Fundamentals"
+    author_id: "author_2"
+  
+  - id: "article_3"
+    title: "Advanced AI Techniques"
+    author_id: "author_1"
+
+# Sample authors
+sample_authors:
+  - id: "author_1"
+    name: "Dr. Alice Smith"
+  
+  - id: "author_2"
+    name: "Prof. Bob Johnson"
+
+# Test queries with expected results
+test_queries:
+  - query: "What is machine learning?"
+    expected_chunks: ["chunk_1", "chunk_2"]
+    expected_authors: ["Dr. Alice Smith"]
+    expected_articles: ["Introduction to Machine Learning"]
+  
+  - query: "How does natural language processing work?"
+    expected_chunks: ["chunk_3"]
+    expected_authors: ["Prof. Bob Johnson"]
+    expected_articles: ["Natural Language Processing Fundamentals"]
+  
+  - query: "Tell me about AI and deep learning"
+    expected_chunks: ["chunk_1", "chunk_2"]
+    expected_authors: ["Dr. Alice Smith"]
+    expected_articles: ["Introduction to Machine Learning"]
+
+# Integration test scenarios
+integration_tests:
+  - name: "end_to_end_retrieval"
+    description: "Test complete retrieval pipeline from query to results"
+    query: "machine learning algorithms"
+    expected_results_count: 2
+    expected_score_range: [0.7, 1.0]
+  
+  - name: "graph_expansion_integration"
+    description: "Test graph expansion with related content"
+    query: "deep learning neural networks"
+    expand_graph: true
+    expected_related_chunks: true
+    expected_other_articles: true
+  
+  - name: "no_expansion_integration"
+    description: "Test retrieval without graph expansion"
+    query: "artificial intelligence"
+    expand_graph: false
+    expected_related_chunks: false
+    expected_other_articles: false

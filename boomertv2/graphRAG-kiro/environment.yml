@@ -1,0 +1,64 @@
+# Conda environment file for GraphRAG Retrieval Agent
+name: graphrag-agent
+channels:
+  - conda-forge
+  - pytorch
+  - huggingface
+  - defaults
+
+dependencies:
+  # Python version
+  - python=3.11
+
+  # Core ML dependencies
+  - pytorch>=2.0.0
+  - numpy>=1.24.0
+  - scipy>=1.10.0
+  - scikit-learn>=1.2.0
+  
+  # System dependencies
+  - pip>=23.0
+  - setuptools>=65.0
+  - wheel>=0.38.0
+  
+  # Configuration and utilities
+  - pyyaml>=6.0
+  - python-dotenv>=1.0.0
+  - pathlib2>=2.3.0
+  - typing-extensions>=4.5.0
+  
+  # Development tools (optional)
+  - pytest>=7.0.0
+  - pytest-cov>=4.0.0
+  - black>=23.0.0
+  - flake8>=6.0.0
+  - mypy>=1.0.0
+  
+  # Pip dependencies (not available in conda)
+  - pip:
+    # Sentence transformers and related
+    - sentence-transformers==5.1.0
+    - transformers>=4.41.0
+    - huggingface-hub>=0.20.0
+    
+    # Neo4j
+    - neo4j==5.28.1
+    
+    # MCP dependencies
+    - mcp==1.12.3
+    - anyio>=4.5
+    - httpx>=0.27
+    - httpx-sse>=0.4
+    - jsonschema>=4.20.0
+    - pydantic>=2.8.0,<3.0.0
+    - pydantic-settings>=2.5.2
+    - python-multipart>=0.0.9
+    - sse-starlette>=1.6.1
+    - starlette>=0.27
+    - uvicorn>=0.23.1
+    
+    # Enhanced logging
+    - structlog>=23.0.0
+    
+    # Testing
+    - pytest-asyncio>=0.21.0

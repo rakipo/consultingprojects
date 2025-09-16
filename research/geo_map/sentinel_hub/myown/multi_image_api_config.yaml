@@ -1,0 +1,214 @@
+# Multi-API Satellite Image Creation Configuration
+# This file contains all configuration parameters for satellite image retrieval
+
+# API Credentials
+api_credentials:
+  sentinel_hub:
+    client_id: "1ecf7748-4066-4ba1-a3df-3ea2517cf7f6"
+    client_secret: "lCK9t1qjeD1mKjcmW9sZ1wqMCFwD1RsQ"
+    base_url: "https://services.sentinel-hub.com"
+  
+  planet_labs:
+    api_key: "PLAK23e16042b513487fa83f45803fcc2cb7"
+    base_url: "https://api.planet.com"
+  
+  nasa:
+    base_url: "https://map1.vis.earthdata.nasa.gov/wmts-geo/1.0.0"
+    landsat_base: "https://earthexplorer.usgs.gov/inventory/json/v/1.4.0"
+
+# NASA GIBS Configuration
+nasa_gibs:
+  default_layer: "VIIRS_SNPP_CorrectedReflectance_TrueColor"
+  available_layers:
+    - "VIIRS_SNPP_CorrectedReflectance_TrueColor"
+    - "MODIS_Terra_CorrectedReflectance_TrueColor"
+    - "MODIS_Aqua_CorrectedReflectance_TrueColor"
+    - "VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11"
+  
+  tile_settings:
+    default_zoom: 8
+    default_tile_size: 3
+    tile_dimensions: [256, 256]
+    timeout_seconds: 10
+  
+  date_search:
+    max_days_before: 7
+    max_days_after: 7
+    search_interval_days: 1
+
+# Sentinel Hub Configuration
+sentinel_hub:
+  authentication:
+    grant_type: "client_credentials"
+    token_endpoint: "/oauth/token"
+    process_endpoint: "/api/v1/process"
+  
+  image_settings:
+    default_width: 1024
+    default_height: 1024
+    default_bbox_size: 0.01
+    max_cloud_coverage: 80
+  
+  evalscript:
+    version: "3"
+    input_bands: ["B02", "B03", "B04", "B08", "SCL"]
+    output_bands: 3
+    sample_type: "AUTO"
+  
+  data_source:
+    type: "sentinel-2-l2a"
+    crs: "http://www.opengis.net/def/crs/EPSG/0/4326"
+  
+  cloud_masking:
+    cloud_classes: [3, 8, 9]  # Clouds, cloud shadows, cirrus
+    transparency_factor: 0.7
+    color_enhancement: 3.5
+
+# Planet Labs Configuration
+planet_labs:
+  search:
+    item_types: ["PSScene"]
+    max_cloud_cover: 0.3  # 30%
+    default_date_range_days: 3
+  
+  geometry:
+    type: "Point"
+    buffer_meters: 1000
+  
+  filters:
+    geometry_filter:
+      field_name: "geometry"
+    date_range_filter:
+      field_name: "acquired"
+    cloud_cover_filter:
+      field_name: "cloud_cover"
+      max_value: 0.3
+
+# Image Processing Settings
+image_processing:
+  output_format: "PNG"
+  quality: 95
+  dpi: 300
+  
+  enhancement:
+    enable_color_enhancement: true
+    enable_contrast_enhancement: false
+    enable_sharpening: false
+  
+  normalization:
+    enable_auto_normalization: true
+    min_value: 0
+    max_value: 1
+
+# Search Configuration
+search_settings:
+  default_apis: ["nasa", "sentinel", "planet"]
+  api_priority_order: ["nasa", "sentinel", "planet"]
+  images_per_api: 3  # Number of images to retrieve per API
+  
+  fallback_strategy:
+    enable_date_expansion: true
+    max_date_expansion_days: 7
+    enable_api_fallback: true
+  
+  quality_preferences:
+    prefer_lower_cloud_cover: true
+    prefer_higher_resolution: true
+    prefer_recent_images: true
+
+# Output Configuration
+output_settings:
+  filename_template: "satellite_{source}_{lat}_{lon}_{date}.{ext}"
+  save_metadata: true
+  metadata_format: "JSON"
+  
+  directories:
+    base_output_dir: "satellite_images"
+    create_date_subdirs: true
+    create_location_subdirs: true
+  
+  file_organization:
+    group_by_date: true
+    group_by_location: true
+    group_by_source: true
+
+# Error Handling and Logging
+error_handling:
+  max_retries: 3
+  retry_delay_seconds: 2
+  timeout_seconds: 30
+  
+  logging:
+    level: "INFO"
+    save_logs: true
+    log_file: "satellite_image_retrieval.log"
+  
+  fallback_images:
+    create_placeholder: true
+    placeholder_color: "gray"
+    placeholder_size: [256, 256]
+
+# Performance Settings
+performance:
+  concurrent_requests: 5
+  request_delay_ms: 100
+  cache_results: true
+  cache_duration_hours: 24
+  
+  memory_management:
+    max_image_size_mb: 50
+    enable_compression: true
+    compression_quality: 85
+
+# Example Coordinates and Dates
+example_data:
+  coordinates:
+    times_square_nyc:
+      latitude: 40.7589
+      longitude: -73.9851
+      name: "Times Square, NYC"
+    
+    eiffel_tower_paris:
+      latitude: 48.8584
+      longitude: 2.2945
+      name: "Eiffel Tower, Paris"
+    
+    taj_mahal_india:
+      latitude: 27.1751
+      longitude: 78.0421
+      name: "Taj Mahal, India"
+  
+  date_ranges:
+    recent_summer:
+      start_date: "2024-06-01"
+      end_date: "2024-08-31"
+      name: "Recent Summer 2024"
+    
+    recent_winter:
+      start_date: "2024-12-01"
+      end_date: "2025-02-28"
+      name: "Recent Winter 2024-25"
+    
+    historical_comparison:
+      start_date: "2023-06-01"
+      end_date: "2023-08-31"
+      name: "Historical Summer 2023"
+
+# Validation Rules
+validation:
+  coordinates:
+    min_latitude: -90
+    max_latitude: 90
+    min_longitude: -180
+    max_longitude: 180
+  
+  dates:
+    min_date: "2015-01-01"
+    max_date: "2025-12-31"
+    date_format: "%Y-%m-%d"
+  
+  image_dimensions:
+    min_width: 256
+    max_width: 4096
+    min_height: 256
+    max_height: 4096

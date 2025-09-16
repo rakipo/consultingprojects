@@ -1,0 +1,7 @@
+pytesseract==0.3.13
+pillow==11.3.0
+pdf2image==1.17.0
+opencv-python==4.12.0.88
+google-cloud-vision==3.10.2
+reportlab==4.4.3
+numpy==2.0.2

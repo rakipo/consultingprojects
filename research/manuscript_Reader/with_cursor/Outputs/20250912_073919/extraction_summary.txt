@@ -1,0 +1,14 @@
+EXTRACTION SUMMARY
+========================================
+
+Total Pages: 5
+Total Text Extracted: 680 characters
+Average Confidence: 87.0%
+
+Page-by-Page Summary:
+----------------------------------------
+Page 1: conservative (telugu_psm3) - 80.9% - 519 chars
+Page 2: enhanced (telugu_psm4) - 95.0% - 0 chars
+Page 3: enhanced (telugu_psm4) - 95.0% - 0 chars
+Page 4: conservative (telugu_psm4) - 69.1% - 161 chars
+Page 5: enhanced (telugu_psm4) - 95.0% - 0 chars

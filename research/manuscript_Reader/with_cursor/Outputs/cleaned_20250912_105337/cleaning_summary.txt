@@ -1,0 +1,14 @@
+Telugu Data Cleaning Summary
+========================================
+
+Total pages processed: 5
+Total text length: 233 characters
+Average confidence: 54.9%
+
+Page-by-page summary:
+------------------------------
+Page 1: 22 chars, 67.9% confidence
+Page 2: 15 chars, 70.0% confidence
+Page 3: 63 chars, 53.1% confidence
+Page 4: 42 chars, 44.9% confidence
+Page 5: 91 chars, 38.9% confidence

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>NDBI BuiltUp Analysis - All Areas</name>
+    <description>All analysis areas for NDBI BuiltUp Analysis</description>
+    
+    <Style id="polygon_style">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <fill>1</fill>
+        <color>4d0000ff</color>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+
+    <Placemark>
+      <name>NDBI Square 5</name>
+      <description><![CDATA[
+        <h3>NDBI Square 5</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.380813, 79.524146</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.380583637765067,0 79.52450067069601,14.380583637765067,0 79.52450067069601,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.380583637765067,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 6</name>
+      <description><![CDATA[
+        <h3>NDBI Square 6</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.381385, 79.521782</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.38115618265904,0 79.52213639758239,14.38115618265904,0 79.52213639758239,14.381728727553014,0 79.52154532930398,14.381728727553014,0 79.52154532930398,14.38115618265904,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 8</name>
+      <description><![CDATA[
+        <h3>NDBI Square 8</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.381385, 79.522964</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52272746586078,14.38115618265904,0 79.5233185341392,14.38115618265904,0 79.5233185341392,14.381728727553014,0 79.52272746586078,14.381728727553014,0 79.52272746586078,14.38115618265904,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 9</name>
+      <description><![CDATA[
+        <h3>NDBI Square 9</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.381385, 79.523555</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.38115618265904,0 79.5239096024176,14.38115618265904,0 79.5239096024176,14.381728727553014,0 79.5233185341392,14.381728727553014,0 79.5233185341392,14.38115618265904,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 11</name>
+      <description><![CDATA[
+        <h3>NDBI Square 11</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.381958, 79.521782</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.381728727553014,0 79.52213639758239,14.381728727553014,0 79.52213639758239,14.382301272446988,0 79.52154532930398,14.382301272446988,0 79.52154532930398,14.381728727553014,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 15</name>
+      <description><![CDATA[
+        <h3>NDBI Square 15</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.381958, 79.524146</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5239096024176,14.381728727553014,0 79.52450067069601,14.381728727553014,0 79.52450067069601,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.381728727553014,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 16</name>
+      <description><![CDATA[
+        <h3>NDBI Square 16</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.382530, 79.521782</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.52154532930398,14.382301272446988,0 79.52213639758239,14.382301272446988,0 79.52213639758239,14.382873817340961,0 79.52154532930398,14.382873817340961,0 79.52154532930398,14.382301272446988,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NDBI Square 19</name>
+      <description><![CDATA[
+        <h3>NDBI Square 19</h3>
+        <p><strong>Analysis:</strong> NDBI BuiltUp Analysis</p>
+        <p><strong>Center:</strong> 14.382530, 79.523555</p>
+        <p><strong>Boundary Points:</strong> 5</p>
+      ]]></description>
+      <styleUrl>#polygon_style</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.5233185341392,14.382301272446988,0 79.5239096024176,14.382301272446988,0 79.5239096024176,14.382873817340961,0 79.5233185341392,14.382873817340961,0 79.5233185341392,14.382301272446988,0 </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

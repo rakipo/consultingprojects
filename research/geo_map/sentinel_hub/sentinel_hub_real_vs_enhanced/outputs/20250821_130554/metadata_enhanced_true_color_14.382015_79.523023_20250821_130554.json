@@ -1,0 +1,51 @@
+{
+  "api_source": "Sentinel Hub",
+  "image_type": "enhanced_true_color",
+  "image_type_info": {
+    "name": "Enhanced True Color - Improved Real Photos",
+    "description": "Real satellite photo with enhancements and cloud masking",
+    "output_description": "Real satellite photo with enhancements - Better contrast and brightness, cloud handling"
+  },
+  "coordinates": {
+    "latitude": 14.382015,
+    "longitude": 79.523023,
+    "bbox_size": 0.01
+  },
+  "temporal_info": {
+    "date": "2024-06-15",
+    "time_range": "2024-06-15T00:00:00Z to 2024-06-15T23:59:59Z"
+  },
+  "image_properties": {
+    "actual_size": [
+      1024,
+      1024
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "file_size_bytes": 3129
+  },
+  "request_settings": {
+    "bbox_size": 0.01,
+    "width": 1024,
+    "height": 1024,
+    "max_cloud_coverage": 20.0,
+    "timeout_seconds": 60
+  },
+  "request_details": {
+    "url": "https://services.sentinel-hub.com/api/v1/process",
+    "response_status": 200,
+    "content_type": "image/png",
+    "server": null
+  },
+  "acquisition_info": {
+    "satellite": "Sentinel-2 L2A",
+    "sensor": "MultiSpectral Instrument (MSI)",
+    "resolution": "10-20 meters",
+    "coverage": "Global"
+  },
+  "processing_info": {
+    "requested_at": "2025-08-21T13:06:00.283801",
+    "coordinate_system": "EPSG:4326 (WGS84)",
+    "evalscript_version": "3"
+  }
+}
