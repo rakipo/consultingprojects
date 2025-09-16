@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <name>GeoJSON to KML Conversion</name>
+    <description>Converted from GeoJSON with 1 features</description>
+    <Style id="polygonStyle">
+      <PolyStyle>
+        <color>7f00ff00</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>2</width>
+      </LineStyle>
+    </Style>
+    <Style id="pointStyle">
+      <IconStyle>
+        <color>ff0000ff</color>
+        <scale>1.2</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="lineStyle">
+      <LineStyle>
+        <color>ff00ff00</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <Placemark>
+      <name>Plot 2</name>
+      <description>
+        &lt;![CDATA[
+        &lt;h3&gt;Plot Information&lt;/h3&gt;
+        &lt;table border=&quot;1&quot;&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;b&gt;Plot Number:&lt;/b&gt;&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;b&gt;Village ID:&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;b&gt;Extent (Acres):&lt;/b&gt;&lt;/td&gt;&lt;td&gt;206.49&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;b&gt;Boundary Points:&lt;/b&gt;&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        ]]&gt;
+        </description>
+      <styleUrl>#polygonStyle</styleUrl>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>79.523023,14.382015,0 79.524128,14.3797,0 79.52574,14.375757,0 79.526398,14.37302,0 79.52693,14.370975,0 79.527234,14.367989,0 79.52668,14.367752,0 79.526509,14.367519,0 79.5255,14.367975,0 79.524491,14.368432,0 79.523591,14.368685,0 79.52275,14.368929,0 79.522308,14.37009,0 79.521311,14.375488,0 79.51879,14.381288,0 79.519614,14.384971,0 79.519681,14.38493,0 79.519698,14.38492,0 79.519715,14.384908,0 79.519743,14.384888,0 79.519887,14.384807,0 79.520201,14.384629,0 79.520943,14.384244,0 79.523023,14.382015,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

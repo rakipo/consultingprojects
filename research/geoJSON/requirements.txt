@@ -1,0 +1,11 @@
+# No external dependencies required
+# These programs use only Python standard library modules:
+# - csv
+# - json
+# - sys
+# - collections
+# - typing
+# - xml.etree.ElementTree
+# - xml.dom.minidom
+# - subprocess
+# - tempfile
