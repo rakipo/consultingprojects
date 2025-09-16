@@ -312,3 +312,4 @@ Modify existing Forest rules to be more sensitive to early deforestation:
 
 Remember: The rule engine is designed to be flexible and user-friendly. Don't be afraid to experiment and modify rules to suit your specific environmental monitoring needs!
 
+
