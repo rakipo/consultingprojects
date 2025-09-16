@@ -92,3 +92,10 @@ volumes/
 *.bak
 *.backup
 *.old
+
+# Large files and credentials
+*.pdf
+**/credentials/
+**/google_vision_credentials.json
+**/service_account*.json
+**/*credentials*.json
