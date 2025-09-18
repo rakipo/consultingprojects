@@ -156,82 +156,82 @@ def populate_thresholds():
     # Clear existing data
     cursor.execute('DELETE FROM Thresholds')
     
-    # Define thresholds with very achievable values to ensure we get all types of changes
+    # Define thresholds with soil-specific rules for accurate environmental change detection
     thresholds = [
         ('Red Soil', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.08 OR (dbi < 0.05 AND dwi < 0.08)', 
+         'dvi < -0.06 OR dbi > 0.10', 
+         'dvi < -0.08 OR dwi > 0.15'),
         
         ('Black Soil', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.10 OR (dbi < 0.04 AND dwi < 0.10)', 
+         'dvi < -0.08 OR dbi > 0.08', 
+         'dvi < -0.10 OR dwi > 0.22'),
         
         ('Sand Quarry', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.05 OR (dbi < 0.15 AND dwi < 0.05)', 
+         'dvi < -0.03 OR dbi > 0.20', 
+         'dvi < -0.05 OR dwi > 0.10'),
         
         ('Rock Quarry', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.03 OR (dbi < 0.20 AND dwi < 0.03)', 
+         'dvi < -0.02 OR dbi > 0.25', 
+         'dvi < -0.03 OR dwi > 0.08'),
         
         ('River Bed', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.06 OR (dbi < 0.03 AND dwi < 0.20)', 
+         'dvi < -0.04 OR dbi > 0.05', 
+         'dvi < -0.06 OR dwi > 0.30'),
         
         ('Agriculture Wet Land', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.10 OR (dbi < 0.03 AND dwi < 0.12)', 
+         'dvi < -0.08 OR dbi > 0.10', 
+         'dvi < -0.12 OR dwi > 0.30'),
         
         ('Agriculture Dry Land', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.08 OR (dbi < 0.05 AND dwi < 0.10)', 
+         'dvi < -0.06 OR dbi > 0.12', 
+         'dvi < -0.10 OR dwi > 0.18'),
         
         ('Urban Area', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.03 OR (dbi < 0.15 AND dwi < 0.03)', 
+         'dvi < -0.02 OR dbi > 0.15', 
+         'dvi < -0.03 OR dwi > 0.12'),
         
         ('Forest', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.2 OR (dbi < 0.02 AND dwi < 0.12)', 
+         'dvi < -0.12 OR dbi > 0.08', 
+         'dvi < -0.15 OR dwi > 0.30'),
         
         ('Grassland', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.10 OR (dbi < 0.05 AND dwi < 0.10)', 
+         'dvi < -0.08 OR dbi > 0.12', 
+         'dvi < -0.12 OR dwi > 0.20'),
         
         ('Wetland', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.08 OR (dbi < 0.03 AND dwi < 0.15)', 
+         'dvi < -0.06 OR dbi > 0.08', 
+         'dvi < -0.10 OR dwi > 0.25'),
         
         ('Desert', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.02 OR (dbi < 0.10 AND dwi < 0.02)', 
+         'dvi < -0.01 OR dbi > 0.12', 
+         'dvi < -0.02 OR dwi > 0.08'),
         
         ('Mountain', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.12 OR (dbi < 0.03 AND dwi < 0.12)', 
+         'dvi < -0.10 OR dbi > 0.08', 
+         'dvi < -0.15 OR dwi > 0.18'),
         
         ('Coastal Area', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05'),
+         'dvi > 0.06 OR (dbi < 0.03 AND dwi < 0.18)', 
+         'dvi < -0.04 OR dbi > 0.08', 
+         'dvi < -0.08 OR dwi > 0.25'),
         
         ('Industrial Area', 
-         'dvi > 0.01 OR (dbi < 0.10 AND dwi < 0.10)', 
-         'dvi < -0.01 OR dbi > 0.05', 
-         'dvi < -0.01 OR dwi > 0.05')
+         'dvi > 0.02 OR (dbi < 0.25 AND dwi < 0.03)', 
+         'dvi < -0.01 OR dbi > 0.25', 
+         'dvi < -0.02 OR dwi > 0.12')
     ]
     
     # Insert thresholds into the database
